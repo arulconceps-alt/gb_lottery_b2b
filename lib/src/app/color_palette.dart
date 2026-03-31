@@ -8,7 +8,11 @@ class ColorPalette {
   static const Color surfaceDark = Color(0xFF333236); // Ellipse 6065 Fill
   static const Color surfaceLight = Color(0xFF333236);
   static const Color backgroundDark = Color(0xFF24232A);
+  static const Color border = Color(0xFF1F1E24);
+  static const Color searchText = Color(0xFF9F9F9F);
 
+  static const Color option = Color(0xFFDFC45C);
+  static const Color unselected = Color(0xFFD9D9D9);
 
   static const Color snackbar = Color(0xFF37B158);
 
