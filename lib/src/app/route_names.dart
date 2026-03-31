@@ -1,14 +1,14 @@
+
 mixin RouteName {
   static const splashscreen = "splash";
-  static const onboarding = "onboarding";
   static const login = "login";
   static const otp = "otp";
   static const register = "register";
   static const success = "success";
-  static const home = "home";
-  static const myAccount = "myAccount";
-  static const wallet = "wallet";
-  static const kyc_verify = "kyc_verify";
+  static const dashboard = "dashboard";
+  static const customer = "customer";
+  static const results = "results";
+  static const profile = "profile";
   static const chat = "chat";
   static const suggestion = "suggestion";
   static const suggestion_success = "suggestion_success";

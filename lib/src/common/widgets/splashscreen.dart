@@ -11,37 +11,31 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  final String iconLogo = "assets/images/auth/logo.svg";
+  final String iconLogo = "assets/images/splash/logo.webp";
 
   @override
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
       if (!mounted) return;
-      context.go('/onboarding'); // navigate after splash
+      context.go('/login'); 
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-
-    // Scale the logo based on screen width (responsive)
-    // Assuming Figma frame width is 390 px and logo 110 px
-    final double logoSize = screenWidth * (110 / 390);
+   final w = MediaQuery.of(context).size.width;
+    final scale = w / 440;
+    double s(double v) => v * scale;
 
     return Scaffold(
-      backgroundColor: ColorPalette.background, // Figma background
+      backgroundColor: ColorPalette.background, 
       body: SafeArea(
         child: Center(
-          child: SvgPicture.asset(
+          child: Image.asset(
             iconLogo,
-            width: logoSize,
-            height: logoSize,
-            colorFilter: ColorFilter.mode(
-              ColorPalette.primary, // gold accent from palette
-              BlendMode.srcIn,
-            ),
+            width: s(167),
+            height: s(82),
           ),
         ),
       ),
