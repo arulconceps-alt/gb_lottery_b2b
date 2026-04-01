@@ -74,6 +74,9 @@ flutter:
   assets:
      - assets/images/buy_ticket/
      - assets/images/splash/
+     - assets/images/icons/
+     - assets/images/myCart/
+     - assets/images/profile/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

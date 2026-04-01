@@ -33,8 +33,6 @@ class _TimeSlotPickerState extends State<TimeSlotPicker> {
     return Container(
       height: widget.s(60),
       padding: EdgeInsets.only(
-        left: widget.s(16),
-        right: widget.s(12),
         top: widget.s(12),
         bottom: widget.s(12),
       ),

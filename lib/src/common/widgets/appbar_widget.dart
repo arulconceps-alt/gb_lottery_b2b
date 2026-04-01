@@ -4,10 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 class AppbarWidget extends StatelessWidget {
   final double Function(double) s;
   final String title;
-
   final bool showBack;
   final VoidCallback? onBackTap;
-
   final Widget? rightWidget;
 
   const AppbarWidget({
@@ -21,61 +19,67 @@ class AppbarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        height: s(91),
-        width: double.infinity,
-        padding: EdgeInsets.only(bottom: s(3)),
-
-        decoration: BoxDecoration(
-          color: const Color(0xFF0F1116),
-          border: Border(
-            bottom: BorderSide(
-              color: Colors.white.withOpacity(0.1),
-              width: 0.5,
-            ),
+    // We remove SafeArea from here and handle it in the Scaffold/PreferredSize
+    // so the background color extends behind the status bar for a "Pro" look.
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.only(
+        top: MediaQuery.of(context).padding.top, // This manually adds the Status Bar height
+      ),
+      decoration: BoxDecoration(
+        color: const Color(0xFF1C1B20), // Matches your app's dark theme
+        border: Border(
+          bottom: BorderSide(
+            color: Colors.white.withOpacity(0.1),
+            width: 0.5,
           ),
         ),
-
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: s(16)),
-          child: Row(
-            children: [
-              /// 🔙 BACK BUTTON
-              if (showBack)
-                GestureDetector(
-                  onTap: onBackTap ?? () => Navigator.pop(context),
+      ),
+      child: Container(
+        height: s(60), // Fixed height for the content area
+        padding: EdgeInsets.symmetric(horizontal: s(16)),
+        child: Row(
+          children: [
+            /// 🔙 BACK BUTTON
+            if (showBack)
+              GestureDetector(
+                onTap: onBackTap ?? () {
+                  if (Navigator.canPop(context)) {
+                    Navigator.pop(context);
+                  }
+                },
+                child: Container(
+                  padding: EdgeInsets.all(s(8)), // Larger tap target
                   child: Image.asset(
                     "assets/images/buy_ticket/back.webp",
                     height: s(24),
                     width: s(24),
-                  ),
-                )
-              else
-                SizedBox(width: s(18)),
-
-              /// 📝 TITLE
-              Expanded(
-                child: Center(
-                  child: Text(
-                    title,
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.dmSans(
-                      color: Colors.white,
-                      fontSize: s(17),
-                      fontWeight: FontWeight.w500,
-                      height: 1.3,
-                      letterSpacing: -0.17,
-                    ),
+                    // If image is missing, use Icon as fallback:
+                    errorBuilder: (context, error, stackTrace) =>
+                    const Icon(Icons.arrow_back_ios, color: Colors.white, size: 20),
                   ),
                 ),
-              ),
+              )
+            else
+              SizedBox(width: s(40)),
 
-              /// ⚙️ RIGHT SIDE
-              rightWidget ??
-                  SizedBox(width: s(20)), // keeps alignment perfect
-            ],
-          ),
+            /// 📝 TITLE
+            Expanded(
+              child: Text(
+                title,
+                textAlign: TextAlign.center,
+                style: GoogleFonts.dmSans(
+                  color: Colors.white,
+                  fontSize: s(17),
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: -0.18,
+                ),
+              ),
+            ),
+
+            /// ⚙️ RIGHT SIDE
+            rightWidget ?? SizedBox(width: s(40)),
+          ],
         ),
       ),
     );

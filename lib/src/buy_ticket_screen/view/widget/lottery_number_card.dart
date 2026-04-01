@@ -8,19 +8,16 @@ class LotteryNumberCard extends StatefulWidget {
   final String prize;
   final String ticketPrice;
   final String gameType;
-
-  // FIX: Change this line to match 4 parameters
-  final Function(String letter, String value, int count, double pricePerUnit)
-  onAdd;
+  final Function(String letter, String value, int count, double pricePerUnit) onAdd;
 
   const LotteryNumberCard({
     super.key,
     this.letters = const ["A", "B", "C"],
     this.prize = "Win ₹1000.00",
-    this.ticketPrice = "₹10",
+    this.ticketPrice = "₹10.00",
     this.gameType = "Single Digit",
     required this.s,
-    required this.onAdd, // The bridge to the footer
+    required this.onAdd,
   });
 
   @override
@@ -54,42 +51,41 @@ class _LotteryNumberCardState extends State<LotteryNumberCard> {
     final s = widget.s;
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(12),
+      padding: EdgeInsets.all(s(12)), // Scaled padding
       decoration: BoxDecoration(
         color: const Color(0xFF24232A),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(s(8)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Header Row
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
                 width: s(62),
-                height: s(16.44), // Figma: Fixed (16.4444px)
+                height: s(16.44),
                 child: Text(
                   widget.gameType,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.dmSans(
                     color: Colors.white,
-                    fontSize: s(12),         // Figma: Size 12px
-                    fontWeight: FontWeight.w500, // Figma: Weight 500 (Medium)
-                    fontStyle: FontStyle.normal, // Figma: Regular (Not italic)
-                    height: 1.30,            // Figma: Line height 130%
-                    letterSpacing: s(-0.12), // Figma: -1% (-0.01 * 12)
+                    fontSize: s(12),
+                    fontWeight: FontWeight.w500,
+                    height: 1.30,
+                    letterSpacing: s(-0.12),
                   ),
                 ),
               ),
-               SizedBox(width: s(6)),
+              SizedBox(width: s(6)),
               SizedBox(
                 width: s(78),
                 height: s(18.5),
                 child: Text(
                   widget.prize,
                   maxLines: 1,
-                  // This prevents system font scaling from breaking your fixed height
                   textScaler: TextScaler.noScaling,
                   style: GoogleFonts.dmSans(
                     color: const Color(0xFFCFB95D),
@@ -101,74 +97,165 @@ class _LotteryNumberCardState extends State<LotteryNumberCard> {
                 ),
               ),
               const Spacer(),
-              _quickGuessButton(),
+              _quickGuessButton(s),
             ],
           ),
-          SizedBox(height:s(2.06) ,),
-          Text(
-            widget.ticketPrice,
-            style: const TextStyle(color: Color(0xFF9F9F9F), fontSize: 12),
+
+          SizedBox(height: s(3)), // Exact 3px space
+
+          // Price Section
+          Text.rich(
+            TextSpan(
+              children: [
+                TextSpan(
+                  text: '₹ ',
+                  style: GoogleFonts.dmSans(
+                    color: const Color(0xFFDFC45C),
+                    fontSize: s(11),
+                    fontWeight: FontWeight.w500,
+                    height: 1.0,
+                  ),
+                ),
+                TextSpan(
+                  text: widget.ticketPrice.replaceAll(RegExp(r'[^0-9.]'), ''),
+                  style: GoogleFonts.dmSans(
+                    color: const Color(0xFFDFC45C),
+                    fontSize: s(12),
+                    fontWeight: FontWeight.w500,
+                    height: 1.0,
+                  ),
+                ),
+              ],
+            ),
           ),
-          const SizedBox(height: 16),
-          ...List.generate(widget.letters.length, (index) => _buildRow(index)),
+
+          SizedBox(height: s(16)),
+
+          // Selection Rows
+          ...List.generate(widget.letters.length, (index) => _buildRow(index, s)),
         ],
       ),
     );
   }
 
-  Widget _buildRow(int index) {
+  Widget _buildRow(int index, double Function(double) s) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10),
+      padding: EdgeInsets.only(bottom: s(10)),
       child: Row(
         children: [
-          _letterBox(widget.letters[index]),
-          const SizedBox(width: 10),
-          _letterBox(dashValues[index]),
+          _box(widget.letters[index], s),
+          SizedBox(width: s(10)),
+          _box(dashValues[index], s),
           const Spacer(),
           if (isQuickGuessClicked) ...[
-            _quantitySelector(index),
-            const SizedBox(width: 8),
-            _goldAddButton(index),
+            _quantitySelector(index, s),
+            SizedBox(width: s(8)),
+            _goldAddButton(index, s),
           ] else ...[
-            _greyAddButton(),
+            _greyAddButton(s),
           ],
         ],
       ),
     );
   }
 
-  Widget _goldAddButton(int index) {
+  Widget _box(String text, double Function(double) s) {
+    return Container(
+      width: s(36),
+      height: s(36),
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: const Color(0xFF313038),
+        borderRadius: BorderRadius.circular(s(6)),
+      ),
+      child: Text(
+        text,
+        style: GoogleFonts.dmSans(
+          color: Colors.white,
+          fontSize: s(14),
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+    );
+  }
+
+  Widget _quickGuessButton(double Function(double) s) {
+    return GestureDetector(
+      onTap: fillRandomDashes,
+      child: Container(
+        width: s(92),
+        height: s(32),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: const Color(0xFF313038),
+          borderRadius: BorderRadius.circular(s(6)),
+        ),
+        child: SizedBox(
+          width: s(69),
+          height: s(16.92),
+          child: Text(
+            'Quick Guess',
+            textAlign: TextAlign.center,
+            style: GoogleFonts.dmSans(
+              color: Colors.white,
+              fontSize: s(12),
+              fontWeight: FontWeight.w400,
+              height: 1.30,
+              letterSpacing: s(-0.12),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _quantitySelector(int index, double Function(double) s) {
+    return Container(
+      width: s(92),
+      height: s(36),
+      decoration: BoxDecoration(
+        color: const Color(0xFF313038),
+        borderRadius: BorderRadius.circular(s(6)),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          GestureDetector(
+            onTap: () => setState(() => quantities[index] = max(1, quantities[index] - 1)),
+            child: Text("-", style: TextStyle(color: Colors.white, fontSize: s(18))),
+          ),
+          Text("${quantities[index]}", style: TextStyle(color: Colors.white, fontSize: s(14))),
+          GestureDetector(
+            onTap: () => setState(() => quantities[index]++),
+            child: Text("+", style: TextStyle(color: Colors.white, fontSize: s(18))),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _goldAddButton(int index, double Function(double) s) {
     return GestureDetector(
       onTap: () {
-        if (dashValues[index] == "-")
-          return; // Prevent adding if no number selected
-
-        double price =
-            double.tryParse(widget.ticketPrice.replaceAll('₹', '')) ?? 0.0;
-
-        // Pass specific details back to the Screen
-        widget.onAdd(
-          widget.letters[index],
-          dashValues[index],
-          quantities[index],
-          price,
-        );
+        if (dashValues[index] == "-") return;
+        double price = double.tryParse(widget.ticketPrice.replaceAll(RegExp(r'[^0-9.]'), '')) ?? 0.0;
+        widget.onAdd(widget.letters[index], dashValues[index], quantities[index], price);
       },
       child: Container(
-        width: 44,
-        height: 36,
+        width: s(44),
+        height: s(36),
         alignment: Alignment.center,
-        decoration: ShapeDecoration(
+        decoration: BoxDecoration(
           gradient: const LinearGradient(
             colors: [Color(0xFFDFC45C), Color(0xFFA89A5F)],
           ),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+          borderRadius: BorderRadius.circular(s(6)),
         ),
-        child: const Text(
+        child: Text(
           "Add",
-          style: TextStyle(
+          style: GoogleFonts.dmSans(
             color: Colors.white,
-            fontSize: 14,
+            fontSize: s(14),
             fontWeight: FontWeight.w500,
           ),
         ),
@@ -176,93 +263,23 @@ class _LotteryNumberCardState extends State<LotteryNumberCard> {
     );
   }
 
-  Widget _letterBox(String text) => Container(
-    width: 36,
-    height: 36,
-    alignment: Alignment.center,
-    decoration: BoxDecoration(
-      color: const Color(0xFF313038),
-      borderRadius: BorderRadius.circular(6),
-    ),
-    child: Text(text, style: const TextStyle(color: Colors.white)),
-  );
-
-  Widget _quickGuessButton() => GestureDetector(
-    onTap: fillRandomDashes,
-    child: Container(
-      // Figma: Width Fixed (92px), Height Fixed (32px)
-      width: widget.s(92),
-      height: widget.s(32),
-      alignment: Alignment.center, // Figma: Vertical alignment Middle
+  Widget _greyAddButton(double Function(double) s) {
+    return Container(
+      height: s(36),
+      padding: EdgeInsets.symmetric(horizontal: s(12)),
+      alignment: Alignment.center,
       decoration: BoxDecoration(
         color: const Color(0xFF313038),
-        // Figma: Radius 6px
-        borderRadius: BorderRadius.circular(widget.s(6)),
+        borderRadius: BorderRadius.circular(s(6)),
       ),
-      child: SizedBox(
-        // Figma: Font Width Fixed (69px), Height Fixed (16.92px)
-        width: widget.s(69),
-        height: widget.s(16.9262),
-        child: Text(
-          'Quick Guess',
-          textAlign: TextAlign.center,
-          style: GoogleFonts.dmSans(
-            color: Colors.white,
-            // Figma: Size 12px
-            fontSize: widget.s(12),
-            // Figma: Weight 400 (Regular)
-            fontWeight: FontWeight.w400,
-            // Figma: Line height 130%
-            height: 1.30,
-            // Figma: Letter spacing -1% (12 * -0.01 = -0.12)
-            letterSpacing: widget.s(-0.12),
-          ),
+      child: Text(
+        "Add",
+        style: GoogleFonts.dmSans(
+          color: Colors.white.withOpacity(0.5),
+          fontSize: s(14),
+          fontWeight: FontWeight.w500,
         ),
       ),
-    ),
-  );
-
-  Widget _greyAddButton() => Container(
-    height: 36,
-    padding: const EdgeInsets.symmetric(horizontal: 12),
-    alignment: Alignment.center,
-    decoration: BoxDecoration(
-      color: const Color(0xFF313038),
-      borderRadius: BorderRadius.circular(6),
-    ),
-    child: const Text("Add", style: TextStyle(color: Colors.white)),
-  );
-
-  Widget _quantitySelector(int index) => Container(
-    width: 92,
-    height: 36,
-    decoration: BoxDecoration(
-      color: const Color(0xFF313038),
-      borderRadius: BorderRadius.circular(6),
-    ),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        GestureDetector(
-          onTap: () =>
-              setState(() => quantities[index] = max(1, quantities[index] - 1)),
-          child: const Text(
-            "-",
-            style: TextStyle(color: Colors.white, fontSize: 18),
-          ),
-        ),
-        Text(
-          "${quantities[index]}",
-          style: const TextStyle(color: Colors.white),
-        ),
-        GestureDetector(
-          onTap: () => setState(() => quantities[index]++),
-          child: const Text(
-            "+",
-            style: TextStyle(color: Colors.white, fontSize: 18),
-          ),
-        ),
-      ],
-    ),
-  );
+    );
+  }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SelectedLotteryNumber {
   final String label;
@@ -38,9 +40,9 @@ class MyNumberSummaryView extends StatelessWidget {
       ),
       child: Column(
         children: [
-          const SizedBox(height: 20),
+          SizedBox(height: 20),
           _buildHeader(context), // Added context here
-          const SizedBox(height: 24),
+          SizedBox(height: 24),
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -70,8 +72,8 @@ class MyNumberSummaryView extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const SizedBox(width: 24),
-          const Text(
+          SizedBox(width: 24),
+          Text(
             'My Number',
             style: TextStyle(
               color: Colors.white,
@@ -90,65 +92,95 @@ class MyNumberSummaryView extends StatelessWidget {
 
   Widget _buildExactNumberBox(BuildContext context, int index) {
     final item = selectedNumbers[index];
+
     return Stack(
+      // We keep the Stack ONLY for the "X" button to float on the corner
       clipBehavior: Clip.none,
       children: [
         Container(
-          width: 114,
+          // CHANGE: Removed fixed width: 114
+          // ADDED: BoxConstraints to allow growing
+          constraints: BoxConstraints(
+            minWidth: 114, // Minimum size from Figma
+            maxWidth: 200, // Safety limit so it doesn't hit the screen edge
+          ),
           height: 34,
-          padding: const EdgeInsets.symmetric(horizontal: 8),
+          padding: const EdgeInsets.only(left: 10, right: 8),
           decoration: BoxDecoration(
             color: const Color(0xFF313038),
             borderRadius: BorderRadius.circular(10),
           ),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            // Use mainAxisSize.min so the Row only takes as much space as the text needs
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              // 1. Label (A=5)
               Text(
                 item.label,
-                style: const TextStyle(
+                style: GoogleFonts.dmSans(
                   color: Colors.white,
-                  fontSize: 14,
+                  fontSize: 18,
                   fontWeight: FontWeight.w600,
+                  height: 1.3,
+                  letterSpacing: -0.18,
                 ),
               ),
+
+              const SizedBox(width: 8), // Added a bit more space for breathing
+
+              // 2. Price (₹10.0)
               Text(
                 item.price,
-                style: const TextStyle(color: Colors.white, fontSize: 11),
+                style: GoogleFonts.dmSans(
+                  color: Colors.white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  height: 1.3,
+                  letterSpacing: -0.14,
+                ),
               ),
+
+              const SizedBox(width: 6),
+
+              // 3. Quantity Badge (x1)
               Container(
-                width: 16,
+                width: 18, // Slightly wider to handle "x10" or "x99"
                 height: 16,
+                alignment: Alignment.center,
                 decoration: BoxDecoration(
                   color: const Color(0xFFCDB75D),
                   borderRadius: BorderRadius.circular(4),
                 ),
-                alignment: Alignment.center,
                 child: Text(
                   'x${item.quantity}',
-                  style: const TextStyle(
+                  style: GoogleFonts.dmSans(
                     color: Colors.black,
                     fontSize: 8,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w600,
+                    height: 1.3,
+                    letterSpacing: -0.08,
                   ),
                 ),
               ),
             ],
           ),
         ),
+
+        // Floating Close Button
         Positioned(
-          top: -4,
-          right: -4,
+          top: -6,
+          right: -6,
           child: GestureDetector(
             onTap: () => showDeletePopup(context, () => onDeleteItem(index)),
             child: Container(
-              width: 14,
-              height: 14,
+              width: 16,
+              height: 16,
               decoration: const BoxDecoration(
                 color: Color(0xFFD9D9D9),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.close, color: Colors.black, size: 8),
+              child: const Icon(Icons.close, color: Colors.black, size: 10),
             ),
           ),
         ),
@@ -178,32 +210,32 @@ void showDeletePopup(BuildContext context, VoidCallback onConfirm) {
           child: Column(
             mainAxisSize: MainAxisSize.min, // Shrinks height to fit content
             children: [
-              const Text(
+              Text(
                 'Delete',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 18,
-                  fontFamily: 'DM Sans',
+                  fontFamily: GoogleFonts.dmSans().fontFamily,
                   fontWeight: FontWeight.w600,
                   height: 1.30,
                   letterSpacing: -0.18,
                 ),
               ),
-              const SizedBox(height: 8),
-              const Text(
+              SizedBox(height: 8),
+              Text(
                 'Please confirm you want to clear all numbers?',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 12,
-                  fontFamily: 'DM Sans',
+                  fontFamily: GoogleFonts.dmSans().fontFamily,
                   fontWeight: FontWeight.w400,
                   height: 1.30,
                   letterSpacing: -0.12,
                 ),
               ),
-              const SizedBox(height: 24),
+              SizedBox(height: 24),
               Row(
                 children: [
                   // Use Expanded so buttons fill available space without overflowing
@@ -217,19 +249,23 @@ void showDeletePopup(BuildContext context, VoidCallback onConfirm) {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         alignment: Alignment.center,
-                        child: const Text(
+                        child: Text(
                           'Cancel',
                           style: TextStyle(color: Colors.white, fontSize: 16),
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(width: 12),
+                  SizedBox(width: 12),
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
                         onConfirm();
-                        Navigator.pop(context);
+                        if (Navigator.canPop(context)) {
+                          Navigator.pop(context);
+                        } else {
+                          context.go('/'); // Or your home route
+                        }
                       },
                       child: Container(
                         height: 40,
@@ -240,7 +276,7 @@ void showDeletePopup(BuildContext context, VoidCallback onConfirm) {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         alignment: Alignment.center,
-                        child: const Text(
+                        child: Text(
                           'Delete',
                           style: TextStyle(color: Colors.black, fontSize: 16),
                         ),
