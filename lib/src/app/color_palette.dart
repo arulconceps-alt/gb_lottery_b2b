@@ -9,6 +9,8 @@ class ColorPalette {
   static const Color whitetext = Color(0xFFFFFFFF);
   static const Color darktext = Color(0xFF9F9F9F);
   static const Color primary = Color(0xFFDFC55C);
+  static const Color buttoncolor = Color(0xFF484848);
+
 
 
   static const Color snackbar = Color(0xFF37B158);

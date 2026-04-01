@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
 import 'package:gb_lottery_b2b/src/common/widgets/common_app_bar.dart';
 import 'package:gb_lottery_b2b/src/common/widgets/custom_drawer.dart';
-import 'package:gb_lottery_b2b/src/dashboard/view/widgets/add_customer_section.dart';
+import 'package:gb_lottery_b2b/src/dashboard/view/widgets/dashboard_carousal.dart';
 import 'package:gb_lottery_b2b/src/dashboard/view/widgets/dashboard_fantasy_scroll_section.dart';
 import 'package:gb_lottery_b2b/src/dashboard/view/widgets/dashboard_game_card.dart';
-import 'package:gb_lottery_b2b/src/dashboard/view/widgets/dashboard_status_card.dart';
+import 'package:gb_lottery_b2b/src/dashboard/view/widgets/dashboard_top_section.dart';
 import 'package:gb_lottery_b2b/src/dashboard/view/widgets/pure_lucky_section.dart';
 import 'package:gb_lottery_b2b/src/dashboard/view/widgets/whats_gb_box.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,7 +25,7 @@ class _DashboardPageState extends State<DashboardPage> {
     final scale = w / 375;
     double s(double v) => v * scale;
     return Scaffold(
-       key: _scaffoldKey, // 👈 ADD KEY
+       key: _scaffoldKey, 
        drawer: const CustomDrawer(), 
       appBar: CommonAppBar(
         amount: "₹200",
@@ -36,41 +36,45 @@ class _DashboardPageState extends State<DashboardPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: s(27)),
-            DashboardStatusCard(
-              items: [
-                {
-                  "icon": "assets/images/dashboard/today_sales.webp",
-                  "text1": "Today's Sales",
-                  "text2": "₹12,450",
-                  "text3": "+12.5%",
-                },
-                {
-                  "icon": "assets/images/dashboard/settlement.webp",
-                  "text1": "Settlement",
-                  "text2": "₹35,420",
-                  "text3": "this month",
-                },
-                {
-                  "icon": "assets/images/dashboard/total_customer.webp",
-                  "text1": "Total Customers",
-                  "text2": "25004",
-                  "text3": "+8",
-                },
-                {
-                  "icon": "assets/images/dashboard/buy_tickets.webp",
-                  "text1": "Buy Tickets",
-                  "text2": "Purchase from\ndistributor",
-                  "text3": "+12.5%",
-                },
-              ],
-            ),
-            SizedBox(width: s(18)),
-            AddCustomerSection(
-              title: "Add Customer",
-              subtitle: "Register new customer",
-            ),
-            SizedBox(height: s(30)),
+            SizedBox(height: s(22)),
+            DashboardTopSection(),
+            SizedBox(height: s(21)),
+            DashboardCarousel(),
+            // SizedBox(height: s(10)),
+            // DashboardStatusCard(
+            //   items: [
+            //     {
+            //       "icon": "assets/images/dashboard/today_sales.webp",
+            //       "text1": "Today's Sales",
+            //       "text2": "₹12,450",
+            //       "text3": "+12.5%",
+            //     },
+            //     {
+            //       "icon": "assets/images/dashboard/settlement.webp",
+            //       "text1": "Settlement",
+            //       "text2": "₹35,420",
+            //       "text3": "this month",
+            //     },
+            //     {
+            //       "icon": "assets/images/dashboard/total_customer.webp",
+            //       "text1": "Total Customers",
+            //       "text2": "25004",
+            //       "text3": "+8",
+            //     },
+            //     {
+            //       "icon": "assets/images/dashboard/buy_tickets.webp",
+            //       "text1": "Buy Tickets",
+            //       "text2": "Purchase from\ndistributor",
+            //       "text3": "+12.5%",
+            //     },
+            //   ],
+            // ),
+            // SizedBox(height: s(18)),
+            // AddCustomerSection(
+            //   title: "Add Customer",
+            //   subtitle: "Register new customer",
+            // ),
+            SizedBox(height: s(10)),
             Text(
               "ABC Game",
               style: GoogleFonts.dmSans(fontSize: s(16),

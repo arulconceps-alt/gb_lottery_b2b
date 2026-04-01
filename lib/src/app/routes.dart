@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:gb_lottery_b2b/src/add_customer/view/add_customer_page.dart';
 import 'package:gb_lottery_b2b/src/app/route_names.dart';
 import 'package:gb_lottery_b2b/src/common/widgets/bottom_navigation_bar.dart';
 import 'package:gb_lottery_b2b/src/common/widgets/splashscreen.dart';
+import 'package:gb_lottery_b2b/src/customer_information/view/customer_information_page.dart';
 import 'package:gb_lottery_b2b/src/customers/view/customer_page.dart';
 import 'package:gb_lottery_b2b/src/dashboard/view/dashboard_page.dart';
 import 'package:gb_lottery_b2b/src/login/view/login_page.dart';
+import 'package:gb_lottery_b2b/src/login/view/login_screen.dart';
+import 'package:gb_lottery_b2b/src/otp/view/otp_page.dart';
 import 'package:gb_lottery_b2b/src/profile/view/profile_page.dart';
 import 'package:gb_lottery_b2b/src/results/view/result_page.dart';
 
@@ -26,7 +30,12 @@ class Routes {
       GoRoute(
         name: RouteName.login,
         path: "/login",
-        builder: (context, state) => const LoginPage(),
+        builder: (context, state) => const LoginScreen(),
+      ),
+       GoRoute(
+        name: RouteName.otp,
+        path: "/otp",
+        builder: (context, state) => const OtpPage(),
       ),
 
       ShellRoute(
@@ -67,6 +76,21 @@ class Routes {
           ),
         ],
       ),
+      GoRoute(
+        name: RouteName.addcustomer,
+        path: "/addcustomer",
+        builder: (context, state) => const AddCustomerPage(),
+      ),
+       GoRoute(
+        name: RouteName.customerinformation,
+        path: "/customerinformation",
+        builder: (context, state) => const CustomerInformationPage(),
+      ),
+      //  GoRoute(
+      //   name: RouteName.addcustomer,
+      //   path: "/addcustomer",
+      //   builder: (context, state) => const AddCustomerPage(),
+      // ),
     ],
   );
 }

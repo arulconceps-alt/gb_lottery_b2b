@@ -20,18 +20,26 @@ class CustomDrawer extends StatelessWidget {
             // 🔹 HEADER
             Container(
               width: double.infinity,
+              height: s(80),
               color: ColorPalette.background,
               child: Padding(
                 padding: EdgeInsets.all(s(16)),
                 child: Row(
                   children: [
-                    CircleAvatar(
-                      radius: s(22),
-                      backgroundImage: const AssetImage(
-                        "assets/images/dashboard/user.webp",
+                    Container(
+                      height: 48,
+                      width: 48,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: const DecorationImage(
+                          image: AssetImage(
+                            "assets/images/dashboard/user.webp",
+                          ),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
-                    SizedBox(width: s(10)),
+                    SizedBox(width: s(16)),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,6 +64,7 @@ class CustomDrawer extends StatelessWidget {
                         ],
                       ),
                     ),
+                    SizedBox(width: s(54)),
                     GestureDetector(
                       onTap: () => Navigator.pop(context),
                       child: Image.asset(
@@ -179,40 +188,38 @@ class CustomDrawer extends StatelessWidget {
     );
   }
 
- Widget _menuItem(
-  String iconPath,
-  String title,
-  double Function(double) s, {
-  bool isLogout = false,
-}) {
-  return ListTile(
-    leading: Image.asset(
-      iconPath,
-      width: s(18),
-      height: s(18),
-      fit: BoxFit.contain,
-    ),
-    title: Text(
-      title,
-      style: GoogleFonts.inter(
-        fontSize: s(13),
-        color: isLogout ? Colors.red : Colors.white, 
-        fontWeight: FontWeight.w400,
+  Widget _menuItem(
+    String iconPath,
+    String title,
+    double Function(double) s, {
+    bool isLogout = false,
+  }) {
+    return ListTile(
+      leading: Image.asset(
+        iconPath,
+        width: s(24),
+        height: s(24),
+        fit: BoxFit.contain,
       ),
-    ),
-    trailing: isLogout
-        ? null 
-        : Image.asset(
-            "assets/images/dashboard/right.webp",
-            width: s(20),
-            height: s(20),
-            fit: BoxFit.contain,
-          ),
-    onTap: () {
-      if (isLogout) {
-       
-      }
-    },
-  );
-}
+      title: Text(
+        title,
+        style: GoogleFonts.inter(
+          fontSize: s(14),
+          color: isLogout ? Colors.red : ColorPalette.whitetext,
+          fontWeight: FontWeight.w400,
+        ),
+      ),
+      trailing: isLogout
+          ? null
+          : Image.asset(
+              "assets/images/dashboard/right.webp",
+              width: s(20),
+              height: s(20),
+              fit: BoxFit.contain,
+            ),
+      onTap: () {
+        if (isLogout) {}
+      },
+    );
+  }
 }

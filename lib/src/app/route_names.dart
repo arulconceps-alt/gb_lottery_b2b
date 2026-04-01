@@ -7,9 +7,10 @@ mixin RouteName {
   static const success = "success";
   static const dashboard = "dashboard";
   static const customer = "customer";
+  static const addcustomer = "addcustomer";
   static const results = "results";
   static const profile = "profile";
-  static const chat = "chat";
+  static const customerinformation = "customerinformation";
   static const suggestion = "suggestion";
   static const suggestion_success = "suggestion_success";
   static const lotteryhome = "lotteryhome";
