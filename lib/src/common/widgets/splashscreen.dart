@@ -12,6 +12,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   final String iconLogo = "assets/images/splash/logo.webp";
+  final String iconLogo = "assets/images/splash/logo.webp";
 
   @override
   void initState() {
@@ -32,6 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: ColorPalette.background, 
       body: SafeArea(
         child: Center(
+          child: Image.asset(
           child: Image.asset(
             iconLogo,
             width: s(167),

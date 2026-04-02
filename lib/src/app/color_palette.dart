@@ -11,7 +11,11 @@ class ColorPalette {
   static const Color primary = Color(0xFFDFC55C);
   static const Color buttoncolor = Color(0xFF484848);
 
+  static const Color border = Color(0xFF1F1E24);
+  static const Color searchText = Color(0xFF9F9F9F);
 
+  static const Color option = Color(0xFFDFC45C);
+  static const Color unselected = Color(0xFFD9D9D9);
 
   static const Color snackbar = Color(0xFF37B158);
 

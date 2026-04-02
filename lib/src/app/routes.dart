@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/add_customer/view/add_customer_page.dart';
 import 'package:gb_lottery_b2b/src/app/route_names.dart';
 import 'package:gb_lottery_b2b/src/common/widgets/bottom_navigation_bar.dart';
+import 'package:gb_lottery_b2b/src/buy_ticket_screen/view/buy_ticket_screen.dart';
 import 'package:gb_lottery_b2b/src/common/widgets/splashscreen.dart';
 import 'package:gb_lottery_b2b/src/customer_information/view/customer_information_page.dart';
 import 'package:gb_lottery_b2b/src/customers/view/customer_page.dart';
@@ -11,6 +12,10 @@ import 'package:gb_lottery_b2b/src/login/view/login_screen.dart';
 import 'package:gb_lottery_b2b/src/otp/view/otp_page.dart';
 import 'package:gb_lottery_b2b/src/profile/view/profile_page.dart';
 import 'package:gb_lottery_b2b/src/results/view/result_page.dart';
+import 'package:gb_lottery_b2b/src/customer_info/view/customer_info_screen.dart';
+import 'package:gb_lottery_b2b/src/myCart_Screen/view/myCart_screen.dart';
+import 'package:gb_lottery_b2b/src/profile_screen/view/profile_screen.dart';
+import 'package:gb_lottery_b2b/src/search_screen/view/search_screen.dart';
 
 import 'package:go_router/go_router.dart';
 
@@ -91,6 +96,36 @@ class Routes {
       //   path: "/addcustomer",
       //   builder: (context, state) => const AddCustomerPage(),
       // ),
+      /// OnBoarding
+      GoRoute(
+        name: RouteName.buy_ticket,
+        path: "/buy_ticket",
+        builder: (context, state) => const BuyTicketsScreen(),
+      ),
+      /// My Cart Screen
+      GoRoute(
+        name: RouteName.myCart,
+        path: "/myCart",
+        builder: (context, state) => const MycartScreen(),
+      ),
+      /// Profile Screen
+      GoRoute(
+        name: RouteName.profile,
+        path: "/profile",
+        builder: (context, state) => const ProfileScreen(),
+      ),
+      /// customer_info Screen
+      GoRoute(
+        name: RouteName.customer_info,
+        path: "/customer_info",
+        builder: (context, state) => const CustomerInfoScreen(),
+      ),
+      /// Search Screen
+      GoRoute(
+        name: RouteName.search_screen,
+        path: "/search_screen",
+        builder: (context, state) => const SearchScreen(),
+      ),
     ],
   );
 }
