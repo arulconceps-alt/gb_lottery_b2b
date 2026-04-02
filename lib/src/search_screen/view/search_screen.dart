@@ -15,7 +15,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     final w = MediaQuery.of(context).size.width;
-    final scale = w / 440;
+    final scale = w / 375;
     double s(double v) => v * scale;
 
     return Scaffold(

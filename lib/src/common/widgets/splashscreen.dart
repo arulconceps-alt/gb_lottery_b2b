@@ -17,22 +17,20 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
       if (!mounted) return;
-      context.go('/login'); 
+      context.go('/login');
     });
   }
 
   @override
   Widget build(BuildContext context) {
    final w = MediaQuery.of(context).size.width;
-    final scale = w / 440;
+    final scale = w / 375;
     double s(double v) => v * scale;
-
     return Scaffold(
       backgroundColor: ColorPalette.background, 
       body: SafeArea(
         child: Center(
           child: Image.asset(
-          
             iconLogo,
             width: s(167),
             height: s(82),

@@ -8,7 +8,6 @@ class LotteryNumberCardTriple extends StatefulWidget {
   final String prize;
   final String ticketPrice;
   final List<String> letters;
-  // Updated callback to include quantity and price
   final Function(String label, String value, bool isBox, int count, double price) onAdd;
 
   const LotteryNumberCardTriple({
@@ -28,7 +27,7 @@ class LotteryNumberCardTriple extends StatefulWidget {
 class _LotteryNumberCardTripleState extends State<LotteryNumberCardTriple> {
   List<String> dashValues = ["-", "-", "-"];
   bool isQuickGuessClicked = false;
-  int quantity = 1; // Track quantity
+  int quantity = 1;
 
   void _fillRandom() {
     final random = Random();
@@ -53,81 +52,85 @@ class _LotteryNumberCardTripleState extends State<LotteryNumberCardTriple> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Header Row
           Row(
             children: [
-              Text(widget.lotteryType, style: GoogleFonts.dmSans(color: Colors.white, fontSize: s(12), fontWeight: FontWeight.w500)),
+              Text(widget.lotteryType,
+                  style: GoogleFonts.dmSans(color: Colors.white, fontSize: s(12), fontWeight: FontWeight.w500)),
               SizedBox(width: s(8)),
-              Text(widget.prize, style: GoogleFonts.dmSans(color: const Color(0xFFCFB95D), fontSize: s(12), fontWeight: FontWeight.w500)),
+              Text(widget.prize,
+                  style: GoogleFonts.dmSans(color: const Color(0xFFCFB95D), fontSize: s(12), fontWeight: FontWeight.w500)),
               const Spacer(),
               _quickGuessButton(s),
             ],
           ),
-
           SizedBox(height: s(3)),
-
-          // Price Row
           Text.rich(
             TextSpan(
               children: [
-                TextSpan(text: '₹ ', style: GoogleFonts.dmSans(color: const Color(0xFFDFC45C), fontSize: s(11), fontWeight: FontWeight.w500)),
-                TextSpan(text: widget.ticketPrice.replaceAll(RegExp(r'[^0-9.]'), ''), style: GoogleFonts.dmSans(color: const Color(0xFFDFC45C), fontSize: s(12), fontWeight: FontWeight.w500)),
+                TextSpan(text: '₹ ',
+                    style: GoogleFonts.dmSans(color: const Color(0xFFDFC45C), fontSize: s(11), fontWeight: FontWeight.w500)),
+                TextSpan(text: widget.ticketPrice.replaceAll(RegExp(r'[^0-9.]'), ''),
+                    style: GoogleFonts.dmSans(color: const Color(0xFFDFC45C), fontSize: s(12), fontWeight: FontWeight.w500)),
               ],
             ),
           ),
-
           SizedBox(height: s(16)),
-
-          // Numbers Row
-          // Numbers Row
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Left side: A, B, C boxes
-              ...widget.letters.asMap().entries.map((entry) {
-                int idx = entry.key;
-                String label = entry.value;
-                return Padding(
-                  // Add right padding ONLY if it's NOT the last letter box
-                  padding: EdgeInsets.only(right: idx == widget.letters.length - 1 ? 0 : s(10)),
-                  child: _box(label, s),
-                );
-              }),
-
-              const Spacer(),
-
-              // Right side: Digit boxes (the dash/random values)
-              ...dashValues.asMap().entries.map((entry) {
-                int idx = entry.key;
-                String val = entry.value;
-                return Padding(
-                  // Add left padding ONLY if it's NOT the first digit box
-                  // This ensures the last box (idx 2) has 0 right padding and hits the edge
-                  padding: EdgeInsets.only(left: idx == 0 ? 0 : s(12)),
-                  child: _box(val, s),
-                );
-              }),
+              Row(
+                children: widget.letters.asMap().entries.map((entry) {
+                  return Padding(
+                    padding: EdgeInsets.only(right: entry.key == widget.letters.length - 1 ? 0 : s(10)),
+                    child: _box(entry.value, s),
+                  );
+                }).toList(),
+              ),
+              Row(
+                children: dashValues.asMap().entries.map((entry) {
+                  return Padding(
+                    padding: EdgeInsets.only(left: entry.key == 0 ? 0 : s(12)),
+                    child: _box(entry.value, s),
+                  );
+                }).toList(),
+              ),
             ],
           ),
-
           SizedBox(height: s(12)),
 
-          // Bottom Action Row
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              if (isQuickGuessClicked) ...[
-                _quantitySelector(s),
+          // Bottom Action Row - Clean Row implementation
+          SizedBox(
+            height: s(36),
+            child: Row(
+              children: [
+                if (isQuickGuessClicked)
+                  _quantitySelector(s),
+
+                const Spacer(),
+
+                // BOX Button
+                isQuickGuessClicked
+                    ? _goldActionButton(
+                  text: "Box",
+                  width: 68,
+                  s: s,
+                  onTap: () => widget.onAdd(widget.letters.join(), dashValues.join(), true, quantity, pricePerUnit),
+                )
+                    : _greyButton("Box", 68, s),
+
                 SizedBox(width: s(10)),
-                _goldActionButton(text: "Box", width: 68, s: s, isBox: true, price: pricePerUnit),
-                SizedBox(width: s(10)),
-                _goldActionButton(text: "Add", width: 68, s: s, isBox: false, price: pricePerUnit),
-              ] else ...[
-                // Default greyed out buttons when not clicked
-                _greyButton("Box", 68, s),
-                SizedBox(width: s(10)),
-                _greyButton("Add", 68, s),
+
+                // ADD Button
+                isQuickGuessClicked
+                    ? _goldActionButton(
+                  text: "Add",
+                  width: 68,
+                  s: s,
+                  onTap: () => widget.onAdd(widget.letters.join(), dashValues.join(), false, quantity, pricePerUnit),
+                )
+                    : _greyButton("Add", 68, s),
               ],
-            ],
+            ),
           ),
         ],
       ),
@@ -138,8 +141,12 @@ class _LotteryNumberCardTripleState extends State<LotteryNumberCardTriple> {
     return Container(
       width: s(36), height: s(36),
       alignment: Alignment.center,
-      decoration: BoxDecoration(color: const Color(0xFF313038), borderRadius: BorderRadius.circular(s(6))),
-      child: Text(text, style: GoogleFonts.dmSans(color: Colors.white, fontSize: s(14), fontWeight: FontWeight.w500)),
+      decoration: BoxDecoration(
+        color: const Color(0xFF313038),
+        borderRadius: BorderRadius.circular(s(6)),
+      ),
+      child: Text(text,
+          style: GoogleFonts.dmSans(color: Colors.white, fontSize: s(14), fontWeight: FontWeight.w500)),
     );
   }
 
@@ -149,8 +156,12 @@ class _LotteryNumberCardTripleState extends State<LotteryNumberCardTriple> {
       child: Container(
         width: s(92), height: s(32),
         alignment: Alignment.center,
-        decoration: BoxDecoration(color: const Color(0xFF313038), borderRadius: BorderRadius.circular(s(6))),
-        child: Text('Quick Guess', style: GoogleFonts.dmSans(color: Colors.white, fontSize: s(12))),
+        decoration: BoxDecoration(
+          color: const Color(0xFF313038),
+          borderRadius: BorderRadius.circular(s(6)),
+        ),
+        child: Text('Quick Guess',
+            style: GoogleFonts.dmSans(color: Colors.white, fontSize: s(12))),
       ),
     );
   }
@@ -158,29 +169,47 @@ class _LotteryNumberCardTripleState extends State<LotteryNumberCardTriple> {
   Widget _quantitySelector(double Function(double) s) {
     return Container(
       width: s(92), height: s(36),
-      decoration: BoxDecoration(color: const Color(0xFF313038), borderRadius: BorderRadius.circular(s(6))),
+      decoration: BoxDecoration(
+        color: const Color(0xFF313038),
+        borderRadius: BorderRadius.circular(s(6)),
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          GestureDetector(onTap: () => setState(() => quantity = max(1, quantity - 1)), child: Text("-", style: TextStyle(color: Colors.white, fontSize: s(18)))),
-          Text("$quantity", style: TextStyle(color: Colors.white, fontSize: s(14))),
-          GestureDetector(onTap: () => setState(() => quantity++), child: Text("+", style: TextStyle(color: Colors.white, fontSize: s(18)))),
+          GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () => setState(() => quantity = max(1, quantity - 1)),
+            child: Text("-", style: TextStyle(color: Colors.white, fontSize: s(18))),
+          ),
+          Text("$quantity",
+              style: GoogleFonts.dmSans(color: Colors.white, fontSize: s(14), fontWeight: FontWeight.bold)),
+          GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () => setState(() => quantity++),
+            child: Text("+", style: TextStyle(color: Colors.white, fontSize: s(18))),
+          ),
         ],
       ),
     );
   }
 
-  Widget _goldActionButton({required String text, required double width, required double Function(double) s, required bool isBox, required double price}) {
+  Widget _goldActionButton({
+    required String text,
+    required double width,
+    required double Function(double) s,
+    required VoidCallback onTap,
+  }) {
     return GestureDetector(
-      onTap: () => widget.onAdd(widget.letters.join(), dashValues.join(), isBox, quantity, price),
+      onTap: onTap,
       child: Container(
-        width: s(width), height: s(36),
+        width: s(68), height: s(36),
         alignment: Alignment.center,
         decoration: BoxDecoration(
           gradient: const LinearGradient(colors: [Color(0xFFDFC45C), Color(0xFFA89A5F)]),
           borderRadius: BorderRadius.circular(s(6)),
         ),
-        child: Text(text, style: GoogleFonts.dmSans(color: Colors.white, fontSize: s(14), fontWeight: FontWeight.w500)),
+        child: Text(text,
+            style: GoogleFonts.dmSans(color: Colors.white, fontSize: s(14), fontWeight: FontWeight.w500)),
       ),
     );
   }
@@ -189,8 +218,12 @@ class _LotteryNumberCardTripleState extends State<LotteryNumberCardTriple> {
     return Container(
       width: s(width), height: s(36),
       alignment: Alignment.center,
-      decoration: BoxDecoration(color: const Color(0xFF313038), borderRadius: BorderRadius.circular(s(6))),
-      child: Text(text, style: GoogleFonts.dmSans(color: Colors.white.withOpacity(0.4), fontSize: s(14))),
+      decoration: BoxDecoration(
+        color: const Color(0xFF313038),
+        borderRadius: BorderRadius.circular(s(6)),
+      ),
+      child: Text(text,
+          style: GoogleFonts.dmSans(color: Colors.white.withOpacity(0.4), fontSize: s(14))),
     );
   }
 }

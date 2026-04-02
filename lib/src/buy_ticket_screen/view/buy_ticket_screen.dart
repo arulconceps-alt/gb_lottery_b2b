@@ -101,7 +101,7 @@ class _BuyTicketsScreenState extends State<BuyTicketsScreen> {
   @override
   Widget build(BuildContext context) {
     final w = MediaQuery.of(context).size.width;
-    final scale = w / 440;
+    final scale = w / 375;
     double s(double v) => v * scale;
     final topPadding = MediaQuery.of(context).padding.top;
     final appBarHeight = s(60) + topPadding;
@@ -277,12 +277,12 @@ class _BuyTicketsScreenState extends State<BuyTicketsScreen> {
                     s: s,
                     onAdd: _handleAddition,
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 27),
                   LotteryNumberCardDouble(
                     s: s,
                     lotteryType: "Double Digit",
                     prize: "Win ₹1000.00",
-                    ticketPrice: "₹100",
+                    ticketPrice: "₹100.00",
                     onAdd: _handleAddition,
                     rows: const [
                       ["A", "B"],
@@ -292,7 +292,7 @@ class _BuyTicketsScreenState extends State<BuyTicketsScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: s(20),),
+              SizedBox(height: s(21),),
               LotteryNumberCardTriple(
                 s: s,
                 lotteryType: "Triple Digit",

@@ -17,7 +17,7 @@ class _MycartScreenState extends State<MycartScreen> {
   @override
   Widget build(BuildContext context) {
     final w = MediaQuery.of(context).size.width;
-    final scale = w / 440;
+    final scale = w / 375;
     double s(double v) => v * scale;
 
     return Scaffold(
@@ -28,47 +28,47 @@ class _MycartScreenState extends State<MycartScreen> {
       backgroundColor: const Color(0xFF0F1116),
 
       /// --- 1. ONLY PAY NOW BUTTON IS FIXED ---
-      bottomNavigationBar: Container(
-        color: const Color(0xFF0F1116),
-        padding: EdgeInsets.fromLTRB(
-            s(16),
-            s(10),
-            s(16),
-            MediaQuery.of(context).padding.bottom + s(16)
-        ),
-        child: GestureDetector(
-          onTap: () {
-           context.push("/profile");
-          },
-          child: Container(
-            width: double.infinity,
-            height: s(50),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                colors: [Color(0xFFA89A5F), Color(0xFFDFC45C)],
+      bottomNavigationBar: SafeArea(
+        child: Container(
+          color: const Color(0xFF0F1116),
+          padding: EdgeInsets.fromLTRB(
+              s(16),
+              s(10),
+              s(16),
+              MediaQuery.of(context).padding.bottom + s(16)
+          ),
+          child: GestureDetector(
+            onTap: () {
+             context.push("/profile");
+            },
+            child: Container(
+              width: double.infinity,
+              height: s(50),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [Color(0xFFA89A5F), Color(0xFFDFC45C)],
+                ),
+                borderRadius: BorderRadius.circular(s(8)),
               ),
-              borderRadius: BorderRadius.circular(s(8)),
-            ),
-            child: Text(
-              'Pay Now',
-              style: GoogleFonts.dmSans(
-                color: Colors.white,
-                fontSize: s(16),
-                fontWeight: FontWeight.w700,
+              child: Text(
+                'Pay Now',
+                style: GoogleFonts.dmSans(
+                  color: Colors.white,
+                  fontSize: s(16),
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
           ),
         ),
       ),
-
       /// --- 2. TOTAL AMOUNT BOX MOVED INSIDE SCROLL VIEW ---
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Your List of Cards
             ListView.builder(
               shrinkWrap: true, // Needed inside SingleChildScrollView
               physics: const NeverScrollableScrollPhysics(),
