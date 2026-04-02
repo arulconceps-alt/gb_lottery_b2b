@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gb_lottery_b2b/src/app/color_palette.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomerSearchCard extends StatelessWidget {
@@ -25,7 +26,7 @@ class CustomerSearchCard extends StatelessWidget {
       width: double.infinity,
       height: s(70),
       decoration: BoxDecoration(
-        color: const Color(0xFF24232A),
+        color:  ColorPalette.backgroundDark,
         // Only round the top corners of the very first card
         borderRadius: isFirst
             ? BorderRadius.vertical(top: Radius.circular(s(10)))

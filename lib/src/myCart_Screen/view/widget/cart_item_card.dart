@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gb_lottery_b2b/src/app/color_palette.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CartItemCard extends StatelessWidget {
@@ -12,7 +13,7 @@ class CartItemCard extends StatelessWidget {
       width: double.infinity,
       margin: EdgeInsets.symmetric(horizontal: s(16), vertical: s(8)),
       decoration: BoxDecoration(
-        color: const Color(0xFF24232A),
+        color:  ColorPalette.backgroundDark,
         borderRadius: BorderRadius.circular(s(10)),
       ),
       child: Column(

@@ -78,11 +78,10 @@ class _BuyTicketsScreenState extends State<BuyTicketsScreen> {
   void _openMyNumbersBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      isScrollControlled: true, // 👈 CRITICAL: Allows custom heights taller than half-screen
+      isScrollControlled: true, 
       useSafeArea: true,
-      backgroundColor: Colors.transparent, // 👈 Keep transparent to see your custom radius
+      backgroundColor: Colors.transparent,
       builder: (bottomSheetContext) {
-        // Use Wrap or a Column with mainAxisSize.min to allow it to respect child height
         return MyNumberSummaryView(
           selectedNumbers: myItems,
           onClearAll: () {
@@ -101,7 +100,7 @@ class _BuyTicketsScreenState extends State<BuyTicketsScreen> {
   @override
   Widget build(BuildContext context) {
     final w = MediaQuery.of(context).size.width;
-    final scale = w / 440;
+    final scale = w / 375;
     double s(double v) => v * scale;
     final topPadding = MediaQuery.of(context).padding.top;
     final appBarHeight = s(60) + topPadding;
@@ -141,7 +140,7 @@ class _BuyTicketsScreenState extends State<BuyTicketsScreen> {
         },
       )
           : null,
-      backgroundColor: ColorPalette.background,
+      backgroundColor: const Color(0xFF1C1B20),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(s(16)),
@@ -170,8 +169,8 @@ class _BuyTicketsScreenState extends State<BuyTicketsScreen> {
               CustomerInfoCard(s: s),
               SizedBox(height: s(26),),
               SizedBox(
-                width: s(128),   // ✅ correct width
-                height: s(20),   // ✅ correct height
+                width: s(128),  
+                height: s(20), 
                 child: Text(
                   "Select Lottery",
                   style: GoogleFonts.dmSans(
@@ -179,7 +178,7 @@ class _BuyTicketsScreenState extends State<BuyTicketsScreen> {
                     fontSize: s(16),
                     fontWeight: FontWeight.w600,
                     fontStyle: FontStyle.italic,
-                    height: 20 / 16, // ✅ line height
+                    height: 20 / 16, 
                   ),
                 ),
               ),
@@ -190,12 +189,11 @@ class _BuyTicketsScreenState extends State<BuyTicketsScreen> {
                 },
               ),
               SizedBox(height: s(30),),
-              // Remove the SizedBox width or set it to double.infinity
               Container(
                 width: double.infinity,
                 height: s(135),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF24232A), // Matches your card color
+                  color:  ColorPalette.backgroundDark, // Matches your card color
                   borderRadius: BorderRadius.circular(s(8)),
                 ),
                 child: Image.asset(

@@ -9,7 +9,7 @@ class DashboardTopSection extends StatelessWidget {
     final scale = w / 375;
     double s(double v) => v * scale;
     return Padding(
-      padding:  EdgeInsets.symmetric(horizontal:  s(31)),
+      padding:  EdgeInsets.symmetric(horizontal:  s(32)),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

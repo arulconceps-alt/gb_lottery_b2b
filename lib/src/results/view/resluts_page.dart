@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/common/widgets/common_app_bar.dart';
 import 'package:gb_lottery_b2b/src/common/widgets/custom_drawer.dart';
-import 'package:gb_lottery_b2b/src/results/view/widgets/results_lottry_section_card.dart';
-import 'package:gb_lottery_b2b/src/results/view/widgets/results_top_tabs.dart';
+import 'package:gb_lottery_b2b/src/results/view/widgets/resluts_lottry_section_card.dart';
+import 'package:gb_lottery_b2b/src/results/view/widgets/resluts_top_tabs.dart';
 
 class ResultPage extends StatefulWidget {
   const ResultPage({super.key});
@@ -22,7 +22,7 @@ class _ResultPageState extends State<ResultPage> {
     return Scaffold(
      key: _scaffoldKey,
       drawer: const CustomDrawer(),
-      backgroundColor: const Color(0xFF1F1E26),
+      backgroundColor: const Color(0xFF1C1B20),
       appBar: CommonAppBar(
         amount: "₹200",
         onLeadingTap: () {

@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:gb_lottery_b2b/src/app/color_palette.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LotteryNumberCardDouble extends StatefulWidget {
@@ -59,7 +60,7 @@ class _LotteryNumberCardDoubleState extends State<LotteryNumberCardDouble> {
       width: double.infinity,
       padding: EdgeInsets.all(s(12)),
       decoration: BoxDecoration(
-        color: const Color(0xFF24232A),
+        color:  ColorPalette.backgroundDark,
         borderRadius: BorderRadius.circular(s(8)),
       ),
       child: Column(

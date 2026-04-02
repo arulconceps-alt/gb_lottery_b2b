@@ -15,7 +15,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     double s(double v) => v * scale;
 
     return AppBar(
-      backgroundColor: const Color(0xFF24232A),
+      backgroundColor:  ColorPalette.backgroundDark,
       elevation: 0,
 
       leading: GestureDetector(

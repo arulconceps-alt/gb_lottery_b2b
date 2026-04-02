@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gb_lottery_b2b/src/app/color_palette.dart';
 import 'package:go_router/go_router.dart';
 
 class AppBarWithBack extends StatelessWidget
@@ -14,7 +15,7 @@ class AppBarWithBack extends StatelessWidget
     double s(double v) => v * scale;
 
     return AppBar(
-      backgroundColor: const Color(0xFF24232A),
+      backgroundColor:  ColorPalette.backgroundDark,
       elevation: 0,
       leading: GestureDetector(
         onTap: onBackTap ?? () => context.pop(),

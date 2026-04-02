@@ -17,7 +17,7 @@ class _MycartScreenState extends State<MycartScreen> {
   @override
   Widget build(BuildContext context) {
     final w = MediaQuery.of(context).size.width;
-    final scale = w / 440;
+    final scale = w / 375;
     double s(double v) => v * scale;
 
     return Scaffold(
@@ -25,11 +25,11 @@ class _MycartScreenState extends State<MycartScreen> {
         preferredSize: Size.fromHeight(s(60) + MediaQuery.of(context).padding.top),
         child: AppbarWidget(s: s, title: "My Cart", showBack: true),
       ),
-      backgroundColor: const Color(0xFF0F1116),
+        backgroundColor: ColorPalette.background,
 
       /// --- 1. ONLY PAY NOW BUTTON IS FIXED ---
       bottomNavigationBar: Container(
-        color: const Color(0xFF0F1116),
+        color: const Color(0xFF1C1B20),
         padding: EdgeInsets.fromLTRB(
             s(16),
             s(10),
@@ -38,7 +38,7 @@ class _MycartScreenState extends State<MycartScreen> {
         ),
         child: GestureDetector(
           onTap: () {
-           context.push("/profile");
+           //context.push("/profile");
           },
           child: Container(
             width: double.infinity,
@@ -87,7 +87,7 @@ class _MycartScreenState extends State<MycartScreen> {
                 // Figma height: 69
                 height: s(69),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF24232A),
+                  color:  ColorPalette.backgroundDark,
                   borderRadius: BorderRadius.circular(s(8)),
                 ),
                 // Using Padding to match Figma: 16 left/right, 25 top, 24 bottom

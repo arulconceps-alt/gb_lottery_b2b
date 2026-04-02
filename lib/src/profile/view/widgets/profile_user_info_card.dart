@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProfileUserInfoCard extends StatelessWidget {
@@ -13,7 +14,7 @@ class ProfileUserInfoCard extends StatelessWidget {
     required this.name,
     required this.id,
     required this.initial,
-    this.backgroundColor = const Color(0xFF24232A),
+    this.backgroundColor =  ColorPalette.backgroundDark,
   });
 
   @override
@@ -75,18 +76,21 @@ class ProfileUserInfoCard extends StatelessWidget {
             ],
           ),
           SizedBox(width: s(132)),
-          Container(
-            width: s(40),
-            height: s(40),
-            padding: EdgeInsets.all(s(11)),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              gradient: ColorPalette.buttonGradient,
-            ),
-            child: Image.asset(
-              'assets/images/profile/edit.webp',
-              width: s(18),
-              height: s(18),
+          GestureDetector(
+            onTap: () => context.push('/editprofile'),
+            child: Container(
+              width: s(40),
+              height: s(40),
+              padding: EdgeInsets.all(s(11)),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: ColorPalette.buttonGradient,
+              ),
+              child: Image.asset(
+                'assets/images/profile/edit.webp',
+                width: s(18),
+                height: s(18),
+              ),
             ),
           ),
         ],

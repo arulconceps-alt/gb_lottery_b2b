@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -13,7 +14,7 @@ class CustomDrawer extends StatelessWidget {
 
     return Drawer(
       width: s(300),
-      backgroundColor: const Color(0xFF1F1E26),
+      backgroundColor:  ColorPalette.backgroundDark,
       child: SafeArea(
         child: Column(
           children: [
@@ -87,16 +88,19 @@ class CustomDrawer extends StatelessWidget {
                     "assets/images/dashboard/profile_icon.webp",
                     "Profile",
                     s,
+                    onTap: () => context.push('/profile'),
                   ),
                   _menuItem(
                     "assets/images/dashboard/customer_icon.webp",
                     "Customers",
                     s,
+                     onTap: () => context.push('/customer'),
                   ),
                   _menuItem(
                     "assets/images/dashboard/purchase.webp",
                     "Purchase Ticket",
                     s,
+                    onTap: () => context.push('/buy_ticket'),
                   ),
                   _menuItem(
                     "assets/images/dashboard/wallet_icon.webp",
@@ -107,6 +111,7 @@ class CustomDrawer extends StatelessWidget {
                     "assets/images/dashboard/settle_icon.webp",
                     "Settlement",
                     s,
+                    onTap: () => context.push('/settlement'),
                   ),
                   _menuItem(
                     "assets/images/dashboard/leadboard.webp",
@@ -189,37 +194,36 @@ class CustomDrawer extends StatelessWidget {
   }
 
   Widget _menuItem(
-    String iconPath,
-    String title,
-    double Function(double) s, {
-    bool isLogout = false,
-  }) {
-    return ListTile(
-      leading: Image.asset(
-        iconPath,
-        width: s(24),
-        height: s(24),
-        fit: BoxFit.contain,
+  String iconPath,
+  String title,
+  double Function(double) s, {
+  bool isLogout = false,
+  VoidCallback? onTap, 
+}) {
+  return ListTile(
+    leading: Image.asset(
+      iconPath,
+      width: s(24),
+      height: s(24),
+      fit: BoxFit.contain,
+    ),
+    title: Text(
+      title,
+      style: GoogleFonts.inter(
+        fontSize: s(14),
+        color: isLogout ? Colors.red : ColorPalette.whitetext,
+        fontWeight: FontWeight.w400,
       ),
-      title: Text(
-        title,
-        style: GoogleFonts.inter(
-          fontSize: s(14),
-          color: isLogout ? Colors.red : ColorPalette.whitetext,
-          fontWeight: FontWeight.w400,
-        ),
-      ),
-      trailing: isLogout
-          ? null
-          : Image.asset(
-              "assets/images/dashboard/right.webp",
-              width: s(20),
-              height: s(20),
-              fit: BoxFit.contain,
-            ),
-      onTap: () {
-        if (isLogout) {}
-      },
-    );
-  }
+    ),
+    trailing: isLogout
+        ? null
+        : Image.asset(
+            "assets/images/dashboard/right.webp",
+            width: s(20),
+            height: s(20),
+            fit: BoxFit.contain,
+          ),
+    onTap: onTap,
+  );
+}
 }

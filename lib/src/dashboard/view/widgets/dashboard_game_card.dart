@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DashboardGameCard extends StatelessWidget {
@@ -123,20 +124,23 @@ class DashboardGameCard extends StatelessWidget {
 
            SizedBox(height: s(8)),
 
-          Container(
-            width: double.infinity,
-            height: s(34),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              color: ColorPalette.surface,
-              borderRadius: BorderRadius.circular(s(6)),
-            ),
-            child: Text(
-              "Play Now",
-              style: GoogleFonts.dmSans(
-                fontSize: s(12),
-                fontWeight: FontWeight.w600,
-                color: ColorPalette.whitetext,
+          GestureDetector(
+            onTap: () => context.push('/buy_ticket'),
+            child: Container(
+              width: double.infinity,
+              height: s(34),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: ColorPalette.surface,
+                borderRadius: BorderRadius.circular(s(6)),
+              ),
+              child: Text(
+                "Play Now",
+                style: GoogleFonts.dmSans(
+                  fontSize: s(12),
+                  fontWeight: FontWeight.w600,
+                  color: ColorPalette.whitetext,
+                ),
               ),
             ),
           ),

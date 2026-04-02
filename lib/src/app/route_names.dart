@@ -13,11 +13,11 @@ mixin RouteName {
   static const customerinformation = "customerinformation";
   static const buy_ticket = "buy_ticket";
   static const myCart = "myCart";
-  static const customer_info = "customer_info";
+  static const customer_edit = "customer_edit";
   static const search_screen = "search_screen";
   static const editprofile = "editprofile";
-  static const withdrawSuccessful = "withdrawSuccessful";
-  static const AddMoneyPage = "AddMoneyPage";
+  static const settlement = "settlement";
+  static const reslutinner = "reslutinner";
   static const paymentModePage = "paymentModePage";
   static const walletLinkingPage = "walletLinkingPage";
   static const walletOtpSent = "walletOtpSent";

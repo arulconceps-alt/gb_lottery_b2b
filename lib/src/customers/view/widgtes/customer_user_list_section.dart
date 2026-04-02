@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CustomerUserListSection extends StatelessWidget {
+class CustomerUserListSection extends StatefulWidget {
   const CustomerUserListSection({super.key});
+
+  @override
+  State<CustomerUserListSection> createState() =>
+      _CustomerUserListSectionState();
+}
+
+class _CustomerUserListSectionState
+    extends State<CustomerUserListSection> {
+
+  int selectedPage = 1; // ✅ FIXED (moved to state)
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +35,7 @@ class CustomerUserListSection extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: const Color(0xFF24232A),
+            color: ColorPalette.backgroundDark,
             borderRadius: BorderRadius.only(
               topRight: Radius.circular(s(10)),
               topLeft: Radius.circular(s(10)),
@@ -36,7 +47,6 @@ class CustomerUserListSection extends StatelessWidget {
 
               return Column(
                 children: [
-                  /// 🔹 LIST ITEM
                   Padding(
                     padding: EdgeInsets.symmetric(
                       horizontal: s(10),
@@ -88,6 +98,7 @@ class CustomerUserListSection extends StatelessWidget {
                             ],
                           ),
                         ),
+
                         GestureDetector(
                           onTapDown: (details) async {
                             final selected = await showMenu(
@@ -109,21 +120,17 @@ class CustomerUserListSection extends StatelessWidget {
                                   child: SizedBox(
                                     width: s(132),
                                     height: s(42),
-                                    child: Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Padding(
-                                        padding: EdgeInsets.only(
-                                          left: s(13),
-                                          top: s(8),
-                                          bottom: s(8),
-                                        ),
-                                        child: Text(
-                                          "View",
-                                          style: GoogleFonts.dmSans(
-                                            color: ColorPalette.whitetext,
-                                            fontSize: s(14),
-                                            fontWeight: FontWeight.w400,
-                                          ),
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                        left: s(13),
+                                        top: s(8),
+                                        bottom: s(8),
+                                      ),
+                                      child: Text(
+                                        "View",
+                                        style: GoogleFonts.dmSans(
+                                          color: ColorPalette.whitetext,
+                                          fontSize: s(14),
                                         ),
                                       ),
                                     ),
@@ -135,11 +142,8 @@ class CustomerUserListSection extends StatelessWidget {
                                   padding: EdgeInsets.zero,
                                   height: s(1),
                                   child: Divider(
-                                    color: ColorPalette.darktext.withOpacity(
-                                      0.5,
-                                    ),
+                                    color: ColorPalette.darktext.withOpacity(0.5),
                                     thickness: 0.5,
-                                    height: 1,
                                   ),
                                 ),
 
@@ -149,21 +153,17 @@ class CustomerUserListSection extends StatelessWidget {
                                   child: SizedBox(
                                     width: s(132),
                                     height: s(42),
-                                    child: Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Padding(
-                                        padding: EdgeInsets.only(
-                                          left: s(13),
-                                          top: s(8),
-                                          bottom: s(8),
-                                        ),
-                                        child: Text(
-                                          "Edit",
-                                          style: GoogleFonts.dmSans(
-                                            color: ColorPalette.whitetext,
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: s(14),
-                                          ),
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                        left: s(13),
+                                        top: s(8),
+                                        bottom: s(8),
+                                      ),
+                                      child: Text(
+                                        "Edit",
+                                        style: GoogleFonts.dmSans(
+                                          color: ColorPalette.whitetext,
+                                          fontSize: s(14),
                                         ),
                                       ),
                                     ),
@@ -173,19 +173,16 @@ class CustomerUserListSection extends StatelessWidget {
                             );
 
                             if (selected == "view") {
-                              print("View clicked");
+                              context.push('/customerinformation');
                             } else if (selected == "edit") {
-                              print("Edit clicked");
+                              context.push('/customer_edit');
                             }
                           },
-
                           child: Padding(
                             padding: EdgeInsets.only(right: s(20)),
                             child: Icon(
                               Icons.more_vert,
-                              color: ColorPalette.buttoncolor.withValues(
-                                alpha: .80,
-                              ),
+                              color: ColorPalette.buttoncolor.withValues(alpha: .80),
                               size: s(23.9),
                             ),
                           ),
@@ -205,6 +202,7 @@ class CustomerUserListSection extends StatelessWidget {
             }),
           ),
         ),
+
         SizedBox(height: s(44)),
 
         Padding(
@@ -222,17 +220,16 @@ class CustomerUserListSection extends StatelessWidget {
               ),
 
               SizedBox(width: s(24)),
+
               Row(
                 children: [
-                  _pageNumber("1", true, s),
+                  _pageNumber("1", selectedPage == 1, s),
                   SizedBox(width: s(24)),
-                  _pageNumber("2", false, s),
+                  _pageNumber("2", selectedPage == 2, s),
                   SizedBox(width: s(24)),
-                  _pageNumber("3", false, s),
-
+                  _pageNumber("3", selectedPage == 3, s),
                   SizedBox(width: s(24)),
                   _navButton(Icons.chevron_left, s),
-
                   SizedBox(width: s(7)),
                   _navButton(Icons.chevron_right, s),
                 ],
@@ -240,31 +237,52 @@ class CustomerUserListSection extends StatelessWidget {
             ],
           ),
         ),
+
         SizedBox(height: s(10)),
       ],
     );
   }
 
   Widget _pageNumber(String text, bool isSelected, double Function(double) s) {
-    return Text(
-      text,
-      style: GoogleFonts.dmSans(
-        fontSize: s(14),
-        fontWeight: FontWeight.w600,
-        color: isSelected ? ColorPalette.whitetext : ColorPalette.darktext,
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          selectedPage = int.parse(text);
+        });
+      },
+      child: Text(
+        text,
+        style: GoogleFonts.dmSans(
+          fontSize: s(14),
+          fontWeight: FontWeight.w600,
+          color: isSelected
+              ? ColorPalette.whitetext
+              : ColorPalette.darktext,
+        ),
       ),
     );
   }
 
   Widget _navButton(IconData icon, double Function(double) s) {
-    return Container(
-      height: s(26),
-      width: s(26),
-      decoration: BoxDecoration(
-        color: const Color(0xFF313038),
-        borderRadius: BorderRadius.circular(s(6)),  
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          if (icon == Icons.chevron_left && selectedPage > 1) {
+            selectedPage--;
+          } else if (icon == Icons.chevron_right && selectedPage < 3) {
+            selectedPage++;
+          }
+        });
+      },
+      child: Container(
+        height: s(26),
+        width: s(26),
+        decoration: BoxDecoration(
+          color: const Color(0xFF313038),
+          borderRadius: BorderRadius.circular(s(6)),
+        ),
+        child: Icon(icon, size: s(12), color: ColorPalette.whitetext),
       ),
-      child: Icon(icon, size: s(12), color: ColorPalette.whitetext),
     );
   }
 }

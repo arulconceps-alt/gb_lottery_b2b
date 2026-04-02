@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
-import 'package:gb_lottery_b2b/src/results/view/widgets/results_lottry_table.dart';
+import 'package:gb_lottery_b2b/src/results/view/widgets/resluts_lottry_table.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -45,7 +45,8 @@ class LotterySectionCard extends StatelessWidget {
               ],
             ),
             GestureDetector(
-              onTap: () => context.push('/customerinformation'),
+             // onTap: () => context.push('/customerinformation'),
+             onTap: () => context.push('/reslutinner'),
               child: Container(
                     height: s(39),
                 padding: EdgeInsets.symmetric(
@@ -53,7 +54,7 @@ class LotterySectionCard extends StatelessWidget {
                   vertical: s(9),
                 ), 
                 decoration: BoxDecoration(
-                  color: const Color(0xFF24232A),
+                  color:  ColorPalette.backgroundDark,
                   borderRadius: BorderRadius.circular(s(10)), 
                 ),
                 child: Text(
@@ -72,7 +73,7 @@ class LotterySectionCard extends StatelessWidget {
         SizedBox(height: s(14)), 
 
         /// Table
-        const LotteryTable(),
+        const ReslutsLottryTable(),
       ],
     );
   }

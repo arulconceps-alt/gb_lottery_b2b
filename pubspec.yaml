@@ -79,7 +79,10 @@ flutter:
       - assets/images/customer_list/
       - assets/images/add_customer/
       - assets/images/profile/
-  #   - images/a_dot_ham.jpeg
+      - assets/images/settlement/
+      - assets/images/buy_ticket/
+      - assets/images/myCart/
+      - assets/images/icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

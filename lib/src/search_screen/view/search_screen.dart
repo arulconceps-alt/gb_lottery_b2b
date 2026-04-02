@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gb_lottery_b2b/src/app/color_palette.dart';
 import 'package:gb_lottery_b2b/src/common/widgets/appbar_widget.dart';
 import 'package:gb_lottery_b2b/src/search_screen/view/widget/customer_search_card.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,11 +14,11 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     final w = MediaQuery.of(context).size.width;
-    final scale = w / 440;
+    final scale = w / 375;
     double s(double v) => v * scale;
 
     return Scaffold(
-      backgroundColor: const Color(0xFF0F1116),
+     backgroundColor: const Color(0xFF1C1B20),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(s(60) + MediaQuery.of(context).padding.top),
         child: AppbarWidget(s: s, title: "Search", showBack: true),

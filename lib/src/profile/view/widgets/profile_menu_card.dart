@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProfileMenuCard extends StatelessWidget {
@@ -16,7 +17,7 @@ class ProfileMenuCard extends StatelessWidget {
         Container(
           padding: EdgeInsets.symmetric(vertical: s(8)),
           decoration: BoxDecoration(
-            color: const Color(0xFF24232A),
+            color:  ColorPalette.backgroundDark,
             borderRadius: BorderRadius.circular(s(12)),
           ),
           child: Column(
@@ -32,6 +33,7 @@ class ProfileMenuCard extends StatelessWidget {
                 s,
                 iconPath: 'assets/images/profile/settlement.webp',
                 title: 'Settlement',
+                onTap: () => context.push('/settlement'),
               ),
               _divider(s),
 
@@ -41,26 +43,39 @@ class ProfileMenuCard extends StatelessWidget {
                 title: 'Leaderboard',
               ),
               _divider(s),
+               _menuItem(
+                s,
+                iconPath: 'assets/images/profile/purchase.webp',
+                title: 'Purchase History',
+              ),
+              _divider(s),
+               _menuItem(
+                s,
+                iconPath: 'assets/images/profile/cart.webp',
+                title: 'Cart',
+              ),
 
+              
+            ],
+          ),
+        ),
+
+        SizedBox(height: s(26)),
+
+        Container(
+          padding: EdgeInsets.symmetric(vertical: s(8)),
+          decoration: BoxDecoration(
+            color:  ColorPalette.backgroundDark,
+            borderRadius: BorderRadius.circular(s(12)),
+          ),
+          child: Column(
+            children: [
               _menuItem(
                 s,
                 iconPath: 'assets/images/profile/notification.webp',
                 title: 'Notification',
               ),
-            ],
-          ),
-        ),
 
-        SizedBox(height: s(14)),
-
-        Container(
-          padding: EdgeInsets.symmetric(vertical: s(8)),
-          decoration: BoxDecoration(
-            color: const Color(0xFF24232A),
-            borderRadius: BorderRadius.circular(s(12)),
-          ),
-          child: Column(
-            children: [
               _menuItem(
                 s,
                 iconPath: 'assets/images/profile/language.webp',
@@ -163,7 +178,7 @@ class ProfileMenuCard extends StatelessWidget {
             width: double.infinity,
             height: s(200),
             decoration: BoxDecoration(
-              color: const Color(0xFF24232A),
+              color:  ColorPalette.backgroundDark,
               borderRadius: BorderRadius.vertical(top: Radius.circular(s(26))),
             ),
             child: Column(

@@ -24,7 +24,7 @@ class _CustomerPageState extends State<CustomerPage> {
     final scale = w / 375;
     double s(double v) => v * scale;
     return Scaffold(
-      backgroundColor: const Color(0xFF1F1E26),
+      backgroundColor: const Color(0xFF1C1B20),
       key: _scaffoldKey,
       drawer: const CustomDrawer(),
       appBar: CommonAppBar(
@@ -45,15 +45,18 @@ class _CustomerPageState extends State<CustomerPage> {
                 subtitle: "Customer Details",
                 buttonText: "Add New",
                 onButtonTap: () {
-                 context.push('/addcustomer');
-                 //context.push('/customerinformation');
+                  context.push('/addcustomer');
+                  //context.push('/customerinformation');
                 },
               ),
               SizedBox(height: s(17)),
               Container(
                 height: s(50),
                 width: s(344),
-                padding: EdgeInsets.symmetric(horizontal: s(16), vertical: s(13)),
+                padding: EdgeInsets.symmetric(
+                  horizontal: s(16),
+                  vertical: s(13),
+                ),
                 decoration: BoxDecoration(
                   color: const Color(0xFF2A2A33),
                   borderRadius: BorderRadius.circular(s(8)),
@@ -64,16 +67,29 @@ class _CustomerPageState extends State<CustomerPage> {
                       "assets/images/customer_list/search.webp",
                       height: s(24),
                       width: s(24),
-                      fit: BoxFit.contain,
+                      color: ColorPalette.darktext,
                     ),
-          
+
                     SizedBox(width: s(9)),
-                    Text(
-                      "Search by customer",
-                      style: GoogleFonts.dmSans(
-                        fontSize: s(16),
-                        fontWeight: FontWeight.w400,
-                        color: ColorPalette.whitetext.withOpacity(0.5),
+
+                    Expanded(
+                      child: TextField(
+                        style: GoogleFonts.dmSans(
+                          fontSize: s(16),
+                          fontWeight: FontWeight.w400,
+                          color: ColorPalette.whitetext,
+                        ),
+                        decoration: InputDecoration(
+                          hintText: "Search by customer",
+                          hintStyle: GoogleFonts.dmSans(
+                            fontSize: s(16),
+                            fontWeight: FontWeight.w400,
+                            color: ColorPalette.whitetext.withOpacity(0.5),
+                          ),
+                          border: InputBorder.none,
+                          isDense: true, 
+                          contentPadding: EdgeInsets.zero,
+                        ),
                       ),
                     ),
                   ],
@@ -91,7 +107,7 @@ class _CustomerPageState extends State<CustomerPage> {
               SizedBox(height: s(19)),
               UserTypeSelector(),
               SizedBox(height: s(27)),
-              CustomerUserListSection()
+              CustomerUserListSection(),
             ],
           ),
         ),

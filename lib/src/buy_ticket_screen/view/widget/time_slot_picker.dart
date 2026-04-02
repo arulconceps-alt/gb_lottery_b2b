@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gb_lottery_b2b/src/app/color_palette.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TimeSlotPicker extends StatefulWidget {
@@ -36,10 +37,10 @@ class _TimeSlotPickerState extends State<TimeSlotPicker> {
         top: widget.s(12),
         bottom: widget.s(12),
       ),
-      color: const Color(0xFF1B1A1F), // ✅ background like design
+      color: const Color(0xFF1B1A1F),
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
-        physics: const BouncingScrollPhysics(),
+        //physics: const BouncingScrollPhysics(),
         itemCount: widget.slots.length,
         separatorBuilder: (_, __) => SizedBox(width: widget.s(10)), // ✅ gap 10
         itemBuilder: (context, index) {
@@ -67,7 +68,7 @@ class _TimeSlotPickerState extends State<TimeSlotPicker> {
                   ],
                 )
                     : null,
-                color: isSelected ? null : const Color(0xFF24232A),
+                color: isSelected ? null :  ColorPalette.backgroundDark,
                 borderRadius: BorderRadius.circular(widget.s(8)),
               ),
               child: Center(

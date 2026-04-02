@@ -15,7 +15,7 @@ class CustomerInfoCard extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF24232A),
+        color: ColorPalette.backgroundDark,
         borderRadius: BorderRadius.circular(s(12)),
       ),
       child: Column(

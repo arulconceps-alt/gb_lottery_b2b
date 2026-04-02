@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gb_lottery_b2b/src/app/color_palette.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -32,7 +33,7 @@ class MyNumberSummaryView extends StatelessWidget {
       width: double.infinity,
       height: 515,
       decoration: const BoxDecoration(
-        color: Color(0xFF24232A),
+        color:  ColorPalette.backgroundDark,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(10),
           topRight: Radius.circular(10),
@@ -202,7 +203,7 @@ void showDeletePopup(BuildContext context, VoidCallback onConfirm) {
           constraints: const BoxConstraints(maxWidth: 340),
           padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
           decoration: ShapeDecoration(
-            color: const Color(0xFF24232A),
+            color:  ColorPalette.backgroundDark,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(26),
             ),

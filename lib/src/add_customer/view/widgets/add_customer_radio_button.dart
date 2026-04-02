@@ -80,7 +80,7 @@ class AddCustomerTypeSelector extends StatefulWidget {
 }
 
 class _AddCustomerTypeSelectorState extends State<AddCustomerTypeSelector> {
-  String selectedValue = "all";
+  String selectedValue = "customer";
 
   @override
   Widget build(BuildContext context) {
