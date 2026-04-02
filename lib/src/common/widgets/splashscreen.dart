@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
 
@@ -11,7 +10,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  final String iconLogo = "assets/images/splash/logo.webp";
   final String iconLogo = "assets/images/splash/logo.webp";
 
   @override
@@ -34,13 +32,13 @@ class _SplashScreenState extends State<SplashScreen> {
       body: SafeArea(
         child: Center(
           child: Image.asset(
-          child: Image.asset(
+          
             iconLogo,
             width: s(167),
             height: s(82),
-          ),
         ),
       ),
+    )
     );
   }
 }

@@ -11,10 +11,10 @@ mixin RouteName {
   static const results = "results";
   static const profile = "profile";
   static const customerinformation = "customerinformation";
-  static const suggestion = "suggestion";
-  static const suggestion_success = "suggestion_success";
-  static const lotteryhome = "lotteryhome";
-  static const lotteryresult = "lotteryresult";
+  static const buy_ticket = "buy_ticket";
+  static const myCart = "myCart";
+  static const customer_info = "customer_info";
+  static const search_screen = "search_screen";
   static const withdrawPage = "withdrawPage";
   static const withdrawSuccessful = "withdrawSuccessful";
   static const AddMoneyPage = "AddMoneyPage";

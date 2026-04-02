@@ -10,7 +10,7 @@ class ColorPalette {
   static const Color darktext = Color(0xFF9F9F9F);
   static const Color primary = Color(0xFFDFC55C);
   static const Color buttoncolor = Color(0xFF484848);
-
+  static const Color backgroundDark = Color(0xFF24232A);
   static const Color border = Color(0xFF1F1E24);
   static const Color searchText = Color(0xFF9F9F9F);
 
