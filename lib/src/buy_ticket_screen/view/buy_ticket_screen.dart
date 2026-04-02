@@ -275,12 +275,12 @@ class _BuyTicketsScreenState extends State<BuyTicketsScreen> {
                     s: s,
                     onAdd: _handleAddition,
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 27),
                   LotteryNumberCardDouble(
                     s: s,
                     lotteryType: "Double Digit",
                     prize: "Win ₹1000.00",
-                    ticketPrice: "₹100",
+                    ticketPrice: "₹100.00",
                     onAdd: _handleAddition,
                     rows: const [
                       ["A", "B"],
@@ -290,7 +290,7 @@ class _BuyTicketsScreenState extends State<BuyTicketsScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: s(20),),
+              SizedBox(height: s(21),),
               LotteryNumberCardTriple(
                 s: s,
                 lotteryType: "Triple Digit",

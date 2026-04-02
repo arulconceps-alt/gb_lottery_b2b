@@ -243,11 +243,13 @@ class _LotteryNumberCardState extends State<LotteryNumberCard> {
         widget.onAdd(widget.letters[index], dashValues[index], quantities[index], price);
       },
       child: Container(
-        width: s(44),
+        width: s(68), // UPDATED: Changed from 44 to 68 to match the grey button
         height: s(36),
         alignment: Alignment.center,
         decoration: BoxDecoration(
           gradient: const LinearGradient(
+            begin: Alignment(1.00, 0.50), // Matches your ShapeDecoration spec
+            end: Alignment(0.00, 0.50),
             colors: [Color(0xFFDFC45C), Color(0xFFA89A5F)],
           ),
           borderRadius: BorderRadius.circular(s(6)),
@@ -266,8 +268,8 @@ class _LotteryNumberCardState extends State<LotteryNumberCard> {
 
   Widget _greyAddButton(double Function(double) s) {
     return Container(
-      height: s(36),
-      padding: EdgeInsets.symmetric(horizontal: s(12)),
+      width: s(68), // Fixed width to match the Gold Button
+      height: s(36), // Fixed height to match the Gold Button
       alignment: Alignment.center,
       decoration: BoxDecoration(
         color: const Color(0xFF313038),

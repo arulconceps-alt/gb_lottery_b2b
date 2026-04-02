@@ -8,8 +8,11 @@ import 'package:gb_lottery_b2b/src/customer_information/view/customer_informatio
 import 'package:gb_lottery_b2b/src/customers/view/customer_page.dart';
 import 'package:gb_lottery_b2b/src/dashboard/view/dashboard_page.dart';
 import 'package:gb_lottery_b2b/src/login/view/login_screen.dart';
+import 'package:gb_lottery_b2b/src/notification_screen/view/notification_screen.dart';
 import 'package:gb_lottery_b2b/src/otp/view/otp_page.dart';
 import 'package:gb_lottery_b2b/src/profile/view/profile_page.dart';
+import 'package:gb_lottery_b2b/src/purchase_history_details/view/purchase_history_details.dart';
+import 'package:gb_lottery_b2b/src/purchase_history_list_screen/view/purchase_history_list.dart';
 import 'package:gb_lottery_b2b/src/resultinner/view/result_inner_page.dart';
 import 'package:gb_lottery_b2b/src/customer_info/view/customer_info_screen.dart';
 import 'package:gb_lottery_b2b/src/myCart_Screen/view/myCart_screen.dart';
@@ -17,6 +20,7 @@ import 'package:gb_lottery_b2b/src/edit_profile_screen/view/edit_profile_screen.
 import 'package:gb_lottery_b2b/src/results/view/resluts_page.dart';
 import 'package:gb_lottery_b2b/src/search_screen/view/search_screen.dart';
 import 'package:gb_lottery_b2b/src/settlement/view/settlement_page.dart';
+import 'package:gb_lottery_b2b/src/wallet_screen/view/wallet_screen.dart';
 
 import 'package:go_router/go_router.dart';
 
@@ -121,6 +125,30 @@ class Routes {
         name: RouteName.search_screen,
         path: "/search_screen",
         builder: (context, state) => const SearchScreen(),
+      ),
+      /// Purchase list
+        GoRoute(
+        name: RouteName.purchase_history_list,
+        path: "/purchase_history_list",
+        builder: (context, state) => const PurchaseHistoryList(),
+      ),
+      /// Purchase History details Screen
+      GoRoute(
+        name: RouteName.purchase_history_details,
+        path: "/purchase_history_details",
+        builder: (context, state) => const PurchaseHistoryDetails(),
+      ),
+      /// Wallet Screen
+      GoRoute(
+        name: RouteName.wallet_screen,
+        path: "/wallet_screen",
+        builder: (context, state) => const WalletScreen(),
+      ),
+      /// Purchase history list Screen
+      GoRoute(
+        name: RouteName.notification_screen,
+        path: "/notification_screen",
+        builder: (context, state) => const NotificationScreen(),
       ),
        GoRoute(
         name: RouteName.settlement,

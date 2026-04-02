@@ -1,7 +1,7 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class LotteryNumberCardDouble extends StatefulWidget {
   final double Function(double) s;
@@ -14,15 +14,11 @@ class LotteryNumberCardDouble extends StatefulWidget {
   const LotteryNumberCardDouble({
     super.key,
     required this.s,
-    this.lotteryType = "Double Digit",
-    this.prize = "Win ₹1000.00",
-    this.ticketPrice = "₹100.00",
+    required this.lotteryType,
+    required this.prize,
+    required this.ticketPrice,
+    required this.rows,
     required this.onAdd,
-    this.rows = const [
-      ["A", "B"],
-      ["A", "C"],
-      ["B", "C"],
-    ],
   });
 
   @override
@@ -41,6 +37,132 @@ class _LotteryNumberCardDoubleState extends State<LotteryNumberCardDouble> {
     quantities = List.generate(widget.rows.length, (_) => 1);
   }
 
+  Widget _box(String text, {Color? color}) {
+    final s = widget.s;
+    return Container(
+      width: s(34),
+      height: s(34),
+      alignment: Alignment.center,
+      decoration: ShapeDecoration(
+        color: color ?? const Color(0xFF313038),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(s(6))),
+      ),
+      child: Text(
+        text,
+        style: GoogleFonts.dmSans(
+          color: Colors.white,
+          fontSize: s(14),
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+    );
+  }
+
+  Widget _goldAddButton(int rowIndex) {
+    final s = widget.s;
+    return GestureDetector(
+      onTap: () {
+        double unitPrice = double.tryParse(
+          widget.ticketPrice.replaceAll(RegExp(r'[^0-9.]'), ''),
+        ) ?? 0.0;
+
+        String combinedLetters = widget.rows[rowIndex].join("");
+        String combinedValues = dashValues[rowIndex].join("");
+
+        if (combinedValues.contains("-")) return;
+
+        widget.onAdd(
+          combinedLetters,
+          combinedValues,
+          quantities[rowIndex],
+          unitPrice,
+        );
+      },
+      child: Container(
+        width: s(42),
+        height: s(34),
+        alignment: Alignment.center,
+        decoration: ShapeDecoration(
+          gradient: const LinearGradient(
+            begin: Alignment(1.00, 0.50),
+            end: Alignment(0.00, 0.50),
+            colors: [Color(0xFFDFC45C), Color(0xFFA89A5F)],
+          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(s(6))),
+        ),
+        child: Text(
+          "Add",
+          style: GoogleFonts.dmSans(
+            color: Colors.white,
+            fontSize: s(14),
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _quantitySelector(int index) {
+    final s = widget.s;
+    return Container(
+      width: s(84),
+      height: s(34),
+      decoration: BoxDecoration(
+        color: const Color(0xFF313038),
+        borderRadius: BorderRadius.circular(s(6)),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          GestureDetector(
+            onTap: () => setState(() => quantities[index] = max(1, quantities[index] - 1)),
+            child: Text("-", style: TextStyle(color: Colors.white, fontSize: s(18))),
+          ),
+          Text(
+            "${quantities[index]}",
+            style: GoogleFonts.dmSans(color: Colors.white, fontSize: s(14)),
+          ),
+          GestureDetector(
+            onTap: () => setState(() => quantities[index]++),
+            child: Text("+", style: TextStyle(color: Colors.white, fontSize: s(18))),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildRow(int rowIndex, List<String> letters) {
+    final s = widget.s;
+    return Row(
+      children: [
+        for (var letter in letters) ...[_box(letter), SizedBox(width: s(8))],
+        _box(dashValues[rowIndex][0]),
+        SizedBox(width: s(8)),
+        _box(dashValues[rowIndex][1]),
+        const Spacer(),
+        if (isQuickGuessClicked) ...[
+          _quantitySelector(rowIndex),
+          SizedBox(width: s(6)),
+          _goldAddButton(rowIndex),
+        ] else ...[
+          Container(
+            height: s(34),
+            padding: EdgeInsets.symmetric(horizontal: s(10)),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: const Color(0xFF313038),
+              borderRadius: BorderRadius.circular(s(6)),
+            ),
+            child: Text(
+              "Add",
+              style: GoogleFonts.dmSans(color: Colors.white, fontSize: s(14)),
+            ),
+          ),
+        ],
+      ],
+    );
+  }
+
   void fillRandomDashes() {
     final random = Random();
     setState(() {
@@ -55,48 +177,32 @@ class _LotteryNumberCardDoubleState extends State<LotteryNumberCardDouble> {
   @override
   Widget build(BuildContext context) {
     final s = widget.s;
-
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(s(12)),
-      decoration: BoxDecoration(
-        color:  ColorPalette.backgroundDark,
-        borderRadius: BorderRadius.circular(s(8)),
+      decoration: ShapeDecoration(
+        color: const Color(0xFF24232A),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(s(8))),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Header Row
           Row(
             children: [
               Text(
                 widget.lotteryType,
-                style: GoogleFonts.dmSans(
-                  color: Colors.white,
-                  fontSize: s(12),
-                  fontWeight: FontWeight.w500,
-                  height: 1.0,
-                ),
+                style: GoogleFonts.dmSans(color: Colors.white, fontSize: s(12)),
               ),
               SizedBox(width: s(8)),
               Text(
                 widget.prize,
-                style: GoogleFonts.dmSans(
-                  color: const Color(0xFFCFB95D),
-                  fontSize: s(12),
-                  fontWeight: FontWeight.w500,
-                  height: 1.0,
-                ),
+                style: GoogleFonts.dmSans(color: const Color(0xFFCFB95D), fontSize: s(12)),
               ),
               const Spacer(),
               _quickGuessButton(s),
             ],
           ),
-
-          // EXACT 3PX SPACE AS REQUESTED
-          SizedBox(height: s(3)),
-
-          // Price Section
+          SizedBox(height: s(4)),
           Text.rich(
             TextSpan(
               children: [
@@ -121,61 +227,12 @@ class _LotteryNumberCardDoubleState extends State<LotteryNumberCardDouble> {
               ],
             ),
           ),
-
           SizedBox(height: s(16)),
-
-          // The Rows (A B -, A C -, B C -)
-          ...List.generate(widget.rows.length, (index) => _buildRow(index, s)),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildRow(int index, double Function(double) s) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: s(10)),
-      child: Row(
-        children: [
-          // Static letters (e.g., A and B)
-          ...widget.rows[index].map((letter) => Padding(
-            padding: EdgeInsets.only(right: s(10)),
-            child: _box(letter, s),
-          )),
-          SizedBox(width: s(20),),
-          // Selection boxes (dashes)
-          _box(dashValues[index][0], s),
-          SizedBox(width: s(10)),
-          _box(dashValues[index][1], s),
-
-          const Spacer(),
-          if (isQuickGuessClicked) ...[
-            _quantitySelector(index, s),
-            SizedBox(width: s(8)),
-            _goldAddButton(index, s),
-          ] else ...[
-            _greyAddButton(s),
+          for (int i = 0; i < widget.rows.length; i++) ...[
+            buildRow(i, widget.rows[i]),
+            SizedBox(height: s(10)),
           ],
         ],
-      ),
-    );
-  }
-
-  Widget _box(String text, double Function(double) s) {
-    return Container(
-      width: s(36),
-      height: s(36),
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: const Color(0xFF313038),
-        borderRadius: BorderRadius.circular(s(6)),
-      ),
-      child: Text(
-        text,
-        style: GoogleFonts.dmSans(
-          color: Colors.white,
-          fontSize: s(14),
-          fontWeight: FontWeight.w500,
-        ),
       ),
     );
   }
@@ -193,88 +250,12 @@ class _LotteryNumberCardDoubleState extends State<LotteryNumberCardDouble> {
         ),
         child: Text(
           'Quick Guess',
+          textAlign: TextAlign.center,
           style: GoogleFonts.dmSans(
             color: Colors.white,
             fontSize: s(12),
             fontWeight: FontWeight.w400,
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _quantitySelector(int index, double Function(double) s) {
-    return Container(
-      width: s(92),
-      height: s(36),
-      decoration: BoxDecoration(
-        color: const Color(0xFF313038),
-        borderRadius: BorderRadius.circular(s(6)),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          GestureDetector(
-            onTap: () => setState(() => quantities[index] = max(1, quantities[index] - 1)),
-            child: Text("-", style: GoogleFonts.dmSans(color: Colors.white, fontSize: s(18))),
-          ),
-          Text("${quantities[index]}", style: GoogleFonts.dmSans(color: Colors.white, fontSize: s(14))),
-          GestureDetector(
-            onTap: () => setState(() => quantities[index]++),
-            child: Text("+", style: GoogleFonts.dmSans(color: Colors.white, fontSize: s(18))),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _goldAddButton(int index, double Function(double) s) {
-    return GestureDetector(
-      onTap: () {
-        if (dashValues[index].contains("-")) return;
-        double price = double.tryParse(widget.ticketPrice.replaceAll(RegExp(r'[^0-9.]'), '')) ?? 0.0;
-        widget.onAdd(widget.rows[index].join(""), dashValues[index].join(""), quantities[index], price);
-      },
-      child: Container(
-        width: s(68),
-        height: s(36),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          // GRADIENT ADDED HERE
-          gradient: const LinearGradient(
-            begin: Alignment.centerRight,
-            end: Alignment.centerLeft,
-            colors: [Color(0xFFDFC45C), Color(0xFFA89A5F)],
-          ),
-          borderRadius: BorderRadius.circular(s(6)),
-        ),
-        child: Text(
-          "Add",
-          style: GoogleFonts.dmSans(
-            color: Colors.white,
-            fontSize: s(14),
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _greyAddButton(double Function(double) s) {
-    return Container(
-      width: s(68),
-      height: s(36),
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: const Color(0xFF313038), // Standard dark grey
-        borderRadius: BorderRadius.circular(s(6)),
-      ),
-      child: Text(
-        "Add",
-        style: GoogleFonts.dmSans(
-          color: Colors.white.withOpacity(0.5), // Faded text
-          fontSize: s(14),
-          fontWeight: FontWeight.w500,
         ),
       ),
     );

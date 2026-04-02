@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CartItemCard extends StatelessWidget {
+class PurchaseHistoryItemCard extends StatelessWidget {
   final double Function(double) s;
 
-  const CartItemCard({super.key, required this.s});
+  const PurchaseHistoryItemCard({super.key, required this.s});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.only(top: s(16), bottom: s(8)),
+      // CHANGE THIS LINE: Removed horizontal: s(16)
+      margin: EdgeInsets.only(top: s(16), bottom: s(16)),
       decoration: BoxDecoration(
         color: const Color(0xFF24232A),
       ),
@@ -23,16 +24,13 @@ class CartItemCard extends StatelessWidget {
               children: [
                 /// --- 1. Image Section ---
                 Container(
-                  // Figma dimensions: 56px wide, 44px high
                   width: s(56),
                   height: s(44),
                   decoration: BoxDecoration(
-                    // Figma: Radius 8px
                     borderRadius: BorderRadius.circular(s(8)),
-                    color: const Color(0xFFDFC45C),
                     image: const DecorationImage(
                       image: AssetImage("assets/images/myCart/list_image.webp"),
-                      fit: BoxFit.cover, // Ensures the image fills the 56x44 area without gaps
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
@@ -85,31 +83,10 @@ class CartItemCard extends StatelessWidget {
               ],
             ),
           ),
-
-          /// --- 4. Bottom Action Bar ---
-          Container(
-            decoration: BoxDecoration(
-              border: Border(
-                top: BorderSide(color: Colors.white.withOpacity(0.1)),
-              ),
-            ),
-            child: Row(
-              children: [
-                _actionButton("assets/images/myCart/edit_icon.webp", "Edit"),
-                Container(
-                  width: 1,
-                  height: s(40),
-                  color: Colors.white.withOpacity(0.1),
-                ),
-                _actionButton("assets/images/myCart/delete_icon.webp", "Remove"),
-              ],
-            ),
-          ),
         ],
       ),
     );
   }
-
   Widget _infoText(String label, String value, {bool isTotal = false}) {
     return Padding(
       padding: EdgeInsets.only(bottom: s(2)),

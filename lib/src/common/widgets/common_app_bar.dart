@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -111,37 +112,40 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Stack(
-                    clipBehavior: Clip.none,
-                    children: [
-                      Image.asset(
-                        "assets/images/dashboard/bell.webp",
-                        height: s(19.86),
-                        width: s(19.86),
-                      ),
-
-                      Positioned(
-                        right: -4,
-                        top: -4,
-                        child: Container(
-                          height: s(12),
-                          width: s(12),
-                          alignment: Alignment.center,
-                          decoration: const BoxDecoration(
-                            color: Colors.red,
-                            shape: BoxShape.circle,
-                          ),
-                          child: Text(
-                            "9+",
-                            style: GoogleFonts.inter(
-                              color: ColorPalette.whitetext,
-                              fontSize: s(6),
-                              fontWeight: FontWeight.w500,
+                  GestureDetector(
+                    onTap: ()=> context.push('/notification_screen'),
+                    child: Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        Image.asset(
+                          "assets/images/dashboard/bell.webp",
+                          height: s(19.86),
+                          width: s(19.86),
+                        ),
+                    
+                        Positioned(
+                          right: -4,
+                          top: -4,
+                          child: Container(
+                            height: s(12),
+                            width: s(12),
+                            alignment: Alignment.center,
+                            decoration: const BoxDecoration(
+                              color: Colors.red,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Text(
+                              "9+",
+                              style: GoogleFonts.inter(
+                                color: ColorPalette.whitetext,
+                                fontSize: s(6),
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
 
                   Image.asset(

@@ -26,6 +26,7 @@ class ProfileMenuCard extends StatelessWidget {
                 s,
                 iconPath: 'assets/images/profile/wallet.webp',
                 title: 'Wallet History',
+                onTap: ()=> context.push('/wallet_screen')
               ),
               _divider(s),
 
@@ -47,12 +48,14 @@ class ProfileMenuCard extends StatelessWidget {
                 s,
                 iconPath: 'assets/images/profile/purchase.webp',
                 title: 'Purchase History',
+                onTap: ()=> context.push('/purchase_history_list')
               ),
               _divider(s),
                _menuItem(
                 s,
                 iconPath: 'assets/images/profile/cart.webp',
                 title: 'Cart',
+                 onTap: ()=> context.push('/myCart')
               ),
 
               

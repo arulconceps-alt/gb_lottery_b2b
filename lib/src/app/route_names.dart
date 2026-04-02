@@ -15,7 +15,11 @@ mixin RouteName {
   static const myCart = "myCart";
   static const customer_edit = "customer_edit";
   static const search_screen = "search_screen";
+  static const purchase_history_details = "purchase_history_details";
   static const editprofile = "editprofile";
+  static const wallet_screen = "wallet_screen";
+  static const notification_screen = "notification_screen";
+  static const purchase_history_list = "purchase_history_list";
   static const settlement = "settlement";
   static const reslutinner = "reslutinner";
   static const paymentModePage = "paymentModePage";

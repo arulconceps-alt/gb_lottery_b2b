@@ -17,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
       if (!mounted) return;
-      context.go('/login'); 
+      context.go('/login');
     });
   }
 
@@ -26,13 +26,11 @@ class _SplashScreenState extends State<SplashScreen> {
    final w = MediaQuery.of(context).size.width;
     final scale = w / 360;
     double s(double v) => v * scale;
-
     return Scaffold(
       backgroundColor: ColorPalette.background, 
       body: SafeArea(
         child: Center(
           child: Image.asset(
-          
             iconLogo,
             width: s(167),
             height: s(82),
