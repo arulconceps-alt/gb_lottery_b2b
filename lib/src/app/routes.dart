@@ -14,7 +14,7 @@ import 'package:gb_lottery_b2b/src/profile/view/profile_page.dart';
 import 'package:gb_lottery_b2b/src/results/view/result_page.dart';
 import 'package:gb_lottery_b2b/src/customer_info/view/customer_info_screen.dart';
 import 'package:gb_lottery_b2b/src/myCart_Screen/view/myCart_screen.dart';
-import 'package:gb_lottery_b2b/src/profile_screen/view/profile_screen.dart';
+import 'package:gb_lottery_b2b/src/edit_profile_screen/view/edit_profile_screen.dart';
 import 'package:gb_lottery_b2b/src/search_screen/view/search_screen.dart';
 
 import 'package:go_router/go_router.dart';
@@ -91,12 +91,7 @@ class Routes {
         path: "/customerinformation",
         builder: (context, state) => const CustomerInformationPage(),
       ),
-      //  GoRoute(
-      //   name: RouteName.addcustomer,
-      //   path: "/addcustomer",
-      //   builder: (context, state) => const AddCustomerPage(),
-      // ),
-      /// OnBoarding
+    
       GoRoute(
         name: RouteName.buy_ticket,
         path: "/buy_ticket",
@@ -110,9 +105,9 @@ class Routes {
       ),
       /// Profile Screen
       GoRoute(
-        name: RouteName.profile,
-        path: "/profile",
-        builder: (context, state) => const ProfileScreen(),
+        name: RouteName.editprofile,
+        path: "/editprofile",
+        builder: (context, state) => const EditProfileScreen(),
       ),
       /// customer_info Screen
       GoRoute(
