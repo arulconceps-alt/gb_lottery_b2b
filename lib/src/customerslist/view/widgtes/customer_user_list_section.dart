@@ -14,7 +14,7 @@ class CustomerUserListSection extends StatefulWidget {
 class _CustomerUserListSectionState
     extends State<CustomerUserListSection> {
 
-  int selectedPage = 1; // ✅ FIXED (moved to state)
+  int selectedPage = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +23,10 @@ class _CustomerUserListSectionState
     double s(double v) => v * scale;
 
     final users = [
-      {"name": "S", "phone": "9874563212"},
+      {"name": "Santhosh", "phone": "9874563212"},
       {"name": "Mani", "phone": "9874563212"},
       {"name": "Mani", "phone": "9874563212"},
-      {"name": "S", "phone": "9874563212"},
+      {"name": "Santhosh", "phone": "9874563212"},
       {"name": "Mani", "phone": "9874563212"},
       {"name": "Mani", "phone": "9874563212"},
     ];
@@ -34,6 +34,7 @@ class _CustomerUserListSectionState
     return Column(
       children: [
         Container(
+          width: s(344),
           decoration: BoxDecoration(
             color: ColorPalette.backgroundDark,
             borderRadius: BorderRadius.only(

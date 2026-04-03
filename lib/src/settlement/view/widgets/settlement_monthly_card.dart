@@ -76,6 +76,7 @@ class _SettlementMonthlyCardState extends State<SettlementMonthlyCard> {
                 child: GestureDetector(
                   onTap: () => setState(() => selectedIndex = 0),
                   child: Container(
+                     height: s(43),
                     padding: EdgeInsets.symmetric(vertical: s(12)),
                     decoration: BoxDecoration(
                       color: ColorPalette.surface,
@@ -102,7 +103,7 @@ class _SettlementMonthlyCardState extends State<SettlementMonthlyCard> {
               /// Divider
               Container(
                 width: 1,
-                height: s(40),
+                height: s(43),
                 color: ColorPalette.whitetext.withOpacity(0.2),
               ),
 
@@ -110,6 +111,7 @@ class _SettlementMonthlyCardState extends State<SettlementMonthlyCard> {
                 child: GestureDetector(
                   onTap: () => setState(() => selectedIndex = 1),
                   child: Container(
+                     height: s(43),
                     padding: EdgeInsets.symmetric(vertical: s(12)),
                     decoration: BoxDecoration(
                       color: ColorPalette.surface,
@@ -146,9 +148,9 @@ class _SettlementMonthlyCardState extends State<SettlementMonthlyCard> {
                 Text(
                   selectedIndex == 0 ? "Monthly Earnings" : "Daily Earnings",
                   style: GoogleFonts.dmSans(
-                    fontSize: s(16),
+                    fontSize: s(18),
                     fontWeight: FontWeight.w600,
-                    color: Colors.white,
+                    color: ColorPalette.whitetext,
                   ),
                 ),
                 Container(
@@ -169,7 +171,7 @@ class _SettlementMonthlyCardState extends State<SettlementMonthlyCard> {
             ),
           ),
 
-          SizedBox(height: s(8)),
+          SizedBox(height: s(12)),
 
           /// DATA
           buildRow("Month", "January, 2026", 1.0),

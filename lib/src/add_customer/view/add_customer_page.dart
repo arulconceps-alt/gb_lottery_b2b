@@ -24,7 +24,7 @@ class _AddCustomerPageState extends State<AddCustomerPage> {
     return Scaffold(
       backgroundColor: const Color(0xFF1C1B20),
       appBar: AppBarWithBack(),
-      bottomNavigationBar: Padding(
+      bottomNavigationBar: Container(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 25),
         child: _doneButton(),
       ),
@@ -36,12 +36,11 @@ class _AddCustomerPageState extends State<AddCustomerPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: s(28)),
-
               Text(
                 "Select Customer or Moderator",
-                style: GoogleFonts.inter(
+                style: GoogleFonts.dmSans(
                   fontSize: s(18),
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.w600,
                   fontStyle: FontStyle.italic,
                   color: ColorPalette.whitetext,
                 ),

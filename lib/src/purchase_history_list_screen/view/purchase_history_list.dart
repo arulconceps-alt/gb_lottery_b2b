@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/common/widgets/appbar_widget.dart';
 import 'package:gb_lottery_b2b/src/purchase_history_list_screen/view/widget/purchase_history_list_item.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PurchaseHistoryList extends StatefulWidget {
@@ -102,7 +103,9 @@ class _PurchaseHistoryListState extends State<PurchaseHistoryList> {
                 itemBuilder: (context, index) {
                   // If you need the items to touch the screen edges,
                   // ensure the 'PurchaseHistoryListItem' width is set to 'double.infinity' or 'w'
-                  return PurchaseHistoryListItem(s: s);
+                  return GestureDetector(
+                     onTap: ()=> context.push('/purchase_history_details'),
+                    child: PurchaseHistoryListItem(s: s));
                 },
               ),
             ],

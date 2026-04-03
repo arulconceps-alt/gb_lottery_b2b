@@ -30,8 +30,6 @@ class HomeMenuSection extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          // height: s(70),
-          // width: s(105),  
           margin: EdgeInsets.symmetric(horizontal: s(14)),
           decoration: BoxDecoration(
             color: const Color(0xFF1C1B20),

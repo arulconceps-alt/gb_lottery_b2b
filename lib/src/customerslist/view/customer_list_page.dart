@@ -3,9 +3,9 @@ import 'package:gb_lottery_b2b/src/app/color_palette.dart';
 import 'package:gb_lottery_b2b/src/common/widgets/common_app_bar.dart';
 import 'package:gb_lottery_b2b/src/common/widgets/custom_drawer.dart'
     show CustomDrawer;
-import 'package:gb_lottery_b2b/src/customers/view/widgtes/customer_radio_button.dart';
-import 'package:gb_lottery_b2b/src/customers/view/widgtes/customer_top_section.dart';
-import 'package:gb_lottery_b2b/src/customers/view/widgtes/customer_user_list_section.dart';
+import 'package:gb_lottery_b2b/src/customerslist/view/widgtes/customer_radio_button.dart';
+import 'package:gb_lottery_b2b/src/customerslist/view/widgtes/customer_top_section.dart';
+import 'package:gb_lottery_b2b/src/customerslist/view/widgtes/customer_user_list_section.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -82,9 +82,9 @@ class _CustomerPageState extends State<CustomerPage> {
                         decoration: InputDecoration(
                           hintText: "Search by customer",
                           hintStyle: GoogleFonts.dmSans(
-                            fontSize: s(16),
-                            fontWeight: FontWeight.w400,
-                            color: ColorPalette.whitetext.withOpacity(0.5),
+                           fontSize: s(16),
+                          fontWeight: FontWeight.w400,
+                          color: ColorPalette.darktext,
                           ),
                           border: InputBorder.none,
                           isDense: true, 
@@ -98,7 +98,7 @@ class _CustomerPageState extends State<CustomerPage> {
               SizedBox(height: s(12)),
               Text(
                 "Total Customer (25004)",
-                style: GoogleFonts.dmSans(
+                style: GoogleFonts.inter(
                   fontSize: s(16),
                   fontWeight: FontWeight.w400,
                   color: ColorPalette.darktext.withOpacity(0.60),

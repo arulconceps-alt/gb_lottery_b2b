@@ -17,7 +17,7 @@ class SettlementCommissionCard extends StatelessWidget {
       padding: EdgeInsets.all(s(16)),
       decoration: BoxDecoration(
         color: ColorPalette.backgroundDark,
-        borderRadius: BorderRadius.circular(s(16)),
+        borderRadius: BorderRadius.circular(s(8)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

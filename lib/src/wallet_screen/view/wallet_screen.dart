@@ -24,7 +24,7 @@ class _WalletScreenState extends State<WalletScreen> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: s(16)), // Sets left & right to 16
+          padding: EdgeInsets.symmetric(horizontal: s(16)),
           child: Column(
             children: [
               SizedBox(height: s(20)),

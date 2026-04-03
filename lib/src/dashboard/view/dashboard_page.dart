@@ -85,7 +85,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   title: "Add Customer",
                   imageheight: 36,
                   imagewidth: 38,
-                  spaceheight: 6,
+                  spaceheight: 3,
                   onTap: () {
                     context.push('/addcustomer');
                   },
@@ -108,14 +108,16 @@ class _DashboardPageState extends State<DashboardPage> {
                   imageheight: 36,
                   imagewidth: 36,
                   spaceheight: 3,
-                  onTap: () {},
+                  onTap: () {
+                    context.push('/leaderboard');
+                  },
                 ),
               ],
             ),
             SizedBox(height: s(30)),
             Text(
               "ABC Game",
-              style: GoogleFonts.dmSans(
+              style: GoogleFonts.inter(
                 fontSize: s(16),
                 fontWeight: FontWeight.w600,
                 fontStyle: FontStyle.italic,
@@ -168,7 +170,7 @@ class _DashboardPageState extends State<DashboardPage> {
             SizedBox(height: s(33)),
             Text(
               "YZABC Game",
-              style: GoogleFonts.dmSans(
+              style: GoogleFonts.inter(
                 fontSize: s(16),
                 fontWeight: FontWeight.w600,
                 fontStyle: FontStyle.italic,
@@ -221,7 +223,7 @@ class _DashboardPageState extends State<DashboardPage> {
             SizedBox(height: s(40)),
             Text(
               "What's in GB ",
-              style: GoogleFonts.dmSans(
+              style: GoogleFonts.inter(
                 fontSize: s(16),
                 fontWeight: FontWeight.w600,
                 fontStyle: FontStyle.italic,
@@ -229,12 +231,15 @@ class _DashboardPageState extends State<DashboardPage> {
               ),
             ),
             SizedBox(height: s(20)),
-            const WhatsGbBox(),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: s(16)),
+              child: const WhatsGbBox(),
+            ),
 
-            SizedBox(height: s(33)),
+            SizedBox(height: s(31)),
             Text(
               "Fantasy Sports",
-              style: GoogleFonts.dmSans(
+              style: GoogleFonts.inter(
                 fontSize: s(16),
                 fontWeight: FontWeight.w600,
                 fontStyle: FontStyle.italic,
@@ -259,7 +264,7 @@ class _DashboardPageState extends State<DashboardPage> {
             SizedBox(height: s(42)),
             Text(
               "Pure Luck - Instant results.",
-              style: GoogleFonts.dmSans(
+              style: GoogleFonts.inter(
                 fontSize: s(16),
                 fontWeight: FontWeight.w600,
                 fontStyle: FontStyle.italic,
@@ -276,7 +281,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 color: ColorPalette.whitetext,
               ),
             ),
-            SizedBox(height: s(10)),
+            SizedBox(height: s(11)),
             DashboradPureluckySectionCard(),
           ],
         ),

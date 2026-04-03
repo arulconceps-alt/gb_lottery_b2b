@@ -23,20 +23,28 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-   final w = MediaQuery.of(context).size.width;
+    final w = MediaQuery.of(context).size.width;
     final scale = w / 360;
     double s(double v) => v * scale;
     return Scaffold(
-      backgroundColor: ColorPalette.background, 
+      backgroundColor: ColorPalette.background,
       body: SafeArea(
         child: Center(
-          child: Image.asset(
-            iconLogo,
-            width: s(167),
-            height: s(82),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                "assets/images/login/gb_logo.webp",
+                width: s(72),
+                height: s(50),
+              ),
+              SizedBox(height: s(8)),
+              Image.asset(iconLogo, width: s(167), height: s(82)),
+            ],
+          ),
         ),
       ),
-    )
     );
   }
 }

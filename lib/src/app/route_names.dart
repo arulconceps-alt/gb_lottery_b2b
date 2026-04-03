@@ -22,7 +22,7 @@ mixin RouteName {
   static const purchase_history_list = "purchase_history_list";
   static const settlement = "settlement";
   static const reslutinner = "reslutinner";
-  static const paymentModePage = "paymentModePage";
+  static const leaderboard = "leaderboard";
   static const walletLinkingPage = "walletLinkingPage";
   static const walletOtpSent = "walletOtpSent";
   static const walletLinkingProcessing = "walletLinkingProcessing";

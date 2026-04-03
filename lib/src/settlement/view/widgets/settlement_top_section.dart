@@ -26,7 +26,7 @@ class SettlementTopSection extends StatelessWidget {
         crossAxisCount: 2,
         crossAxisSpacing: s(16),
         mainAxisSpacing: s(16),
-        childAspectRatio: 1,
+        childAspectRatio: 1.05,
       ),
       itemBuilder: (context, index) {
         final item = items[index];
@@ -35,7 +35,7 @@ class SettlementTopSection extends StatelessWidget {
           padding: EdgeInsets.only(bottom : s(16), left: s(10), top: s(12)),
           decoration: BoxDecoration(
             color: ColorPalette.backgroundDark,
-            borderRadius: BorderRadius.circular(s(16)),
+            borderRadius: BorderRadius.circular(s(8)),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,10 +44,10 @@ class SettlementTopSection extends StatelessWidget {
               Container(
                 height: s(40),
                 width: s(40),
-                padding: EdgeInsets.all(s(8)),
+                padding: EdgeInsets.all(s(10)),
                 decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.3),
-                  borderRadius: BorderRadius.circular(s(10)),
+                  color: ColorPalette.background,
+                  borderRadius: BorderRadius.circular(s(8)),
                 ),
                 child: Image.asset(
                   item['icon'] ?? '',

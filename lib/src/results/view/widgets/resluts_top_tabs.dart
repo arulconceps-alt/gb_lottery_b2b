@@ -37,12 +37,12 @@ class _ResultsTopTabsState extends State<ResultsTopTabs> {
               });
             },
             child: AnimatedContainer(
-              duration: const Duration(milliseconds: 150),
+              duration: const Duration(milliseconds: 50),
               padding: EdgeInsets.symmetric(horizontal: s(14)),
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 gradient: isSelected ? ColorPalette.buttonGradient : null,
-                color: !isSelected ? const Color(0xFF2A2933) : null,
+                color: !isSelected ? ColorPalette.backgroundDark : null,
                 borderRadius: BorderRadius.circular(s(8)),
               ),
               child: Text(

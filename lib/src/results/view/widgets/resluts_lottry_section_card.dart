@@ -45,10 +45,9 @@ class LotterySectionCard extends StatelessWidget {
               ],
             ),
             GestureDetector(
-             // onTap: () => context.push('/customerinformation'),
              onTap: () => context.push('/reslutinner'),
               child: Container(
-                    height: s(39),
+                    height: s(36),
                 padding: EdgeInsets.symmetric(
                   horizontal: s(16),
                   vertical: s(9),
@@ -59,6 +58,8 @@ class LotterySectionCard extends StatelessWidget {
                 ),
                 child: Text(
                   "More",
+                  maxLines: 1,
+                  softWrap: true,
                   style: GoogleFonts.dmSans(
                     color: ColorPalette.whitetext,
                       fontWeight: FontWeight.w400,

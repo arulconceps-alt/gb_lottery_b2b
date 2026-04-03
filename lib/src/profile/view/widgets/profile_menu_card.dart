@@ -15,10 +15,9 @@ class ProfileMenuCard extends StatelessWidget {
     return Column(
       children: [
         Container(
-          padding: EdgeInsets.symmetric(vertical: s(8)),
           decoration: BoxDecoration(
-            color:  ColorPalette.backgroundDark,
-            borderRadius: BorderRadius.circular(s(12)),
+            color: ColorPalette.backgroundDark,
+            borderRadius: BorderRadius.circular(s(8)),
           ),
           child: Column(
             children: [
@@ -26,7 +25,7 @@ class ProfileMenuCard extends StatelessWidget {
                 s,
                 iconPath: 'assets/images/profile/wallet.webp',
                 title: 'Wallet History',
-                onTap: ()=> context.push('/wallet_screen')
+                onTap: () => context.push('/wallet_screen'),
               ),
               _divider(s),
 
@@ -42,23 +41,22 @@ class ProfileMenuCard extends StatelessWidget {
                 s,
                 iconPath: 'assets/images/profile/leardboard.webp',
                 title: 'Leaderboard',
+                 onTap: () => context.push('/leaderboard'),
               ),
               _divider(s),
-               _menuItem(
+              _menuItem(
                 s,
                 iconPath: 'assets/images/profile/purchase.webp',
                 title: 'Purchase History',
-                onTap: ()=> context.push('/purchase_history_list')
+                onTap: () => context.push('/purchase_history_list'),
               ),
               _divider(s),
-               _menuItem(
+              _menuItem(
                 s,
                 iconPath: 'assets/images/profile/cart.webp',
                 title: 'Cart',
-                 onTap: ()=> context.push('/myCart')
+                onTap: () => context.push('/myCart'),
               ),
-
-              
             ],
           ),
         ),
@@ -66,10 +64,9 @@ class ProfileMenuCard extends StatelessWidget {
         SizedBox(height: s(26)),
 
         Container(
-          padding: EdgeInsets.symmetric(vertical: s(8)),
           decoration: BoxDecoration(
-            color:  ColorPalette.backgroundDark,
-            borderRadius: BorderRadius.circular(s(12)),
+            color: ColorPalette.backgroundDark,
+            borderRadius: BorderRadius.circular(s(8)),
           ),
           child: Column(
             children: [
@@ -78,6 +75,7 @@ class ProfileMenuCard extends StatelessWidget {
                 iconPath: 'assets/images/profile/notification.webp',
                 title: 'Notification',
               ),
+              _divider(s),
 
               _menuItem(
                 s,
@@ -125,7 +123,7 @@ class ProfileMenuCard extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(s(12)),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: s(16), vertical: s(14)),
+        padding: EdgeInsets.symmetric(horizontal: s(17), vertical: s(12)),
         child: Row(
           children: [
             Image.asset(iconPath, width: s(24), height: s(24)),
@@ -143,11 +141,17 @@ class ProfileMenuCard extends StatelessWidget {
               ),
             ),
 
-            Icon(
-              Icons.chevron_right,
-              color: ColorPalette.whitetext,
-              size: s(20),
+            Image.asset(
+              "assets/images/profile/right.webp",
+              height: s(20),
+              width: s(20),
+              fit: BoxFit.contain,
             ),
+            // Icon(
+            //   Icons.chevron_right,
+            //   color: ColorPalette.whitetext,
+            //   size: s(20),
+            // ),
           ],
         ),
       ),
@@ -181,7 +185,7 @@ class ProfileMenuCard extends StatelessWidget {
             width: double.infinity,
             height: s(200),
             decoration: BoxDecoration(
-              color:  ColorPalette.backgroundDark,
+              color: ColorPalette.backgroundDark,
               borderRadius: BorderRadius.vertical(top: Radius.circular(s(26))),
             ),
             child: Column(
@@ -196,9 +200,9 @@ class ProfileMenuCard extends StatelessWidget {
                     fontSize: s(18),
                   ),
                 ),
-          
+
                 SizedBox(height: s(16)),
-          
+
                 Text(
                   "Are you sure you want to logout ?",
                   style: GoogleFonts.dmSans(
@@ -207,11 +211,11 @@ class ProfileMenuCard extends StatelessWidget {
                     fontSize: s(12),
                   ),
                 ),
-          
+
                 SizedBox(height: s(23)),
-          
+
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: s(16)),
+                  padding: EdgeInsets.symmetric(horizontal: s(40)),
                   child: Row(
                     children: [
                       Expanded(
@@ -236,9 +240,9 @@ class ProfileMenuCard extends StatelessWidget {
                           ),
                         ),
                       ),
-          
+
                       SizedBox(width: s(11)),
-          
+
                       Expanded(
                         child: GestureDetector(
                           onTap: () {
@@ -254,7 +258,7 @@ class ProfileMenuCard extends StatelessWidget {
                             ),
                             child: Text(
                               "Yes, Logout",
-                             style: GoogleFonts.dmSans(
+                              style: GoogleFonts.dmSans(
                                 color: ColorPalette.whitetext,
                                 fontWeight: FontWeight.w500,
                                 fontSize: s(16),

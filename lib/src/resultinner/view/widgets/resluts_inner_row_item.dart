@@ -15,20 +15,26 @@ class ResultInnerRowItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
       child: Row(
         children: [
-          Expanded(flex: 3, child: ReslutInnerCellText(data[0])),
-          Expanded(flex: 2, child: ReslutInnerCellText(data[1])),
+          Expanded(flex: 2, child: ReslutInnerCellText(data[0])),
+          Expanded(flex: 2, child: Center(child: ReslutInnerCellText(data[1]))),
+         SizedBox(width: s(40)),
+          SizedBox(
+            width: s(26),
+            height: s(26),
+            child: ResultInnerNumberBox(data[2]),
+          ),
 
-          Expanded(
-            flex: 1,
-            child: Center(child: ResultInnerNumberBox(data[2])),
+          SizedBox(width: s(8)),
+          SizedBox(
+            width: s(26),
+            height: s(26),
+            child: ResultInnerNumberBox(data[3]),
           ),
-          Expanded(
-            flex: 1,
-            child: Center(child: ResultInnerNumberBox(data[3])),
-          ),
-          Expanded(
-            flex: 1,
-            child: Center(child: ResultInnerNumberBox(data[4])),
+          SizedBox(width: s(8)),
+          SizedBox(
+            width: s(26),
+            height: s(26),
+            child: ResultInnerNumberBox(data[4]),
           ),
         ],
       ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class DashboradPureluckySectionCard extends StatelessWidget {
   const DashboradPureluckySectionCard({super.key});
@@ -28,39 +27,46 @@ class DashboradPureluckySectionCard extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         itemCount: 8,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 4, // 4 per row → total 2 rows
-          crossAxisSpacing: s(12),
-          mainAxisSpacing: s(12),
-          childAspectRatio: s(72) / s(100), // container + text space
+          crossAxisCount: 4,
+          crossAxisSpacing: s(10),
+          mainAxisSpacing: s(13),
+          childAspectRatio: s(75) / s(87),
         ),
         itemBuilder: (context, index) {
           return Column(
-            mainAxisSize: MainAxisSize.min,
+              mainAxisSize: MainAxisSize.min,
             children: [
-              // 🔹 CONTAINER
               Container(
-                width: s(72),
-                height: s(84),
+                width: s(75),
+                height: s(87),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF2C2B33),
-                  borderRadius: BorderRadius.circular(s(10)),
+                  image: DecorationImage(
+                    image: AssetImage("assets/images/dashboard/pure_frame.webp"),
+                    fit: BoxFit.cover,
+                  ),
+                 // borderRadius: BorderRadius.circular(s(6)),
                 ),
-                clipBehavior: Clip.antiAlias,
-                child: Image.asset(images[index], fit: BoxFit.cover),
+                alignment: Alignment.center,
+                child: Image.asset(
+                  images[index],
+                  width: s(66),
+                  height: s(76),
+                  fit: BoxFit.contain,
+                ),
               ),
 
-              SizedBox(height: s(6)),
-              Text(
-                "Game ${(index + 1).toString().padLeft(2, '0')}",
-                style: GoogleFonts.inter(
-                  fontSize: s(8),
-                  fontWeight: FontWeight.w400,
-                  height: 11 / 8,
-                  letterSpacing: 0,
-                  color: Colors.white,
-                ),
-                textAlign: TextAlign.center,
-              ),
+              // SizedBox(height: s(6)),
+              // Text(
+              //   "Game ${(index + 1).toString().padLeft(2, '0')}",
+              //   style: GoogleFonts.inter(
+              //     fontSize: s(8),
+              //     fontWeight: FontWeight.w400,
+              //     height: 11 / 8,
+              //     letterSpacing: 0,
+              //     color: Colors.white,
+              //   ),
+              //   textAlign: TextAlign.center,
+              // ),
             ],
           );
         },

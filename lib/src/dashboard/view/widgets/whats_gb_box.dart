@@ -12,62 +12,57 @@ class WhatsGbBox extends StatelessWidget {
     double s(double v) => v * scale;
 
     final List<Map<String, String>> items = [
-      {"icon": "assets/images/dashboard/card.webp", "text": "Card"},
-      {"icon": "assets/images/dashboard/sports.webp", "text": "Sports"},
-      {"icon": "assets/images/dashboard/lottry.webp", "text": "Lottry"},
-      {"icon": "assets/images/dashboard/casino.webp", "text": "Casino"},
-      {"icon": "assets/images/dashboard/horse.webp", "text": "Horse"},
+      {"imagepath": "assets/images/dashboard/card.webp", "text": "Card"},
+      {"imagepath": "assets/images/dashboard/sports.webp", "text": "Sports"},
+      {"imagepath": "assets/images/dashboard/lottry.webp", "text": "Lottry"},
+      {"imagepath": "assets/images/dashboard/casino.webp", "text": "Casino"},
+      {"imagepath": "assets/images/dashboard/horse.webp", "text": "Horse"},
     ];
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: List.generate(items.length, (index) {
-        final item = items[index];
+    return SingleChildScrollView(
+  scrollDirection: Axis.horizontal,
+  child: Row(
+    children: List.generate(items.length, (index) {
+      final item = items[index];
 
-        return Padding(
-          padding: EdgeInsets.only(
-            right: index != items.length - 1 ? s(21) : 0,
-          ),
-          child: Column(
-            children: [
-              Container(
-                width: s(48),
-                height: s(60),
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  border: Border.all(
-                    color: ColorPalette.whitetext,
-                    width: s(1),
-                  ),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(s(50)),
-                    topRight: Radius.circular(s(50)),
-                  ),
+      return Padding(
+        padding: EdgeInsets.only(
+          right: index != items.length - 1 ? s(10) : 0,
+        ),
+        child: Column(
+          children: [
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                Image.asset(
+                  "assets/images/dashboard/frame.webp",
+                  height: s(47),
+                  width: s(59),
+                  fit: BoxFit.contain,
                 ),
-                child: Center(
-                  child: Image.asset(
-                    item["icon"] ?? "",
-                    height: s(60), 
-                    width: s(48),
-                    fit: BoxFit.contain,
-                  ),
+                Image.asset(
+                  item["imagepath"] ?? "",
+                  height: s(42),
+                  width: s(52),
+                  fit: BoxFit.contain,
                 ),
+              ],
+            ),
+            SizedBox(height: s(6)),
+            Text(
+              item["text"] ?? "",
+              style: GoogleFonts.dmSans(
+                fontSize: s(10),
+                fontStyle: FontStyle.italic,
+                fontWeight: FontWeight.w600,
+                color: Color(0xFFD8AC70),
               ),
-
-              SizedBox(height: s(6)),
-
-              Text(
-                item["text"] ?? "",
-                style: GoogleFonts.inter(
-                  fontSize: s(9),
-                  fontWeight: FontWeight.w400,
-                  color: ColorPalette.whitetext,
-                ),
-              ),
-            ],
-          ),
-        );
-      }),
-    );
+            ),
+          ],
+        ),
+      );
+    }),
+  ),
+);
   }
 }

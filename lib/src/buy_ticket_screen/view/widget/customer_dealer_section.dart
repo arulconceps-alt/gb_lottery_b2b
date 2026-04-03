@@ -21,17 +21,14 @@ class CustomerDealerSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(height: s(30)),
-        SizedBox(
-          width: s(237),
-          child: Text(
-            "Select Customer or Dealer",
-            style: GoogleFonts.dmSans(
-              color: Colors.white,
-              fontSize: s(16),
-              fontWeight: FontWeight.w600,
-              fontStyle: FontStyle.italic,
-              height: 20 / 16,
-            ),
+        Text(
+          "Select Customer or Dealer",
+          style: GoogleFonts.dmSans(
+            color: Colors.white,
+            fontSize: s(16),
+            fontWeight: FontWeight.w600,
+            fontStyle: FontStyle.italic,
+           // height: 20 / 16,
           ),
         ),
 

@@ -25,27 +25,37 @@ class ReslutsLottryTable extends StatelessWidget {
     return Column(
       children: [
         Container(
+          height: s(48),
           decoration: const BoxDecoration(
-            color: Color(0xFF313038),
+            color: ColorPalette.surface,
             borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
           ),
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: s(16), horizontal: s(16)),
+            padding: EdgeInsets.symmetric(horizontal: s(16), vertical: s(12)),
             child: Row(
               children: [
-                Expanded(flex: 3, child: ReslutsHeaderText("Date")),
-                Expanded(flex: 2, child: ReslutsHeaderText("Time")),
-
+                Expanded(flex: 2, child: ReslutsHeaderText("Date")),
                 Expanded(
-                  flex: 1,
+                  flex: 2,
+                  child: Center(child: ReslutsHeaderText("Time")),
+                ),
+
+                SizedBox(width: s(40)), // small gap
+
+                SizedBox(
+                  width: s(26),
                   child: Center(child: ResultsCircleHeader("A")),
                 ),
-                Expanded(
-                  flex: 1,
+                SizedBox(width: s(8)),
+
+                SizedBox(
+                  width: s(26),
                   child: Center(child: ResultsCircleHeader("B")),
                 ),
-                Expanded(
-                  flex: 1,
+                SizedBox(width: s(8)),
+
+                SizedBox(
+                  width: s(26),
                   child: Center(child: ResultsCircleHeader("C")),
                 ),
               ],
@@ -56,7 +66,7 @@ class ReslutsLottryTable extends StatelessWidget {
         /// Rows
         Container(
           decoration: const BoxDecoration(
-            color:  ColorPalette.backgroundDark,
+            color: ColorPalette.backgroundDark,
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(10)),
           ),
           child: Column(

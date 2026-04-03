@@ -27,7 +27,7 @@ class DashboardGameCard extends StatelessWidget {
       padding: EdgeInsets.all(s(10)),
       decoration: BoxDecoration(
         color: const Color(0xFF2C2B33),
-        borderRadius: BorderRadius.circular(s(12)),
+        borderRadius: BorderRadius.circular(s(8)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -156,7 +156,7 @@ class DashboardGameCard extends StatelessWidget {
       alignment: Alignment.center,
       decoration: BoxDecoration(
         color: ColorPalette.surface,
-        borderRadius: BorderRadius.circular(s(6)),
+        borderRadius: BorderRadius.circular(s(4)),
       ),
       child: Text(
         text,

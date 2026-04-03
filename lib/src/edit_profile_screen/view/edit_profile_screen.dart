@@ -76,7 +76,7 @@ void initState() {
                     SizedBox(height: s(40)),
                     _buildDetailsCard(s),
                     SizedBox(height: s(107)),
-                     _buildSubmitButton(context,s),
+                     _buildSubmitButton(s),
                   ],
                 ),
               ),
@@ -89,92 +89,7 @@ void initState() {
     );
   }
 
- Widget _buildDetailsCard(double Function(double) s) {
-  return Container(
-    width: double.infinity,
-    padding: EdgeInsets.all(s(16)),
-    decoration: BoxDecoration(
-      color: ColorPalette.backgroundDark,
-      borderRadius: BorderRadius.circular(s(20)),
-    ),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        ...List.generate(labels.length, (index) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: s(4)),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    /// 🔹 FIXED LABEL WITH COLON (UI SAME)
-                    Text(
-                      "${labels[index]} : ",
-                      style: GoogleFonts.dmSans(
-                        color: Colors.white,
-                        fontSize: s(16),
-                        letterSpacing: 0.16,
-                      ),
-                    ),
 
-                    /// 🔹 EDITABLE VALUE
-                    Expanded(
-                      child: TextField(
-                        controller: controllers[index],
-                        maxLines: labels[index] == "Address" ? 1 : 1,
-                        style: GoogleFonts.dmSans(
-                          color: Colors.white,
-                          fontSize: s(16),
-                        ),
-                        decoration: InputDecoration(
-                          // hintText: "Enter ${labels[index]}",
-                          // hintStyle: GoogleFonts.dmSans(
-                          //   color: Colors.white.withOpacity(0.5),
-                          //   fontSize: s(16),
-                          // ),
-                          border: InputBorder.none,
-                          isDense: true,
-                          contentPadding: EdgeInsets.zero,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              Divider(
-                color: Colors.white.withOpacity(0.10),
-                thickness: 1,
-                height: s(20),
-              ),
-            ],
-          );
-        }),
-
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Copy My Details',
-              style: GoogleFonts.dmSans(
-                color: Colors.white,
-                fontSize: s(16),
-              ),
-            ),
-            Image.asset(
-              "assets/images/profile/copy_icon.webp",
-              width: s(20),
-              height: s(20),
-              color: Colors.white,
-            ),
-          ],
-        ),
-      ],
-    ),
-  );
-}
   Widget _buildProfileImage(double Function(double) s) {
     return Center(
       child: Container(
@@ -219,30 +134,133 @@ void initState() {
       ),
     );
   }
-  Widget _buildSubmitButton(BuildContext context, double Function(double) s) {
-    return GestureDetector(
-      onTap: () {
-        // Navigates to the Customer Info screen
-        context.push("/customer_info");
-      },
+ Widget _buildDetailsCard(double Function(double) s) {
+  return Container(
+    width: double.infinity,
+    padding: EdgeInsets.symmetric(vertical:  s(16), horizontal: s(12)),
+    decoration: BoxDecoration(
+      color: ColorPalette.backgroundDark,
+      borderRadius: BorderRadius.circular(s(20)),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ...List.generate(labels.length, (index) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: s(4)),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      "${labels[index]} : ",
+                      style: GoogleFonts.dmSans(
+                        color: Colors.white,
+                        fontSize: s(16),
+                        fontWeight: FontWeight.w400,
+                        letterSpacing: 0.16,
+                      ),
+                    ),
+
+                    Expanded(
+                      child: TextField(
+                        controller: controllers[index],
+                        maxLines: labels[index] == "Address" ? 1 : 1,
+                        style: GoogleFonts.dmSans(
+                          color: Colors.white,
+                          fontSize: s(16),
+                           fontWeight: FontWeight.w400,
+                        ),
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          isDense: true,
+                          contentPadding: EdgeInsets.zero,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              Divider(
+                color: Colors.white.withOpacity(0.10),
+                thickness: 1,
+                height: s(10),
+              ),
+            ],
+          );
+        }),
+
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Copy My Details',
+              style: GoogleFonts.dmSans(
+                color: Colors.white,
+                fontSize: s(16),
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            Padding(
+              padding:  EdgeInsets.all(s(8)),
+              child: Image.asset(
+                "assets/images/profile/copy_icon.webp",
+                width: s(20),
+                height: s(20),
+                color: Colors.white,
+                fit: BoxFit.contain,
+              ),
+            ),
+          ],
+        ),
+      ],
+    ),
+  );
+}
+  Widget _buildName(double Function(double) s) {
+    return Center(
       child: Container(
-        width: double.infinity,
-        height: s(54),
+        width: s(80),
+        height: s(80),
         alignment: Alignment.center,
-        decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            colors: [Color(0xFFDFC45C), Color(0xFFA89A5F)],
-          ),
-          borderRadius: BorderRadius.circular(s(8)),
+        decoration: const ShapeDecoration(
+          color:  ColorPalette.backgroundDark,
+          shape: OvalBorder(),
         ),
-        child: Text(
-          'Submit',
-          style: GoogleFonts.dmSans(
-            color: Colors.white,
-            fontSize: s(18),
-            fontWeight: FontWeight.w600,
+        child: SizedBox(
+          width: s(25),
+          height: s(46),
+          child: Center(
+            child: Text(
+              'B',
+              style: GoogleFonts.lato(
+                color: Colors.white,
+                fontSize: s(38.4),
+                fontWeight: FontWeight.w500,
+                height: 1.0,
+                letterSpacing: 0,
+              ),
+            ),
           ),
         ),
+      ),
+    );
+  }
+  Widget _buildSubmitButton(double Function(double) s) {
+    return Container(
+      width: double.infinity,
+      height: s(54),
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(colors: [Color(0xFFDFC45C), Color(0xFFA89A5F)]),
+        borderRadius: BorderRadius.circular(s(8)),
+      ),
+      child: Text(
+        'Submit',
+        style: GoogleFonts.dmSans(color: Colors.white, fontSize: s(18), fontWeight: FontWeight.w600),
       ),
     );
   }

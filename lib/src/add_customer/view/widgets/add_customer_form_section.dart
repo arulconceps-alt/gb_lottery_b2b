@@ -67,13 +67,12 @@ class _AddCustomerFormSectionState extends State<AddCustomerFormSection> {
       margin: EdgeInsets.only(bottom: s(16)),
       decoration: BoxDecoration(
         color: ColorPalette.backgroundDark,
-        borderRadius: BorderRadius.circular(s(12)),
+        borderRadius: BorderRadius.circular(s(8)),
       ),
       child: Column(
         children: [
-          // 👇 Form content with padding
           Padding(
-            padding: EdgeInsets.all(s(12)),
+            padding: EdgeInsets.all(s(15)),
             child: Column(
               children: [
                 _field("Enter Name*", s),
@@ -94,7 +93,6 @@ class _AddCustomerFormSectionState extends State<AddCustomerFormSection> {
 
           SizedBox(height: s(10)),
 
-          // 👇 Button WITHOUT padding
           GestureDetector(
             onTap: () {
               setState(() {
@@ -142,17 +140,23 @@ class _AddCustomerFormSectionState extends State<AddCustomerFormSection> {
   Widget _field(String hint, double Function(double) s, {int maxLines = 1}) {
     return Container(
       height: maxLines == 1 ? s(48) : s(87),
-      padding: EdgeInsets.symmetric(horizontal: s(12)),
+      //padding: EdgeInsets.symmetric(horizontal: s(17), vertical: s(14)),
       decoration: BoxDecoration(
         color: const Color(0xFF1F1E24),
-        borderRadius: BorderRadius.circular(s(8)),
+        borderRadius: BorderRadius.circular(s(10)),
       ),
-      alignment: Alignment.centerLeft,
+     alignment: maxLines > 1
+    ? Alignment.centerLeft
+    : Alignment.topLeft,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: s(17), vertical: s(14)),
+        padding: EdgeInsets.symmetric(horizontal: s(17),),
         child: TextField(
           maxLines: maxLines,
-          style: const TextStyle(color: Colors.white),
+            style: GoogleFonts.dmSans(
+              color: ColorPalette.whitetext,
+              fontWeight: FontWeight.w400,
+              fontSize: s(14),
+            ),
           decoration: InputDecoration(
             hintText: hint,
             hintStyle: GoogleFonts.dmSans(

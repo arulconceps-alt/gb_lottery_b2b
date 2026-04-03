@@ -6,11 +6,11 @@ import 'package:gb_lottery_b2b/src/resultinner/view/widgets/resluts_inner_row_it
 import 'package:google_fonts/google_fonts.dart';
 
 class ResultInnerLotteryTable extends StatefulWidget {
-
   const ResultInnerLotteryTable({super.key});
 
   @override
-  State<ResultInnerLotteryTable> createState() => _ResultInnerLotteryTableState();
+  State<ResultInnerLotteryTable> createState() =>
+      _ResultInnerLotteryTableState();
 }
 
 class _ResultInnerLotteryTableState extends State<ResultInnerLotteryTable> {
@@ -30,7 +30,7 @@ class _ResultInnerLotteryTableState extends State<ResultInnerLotteryTable> {
       ["19/01/2026", "15.00 PM", "6", "2", "1"],
       ["18/01/2026", "15.00 PM", "5", "3", "1"],
       ["17/01/2026", "15.00 PM", "6", "6", "6"],
-       ["16/01/2026", "15.00 PM", "4", "2", "5"],
+      ["16/01/2026", "15.00 PM", "4", "2", "5"],
       ["15/01/2026", "15.00 PM", "2", "2", "2"],
       ["19/01/2026", "15.00 PM", "6", "2", "1"],
       ["18/01/2026", "15.00 PM", "5", "3", "1"],
@@ -45,24 +45,27 @@ class _ResultInnerLotteryTableState extends State<ResultInnerLotteryTable> {
             borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
           ),
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: s(16), horizontal: s(16)),
+            padding: EdgeInsets.symmetric(horizontal: s(16), vertical: s(12)),
             child: Row(
               children: [
-                Expanded(flex: 3, child: ResultInnerHeaderText("Date")),
-                Expanded(flex: 2, child: ResultInnerHeaderText("Time")),
-
+                Expanded(flex: 2, child: ResultInnerHeaderText("Date")),
                 Expanded(
-                  flex: 1,
-                  child: Center(child: ResultsInnerCircleHeader("A")),
+                  flex: 2,
+                  child: Center(child: ResultInnerHeaderText("Time")),
                 ),
-                Expanded(
-                  flex: 1,
-                  child: Center(child: ResultsInnerCircleHeader("B")),
+                SizedBox(width: s(40)),
+                SizedBox(
+                  width: s(26),
+                  child: ResultsInnerCircleHeader("A"),
                 ),
-                Expanded(
-                  flex: 1,
-                  child: Center(child: ResultsInnerCircleHeader("C")),
-                ),
+                SizedBox(width: s(8)),
+                SizedBox(
+                  width: s(26),
+                  child: ResultsInnerCircleHeader("B")),
+                  SizedBox(width: s(8)),
+                SizedBox(
+                  width: s(26),
+                  child: ResultsInnerCircleHeader("C")),
               ],
             ),
           ),
@@ -71,7 +74,7 @@ class _ResultInnerLotteryTableState extends State<ResultInnerLotteryTable> {
         /// Rows
         Container(
           decoration: const BoxDecoration(
-            color:  ColorPalette.backgroundDark,
+            color: ColorPalette.backgroundDark,
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(10)),
           ),
           child: Column(
@@ -79,9 +82,9 @@ class _ResultInnerLotteryTableState extends State<ResultInnerLotteryTable> {
           ),
         ),
 
-         SizedBox(height: s(26)),
+        SizedBox(height: s(26)),
 
-            Padding(
+        Padding(
           padding: EdgeInsets.symmetric(horizontal: s(12)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -131,9 +134,7 @@ class _ResultInnerLotteryTableState extends State<ResultInnerLotteryTable> {
         style: GoogleFonts.dmSans(
           fontSize: s(14),
           fontWeight: FontWeight.w600,
-          color: isSelected
-              ? ColorPalette.whitetext
-              : ColorPalette.darktext,
+          color: isSelected ? ColorPalette.whitetext : ColorPalette.darktext,
         ),
       ),
     );
@@ -160,5 +161,5 @@ class _ResultInnerLotteryTableState extends State<ResultInnerLotteryTable> {
         child: Icon(icon, size: s(12), color: ColorPalette.whitetext),
       ),
     );
-}
+  }
 }

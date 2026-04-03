@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gb_lottery_b2b/src/app/color_palette.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppbarWidget extends StatelessWidget {
@@ -19,15 +20,13 @@ class AppbarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // We remove SafeArea from here and handle it in the Scaffold/PreferredSize
-    // so the background color extends behind the status bar for a "Pro" look.
     return Container(
       width: double.infinity,
       padding: EdgeInsets.only(
-        top: MediaQuery.of(context).padding.top, // This manually adds the Status Bar height
+        top: MediaQuery.of(context).padding.top, 
       ),
       decoration: BoxDecoration(
-        color: const Color(0xFF1C1B20), // Matches your app's dark theme
+        color: ColorPalette.backgroundDark,
         border: Border(
           bottom: BorderSide(
             color: Colors.white.withOpacity(0.1),
@@ -36,7 +35,7 @@ class AppbarWidget extends StatelessWidget {
         ),
       ),
       child: Container(
-        height: s(60), // Fixed height for the content area
+        height: s(60),
         padding: EdgeInsets.symmetric(horizontal: s(16)),
         child: Row(
           children: [
@@ -49,12 +48,11 @@ class AppbarWidget extends StatelessWidget {
                   }
                 },
                 child: Container(
-                  padding: EdgeInsets.all(s(8)), // Larger tap target
+                  padding: EdgeInsets.all(s(8)),
                   child: Image.asset(
                     "assets/images/buy_ticket/back.webp",
                     height: s(24),
                     width: s(24),
-                    // If image is missing, use Icon as fallback:
                     errorBuilder: (context, error, stackTrace) =>
                     const Icon(Icons.arrow_back_ios, color: Colors.white, size: 20),
                   ),
@@ -63,7 +61,6 @@ class AppbarWidget extends StatelessWidget {
             else
               SizedBox(width: s(40)),
 
-            /// 📝 TITLE
             Expanded(
               child: Text(
                 title,
@@ -77,7 +74,6 @@ class AppbarWidget extends StatelessWidget {
               ),
             ),
 
-            /// ⚙️ RIGHT SIDE
             rightWidget ?? SizedBox(width: s(40)),
           ],
         ),

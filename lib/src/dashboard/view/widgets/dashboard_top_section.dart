@@ -18,7 +18,7 @@ class DashboardTopSection extends StatelessWidget {
             children:  [
                Container(
                 height: s(42),
-                width: s(165.5),
+                width: s(165),
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage("assets/images/dashboard/welcome.webp"),
@@ -42,13 +42,11 @@ class DashboardTopSection extends StatelessWidget {
                ),
             ],
           ),
-      
-          const SizedBox(width: 40.5),
-      
+           SizedBox(width: s(40)),
           Column(
             children:  [
              Container(
-                height: s(86),
+                height: s(89),
                 width: s(106),
                 decoration: BoxDecoration(
                   image: DecorationImage(

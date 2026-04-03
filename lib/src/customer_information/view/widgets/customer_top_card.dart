@@ -28,7 +28,6 @@ class CustomerTopCard extends StatelessWidget {
 
     return Column(
       children: [
-        /// 🔹 TOP CARD
         _card(
           s,
           title: topTitle,
@@ -37,8 +36,6 @@ class CustomerTopCard extends StatelessWidget {
         ),
     
         SizedBox(height: s(12)),
-    
-        /// 🔹 BOTTOM CARD
         _card(
           s,
           title: bottomTitle,
@@ -49,7 +46,7 @@ class CustomerTopCard extends StatelessWidget {
     );
   }
 
-  /// 🔹 COMMON CARD
+  
   Widget _card(
     double Function(double) s, {
     required String title,
@@ -81,8 +78,6 @@ class CustomerTopCard extends StatelessWidget {
           ),
 
           SizedBox(height: s(6)),
-
-          /// VALUE
           Text(
             value,
             textAlign: TextAlign.center,

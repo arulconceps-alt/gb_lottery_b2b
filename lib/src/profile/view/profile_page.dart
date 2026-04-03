@@ -53,7 +53,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 initial: "B",
               ),
                SizedBox(height: s(20)),
-              ProfileMenuCard()
+              ProfileMenuCard(),
+               SizedBox(height: s(20)),
             ],
           ),
         ),

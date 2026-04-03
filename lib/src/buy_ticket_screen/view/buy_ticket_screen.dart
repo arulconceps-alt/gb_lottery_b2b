@@ -103,7 +103,7 @@ class _BuyTicketsScreenState extends State<BuyTicketsScreen> {
     final scale = w / 375;
     double s(double v) => v * scale;
     final topPadding = MediaQuery.of(context).padding.top;
-    final appBarHeight = s(60) + topPadding;
+    final appBarHeight = s(42) + topPadding;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(appBarHeight),
@@ -156,8 +156,7 @@ class _BuyTicketsScreenState extends State<BuyTicketsScreen> {
                   });
                 },
               ),
-              SizedBox(height: s(29),),
-              // Inside Column in BuyTicketsScreen
+              SizedBox(height: s(28),),
               SearchFieldWidget(
                 s: s,
                 onTap: () {
@@ -165,7 +164,7 @@ class _BuyTicketsScreenState extends State<BuyTicketsScreen> {
                   context.pushNamed("search_screen");
                 },
               ),
-              SizedBox(height: s(16),),
+              SizedBox(height: s(24),),
               CustomerInfoCard(s: s),
               SizedBox(height: s(26),),
               SizedBox(
