@@ -61,48 +61,32 @@ class _LotteryNumberCardState extends State<LotteryNumberCard> {
         children: [
           // Header Row
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
-                width: s(62),
-                height: s(16.44),
-                child: Text(
-                  widget.gameType,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: GoogleFonts.dmSans(
-                    color: Colors.white,
-                    fontSize: s(12),
-                    fontWeight: FontWeight.w500,
-                    height: 1.30,
-                    letterSpacing: s(-0.12),
-                  ),
+              Text(
+                widget.gameType,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: GoogleFonts.dmSans(
+                  color: Colors.white,
+                  fontSize: s(12),
+                  fontWeight: FontWeight.w500,
                 ),
               ),
               SizedBox(width: s(6)),
-              SizedBox(
-                width: s(78),
-                height: s(18.5),
-                child: Text(
-                  widget.prize,
-                  maxLines: 1,
-                  textScaler: TextScaler.noScaling,
-                  style: GoogleFonts.dmSans(
-                    color: const Color(0xFFCFB95D),
-                    fontSize: s(11),
-                    fontWeight: FontWeight.w500,
-                    height: 1.30,
-                    letterSpacing: s(-0.11),
-                  ),
+              Text(
+                widget.prize,
+                style: GoogleFonts.dmSans(
+                  color: const Color(0xFFCFB95D),
+                  fontSize: s(12),
+                  fontWeight: FontWeight.w500,
                 ),
               ),
               const Spacer(),
               _quickGuessButton(s),
             ],
           ),
-
-          SizedBox(height: s(3)), // Exact 3px space
-
+          SizedBox(height: s(2.06)), // Exact 3px space
           // Price Section
           Text.rich(
             TextSpan(
@@ -128,9 +112,7 @@ class _LotteryNumberCardState extends State<LotteryNumberCard> {
               ],
             ),
           ),
-
-          SizedBox(height: s(16)),
-
+          SizedBox(height: s(13)),
           // Selection Rows
           ...List.generate(widget.letters.length, (index) => _buildRow(index, s)),
         ],
@@ -200,7 +182,6 @@ class _LotteryNumberCardState extends State<LotteryNumberCard> {
               color: Colors.white,
               fontSize: s(12),
               fontWeight: FontWeight.w400,
-              height: 1.30,
               letterSpacing: s(-0.12),
             ),
           ),
@@ -211,8 +192,8 @@ class _LotteryNumberCardState extends State<LotteryNumberCard> {
 
   Widget _quantitySelector(int index, double Function(double) s) {
     return Container(
-      width: s(92),
-      height: s(36),
+      width: s(84),
+      height: s(34),
       decoration: BoxDecoration(
         color: const Color(0xFF313038),
         borderRadius: BorderRadius.circular(s(6)),
@@ -222,12 +203,12 @@ class _LotteryNumberCardState extends State<LotteryNumberCard> {
         children: [
           GestureDetector(
             onTap: () => setState(() => quantities[index] = max(1, quantities[index] - 1)),
-            child: Text("-", style: TextStyle(color: Colors.white, fontSize: s(18))),
+            child: Text("-", style: GoogleFonts.dmSans(color: Colors.white,fontWeight: FontWeight.w400, fontSize: s(14))),
           ),
-          Text("${quantities[index]}", style: TextStyle(color: Colors.white, fontSize: s(14))),
+          Text("${quantities[index]}", style: GoogleFonts.dmSans(color: Colors.white,fontWeight: FontWeight.w400, fontSize: s(14))),
           GestureDetector(
             onTap: () => setState(() => quantities[index]++),
-            child: Text("+", style: TextStyle(color: Colors.white, fontSize: s(18))),
+            child: Text("+", style: GoogleFonts.dmSans(color: Colors.white,fontWeight: FontWeight.w400, fontSize: s(14))),
           ),
         ],
       ),
@@ -242,8 +223,8 @@ class _LotteryNumberCardState extends State<LotteryNumberCard> {
         widget.onAdd(widget.letters[index], dashValues[index], quantities[index], price);
       },
       child: Container(
-        width: s(68), // UPDATED: Changed from 44 to 68 to match the grey button
-        height: s(36),
+        width: s(42),
+        height: s(34),
         alignment: Alignment.center,
         decoration: BoxDecoration(
           gradient: const LinearGradient(
@@ -267,8 +248,8 @@ class _LotteryNumberCardState extends State<LotteryNumberCard> {
 
   Widget _greyAddButton(double Function(double) s) {
     return Container(
-      width: s(68), // Fixed width to match the Gold Button
-      height: s(36), // Fixed height to match the Gold Button
+      width: s(42),
+      height: s(34),
       alignment: Alignment.center,
       decoration: BoxDecoration(
         color: const Color(0xFF313038),

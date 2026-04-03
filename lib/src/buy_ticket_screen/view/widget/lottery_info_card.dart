@@ -19,7 +19,6 @@ class LotteryInfoCard extends StatelessWidget {
       child: IntrinsicHeight( // Ensures the divider matches the column height
         child: Row(
           children: [
-            /// LEFT SIDE
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

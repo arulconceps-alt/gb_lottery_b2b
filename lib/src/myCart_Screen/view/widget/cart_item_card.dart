@@ -23,7 +23,6 @@ class CartItemCard extends StatelessWidget {
               children: [
                 /// --- 1. Image Section ---
                 Container(
-                  // Figma dimensions: 56px wide, 44px high
                   width: s(56),
                   height: s(44),
                   decoration: BoxDecoration(

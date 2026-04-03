@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:gb_lottery_b2b/src/common/widgets/appbar_widget.dart';
+import 'package:gb_lottery_b2b/src/common/widgets/app_bar_text_with_back.dart';
+
 import 'package:gb_lottery_b2b/src/purchase_history_details/view/widgets/purchase_history_item_card.dart';
 
 
@@ -19,10 +20,7 @@ class _PurchaseHistoryDetailsState extends State<PurchaseHistoryDetails> {
     double s(double v) => v * scale;
 
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(s(60) + MediaQuery.of(context).padding.top),
-        child: AppbarWidget(s: s, title: "Purchase History", showBack: true),
-      ),
+      appBar: AppBarTextWithBack( title: "Purchase History",),
       backgroundColor: const Color(0xFF0F1116),
       body: SafeArea(
         top: false, // appbar already handles top

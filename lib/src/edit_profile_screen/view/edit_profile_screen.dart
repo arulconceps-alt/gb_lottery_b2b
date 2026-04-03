@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gb_lottery_b2b/src/common/widgets/appbar_widget.dart';
+import 'package:gb_lottery_b2b/src/common/widgets/app_bar_text_with_back.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -19,10 +20,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
     return Scaffold(
       backgroundColor: const Color(0xFF0F1116),
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(s(60) + MediaQuery.of(context).padding.top),
-        child: AppbarWidget(s: s, title: "Profile", showBack: true),
-      ),
+      appBar: AppBarTextWithBack(title: "Profile",),
       // SafeArea prevents the Submit button from hitting the device navigation bar
       body: SafeArea(
         child: Column(

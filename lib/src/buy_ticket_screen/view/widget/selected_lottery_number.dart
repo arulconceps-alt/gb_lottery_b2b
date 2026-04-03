@@ -28,9 +28,11 @@ class MyNumberSummaryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final h = MediaQuery.of(context).size.height;
     return Container(
       width: double.infinity,
-      height: 515,
+      height: h * 0.62,
+      padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
       decoration: const BoxDecoration(
         color: Color(0xFF24232A),
         borderRadius: BorderRadius.only(
@@ -40,7 +42,7 @@ class MyNumberSummaryView extends StatelessWidget {
       ),
       child: Column(
         children: [
-          SizedBox(height: 20),
+
           _buildHeader(context), // Added context here
           SizedBox(height: 24),
           Expanded(
@@ -83,7 +85,14 @@ class MyNumberSummaryView extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () => showDeletePopup(context, onClearAll),
-            child: const Icon(Icons.delete, color: Color(0xFF9F9F9F)),
+            child: SizedBox(
+              width: 20,
+              height: 20,
+              child: Image.asset(
+                "assets/images/buy_ticket/delete_icon.webp",
+                fit: BoxFit.contain,
+              ),
+            ),
           ),
         ],
       ),

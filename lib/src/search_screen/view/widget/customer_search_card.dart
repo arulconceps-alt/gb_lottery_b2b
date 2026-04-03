@@ -4,8 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 class CustomerSearchCard extends StatelessWidget {
   final double Function(double) s;
   final String name;
-  final String pincode;
+  final String id;
   final String phone;
+  final String pincode;
   final String initial;
   final bool isFirst; // Add this to handle the top radius
 
@@ -13,8 +14,9 @@ class CustomerSearchCard extends StatelessWidget {
     super.key,
     required this.s,
     required this.name,
-    required this.pincode,
+    required this.id,
     required this.phone,
+    required this.pincode,
     required this.initial,
     this.isFirst = false,
   });
@@ -31,12 +33,12 @@ class CustomerSearchCard extends StatelessWidget {
             ? BorderRadius.vertical(top: Radius.circular(s(10)))
             : BorderRadius.zero,
         border: Border(
-          left: BorderSide(color: Colors.white.withOpacity(0.1)),
-          right: BorderSide(color: Colors.white.withOpacity(0.1)),
-          bottom: BorderSide(color: Colors.white.withOpacity(0.1)),
+          left: BorderSide(color: Colors.white.withOpacity(0.2)),
+          right: BorderSide(color: Colors.white.withOpacity(0.2)),
+          bottom: BorderSide(color: Colors.white.withOpacity(0.2)),
           // Only add top border to the first item to avoid double borders between cards
           top: isFirst
-              ? BorderSide(color: Colors.white.withOpacity(0.1))
+              ? BorderSide(color: Colors.white.withOpacity(0.2))
               : BorderSide.none,
         ),
       ),

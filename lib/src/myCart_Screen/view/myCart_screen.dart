@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
-import 'package:gb_lottery_b2b/src/common/widgets/appbar_widget.dart';
+import 'package:gb_lottery_b2b/src/common/widgets/app_bar_text_with_back.dart';
 import 'package:gb_lottery_b2b/src/myCart_Screen/view/widget/cart_item_card.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,10 +21,7 @@ class _MycartScreenState extends State<MycartScreen> {
     double s(double v) => v * scale;
 
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(s(60) + MediaQuery.of(context).padding.top),
-        child: AppbarWidget(s: s, title: "My Cart", showBack: true),
-      ),
+      appBar: AppBarTextWithBack(title: "My Cart",),
       backgroundColor: const Color(0xFF0F1116),
 
       /// --- 1. ONLY PAY NOW BUTTON IS FIXED ---
@@ -77,11 +74,11 @@ class _MycartScreenState extends State<MycartScreen> {
               itemBuilder: (context, index) => CartItemCard(s: s),
             ),
 
-            SizedBox(height: s(16)),
+            SizedBox(height: s(51)),
 
             // Total Amount Box (Now Scrolls)
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: s(16)),
+              padding: EdgeInsets.only(left: s(15),bottom: s(10),right:s(16) ),
               child: Container(
                 width: double.infinity,
                 // Figma height: 69
@@ -125,7 +122,7 @@ class _MycartScreenState extends State<MycartScreen> {
             ),
 
             // Space below the Total Amount box before reaching the fixed button
-            SizedBox(height: s(26)),
+            SizedBox(height: s(14)),
           ],
         ),
       ),

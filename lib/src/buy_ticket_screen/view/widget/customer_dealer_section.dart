@@ -20,7 +20,6 @@ class CustomerDealerSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: s(33)),
         SizedBox(
           width: s(237),
           child: Text(

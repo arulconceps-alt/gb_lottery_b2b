@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class NotificationFilterChips extends StatefulWidget {
   final double Function(double) s;
@@ -73,7 +74,7 @@ class _NotificationFilterChipsState
               child: Center(
                 child: Text(
                   widget.filters[index],
-                  style: TextStyle(
+                  style: GoogleFonts.dmSans(
                     color: Colors.white,
                     fontSize: widget.s(14),
                     fontWeight: FontWeight.w400,

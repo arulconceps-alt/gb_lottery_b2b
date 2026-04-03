@@ -71,10 +71,6 @@ class NotificationCardItem extends StatelessWidget {
                     ),
                   ),
                 ),
-
-                /// TITLE (Top 17)
-                /// We use -s(7) translation to move it up from its Column position
-                /// to hit exactly 17px from the top of the card.
                 Transform.translate(
                   offset: Offset(0, -s(7)),
                   child: Text(
@@ -87,8 +83,7 @@ class NotificationCardItem extends StatelessWidget {
                     ),
                   ),
                 ),
-
-                /// MESSAGE (Below Title with no extra space)
+                SizedBox(height: 1,),
                 Transform.translate(
                   offset: Offset(0, -s(8)),
                   child: SizedBox(

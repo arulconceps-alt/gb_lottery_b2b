@@ -5,34 +5,54 @@ import 'package:google_fonts/google_fonts.dart';
 class LotteryDropdownWidget extends StatelessWidget {
   final double Function(double) s;
   final String text;
-  final VoidCallback? onTap;
+  final List<String> items;
+  final ValueChanged<String> onSelected;
 
   const LotteryDropdownWidget({
     super.key,
     required this.s,
     required this.text,
-    this.onTap,
+    required this.items,
+    required this.onSelected,
   });
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: double.infinity,
-        height: s(66),
-        padding: EdgeInsets.symmetric(horizontal: s(16)),
-        decoration: BoxDecoration(
-          color: ColorPalette.backgroundDark,
-          borderRadius: BorderRadius.circular(s(10)),
-          border: Border.all(
-            color: ColorPalette.border,
-            width: 1.2,
-          ),
+    return Container(
+      width: double.infinity,
+      height: s(66),
+      padding: EdgeInsets.symmetric(horizontal: s(16)),
+      decoration: BoxDecoration(
+        color: ColorPalette.backgroundDark,
+        borderRadius: BorderRadius.circular(s(10)),
+        border: Border.all(
+          color: ColorPalette.border,
+          width: 1.2,
         ),
+      ),
+      child: PopupMenuButton<String>(
+        onSelected: onSelected,
+        color: ColorPalette.backgroundDark,
+        constraints: BoxConstraints(
+          maxHeight: s(180), // 🔥 scroll after 3+ items
+          minWidth: MediaQuery.of(context).size.width - s(32),
+        ),
+        itemBuilder: (context) {
+          return items.map((item) {
+            return PopupMenuItem<String>(
+              value: item,
+              child: Text(
+                item,
+                style: GoogleFonts.dmSans(
+                  color: Colors.white,
+                  fontSize: s(14),
+                ),
+              ),
+            );
+          }).toList();
+        },
         child: Row(
           children: [
-            /// 📝 TEXT
             Expanded(
               child: Text(
                 text,
@@ -45,10 +65,9 @@ class LotteryDropdownWidget extends StatelessWidget {
                 ),
               ),
             ),
-            /// 🔽 DROPDOWN ICON
             Image.asset(
               "assets/images/buy_ticket/ep_arrow-down-bold.webp",
-              height:s(16) ,
+              height: s(16),
               width: s(16),
             ),
           ],

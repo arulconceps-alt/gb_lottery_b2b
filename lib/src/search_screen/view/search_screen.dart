@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
-import 'package:gb_lottery_b2b/src/common/widgets/appbar_widget.dart';
+import 'package:gb_lottery_b2b/src/buy_ticket_screen/view/model/customer_model.dart';
+import 'package:gb_lottery_b2b/src/common/widgets/app_bar_text_with_back.dart';
+
 import 'package:gb_lottery_b2b/src/search_screen/view/widget/customer_search_card.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -20,10 +22,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
     return Scaffold(
       backgroundColor: const Color(0xFF0F1116),
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(s(60) + MediaQuery.of(context).padding.top),
-        child: AppbarWidget(s: s, title: "Search", showBack: true),
-      ),
+      appBar: AppBarTextWithBack( title: "Search",),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: s(16)), // Sets left & right to 16
@@ -70,14 +69,27 @@ class _SearchScreenState extends State<SearchScreen> {
                 child: ListView.builder(
                   itemCount: 5,
                   itemBuilder: (context, index) {
-                    return CustomerSearchCard(
-                      s: s,
-                      name: "Baranee A",
-                      pincode: "642120",
-                      phone: "9874563212",
-                      initial: "B",
-                      // Pass index to handle specific borders if needed
-                      isFirst: index == 0,
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.pop(
+                          context,
+                          CustomerModel(
+                            name: "Baranee A",
+                            phone: "9874563212",
+                            id: "56526",
+                            pincode: "642120",
+                          ),
+                        );
+                      },
+                      child: CustomerSearchCard(
+                        s: s,
+                        name: "Baranee A",
+                        phone: "9874563212",
+                        id: "56526",
+                        pincode: "642120",
+                        initial: "B",
+                        isFirst: index == 0,
+                      ),
                     );
                   },
                 ),

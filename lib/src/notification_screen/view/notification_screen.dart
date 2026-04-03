@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gb_lottery_b2b/src/common/widgets/appbar_widget.dart';
+import 'package:gb_lottery_b2b/src/common/widgets/app_bar_text_with_back.dart';
+
 import 'package:gb_lottery_b2b/src/notification_screen/view/widget/notification_card_item.dart';
 import 'package:gb_lottery_b2b/src/notification_screen/view/widget/notification_filter_chips.dart';
 
@@ -21,21 +22,13 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
     return Scaffold(
       backgroundColor: const Color(0xFF0F1116),
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(
-          s(60) + MediaQuery.of(context).padding.top,
-        ),
-        child: AppbarWidget(
-          s: s,
-          title: "Notification",
-          showBack: true,
-        ),
+      appBar: AppBarTextWithBack(
+        title: "Notification",
       ),
       body: SafeArea(
         child: Column(
           children: [
             SizedBox(height: s(11)),
-
             NotificationFilterChips(
               s: s,
               filters: const [

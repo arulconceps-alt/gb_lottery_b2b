@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:gb_lottery_b2b/src/common/widgets/appbar_widget.dart';
+import 'package:gb_lottery_b2b/src/common/widgets/app_bar_text_with_back.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomerInfoScreen extends StatefulWidget {
@@ -19,10 +19,7 @@ class _CustomerInfoScreenState extends State<CustomerInfoScreen> {
 
     return Scaffold(
       backgroundColor: const Color(0xFF0F1116),
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(s(60) + MediaQuery.of(context).padding.top),
-        child: AppbarWidget(s: s, title: "Customer info", showBack: true),
-      ),
+      appBar: AppBarTextWithBack(title: "Customer info"),
       // SafeArea prevents the Submit button from hitting the device navigation bar
       body: SafeArea(
         child: Column(

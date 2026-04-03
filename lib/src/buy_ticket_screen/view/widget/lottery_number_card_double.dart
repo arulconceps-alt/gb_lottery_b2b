@@ -64,10 +64,8 @@ class _LotteryNumberCardDoubleState extends State<LotteryNumberCardDouble> {
         double unitPrice = double.tryParse(
           widget.ticketPrice.replaceAll(RegExp(r'[^0-9.]'), ''),
         ) ?? 0.0;
-
         String combinedLetters = widget.rows[rowIndex].join("");
         String combinedValues = dashValues[rowIndex].join("");
-
         if (combinedValues.contains("-")) return;
 
         widget.onAdd(
@@ -115,15 +113,15 @@ class _LotteryNumberCardDoubleState extends State<LotteryNumberCardDouble> {
         children: [
           GestureDetector(
             onTap: () => setState(() => quantities[index] = max(1, quantities[index] - 1)),
-            child: Text("-", style: TextStyle(color: Colors.white, fontSize: s(18))),
+            child: Text("-", style: GoogleFonts.dmSans(color: Colors.white,fontWeight: FontWeight.w400, fontSize: s(14))),
           ),
           Text(
             "${quantities[index]}",
-            style: GoogleFonts.dmSans(color: Colors.white, fontSize: s(14)),
+            style: GoogleFonts.dmSans(color: Colors.white, fontSize: s(14),fontWeight: FontWeight.w400),
           ),
           GestureDetector(
             onTap: () => setState(() => quantities[index]++),
-            child: Text("+", style: TextStyle(color: Colors.white, fontSize: s(18))),
+            child: Text("+", style: GoogleFonts.dmSans(color: Colors.white,fontWeight: FontWeight.w400, fontSize: s(14))),
           ),
         ],
       ),
@@ -192,7 +190,7 @@ class _LotteryNumberCardDoubleState extends State<LotteryNumberCardDouble> {
                 widget.lotteryType,
                 style: GoogleFonts.dmSans(color: Colors.white, fontSize: s(12)),
               ),
-              SizedBox(width: s(8)),
+              SizedBox(width: s(6)),
               Text(
                 widget.prize,
                 style: GoogleFonts.dmSans(color: const Color(0xFFCFB95D), fontSize: s(12)),
@@ -201,7 +199,7 @@ class _LotteryNumberCardDoubleState extends State<LotteryNumberCardDouble> {
               _quickGuessButton(s),
             ],
           ),
-          SizedBox(height: s(4)),
+          SizedBox(height: s(2.06)),
           Text.rich(
             TextSpan(
               children: [
@@ -226,7 +224,7 @@ class _LotteryNumberCardDoubleState extends State<LotteryNumberCardDouble> {
               ],
             ),
           ),
-          SizedBox(height: s(16)),
+          SizedBox(height: s(13)),
           for (int i = 0; i < widget.rows.length; i++) ...[
             buildRow(i, widget.rows[i]),
             SizedBox(height: s(10)),

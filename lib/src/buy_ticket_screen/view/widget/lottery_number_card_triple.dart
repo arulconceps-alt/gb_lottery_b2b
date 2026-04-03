@@ -168,7 +168,8 @@ class _LotteryNumberCardTripleState extends State<LotteryNumberCardTriple> {
 
   Widget _quantitySelector(double Function(double) s) {
     return Container(
-      width: s(92), height: s(36),
+      width: s(84),
+      height: s(34),
       decoration: BoxDecoration(
         color: const Color(0xFF313038),
         borderRadius: BorderRadius.circular(s(6)),
@@ -179,14 +180,14 @@ class _LotteryNumberCardTripleState extends State<LotteryNumberCardTriple> {
           GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: () => setState(() => quantity = max(1, quantity - 1)),
-            child: Text("-", style: TextStyle(color: Colors.white, fontSize: s(18))),
+            child: Text("-", style: GoogleFonts.dmSans(color: Colors.white,fontWeight: FontWeight.w400, fontSize: s(14))),
           ),
           Text("$quantity",
-              style: GoogleFonts.dmSans(color: Colors.white, fontSize: s(14), fontWeight: FontWeight.bold)),
+              style: GoogleFonts.dmSans(color: Colors.white, fontSize: s(14), fontWeight: FontWeight.w400)),
           GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: () => setState(() => quantity++),
-            child: Text("+", style: TextStyle(color: Colors.white, fontSize: s(18))),
+            child: Text("+", style: GoogleFonts.dmSans(color: Colors.white,fontWeight: FontWeight.w400, fontSize: s(14))),
           ),
         ],
       ),
@@ -202,7 +203,8 @@ class _LotteryNumberCardTripleState extends State<LotteryNumberCardTriple> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: s(68), height: s(36),
+        width: s(42),
+        height: s(34),
         alignment: Alignment.center,
         decoration: BoxDecoration(
           gradient: const LinearGradient(colors: [Color(0xFFDFC45C), Color(0xFFA89A5F)]),
@@ -216,7 +218,8 @@ class _LotteryNumberCardTripleState extends State<LotteryNumberCardTriple> {
 
   Widget _greyButton(String text, double width, double Function(double) s) {
     return Container(
-      width: s(width), height: s(36),
+      width: s(42),
+      height: s(34),
       alignment: Alignment.center,
       decoration: BoxDecoration(
         color: const Color(0xFF313038),

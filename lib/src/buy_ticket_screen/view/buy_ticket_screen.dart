@@ -11,9 +11,12 @@ import 'package:gb_lottery_b2b/src/buy_ticket_screen/view/widget/lottery_number_
 import 'package:gb_lottery_b2b/src/buy_ticket_screen/view/widget/search_field_widget.dart';
 import 'package:gb_lottery_b2b/src/buy_ticket_screen/view/widget/selected_lottery_number.dart';
 import 'package:gb_lottery_b2b/src/buy_ticket_screen/view/widget/time_slot_picker.dart';
-import 'package:gb_lottery_b2b/src/common/widgets/appbar_widget.dart';
+import 'package:gb_lottery_b2b/src/common/widgets/app_bar_text_with_back.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'model/customer_model.dart';
 
 class BuyTicketsScreen extends StatefulWidget {
   const BuyTicketsScreen({super.key});
@@ -29,6 +32,14 @@ class _BuyTicketsScreenState extends State<BuyTicketsScreen> {
   int _totalCount = 0;
   bool isCartVisible = false;
   List<SelectedLotteryNumber> myItems = [];
+  CustomerModel? selectedCustomer;
+  String selectedLottery = "Kerala Lottery, ABC";
+
+  final List<String> lotteryItems = [
+    "Kerala Lottery, ABC",
+    "Kerala Lottery, XYZ",
+    "Kerala Lottery, DEF",
+  ];
 
   void _handleAddition(
       String letter,
@@ -75,28 +86,7 @@ class _BuyTicketsScreenState extends State<BuyTicketsScreen> {
       }
     });
   }
-  void _openMyNumbersBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true, // 👈 CRITICAL: Allows custom heights taller than half-screen
-      useSafeArea: true,
-      backgroundColor: Colors.transparent, // 👈 Keep transparent to see your custom radius
-      builder: (bottomSheetContext) {
-        // Use Wrap or a Column with mainAxisSize.min to allow it to respect child height
-        return MyNumberSummaryView(
-          selectedNumbers: myItems,
-          onClearAll: () {
-            _handleClearAll();
-            if (Navigator.canPop(bottomSheetContext)) Navigator.pop(bottomSheetContext);
-          },
-          onDeleteItem: (index) {
-            _handleDeleteItem(index);
-            if (myItems.isEmpty && Navigator.canPop(bottomSheetContext)) Navigator.pop(bottomSheetContext);
-          },
-        );
-      },
-    );
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -104,12 +94,8 @@ class _BuyTicketsScreenState extends State<BuyTicketsScreen> {
     final scale = w / 375;
     double s(double v) => v * scale;
     final topPadding = MediaQuery.of(context).padding.top;
-    final appBarHeight = s(60) + topPadding;
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(appBarHeight),
-        child: AppbarWidget(s: s, title: "Buy Tickets", showBack: true),
-      ),
+      appBar: AppBarTextWithBack(title: "Buy Ticket",),
       bottomNavigationBar: LotteryFooterBar(
         totalAmount: _totalPrice,
         totalNumbers: _totalCount,
@@ -144,7 +130,7 @@ class _BuyTicketsScreenState extends State<BuyTicketsScreen> {
       backgroundColor: ColorPalette.background,
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(s(16)),
+          padding: EdgeInsets.only(left:s(16),top:s(30),right:s(16),),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -161,14 +147,26 @@ class _BuyTicketsScreenState extends State<BuyTicketsScreen> {
               // Inside Column in BuyTicketsScreen
               SearchFieldWidget(
                 s: s,
-                onTap: () {
-                  // Replace 'searchCustomerScreen' with your actual route name
-                  context.pushNamed("search_screen");
+                onTap: () async {
+                  final result = await context.pushNamed<CustomerModel>(
+                    "search_screen",
+                  );
+
+                  if (result != null) {
+                    setState(() {
+                      selectedCustomer = result;
+                    });
+                  }
                 },
               ),
               SizedBox(height: s(16),),
-              CustomerInfoCard(s: s),
-              SizedBox(height: s(26),),
+              if (selectedCustomer != null) ...[
+                CustomerInfoCard(
+                  s: s,
+                  customer: selectedCustomer!,
+                ),
+                SizedBox(height: s(26)),
+              ],
               SizedBox(
                 width: s(128),   // ✅ correct width
                 height: s(20),   // ✅ correct height
@@ -184,9 +182,14 @@ class _BuyTicketsScreenState extends State<BuyTicketsScreen> {
                 ),
               ),
               SizedBox(height: s(10),),
-              LotteryDropdownWidget(s: s, text: "Kerala Lottery , ABC",
-                onTap: () {
-                  // open dropdown
+              LotteryDropdownWidget(
+                s: s,
+                text: selectedLottery,
+                items: lotteryItems,
+                onSelected: (value) {
+                  setState(() {
+                    selectedLottery = value;
+                  });
                 },
               ),
               SizedBox(height: s(30),),
@@ -237,41 +240,9 @@ class _BuyTicketsScreenState extends State<BuyTicketsScreen> {
               SizedBox(height: s(13),),
               LotteryInfoCard(s: s),
               SizedBox(height: s(14),),
-              /*if (!isCartVisible) ...[
-                ListView(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 8,
-                  ),
-                  children: [
-                    LotteryNumberCard(s: s,onAdd: _handleAddition),
-                    const SizedBox(height: 16),
-                    LotteryNumberCardDouble(
-                      s:s,
-                      lotteryType: "Double Digit",
-                      prize: "Win ₹1000.00",
-                      ticketPrice: "₹100",
-                      onAdd: _handleAddition,
-                      rows: const [
-                        ["A", "B"],
-                        ["A", "C"],
-                        ["B", "C"],
-                      ],
-                    ),
-                  ],
-                ),
-              ] else ...[
-                MyNumberSummaryView(
-                  selectedNumbers: myItems,
-                  onClearAll: _handleClearAll,
-                  onDeleteItem: _handleDeleteItem,
-                ),
-              ],*/
               ListView(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                padding: const EdgeInsets.symmetric(vertical: 8),
                 children: [
                   LotteryNumberCard(
                     s: s,
@@ -311,11 +282,50 @@ class _BuyTicketsScreenState extends State<BuyTicketsScreen> {
                 },
               ),
               SizedBox(height: 76,),
-
             ],
           ),
         ),
       ),
+    );
+  }
+
+  void _showLotteryBottomSheet(
+      BuildContext context,
+      double Function(double) s,
+      ) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: const Color(0xFF24232A),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(s(16)),
+        ),
+      ),
+      builder: (context) {
+        return Padding(
+          padding: EdgeInsets.all(s(16)),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: lotteryItems.map((item) {
+              return ListTile(
+                title: Text(
+                  item,
+                  style: GoogleFonts.dmSans(
+                    color: Colors.white,
+                    fontSize: s(14),
+                  ),
+                ),
+                onTap: () {
+                  setState(() {
+                    selectedLottery = item;
+                  });
+                  Navigator.pop(context);
+                },
+              );
+            }).toList(),
+          ),
+        );
+      },
     );
   }
 }
