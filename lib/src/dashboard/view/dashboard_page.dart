@@ -78,41 +78,44 @@ class _DashboardPageState extends State<DashboardPage> {
             //   subtitle: "Register new customer",
             // ),
             SizedBox(height: s(23)),
-            Row(
-              children: [
-                HomeMenuSection(
-                  imagePath: "assets/images/dashboard/people.webp",
-                  title: "Add Customer",
-                  imageheight: 36,
-                  imagewidth: 38,
-                  spaceheight: 3,
-                  onTap: () {
-                    context.push('/addcustomer');
-                  },
-                ),
-
-                HomeMenuSection(
-                  imagePath: "assets/images/dashboard/tickets.webp",
-                  title: "Buy Tickets",
-                  imageheight: 30,
-                  imagewidth: 30,
-                  spaceheight: 9,
-                  onTap: () {
-                      context.push('/buy_ticket');
-                  },
-                ),
-
-                HomeMenuSection(
-                  imagePath: "assets/images/dashboard/dashboard.webp",
-                  title: "Dashboard",
-                  imageheight: 36,
-                  imagewidth: 36,
-                  spaceheight: 3,
-                  onTap: () {
-                    context.push('/leaderboard');
-                  },
-                ),
-              ],
+            Padding(
+               padding: EdgeInsets.symmetric(horizontal: s(16)),
+              child: Row(
+                children: [
+                  HomeMenuSection(
+                    imagePath: "assets/images/dashboard/people.webp",
+                    title: "Add Customer",
+                    imageheight: 36,
+                    imagewidth: 38,
+                    spaceheight: 3,
+                    onTap: () {
+                      context.push('/addcustomer');
+                    },
+                  ),
+                  SizedBox(width: s(14)),
+                  HomeMenuSection(
+                    imagePath: "assets/images/dashboard/tickets.webp",
+                    title: "Buy Tickets",
+                    imageheight: 30,
+                    imagewidth: 30,
+                    spaceheight: 9,
+                    onTap: () {
+                        context.push('/buy_ticket');
+                    },
+                  ),
+                  SizedBox(width: s(14)),
+                  HomeMenuSection(
+                    imagePath: "assets/images/dashboard/dashboard.webp",
+                    title: "Dashboard",
+                    imageheight: 36,
+                    imagewidth: 36,
+                    spaceheight: 3,
+                    onTap: () {
+                      context.push('/leaderboard');
+                    },
+                  ),
+                ],
+              ),
             ),
             SizedBox(height: s(30)),
             Text(

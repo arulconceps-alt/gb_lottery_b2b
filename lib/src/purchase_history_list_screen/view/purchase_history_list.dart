@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/common/widgets/app_bar_text_with_back.dart';
 
 import 'package:gb_lottery_b2b/src/purchase_history_list_screen/view/widget/purchase_history_list_item.dart';
+import 'package:gb_lottery_b2b/src/purchase_history_list_screen/view/widget/purchase_option_button.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -20,7 +21,7 @@ class _PurchaseHistoryListState extends State<PurchaseHistoryList> {
     double s(double v) => v * scale;
 
     return Scaffold(
-      appBar: AppBarTextWithBack(title: "Purchase History",),
+      appBar: AppBarTextWithBack(title: "Purchase History"),
       backgroundColor: const Color(0xFF0F1116),
       body: SafeArea(
         top: false, // appbar already handles top
@@ -31,31 +32,43 @@ class _PurchaseHistoryListState extends State<PurchaseHistoryList> {
             children: [
               // 1. Wrap ONLY the top section (Search/Filter) in Padding
               Padding(
-                padding: EdgeInsets.all(s(16),),
+                padding: EdgeInsets.symmetric(horizontal: s(16)),
                 child: Column(
                   children: [
+                    SizedBox(height: s(19)),
                     Row(
                       children: [
                         Expanded(
                           child: Container(
+                            width: double.infinity,
                             height: s(48),
-                            padding: EdgeInsets.symmetric(horizontal: s(16)),
                             decoration: BoxDecoration(
                               color: const Color(0xFF24232A),
                               borderRadius: BorderRadius.circular(s(10)),
                               border: Border.all(
                                 color: const Color(0xFF1F1E24),
-                                width: 1,
+                                width: 1.2,
                               ),
                             ),
-                            alignment: Alignment.centerLeft,
-                            child: Text(
-                              "Search customer by Name or Mobile...",
+                            padding: EdgeInsets.symmetric(horizontal: s(16)),
+                            alignment: Alignment.center,
+                            child: TextField(
                               style: GoogleFonts.dmSans(
-                                color: const Color(0xFF9F9F9F),
+                                color: Colors.white,
                                 fontSize: s(12),
                                 fontWeight: FontWeight.w400,
-                                fontStyle: FontStyle.italic,
+                              ),
+                              decoration: InputDecoration(
+                                hintText:
+                                    "Search customer by Name or Mobile...",
+                                hintStyle: GoogleFonts.dmSans(
+                                  color: const Color(0xFF9F9F9F),
+                                  fontSize: s(12),
+                                  fontWeight: FontWeight.w400,
+                                  fontStyle: FontStyle.italic,
+                                ),
+                                border: InputBorder.none,
+                                isCollapsed: true,
                               ),
                             ),
                           ),
@@ -83,10 +96,13 @@ class _PurchaseHistoryListState extends State<PurchaseHistoryList> {
                         ),
                       ],
                     ),
+                    SizedBox(height: s(20)),
+                    PurchaseOptionButton(),
                   ],
                 ),
               ),
-              // 2. ListView now has NO horizontal padding
+
+              SizedBox(height: s(20)),
               ListView.separated(
                 padding: EdgeInsets.zero, // Ensure no internal list padding
                 shrinkWrap: true,
@@ -97,8 +113,9 @@ class _PurchaseHistoryListState extends State<PurchaseHistoryList> {
                   // If you need the items to touch the screen edges,
                   // ensure the 'PurchaseHistoryListItem' width is set to 'double.infinity' or 'w'
                   return GestureDetector(
-                     onTap: ()=> context.push('/purchase_history_details'),
-                    child: PurchaseHistoryListItem(s: s));
+                    onTap: () => context.push('/purchase_history_details'),
+                    child: PurchaseHistoryListItem(s: s),
+                  );
                 },
               ),
             ],

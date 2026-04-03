@@ -26,22 +26,20 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
       titleSpacing: 0,
       title: Row(
         children: [
-          Container(
-            height: s(32),
-            width: s(32),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(s(6)),
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(s(6)),
-              child: Image.asset(
-                "assets/images/dashboard/a1.webp",
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          SizedBox(width: s(8)),
-
+          // Container(
+          //   height: s(32),
+          //   width: s(32),
+          //   decoration: BoxDecoration(
+          //     borderRadius: BorderRadius.circular(s(6)),
+          //   ),
+          //   child: ClipRRect(
+          //     borderRadius: BorderRadius.circular(s(6)),
+          //     child: Image.asset(
+          //       "assets/images/dashboard/a1.webp",
+          //       fit: BoxFit.cover,
+          //     ),
+          //   ),
+          // ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,12 +82,12 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 child: Row(
                   children: [
-                    Image.asset(
-                      "assets/images/dashboard/wallet_icon.webp",
-                      height: s(20),
-                      width: s(20),
-                    ),
-                    SizedBox(width: s(9.5)),
+                    // Image.asset(
+                    //   "assets/images/dashboard/wallet_icon.webp",
+                    //   height: s(20),
+                    //   width: s(20),
+                    // ),
+                     SizedBox(width: s(15)),
                     Text(
                       amount,
                       style: GoogleFonts.inter(
@@ -98,11 +96,11 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
                         color: ColorPalette.whitetext,
                       ),
                     ),
-                    SizedBox(width: s(9.5)),
+                    SizedBox(width: s(8)),
                     Image.asset(
-                      "assets/images/dashboard/add_icon.webp",
-                      height: s(20),
-                      width: s(20),
+                      "assets/images/dashboard/wallet.webp",
+                      height: s(18),
+                      width: s(18),
                     ),
                   ],
                 ),

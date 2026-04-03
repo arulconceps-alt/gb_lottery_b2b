@@ -107,6 +107,7 @@ class CustomDrawer extends StatelessWidget {
                       "assets/images/dashboard/wallet_icon.webp",
                       "Wallet",
                       s,
+                        onTap: () => context.push('/wallet_screen'),
                     ),
                     _menuItem(
                       "assets/images/dashboard/settle_icon.webp",
@@ -118,6 +119,7 @@ class CustomDrawer extends StatelessWidget {
                       "assets/images/dashboard/leadboard.webp",
                       "Leaderboard",
                       s,
+                        onTap: () => context.push('/leaderboard'),
                     ),
                     _menuItem(
                       "assets/images/dashboard/support.webp",

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class WalletScreenCard extends StatelessWidget {
@@ -202,6 +203,7 @@ class WalletScreenCard extends StatelessWidget {
                 s,
                 text: "Money Request",
                 isGold: true,
+                onTap: (){},
               ),
             ),
             SizedBox(width: s(16)),
@@ -210,6 +212,7 @@ class WalletScreenCard extends StatelessWidget {
                 s,
                 text: "Buy Tickets",
                 isGold: false,
+                onTap: () => context.push('/buy_ticket'),
               ),
             ),
           ],
@@ -222,25 +225,29 @@ class WalletScreenCard extends StatelessWidget {
       double Function(double) s, {
         required String text,
         required bool isGold,
+        required VoidCallback onTap,
       }) {
-    return Container(
-      height: s(48),
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        gradient: isGold
-            ? const LinearGradient(
-          colors: [Color(0xFFDFC45C), Color(0xFFA89A5F)],
-        )
-            : null,
-        color: isGold ? null : const Color(0xFF313038),
-        borderRadius: BorderRadius.circular(s(10)),
-      ),
-      child: Text(
-        text,
-        style: GoogleFonts.dmSans(
-          color: Colors.white,
-          fontSize: s(14),
-          fontWeight: FontWeight.w600,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: s(48),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          gradient: isGold
+              ? const LinearGradient(
+            colors: [Color(0xFFDFC45C), Color(0xFFA89A5F)],
+          )
+              : null,
+          color: isGold ? null : const Color(0xFF313038),
+          borderRadius: BorderRadius.circular(s(10)),
+        ),
+        child: Text(
+          text,
+          style: GoogleFonts.dmSans(
+            color: Colors.white,
+            fontSize: s(14),
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
     );

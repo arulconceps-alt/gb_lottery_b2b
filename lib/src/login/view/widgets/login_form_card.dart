@@ -21,77 +21,87 @@ class _LoginFormCardState extends State<LoginFormCard> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.symmetric(vertical: s(24), horizontal: s(20)),
+      padding: EdgeInsets.symmetric( horizontal: s(20)),
       decoration: BoxDecoration(
-        color: ColorPalette.surface,
+        color: ColorPalette.backgroundDark,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(s(20)),
           topRight: Radius.circular(s(20)),
         ),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Container(
-            height: s(60),
-            padding: EdgeInsets.all(s(11)),
-            decoration: BoxDecoration(
-              color: ColorPalette.background,
-              borderRadius: BorderRadius.circular(s(10)),
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () => setState(() => isOtpLogin = true),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        gradient: isOtpLogin
-                            ? ColorPalette.buttonGradient
-                            : null,
-                        borderRadius: BorderRadius.circular(s(10)),
-                      ),
-                      child: Center(
-                        child: Text(
-                          "OTP Login",
-                          style: GoogleFonts.dmSans(
-                            fontSize: s(12),
-                            fontWeight: FontWeight.w700,
-                            color: ColorPalette.whitetext,
-                          ),
-                        ),
-                      ),
-                    ),
+          // Container(
+          //   height: s(60),
+          //   padding: EdgeInsets.all(s(11)),
+          //   decoration: BoxDecoration(
+          //     color: ColorPalette.background,
+          //     borderRadius: BorderRadius.circular(s(10)),
+          //   ),
+          //   child: Row(
+          //     children: [
+          //       Expanded(
+          //         child: GestureDetector(
+          //           onTap: () => setState(() => isOtpLogin = true),
+          //           child: Container(
+          //             decoration: BoxDecoration(
+          //               gradient: isOtpLogin
+          //                   ? ColorPalette.buttonGradient
+          //                   : null,
+          //               borderRadius: BorderRadius.circular(s(10)),
+          //             ),
+          //             child: Center(
+          //               child: Text(
+          //                 "OTP Login",
+          //                 style: GoogleFonts.dmSans(
+          //                   fontSize: s(12),
+          //                   fontWeight: FontWeight.w700,
+          //                   color: ColorPalette.whitetext,
+          //                 ),
+          //               ),
+          //             ),
+          //           ),
+          //         ),
+          //       ),
+          //       Expanded(
+          //         child: GestureDetector(
+          //           onTap: () => setState(() => isOtpLogin = false),
+          //           child: Container(
+          //             decoration: BoxDecoration(
+          //               gradient: !isOtpLogin
+          //                   ? ColorPalette.buttonGradient
+          //                   : null,
+          //               borderRadius: BorderRadius.circular(s(10)),
+          //             ),
+          //             child: Center(
+          //               child: Text(
+          //                 "Password Login",
+          //                 style: GoogleFonts.dmSans(
+          //                   fontSize: s(12),
+          //                   fontWeight: FontWeight.w700,
+          //                   color: ColorPalette.whitetext,
+          //                 ),
+          //               ),
+          //             ),
+          //           ),
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          SizedBox(height: s(32)),
+           Text(
+                  "OTP Login",
+                  style: GoogleFonts.dmSans(
+                    fontSize: s(12),
+                    fontWeight: FontWeight.w700,
+                    color: ColorPalette.whitetext,
                   ),
                 ),
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () => setState(() => isOtpLogin = false),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        gradient: !isOtpLogin
-                            ? ColorPalette.buttonGradient
-                            : null,
-                        borderRadius: BorderRadius.circular(s(10)),
-                      ),
-                      child: Center(
-                        child: Text(
-                          "Password Login",
-                          style: GoogleFonts.dmSans(
-                            fontSize: s(12),
-                            fontWeight: FontWeight.w700,
-                            color: ColorPalette.whitetext,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
 
-          SizedBox(height: s(16)),
+          SizedBox(height: s(12)),
 
           _inputField(
             iconPath: "assets/images/login/fa_mobile.webp",
@@ -177,7 +187,7 @@ class _LoginFormCardState extends State<LoginFormCard> {
                           "Get OTP",
                           style: GoogleFonts.dmSans(
                             fontSize: s(12),
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.w700,
                             color: ColorPalette.whitetext,
                           ),
                         ),
@@ -205,7 +215,7 @@ class _LoginFormCardState extends State<LoginFormCard> {
                     ),
                   ),
                 ),
-          SizedBox(height: s(32)),
+          SizedBox(height: s(76)),
           GestureDetector(
             onTap: () => context.push('/dashboard'),
             child: Container(
@@ -283,7 +293,7 @@ class _LoginFormCardState extends State<LoginFormCard> {
             ),
             textAlign: TextAlign.start,
           ),
-          //SizedBox(height: s(58)),
+          SizedBox(height: s(58)),
         ],
       ),
     );
@@ -299,8 +309,12 @@ class _LoginFormCardState extends State<LoginFormCard> {
       height: s(60),
       padding: EdgeInsets.symmetric(horizontal: s(20)),
       decoration: BoxDecoration(
-        color: ColorPalette.background,
+        color: ColorPalette.backgroundDark,
         borderRadius: BorderRadius.circular(s(12)),
+        border: Border.all(
+          color: ColorPalette.surface,
+          width: 1
+        )
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,

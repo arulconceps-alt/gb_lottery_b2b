@@ -7,6 +7,7 @@ import 'package:gb_lottery_b2b/src/customer_information/view/customer_informatio
 import 'package:gb_lottery_b2b/src/customerslist/view/customer_list_page.dart';
 import 'package:gb_lottery_b2b/src/dashboard/view/dashboard_page.dart';
 import 'package:gb_lottery_b2b/src/leaderboard/view/leaderboard_page.dart';
+import 'package:gb_lottery_b2b/src/login/view/login_page.dart';
 import 'package:gb_lottery_b2b/src/login/view/login_screen.dart';
 import 'package:gb_lottery_b2b/src/notification_screen/view/notification_screen.dart';
 import 'package:gb_lottery_b2b/src/otp/view/otp_page.dart';
@@ -37,10 +38,16 @@ class Routes {
       ),
 
       /// login
+      /// 
+      // GoRoute(
+      //   name: RouteName.login,
+      //   path: "/login",
+      //   builder: (context, state) => const LoginScreen(),
+      // ),
       GoRoute(
         name: RouteName.login,
         path: "/login",
-        builder: (context, state) => const LoginScreen(),
+        builder: (context, state) => const LoginPage(),
       ),
        GoRoute(
         name: RouteName.otp,
