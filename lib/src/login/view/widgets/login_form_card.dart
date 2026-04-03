@@ -293,7 +293,7 @@ class _LoginFormCardState extends State<LoginFormCard> {
             ),
             textAlign: TextAlign.start,
           ),
-          SizedBox(height: s(58)),
+          SizedBox(height: s(20)),
         ],
       ),
     );

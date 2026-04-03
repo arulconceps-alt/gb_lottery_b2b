@@ -70,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                   ),
-                  // SizedBox(height: s(32)),
+                   SizedBox(height: s(32)),
 
                   //  LoginFormCard(scale: scale),
                 ],
