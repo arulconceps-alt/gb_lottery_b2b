@@ -85,6 +85,9 @@ flutter:
      - assets/images/purchase_history_list/
      - assets/images/notification/
      - assets/images/wallet/
+     - assets/images/settlement/
+     - assets/images/leaderboard/
+
 
 
 

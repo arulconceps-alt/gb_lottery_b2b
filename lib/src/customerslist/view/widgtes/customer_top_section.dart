@@ -30,7 +30,7 @@ class CustomerTopSection extends StatelessWidget {
           children: [
             Text(
               title,
-              style: GoogleFonts.inter(
+              style: GoogleFonts.dmSans(
                 fontSize: s(18),
                 fontWeight: FontWeight.w700,
                 fontStyle: FontStyle.italic,
@@ -40,7 +40,7 @@ class CustomerTopSection extends StatelessWidget {
             SizedBox(height: s(6)),
             Text(
               subtitle,
-              style: GoogleFonts.inter(
+              style: GoogleFonts.dmSans(
                 fontSize: s(16),
                 fontWeight: FontWeight.w400,
                 color: ColorPalette.darktext.withValues(alpha: .60),
@@ -48,7 +48,6 @@ class CustomerTopSection extends StatelessWidget {
             ),
           ],
         ),
-         SizedBox(height: s(86)),
         Row(
           children: [
             /// BUTTON
@@ -76,7 +75,7 @@ class CustomerTopSection extends StatelessWidget {
                      SizedBox(width: s(8)),
                     Text(
                       buttonText,
-                      style: GoogleFonts.inter(
+                      style: GoogleFonts.dmSans(
                         fontSize: s(16),
                         fontWeight: FontWeight.w600,
                         color: ColorPalette.whitetext,

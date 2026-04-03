@@ -15,7 +15,7 @@ class CustomerInfoCard extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF24232A),
+        color: ColorPalette.backgroundDark,
         borderRadius: BorderRadius.circular(s(12)),
       ),
       child: Column(
@@ -44,8 +44,16 @@ class CustomerInfoCard extends StatelessWidget {
           ),
 
           Column(
-            children: data.entries.map((entry) {
-              return _row(s, entry.key, entry.value);
+            children: data.entries.toList().asMap().entries.map((entry) {
+              final index = entry.key;
+              final item = entry.value;
+
+              return _row(
+                s,
+                item.key,
+                item.value,
+                isLast: index == data.length - 1,
+              );
             }).toList(),
           ),
         ],
@@ -53,17 +61,26 @@ class CustomerInfoCard extends StatelessWidget {
     );
   }
 
-  Widget _row(double Function(double) s, String title, String value) {
+  Widget _row(
+    double Function(double) s,
+    String title,
+    String value, {
+    bool isLast = false,
+  }) {
     return Container(
-      decoration: const BoxDecoration(
-        border: Border(
-          bottom: BorderSide(color: Color(0xFF3A3942), width: 0.5),
-        ),
+      decoration: BoxDecoration(
+        border: isLast
+            ? null
+            : Border(
+                bottom: BorderSide(
+                  color: ColorPalette.whitetext.withOpacity(0.10),
+                  width: 0.5,
+                ),
+              ),
       ),
       child: IntrinsicHeight(
         child: Row(
           children: [
-            /// LEFT (TITLE)
             Expanded(
               child: Container(
                 alignment: Alignment.center,
@@ -74,7 +91,6 @@ class CustomerInfoCard extends StatelessWidget {
                 child: Text(
                   title,
                   textAlign: TextAlign.center,
-                  softWrap: true,
                   style: GoogleFonts.dmSans(
                     fontSize: s(14),
                     color: ColorPalette.darktext,
@@ -84,13 +100,11 @@ class CustomerInfoCard extends StatelessWidget {
               ),
             ),
 
-            /// VERTICAL DIVIDER
             Container(
               width: 0.5,
               color: ColorPalette.whitetext.withOpacity(0.10),
             ),
 
-            /// RIGHT (VALUE)
             Expanded(
               child: Container(
                 alignment: Alignment.center,
@@ -101,7 +115,6 @@ class CustomerInfoCard extends StatelessWidget {
                 child: Text(
                   value,
                   textAlign: TextAlign.center,
-                  softWrap: true,
                   style: GoogleFonts.dmSans(
                     fontSize: s(14),
                     color: ColorPalette.darktext,

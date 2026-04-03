@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gb_lottery_b2b/src/app/color_palette.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LotteryInfoCard extends StatelessWidget {
@@ -13,7 +14,7 @@ class LotteryInfoCard extends StatelessWidget {
       constraints: BoxConstraints(minHeight: s(120)), // Better than fixed height
       padding: EdgeInsets.fromLTRB(s(12), s(11), s(12), s(12)),
       decoration: BoxDecoration(
-        color: const Color(0xFF24232A),
+        color:  ColorPalette.backgroundDark,
         borderRadius: BorderRadius.circular(s(8)),
       ),
       child: IntrinsicHeight( // Ensures the divider matches the column height

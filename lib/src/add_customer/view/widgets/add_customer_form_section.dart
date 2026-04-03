@@ -8,12 +8,10 @@ class AddCustomerFormSection extends StatefulWidget {
   const AddCustomerFormSection({super.key, required this.controller});
 
   @override
-  State<AddCustomerFormSection> createState() =>
-      _AddCustomerFormSectionState();
+  State<AddCustomerFormSection> createState() => _AddCustomerFormSectionState();
 }
 
-class _AddCustomerFormSectionState
-    extends State<AddCustomerFormSection> {
+class _AddCustomerFormSectionState extends State<AddCustomerFormSection> {
   List<bool> expandedList = [false];
 
   @override
@@ -29,12 +27,7 @@ class _AddCustomerFormSectionState
           physics: const NeverScrollableScrollPhysics(),
           itemCount: expandedList.length,
           itemBuilder: (context, index) {
-            return Column(
-              children: [
-                _buildForm(s, index),
-                _addButton(s),
-              ],
-            );
+            return Column(children: [_buildForm(s, index), _addButton(s)]);
           },
         ),
       ],
@@ -59,44 +52,44 @@ class _AddCustomerFormSectionState
           });
         },
         child: Image.asset(
-                "assets/images/add_customer/add.webp", 
-                height: s(50),
-                width: s(50),
-              ),
+          "assets/images/add_customer/add.webp",
+          height: s(50),
+          width: s(50),
+        ),
       ),
     );
   }
-
-  
 
   Widget _buildForm(double Function(double) s, int index) {
     bool isExpanded = expandedList[index];
 
     return Container(
-      height: isExpanded ? s(400) : s(244), 
       margin: EdgeInsets.only(bottom: s(16)),
-      padding: EdgeInsets.all(s(12)),
       decoration: BoxDecoration(
-        color: const Color(0xFF24232A),
-        borderRadius: BorderRadius.circular(s(12)),
+        color: ColorPalette.backgroundDark,
+        borderRadius: BorderRadius.circular(s(8)),
       ),
       child: Column(
         children: [
-          _field("Enter Name*", s),
+          Padding(
+            padding: EdgeInsets.all(s(15)),
+            child: Column(
+              children: [
+                _field("Enter Name*", s),
+                SizedBox(height: s(11)),
+                _field("Enter Phone Number*", s),
+                SizedBox(height: s(11)),
+                _field("Enter Pincode*", s),
 
-          SizedBox(height: s(11)),
-          _field("Enter Phone Number*", s),
-
-          SizedBox(height: s(11)),
-          _field("Enter Pincode*", s),
-
-          if (isExpanded) ...[
-            SizedBox(height: s(11)),
-            _field("Enter Email", s),
-
-            SizedBox(height: s(11)),
-            _field("Enter Address", s, maxLines: 3),
-          ],
+                if (isExpanded) ...[
+                  SizedBox(height: s(11)),
+                  _field("Enter Email", s),
+                  SizedBox(height: s(11)),
+                  _field("Enter Address", s, maxLines: 3),
+                ],
+              ],
+            ),
+          ),
 
           SizedBox(height: s(10)),
 
@@ -111,13 +104,16 @@ class _AddCustomerFormSectionState
               width: double.infinity,
               decoration: BoxDecoration(
                 color: const Color(0xFF313038),
-                borderRadius: BorderRadius.circular(s(8)),
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(s(8)),
+                  bottomRight: Radius.circular(s(8)),
+                ),
               ),
               child: Stack(
                 alignment: Alignment.center,
                 children: [
                   Text(
-                    "More",
+                    "View More",
                     style: GoogleFonts.dmSans(
                       color: ColorPalette.primary,
                       fontWeight: FontWeight.w600,
@@ -126,13 +122,11 @@ class _AddCustomerFormSectionState
                   ),
                   Positioned(
                     right: s(10),
-                    child: Icon(
-                      isExpanded
-                          ? Icons.keyboard_arrow_up
-                          : Icons.keyboard_arrow_down,
-                      color: ColorPalette.primary,
-                      size: s(16),
-                    ),
+                    child: Image.asset(
+                      "assets/images/add_customer/down_arrow.webp",
+                      height: s(16),
+                      width: s(16),
+                    )
                   ),
                 ],
               ),
@@ -143,24 +137,26 @@ class _AddCustomerFormSectionState
     );
   }
 
-  Widget _field(String hint, double Function(double) s,
-      {int maxLines = 1}) {
+  Widget _field(String hint, double Function(double) s, {int maxLines = 1}) {
     return Container(
       height: maxLines == 1 ? s(48) : s(87),
-      padding: EdgeInsets.symmetric(horizontal: s(12)),
+      //padding: EdgeInsets.symmetric(horizontal: s(17), vertical: s(14)),
       decoration: BoxDecoration(
         color: const Color(0xFF1F1E24),
-        borderRadius: BorderRadius.circular(s(8)),
+        borderRadius: BorderRadius.circular(s(10)),
       ),
-      alignment: Alignment.centerLeft,
+     alignment: maxLines > 1
+    ? Alignment.centerLeft
+    : Alignment.topLeft,
       child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: s(17),
-          vertical: s(14),
-        ),
+        padding: EdgeInsets.symmetric(horizontal: s(17),),
         child: TextField(
           maxLines: maxLines,
-          style: const TextStyle(color: Colors.white),
+            style: GoogleFonts.dmSans(
+              color: ColorPalette.whitetext,
+              fontWeight: FontWeight.w400,
+              fontSize: s(14),
+            ),
           decoration: InputDecoration(
             hintText: hint,
             hintStyle: GoogleFonts.dmSans(

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ResultsTopTabs extends StatefulWidget {
-  const ResultsTopTabs({super.key});
+class ResultsInnerTopTabs extends StatefulWidget {
+  const ResultsInnerTopTabs({super.key});
 
   @override
-  State<ResultsTopTabs> createState() => _ResultsTopTabsState();
+  State<ResultsInnerTopTabs> createState() => _ResultsInnerTopTabssState();
 }
 
-class _ResultsTopTabsState extends State<ResultsTopTabs> {
+class _ResultsInnerTopTabssState extends State<ResultsInnerTopTabs> {
   int selectedIndex = 0;
 
   @override

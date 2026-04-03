@@ -85,22 +85,19 @@ class ResultsNumberBox extends StatelessWidget {
     double s(double v) => v * scale;
 
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: s(4)), 
-      width: s(26), 
-      height: s(26),
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: const Color(0xFF313038),
-        borderRadius: BorderRadius.circular(s(6)), 
-      ),
-      child: Text(
-        text,
-       style: GoogleFonts.dmSans(
-          fontSize: s(14),
-          color: ColorPalette.whitetext,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-    );
+  alignment: Alignment.center,
+  decoration: BoxDecoration(
+    color: const Color(0xFF313038),
+    borderRadius: BorderRadius.circular(s(6)),
+  ),
+  child: Text(
+    text,
+    style: GoogleFonts.dmSans(
+      fontSize: s(14),
+      color: ColorPalette.whitetext,
+      fontWeight: FontWeight.w500,
+    ),
+  ),
+);
   }
 }

@@ -9,7 +9,7 @@ class DashboardTopSection extends StatelessWidget {
     final scale = w / 375;
     double s(double v) => v * scale;
     return Padding(
-      padding:  EdgeInsets.symmetric(horizontal:  s(31)),
+      padding:  EdgeInsets.symmetric(horizontal:  s(32)),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -18,7 +18,7 @@ class DashboardTopSection extends StatelessWidget {
             children:  [
                Container(
                 height: s(42),
-                width: s(165.5),
+                width: s(165),
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage("assets/images/dashboard/welcome.webp"),
@@ -42,13 +42,11 @@ class DashboardTopSection extends StatelessWidget {
                ),
             ],
           ),
-      
-          const SizedBox(width: 40.5),
-      
+           SizedBox(width: s(40)),
           Column(
             children:  [
              Container(
-                height: s(86),
+                height: s(89),
                 width: s(106),
                 decoration: BoxDecoration(
                   image: DecorationImage(

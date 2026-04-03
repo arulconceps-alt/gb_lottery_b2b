@@ -13,7 +13,7 @@ class LoginScreen extends StatelessWidget {
     double s(double v) => v * scale;
 
     return Scaffold(
-      backgroundColor: const Color(0xFF1E1E24),
+      backgroundColor: const Color(0xFF1C1B20),
       body: SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: s(20)),

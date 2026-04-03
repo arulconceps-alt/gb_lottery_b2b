@@ -19,7 +19,7 @@ class _CustomerInformationPageState extends State<CustomerInformationPage> {
     final scale = w / 375;
     double s(double v) => v * scale;
     return Scaffold(
-      backgroundColor: const Color(0xFF1F1E26),
+        backgroundColor: const Color(0xFF1C1B20),
       appBar: AppBarTextWithBack(title: "Customer Info"),
       body: SingleChildScrollView(
         child: Padding(

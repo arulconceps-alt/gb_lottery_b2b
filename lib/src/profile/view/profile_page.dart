@@ -24,7 +24,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       key: _scaffoldKey,
       drawer: const CustomDrawer(),
-      backgroundColor: const Color(0xFF1F1E26),
+      backgroundColor: const Color(0xFF1C1B20),
       appBar: CommonAppBar(
         amount: "₹200",
         onLeadingTap: () {
@@ -53,7 +53,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 initial: "B",
               ),
                SizedBox(height: s(20)),
-              ProfileMenuCard()
+              ProfileMenuCard(),
+               SizedBox(height: s(20)),
             ],
           ),
         ),

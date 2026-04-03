@@ -66,7 +66,7 @@ class _DashboardCarouselState extends State<DashboardCarousel> {
           height: s(135),
           width: s(343),
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(8),
             child: PageView.builder(
               controller: _controller,
               itemCount: images.length,
@@ -80,7 +80,7 @@ class _DashboardCarouselState extends State<DashboardCarousel> {
           ),
         ),
 
-        SizedBox(height: s(8)),
+        SizedBox(height: s(7)),
 
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -89,8 +89,8 @@ class _DashboardCarouselState extends State<DashboardCarousel> {
             (index) => AnimatedContainer(
               duration: const Duration(milliseconds: 300),
               margin: const EdgeInsets.symmetric(horizontal: 4),
-              height: s(5),
-              width: _currentIndex == index ? s(8) : s(5),
+              height: s(6),
+              width: _currentIndex == index ? s(6) : s(6),
 
               decoration: BoxDecoration(
                 color: _currentIndex == index

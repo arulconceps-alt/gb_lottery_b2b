@@ -1,6 +1,7 @@
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:gb_lottery_b2b/src/app/color_palette.dart';
 
 class LotteryNumberCardDouble extends StatefulWidget {
   final double Function(double) s;

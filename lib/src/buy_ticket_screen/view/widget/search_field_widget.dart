@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gb_lottery_b2b/src/app/color_palette.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SearchFieldWidget extends StatelessWidget {
@@ -21,7 +22,7 @@ class SearchFieldWidget extends StatelessWidget {
         height: s(48),
         decoration: BoxDecoration(
           // Background Color: #24232A
-          color: const Color(0xFF24232A),
+          color:  ColorPalette.backgroundDark,
           borderRadius: BorderRadius.circular(s(10)),
           // Border Color: #1F1E24
           border: Border.all(

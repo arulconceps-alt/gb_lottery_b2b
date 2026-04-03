@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gb_lottery_b2b/src/app/color_palette.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 // Import your route names file
@@ -22,7 +23,7 @@ class LotteryFooterBar extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(
         color: Color(0xFF1C1B20),
-        border: Border(top: BorderSide(width: 2, color: Color(0xFF24232A))),
+        border: Border(top: BorderSide(width: 2, color:  ColorPalette.backgroundDark)),
       ),
       child: SafeArea(
         child: Container(
