@@ -120,7 +120,7 @@ class _DashboardPageState extends State<DashboardPage> {
             SizedBox(height: s(30)),
             Text(
               "ABC Game",
-              style: GoogleFonts.inter(
+              style: GoogleFonts.dmSans(
                 fontSize: s(16),
                 fontWeight: FontWeight.w600,
                 fontStyle: FontStyle.italic,
@@ -173,7 +173,7 @@ class _DashboardPageState extends State<DashboardPage> {
             SizedBox(height: s(33)),
             Text(
               "YZABC Game",
-              style: GoogleFonts.inter(
+              style: GoogleFonts.dmSans(
                 fontSize: s(16),
                 fontWeight: FontWeight.w600,
                 fontStyle: FontStyle.italic,
@@ -226,7 +226,7 @@ class _DashboardPageState extends State<DashboardPage> {
             SizedBox(height: s(40)),
             Text(
               "What's in GB ",
-              style: GoogleFonts.inter(
+              style: GoogleFonts.dmSans(
                 fontSize: s(16),
                 fontWeight: FontWeight.w600,
                 fontStyle: FontStyle.italic,
@@ -242,7 +242,7 @@ class _DashboardPageState extends State<DashboardPage> {
             SizedBox(height: s(31)),
             Text(
               "Fantasy Sports",
-              style: GoogleFonts.inter(
+              style: GoogleFonts.dmSans(
                 fontSize: s(16),
                 fontWeight: FontWeight.w600,
                 fontStyle: FontStyle.italic,
@@ -267,7 +267,7 @@ class _DashboardPageState extends State<DashboardPage> {
             SizedBox(height: s(42)),
             Text(
               "Pure Luck - Instant results.",
-              style: GoogleFonts.inter(
+              style: GoogleFonts.dmSans(
                 fontSize: s(16),
                 fontWeight: FontWeight.w600,
                 fontStyle: FontStyle.italic,

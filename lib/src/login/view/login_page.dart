@@ -26,24 +26,14 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 children: [
                   SizedBox(height: s(60)),
-
-                  /// Small Logo
-                  Image.asset(
-                    "assets/images/login/gb_logo.webp",
-                    width: s(72),
-                    height: s(50),
-                  ),
-
-                  SizedBox(height: s(8)),
-
                   /// Main Logo
                   Image.asset(
                     "assets/images/login/logo.webp",
-                    width: s(167),
-                    height: s(82),
+                    width: s(208),
+                    height: s(102),
                   ),
 
-                  SizedBox(height: s(18)),
+                  SizedBox(height: s(27)),
 
                   /// Title
                   Text(

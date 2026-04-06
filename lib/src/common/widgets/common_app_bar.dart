@@ -46,7 +46,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
             children: [
               Text(
                 "Welcome",
-                style: GoogleFonts.inter(
+                style: GoogleFonts.dmSans(
                   color: ColorPalette.whitetext,
                   fontSize: s(9),
                   fontStyle: FontStyle.italic,
@@ -55,7 +55,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
               Text(
                 "Userid-Name",
-                style: GoogleFonts.inter(
+                style: GoogleFonts.dmSans(
                   color: ColorPalette.whitetext,
                   fontSize: s(11),
                   fontWeight: FontWeight.w400,
@@ -90,7 +90,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
                      SizedBox(width: s(15)),
                     Text(
                       amount,
-                      style: GoogleFonts.inter(
+                      style: GoogleFonts.dmSans(
                         fontWeight: FontWeight.w600,
                         fontSize: s(14),
                         color: ColorPalette.whitetext,
@@ -134,7 +134,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
                             ),
                             child: Text(
                               "9+",
-                              style: GoogleFonts.inter(
+                              style: GoogleFonts.dmSans(
                                 color: ColorPalette.whitetext,
                                 fontSize: s(6),
                                 fontWeight: FontWeight.w500,

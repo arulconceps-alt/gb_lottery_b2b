@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gb_lottery_b2b/src/app/color_palette.dart';
 import 'package:gb_lottery_b2b/src/common/widgets/app_bar_text_with_back.dart';
 
 import 'package:gb_lottery_b2b/src/purchase_history_list_screen/view/widget/purchase_history_list_item.dart';
@@ -74,23 +75,112 @@ class _PurchaseHistoryListState extends State<PurchaseHistoryList> {
                           ),
                         ),
                         SizedBox(width: s(12)),
-                        Container(
-                          width: s(54),
-                          height: s(48),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF24232A),
-                            borderRadius: BorderRadius.circular(s(10)),
-                            border: Border.all(
-                              color: const Color(0xFF1F1E24),
-                              width: 1,
+                        GestureDetector(
+                          onTapDown: (details) async {
+                            final selected = await showMenu(
+                              context: context,
+                              color: const Color(0xFF313038),
+                              position: RelativeRect.fromLTRB(
+                                w - s(16 + 30),
+                                details.globalPosition.dy,
+                                s(40),
+                                0,
+                              ),
+                              shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(s(12)), ),
+                              items: [
+                                PopupMenuItem(
+                                  value: "Upcoming",
+                                  padding: EdgeInsets.zero,
+                                  child: Container(
+                                    height: s(42),
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFF313038),
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(s(10)),
+                                        topRight: Radius.circular(s(10)),
+                                      ),
+                                    ),
+                                    alignment: Alignment.centerLeft,
+                                    padding: EdgeInsets.only(left: s(13)),
+                                    child: Text(
+                                      "Upcoming",
+                                      style: GoogleFonts.dmSans(
+                                        color: ColorPalette.whitetext,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: s(14),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+
+                                // 🔸 DIVIDER
+                                PopupMenuItem(
+                                  enabled: false,
+                                  padding: EdgeInsets.zero,
+                                  height: s(1),
+                                  child: Divider(
+                                    height: 1,
+                                    thickness: 0.5,
+                                    color: ColorPalette.darktext.withOpacity(
+                                      0.5,
+                                    ),
+                                  ),
+                                ),
+
+                                PopupMenuItem(
+                                  value: "Completed",
+                                  padding: EdgeInsets.zero,
+                                  child: Container(
+                                    width: s(132),
+                                    height: s(42),
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFF313038),
+                                      borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(s(10)),
+                                        bottomRight: Radius.circular(s(10)),
+                                      ),
+                                    ),
+                                    alignment: Alignment.centerLeft,
+                                    padding: EdgeInsets.only(left: s(13)),
+                                    child: Text(
+                                      "Completed",
+                                      style: GoogleFonts.dmSans(
+                                        color: ColorPalette.whitetext,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: s(14),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+
+                            // 🔥 Handle selection
+                            if (selected == "Upcoming") {
+                              print("Upcoming clicked");
+                            } else if (selected == "Completed") {
+                              print("Completed clicked");
+                            }
+                          },
+
+                          child: Container(
+                            width: s(54),
+                            height: s(48),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF24232A),
+                              borderRadius: BorderRadius.circular(s(10)),
+                              border: Border.all(
+                                color: const Color(0xFF1F1E24),
+                                width: 1,
+                              ),
                             ),
-                          ),
-                          child: Center(
-                            child: Image.asset(
-                              "assets/images/purchase_history_list/filter_icon.webp",
-                              width: s(20),
-                              height: s(20),
-                              fit: BoxFit.contain,
+                            child: Center(
+                              child: Image.asset(
+                                "assets/images/purchase_history_list/filter_icon.webp",
+                                width: s(20),
+                                height: s(20),
+                                fit: BoxFit.contain,
+                              ),
                             ),
                           ),
                         ),

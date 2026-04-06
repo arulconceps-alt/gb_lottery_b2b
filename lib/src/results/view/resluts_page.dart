@@ -38,7 +38,7 @@ class _ResultPageState extends State<ResultPage> {
               SizedBox(height: s(20)),
               ResultsTopTabs(),
               SizedBox(height: s(27)),
-              LotterySectionCard(title: "Kerala Lottry"),
+              LotterySectionCard(title: "Kerala Lottry"), 
               SizedBox(height: s(18)),
               LotterySectionCard(title: "Arunachal Pradesh"),
             ],

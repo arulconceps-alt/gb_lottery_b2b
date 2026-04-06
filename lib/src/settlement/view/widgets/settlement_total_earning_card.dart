@@ -73,7 +73,7 @@ class SettlementTotalEarningCard extends StatelessWidget {
                 /// TEXT 3
                 Text(
                   text3,
-                  style: GoogleFonts.inter(
+                  style: GoogleFonts.dmSans(
                     fontSize: s(16),
                     fontWeight: FontWeight.w600,
                     color: ColorPalette.whitetext,

@@ -14,33 +14,27 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
   late List<TextEditingController> controllers;
 
-final List<String> labels = [
-  'Name',
-  'User ID',
-  'Phone',
-  'Pincode',
-  'Address',
-  'Email'
-];
-
-@override
-void initState() {
-  super.initState();
-
-  final initialValues = [
-    'Baranee',
-    '',
-    '',
-    '',
-    '',
-    ''
+  final List<String> labels = [
+    'Name',
+    'User ID',
+    'Phone',
+    'Pincode',
+    'Address',
+    'Email',
   ];
 
-  controllers = List.generate(
-    labels.length,
-    (index) => TextEditingController(text: initialValues[index]),
-  );
-}
+  @override
+  void initState() {
+    super.initState();
+
+    final initialValues = ['Baranee', '', '', '', '', ''];
+
+    controllers = List.generate(
+      labels.length,
+      (index) => TextEditingController(text: initialValues[index]),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final w = MediaQuery.of(context).size.width;
@@ -48,8 +42,8 @@ void initState() {
     double s(double v) => v * scale;
 
     return Scaffold(
-       backgroundColor: const Color(0xFF1C1B20),
-      appBar:AppBarTextWithBack(title: "Profile"),
+      backgroundColor: const Color(0xFF1C1B20),
+      appBar: AppBarTextWithBack(title: "Profile"),
       body: SafeArea(
         child: Column(
           children: [
@@ -59,7 +53,7 @@ void initState() {
                 padding: EdgeInsets.symmetric(horizontal: s(16)),
                 child: Column(
                   children: [
-                    SizedBox(height: s(50)), 
+                    SizedBox(height: s(50)),
                     _buildProfileImage(s),
 
                     SizedBox(height: s(12)),
@@ -76,150 +70,151 @@ void initState() {
                     SizedBox(height: s(40)),
                     _buildDetailsCard(s),
                     SizedBox(height: s(107)),
-                     _buildSubmitButton(s),
+                    _buildSubmitButton(s),
                   ],
                 ),
               ),
             ),
-
-           
           ],
         ),
       ),
     );
   }
-
 
   Widget _buildProfileImage(double Function(double) s) {
     return Center(
       child: Container(
-        // Width and Height from Figma: 83.44px
-        width: s(83.44),
-        height: s(83.44),
+        width: s(80),
+        height: s(80),
         decoration: ShapeDecoration(
           shape: const OvalBorder(),
-          // Radial Gradient overlay as per design specs
-          gradient: RadialGradient(
-            center: const Alignment(0.5, 0.5),
-            radius: 0.68,
-            colors: [
-              Colors.white.withValues(alpha: 0),
-              Colors.white.withValues(alpha: 0.5),
-            ],
-          ),
-          image: const DecorationImage(
-            image: AssetImage("assets/images/profile/avatar_img.webp"),
-            fit: BoxFit.cover,
-          ),
+          color: ColorPalette.backgroundDark,
         ),
-        // Alignment for the blue edit icon
-        alignment: Alignment.bottomRight,
-        child: Container(
-          width: s(24),
-          height: s(24),
-          decoration: const BoxDecoration(
-            color: Color(0xFF005AC1), // Brand blue
-            shape: BoxShape.circle,
-          ),
-          child: Padding(
-            padding: EdgeInsets.all(s(4)),
-            child: Image.asset(
-              "assets/images/profile/edit_icon.webp",
-              width: s(16),
-              height: s(16),
-              fit: BoxFit.contain,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
- Widget _buildDetailsCard(double Function(double) s) {
-  return Container(
-    width: double.infinity,
-    padding: EdgeInsets.symmetric(vertical:  s(16), horizontal: s(12)),
-    decoration: BoxDecoration(
-      color: ColorPalette.backgroundDark,
-      borderRadius: BorderRadius.circular(s(20)),
-    ),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        ...List.generate(labels.length, (index) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: s(4)),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      "${labels[index]} : ",
-                      style: GoogleFonts.dmSans(
-                        color: Colors.white,
-                        fontSize: s(16),
-                        fontWeight: FontWeight.w400,
-                        letterSpacing: 0.16,
-                      ),
-                    ),
-
-                    Expanded(
-                      child: TextField(
-                        controller: controllers[index],
-                        maxLines: labels[index] == "Address" ? 1 : 1,
-                        style: GoogleFonts.dmSans(
-                          color: Colors.white,
-                          fontSize: s(16),
-                           fontWeight: FontWeight.w400,
-                        ),
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          isDense: true,
-                          contentPadding: EdgeInsets.zero,
-                        ),
-                      ),
-                    ),
-                  ],
+        child: Stack(
+          children: [
+            Center(
+              child: Text(
+                "B",
+                style: GoogleFonts.dmSans(
+                  fontSize: 28,
+                  color: ColorPalette.whitetext,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
-
-              Divider(
-                color: Colors.white.withOpacity(0.10),
-                thickness: 1,
-                height: s(10),
-              ),
-            ],
-          );
-        }),
-
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Copy My Details',
-              style: GoogleFonts.dmSans(
-                color: Colors.white,
-                fontSize: s(16),
-                fontWeight: FontWeight.w400,
-              ),
             ),
-            Padding(
-              padding:  EdgeInsets.all(s(8)),
-              child: Image.asset(
-                "assets/images/profile/copy_icon.webp",
-                width: s(20),
-                height: s(20),
-                color: Colors.white,
-                fit: BoxFit.contain,
+
+            Positioned(
+              bottom: 0,
+              right: 0,
+              child: Container(
+                width: s(24),
+                height: s(24),
+                decoration: const BoxDecoration(
+                  gradient: ColorPalette.buttonGradient,
+                  shape: BoxShape.circle,
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(s(4)),
+                  child: Image.asset(
+                    "assets/images/profile/edit_icon.webp",
+                    fit: BoxFit.contain,
+                  ),
+                ),
               ),
             ),
           ],
         ),
-      ],
-    ),
-  );
-}
+      ),
+    );
+  }
+
+  Widget _buildDetailsCard(double Function(double) s) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.symmetric(vertical: s(16), horizontal: s(12)),
+      decoration: BoxDecoration(
+        color: ColorPalette.backgroundDark,
+        borderRadius: BorderRadius.circular(s(20)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ...List.generate(labels.length, (index) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: s(4)),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        "${labels[index]} : ",
+                        style: GoogleFonts.dmSans(
+                          color: Colors.white,
+                          fontSize: s(16),
+                          fontWeight: FontWeight.w400,
+                          letterSpacing: 0.16,
+                        ),
+                      ),
+
+                      Expanded(
+                        child: TextField(
+                          controller: controllers[index],
+                          maxLines: labels[index] == "Address" ? 1 : 1,
+                          style: GoogleFonts.dmSans(
+                            color: Colors.white,
+                            fontSize: s(16),
+                            fontWeight: FontWeight.w400,
+                          ),
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            isDense: true,
+                            contentPadding: EdgeInsets.zero,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                Divider(
+                  color: Colors.white.withOpacity(0.10),
+                  thickness: 1,
+                  height: s(10),
+                ),
+              ],
+            );
+          }),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Copy My Details',
+                style: GoogleFonts.dmSans(
+                  color: Colors.white,
+                  fontSize: s(16),
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(s(8)),
+                child: Image.asset(
+                  "assets/images/profile/copy_icon.webp",
+                  width: s(20),
+                  height: s(20),
+                  color: Colors.white,
+                  fit: BoxFit.contain,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildName(double Function(double) s) {
     return Center(
       child: Container(
@@ -227,7 +222,7 @@ void initState() {
         height: s(80),
         alignment: Alignment.center,
         decoration: const ShapeDecoration(
-          color:  ColorPalette.backgroundDark,
+          color: ColorPalette.backgroundDark,
           shape: OvalBorder(),
         ),
         child: SizedBox(
@@ -249,18 +244,25 @@ void initState() {
       ),
     );
   }
+
   Widget _buildSubmitButton(double Function(double) s) {
     return Container(
       width: double.infinity,
       height: s(54),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        gradient: const LinearGradient(colors: [Color(0xFFDFC45C), Color(0xFFA89A5F)]),
+        gradient: const LinearGradient(
+          colors: [Color(0xFFDFC45C), Color(0xFFA89A5F)],
+        ),
         borderRadius: BorderRadius.circular(s(8)),
       ),
       child: Text(
         'Submit',
-        style: GoogleFonts.dmSans(color: Colors.white, fontSize: s(18), fontWeight: FontWeight.w600),
+        style: GoogleFonts.dmSans(
+          color: Colors.white,
+          fontSize: s(18),
+          fontWeight: FontWeight.w600,
+        ),
       ),
     );
   }

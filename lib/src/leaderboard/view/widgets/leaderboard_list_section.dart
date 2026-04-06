@@ -64,14 +64,26 @@ class LeaderboardListSection extends StatelessWidget {
     String rank,
   ) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: s(14),),
+      padding: EdgeInsets.symmetric(horizontal: s(14)),
       child: Row(
         children: [
-          Image.asset(
-            "assets/images/leaderboard/avatar.webp",
+          // Image.asset(
+          //   "assets/images/leaderboard/avatar.webp",
+          //   height: s(35),
+          //   width: s(35),
+          //   fit: BoxFit.contain,
+          // ),m 
+          Container(
             height: s(35),
             width: s(35),
-            fit: BoxFit.contain,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: ColorPalette.surface,
+              image: const DecorationImage(
+                image: AssetImage("assets/images/leaderboard/avatar.webp"),
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
 
           SizedBox(width: s(10)),

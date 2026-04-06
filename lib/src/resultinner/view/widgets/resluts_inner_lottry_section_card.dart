@@ -80,6 +80,12 @@ class _ResultsInnerLottrySectionCardState
                         decoration: const BoxDecoration(
                           color: ColorPalette.backgroundDark,
                           shape: BoxShape.circle,
+                            image: DecorationImage(
+                      image: AssetImage(
+                        "assets/images/dashboard/kerala_lottry.webp",
+                      ),
+                      fit: BoxFit.cover,
+                    ),
                         ),
                       ),
                       SizedBox(width: s(12)),

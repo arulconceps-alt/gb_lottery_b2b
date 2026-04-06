@@ -61,9 +61,9 @@ class LeaderboardContainer extends StatelessWidget {
           bottomImageWidth: s(80),
           gap: s(22),
           rankTextSize: s(22.8),
-          gradientColors: const [
+          gradientColors:  [
             Color(0xFF1C1B20),
-            Color(0xFF3C372A),
+            Color(0xFF70643A),
             Color(0xFFDFC55C),
           ],
           name: "Gopi",
@@ -161,12 +161,15 @@ class LeaderboardContainer extends StatelessWidget {
                             shape: BoxShape.circle,
                           ),
                           child: Center(
-                            child: Text(
-                              rank,
-                              style: GoogleFonts.dmSerifText(
-                                fontSize: rankTextSize,
-                                fontWeight: FontWeight.w400,
-                                color: getRankColor(rank),
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Text(
+                                rank,
+                                style: GoogleFonts.dmSerifText(
+                                  fontSize: rankTextSize,
+                                  fontWeight: FontWeight.w400,
+                                  color: getRankColor(rank),
+                                ),
                               ),
                             ),
                           ),
