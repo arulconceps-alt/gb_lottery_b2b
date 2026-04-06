@@ -17,11 +17,11 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
     final scale = w / 375;
     double s(double v) => v * scale;
 
-    return Scaffold(
-      backgroundColor: const Color(0xFF1C1B20),
-      appBar: AppBarTextWithBack(title: "LeaderBoard"),
-      body: SingleChildScrollView(
-        child: Padding(
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: const Color(0xFF1C1B20),
+        appBar: AppBarTextWithBack(title: "LeaderBoard"),
+        body: Padding(
           padding: EdgeInsets.symmetric(horizontal: s(16)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -29,7 +29,9 @@ class _LeaderboardPageState extends State<LeaderboardPage> {
               SizedBox(height: s(18)),
              LeaderboardContainer(),
               SizedBox(height: s(25)),  
-              LeaderboardListSection(),
+                 Expanded(
+        child: LeaderboardListSection(),
+      ),
             ],  
           ),
         ),
