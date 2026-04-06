@@ -109,7 +109,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   imagewidth: 36,
                   spaceheight: 3,
                   onTap: () {
-                    context.push('/leaderboard');
+                    context.push('/dashboard_chart');
                   },
                 ),
               ],

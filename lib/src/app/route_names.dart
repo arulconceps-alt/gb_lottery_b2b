@@ -20,6 +20,7 @@ mixin RouteName {
   static const wallet_screen = "wallet_screen";
   static const notification_screen = "notification_screen";
   static const purchase_history_list = "purchase_history_list";
+  static const dashboard_chart = "dashboard_chart";
   static const settlement = "settlement";
   static const reslutinner = "reslutinner";
   static const leaderboard = "leaderboard";

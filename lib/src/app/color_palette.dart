@@ -19,11 +19,21 @@ class ColorPalette {
 
   static const Color snackbar = Color(0xFF37B158);
 
-  // static const LinearGradient primaryGradient = LinearGradient(
-  //   colors: [primary, Color(0xFFE8D88A)],
-  //   begin: Alignment.topLeft,
-  //   end: Alignment.bottomRight,
-  // );
+  /// Chart screen design colors
+  static const Color growth = Color(0xFFFF7588);
+  static const Color growth2 = Color(0xFF40A0EF);
+  static const Color growth3 = Color(0xFFDFC55C);
+
+  ///Revenue chart
+  static const Color revenue = Color(0xFF3B82F6);
+  static const Color revenue1 = Color(0xFF10B981);
+  static const Color revenue2 = Color(0xFFDFC55C);
+  static const Color revenue3 = Color(0xFFEC4899);
+  static const Color revenue4 = Color(0xFF8B5CF6);
+
+
+
+
 
   static const LinearGradient buttonGradient = LinearGradient(
     colors: [Color(0xFFA89A5F), Color(0xFFDFC55C)],

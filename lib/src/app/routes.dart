@@ -6,6 +6,7 @@ import 'package:gb_lottery_b2b/src/common/widgets/splashscreen.dart';
 import 'package:gb_lottery_b2b/src/customer_information/view/customer_information_page.dart';
 import 'package:gb_lottery_b2b/src/customerslist/view/customer_list_page.dart';
 import 'package:gb_lottery_b2b/src/dashboard/view/dashboard_page.dart';
+import 'package:gb_lottery_b2b/src/dashboard_chart_screen/view/dashboard_chart_screen.dart';
 import 'package:gb_lottery_b2b/src/leaderboard/view/leaderboard_page.dart';
 import 'package:gb_lottery_b2b/src/login/view/login_screen.dart';
 import 'package:gb_lottery_b2b/src/notification_screen/view/notification_screen.dart';
@@ -178,6 +179,12 @@ class Routes {
         name: RouteName.leaderboard,
         path: "/leaderboard",
         builder: (context, state) => const LeaderboardPage(),
+      ),
+      /// Dashboard Chart Design
+      GoRoute(
+        name: RouteName.dashboard_chart,
+        path: "/dashboard_chart",
+        builder: (context, state) => const DashboardChartScreen(),
       ),
     ],
   );

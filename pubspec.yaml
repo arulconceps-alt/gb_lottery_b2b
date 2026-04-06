@@ -47,6 +47,8 @@ dependencies:
   shimmer: ^3.0.0
   google_fonts: ^8.0.2
   flutter_launcher_icons: ^0.14.4
+  syncfusion_flutter_charts: ^33.1.46
+  fl_chart: ^1.2.0
 
 dev_dependencies:
   flutter_test:
