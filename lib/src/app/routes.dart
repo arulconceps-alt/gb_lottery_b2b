@@ -27,7 +27,7 @@ import 'package:gb_lottery_b2b/src/wallet_screen/view/wallet_screen.dart';
 import 'package:go_router/go_router.dart';
 
 class Routes {
-  GoRouter router = GoRouter(
+  static final GoRouter router = GoRouter(
     initialLocation: "/",
 
     routes: [

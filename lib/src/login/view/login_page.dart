@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
+import 'package:gb_lottery_b2b/src/app/text_styles.dart';
 import 'package:gb_lottery_b2b/src/login/view/widgets/login_form_card.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -38,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
                   /// Title
                   Text(
                     "Welcome Dealer",
-                    style: GoogleFonts.dmSans(
+                    style: TextStyles.dmSans18SemiBold.copyWith(
                       fontSize: s(26),
                       color: ColorPalette.whitetext,
                       fontWeight: FontWeight.w700,
@@ -53,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Text(
                       "Manage your lottery business, tickets, and\ncustomers in one place",
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.dmSans(
+                      style: TextStyles.dmSans14.copyWith(
                         fontSize: s(14),
                           fontWeight: FontWeight.w400,
                         color: ColorPalette.darktext,

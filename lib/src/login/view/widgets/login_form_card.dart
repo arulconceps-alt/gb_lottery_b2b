@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
+import 'package:gb_lottery_b2b/src/app/text_styles.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -94,7 +95,7 @@ class _LoginFormCardState extends State<LoginFormCard> {
           SizedBox(height: s(32)),
            Text(
                   "OTP Login",
-                  style: GoogleFonts.dmSans(
+                  style: TextStyles.dmSans12SemiBold.copyWith(
                     fontSize: s(12),
                     fontWeight: FontWeight.w700,
                     color: ColorPalette.whitetext,
@@ -111,7 +112,7 @@ class _LoginFormCardState extends State<LoginFormCard> {
               children: [
                 Text(
                   "+91",
-                  style: GoogleFonts.dmSans(
+                  style: TextStyles.dmSans12.copyWith(
                     fontSize: s(12),
                     fontWeight: FontWeight.w400,
                     color: ColorPalette.darktext,
@@ -134,7 +135,7 @@ class _LoginFormCardState extends State<LoginFormCard> {
                     style: TextStyle(color: ColorPalette.whitetext),
                     decoration: InputDecoration(
                       hintText: "Enter Phone Number",
-                      hintStyle: GoogleFonts.dmSans(
+                      hintStyle: TextStyles.dmSans12.copyWith(
                         fontSize: s(12),
                         fontWeight: FontWeight.w400,
                         color: ColorPalette.darktext,
@@ -228,7 +229,7 @@ class _LoginFormCardState extends State<LoginFormCard> {
               child: Center(
                 child: Text(
                   "Login",
-                  style: GoogleFonts.dmSans(
+                  style: TextStyles.dmSans16SemiBold.copyWith(
                     fontSize: s(16),
                     fontWeight: FontWeight.w600,
                     color: ColorPalette.whitetext,

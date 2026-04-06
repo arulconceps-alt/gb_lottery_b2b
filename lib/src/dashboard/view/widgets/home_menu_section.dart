@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
+import 'package:gb_lottery_b2b/src/app/text_styles.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomeMenuSection extends StatelessWidget {
@@ -29,17 +30,14 @@ class HomeMenuSection extends StatelessWidget {
     return Expanded(
       child: GestureDetector(
         onTap: onTap,
-        child: Container(          
+        child: Container(
           decoration: BoxDecoration(
             color: const Color(0xFF1C1B20),
             borderRadius: BorderRadius.circular(s(8)),
-            border: Border.all(
-              color: ColorPalette.primary,
-              width: 1,
-            ),
+            border: Border.all(color: ColorPalette.primary, width: 1),
           ),
           child: Padding(
-            padding:  EdgeInsets.only( top: s(11), bottom: s(6)),
+            padding: EdgeInsets.only(top: s(11), bottom: s(6)),
             child: Column(
               children: [
                 Image.asset(
@@ -51,10 +49,10 @@ class HomeMenuSection extends StatelessWidget {
                 Text(
                   title,
                   textAlign: TextAlign.center,
-                  style: GoogleFonts.dmSans(
-                    color: ColorPalette.primary,
+                  style: TextStyles.dmSans10SemiBold.copyWith(
                     fontSize: s(10),
-                    fontWeight: FontWeight.w400,
+
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                 ),
               ],

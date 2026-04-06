@@ -48,14 +48,18 @@ class _DashboardFantasyScrollSectionState
           builder: (context, child) {
             final offset = _controller.value * totalWidth;
 
-            return Transform.translate(
-              offset: Offset(-offset, 0),
-              child: Row(
-                children: [
-                  _buildItems(itemWidth, spacing, s),
-                  SizedBox(width: spacing),
-                  _buildItems(itemWidth, spacing, s), // duplicate
-                ],
+            return SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              physics: const NeverScrollableScrollPhysics(),
+              child: Transform.translate(
+                offset: Offset(-offset, 0),
+                child: Row(
+                  children: [
+                    _buildItems(itemWidth, spacing, s),
+                    SizedBox(width: spacing),
+                    _buildItems(itemWidth, spacing, s), // duplicate
+                  ],
+                ),
               ),
             );
           },
