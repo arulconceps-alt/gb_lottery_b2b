@@ -38,31 +38,33 @@ class _DashboardFantasyScrollSectionState
     final itemWidth = s(140);
     final spacing = s(12);
 
-    final totalWidth = (itemWidth + spacing) * 3; // 3 items
+    final totalWidth = (itemWidth * 3) + (spacing * 2); // 3 items
 
     return SizedBox(
       height: s(66),
-      child: ClipRect(
-        child: AnimatedBuilder(
-          animation: _controller,
-          builder: (context, child) {
-            final offset = _controller.value * totalWidth;
+      child: Padding(
+        padding: EdgeInsets.only(left: s(12)), // ✅ left space 12
+        child: ClipRect(
+          child: AnimatedBuilder(
+            animation: _controller,
+            builder: (context, child) {
+              final offset = _controller.value * totalWidth;
 
-            return SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              physics: const NeverScrollableScrollPhysics(),
-              child: Transform.translate(
+              return Transform.translate(
                 offset: Offset(-offset, 0),
-                child: Row(
-                  children: [
-                    _buildItems(itemWidth, spacing, s),
-                    SizedBox(width: spacing),
-                    _buildItems(itemWidth, spacing, s), // duplicate
-                  ],
+                child: SizedBox(
+                  width: totalWidth * 2, // ✅ prevents Row overflow
+                  child: Row(
+                    children: [
+                      _buildItems(itemWidth, spacing, s),
+                      SizedBox(width: spacing),
+                      _buildItems(itemWidth, spacing, s),
+                    ],
+                  ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
     );
@@ -77,7 +79,6 @@ class _DashboardFantasyScrollSectionState
         _card("assets/images/dashboard/ipl.webp", itemWidth, s),
         SizedBox(width: spacing),
         _card("assets/images/dashboard/hocky.webp", itemWidth, s),
-        SizedBox(width: spacing),
       ],
     );
   }
