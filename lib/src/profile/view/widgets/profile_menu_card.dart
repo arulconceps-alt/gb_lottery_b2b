@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
+import 'package:gb_lottery_b2b/src/login/repo/login_repository.dart';
+import 'package:gb_lottery_b2b/src/login/bloc/login_bloc.dart';
+import 'package:gb_lottery_b2b/src/common/services/services_locator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -148,11 +151,6 @@ class ProfileMenuCard extends StatelessWidget {
               width: s(20),
               fit: BoxFit.contain,
             ),
-            // Icon(
-            //   Icons.chevron_right,
-            //   color: ColorPalette.whitetext,
-            //   size: s(20),
-            // ),
           ],
         ),
       ),
@@ -246,8 +244,12 @@ class ProfileMenuCard extends StatelessWidget {
 
                       Expanded(
                         child: GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
+                          onTap: () async {
+                            Navigator.pop(context); // Close bottom sheet
+                            await getIt<LoginRepository>().logout();
+                            if (context.mounted) {
+                              context.go('/login');
+                            }
                           },
                           child: Container(
                             width: s(140),

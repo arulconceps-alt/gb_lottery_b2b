@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
+import 'package:gb_lottery_b2b/src/app/text_styles.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class WhatsGbBox extends StatelessWidget {
@@ -20,49 +21,48 @@ class WhatsGbBox extends StatelessWidget {
     ];
 
     return SingleChildScrollView(
-  scrollDirection: Axis.horizontal,
-  child: Row(
-    children: List.generate(items.length, (index) {
-      final item = items[index];
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: List.generate(items.length, (index) {
+          final item = items[index];
 
-      return Padding(
-        padding: EdgeInsets.only(
-          right: index != items.length - 1 ? s(10) : 0,
-        ),
-        child: Column(
-          children: [
-            Stack(
-              alignment: Alignment.center,
+          return Padding(
+            padding: EdgeInsets.only(
+              right: index != items.length - 1 ? s(10) : 0,
+            ),
+            child: Column(
               children: [
-                Image.asset(
-                  "assets/images/dashboard/frame.webp",
-                  height: s(47),
-                  width: s(59),
-                  fit: BoxFit.contain,
+                Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Image.asset(
+                      "assets/images/dashboard/frame.webp",
+                      height: s(47),
+                      width: s(59),
+                      fit: BoxFit.contain,
+                    ),
+                    Image.asset(
+                      item["imagepath"] ?? "",
+                      height: s(42),
+                      width: s(52),
+                      fit: BoxFit.contain,
+                    ),
+                  ],
                 ),
-                Image.asset(
-                  item["imagepath"] ?? "",
-                  height: s(42),
-                  width: s(52),
-                  fit: BoxFit.contain,
+                SizedBox(height: s(6)),
+                Text(
+                  item["text"] ?? "",
+                  style: TextStyles.dmSans10SemiBold.copyWith(
+                    fontSize: s(10),
+                    fontStyle: FontStyle.italic,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                 ),
               ],
             ),
-            SizedBox(height: s(6)),
-            Text(
-              item["text"] ?? "",
-              style: GoogleFonts.dmSans(
-                fontSize: s(10),
-                fontStyle: FontStyle.italic,
-                fontWeight: FontWeight.w600,
-                color: Color(0xFFD8AC70),
-              ),
-            ),
-          ],
-        ),
-      );
-    }),
-  ),
-);
+          );
+        }),
+      ),
+    );
   }
 }
