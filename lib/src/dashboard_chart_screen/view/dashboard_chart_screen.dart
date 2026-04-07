@@ -33,9 +33,9 @@ class _DashboardChartScreenState extends State<DashboardChartScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: s(21)),
-              PurchaseChartCard(s:s),
+              PurchaseChartCard(s: s),
               SizedBox(height: s(20)),
-              CustomerGrowthCard(),
+              CustomerGrowthCard(s: s),
               SizedBox(height: 16,),
               RevenueChartCard(),
               SizedBox(height: s(20),),
