@@ -50,3 +50,7 @@ class SubmitLoginCredentials extends LoginEvent {
 class ResetLoginMessage extends LoginEvent {
   const ResetLoginMessage();
 }
+
+class SignOut extends LoginEvent {
+  const SignOut();
+}

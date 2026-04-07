@@ -97,4 +97,19 @@ class LoginRepository {
       rethrow;
     }
   }
+
+  Future<void> logout() async {
+    try {
+      // Clear Preferences
+      await _preferencesRepository.removePreference(Constants.store.AUTH_TOKEN);
+      await _preferencesRepository.removePreference(Constants.store.USER_ID);
+      
+      // Optionally call a logout API if not in MOCK mode
+      if (!Constants.app.USE_MOCK_API) {
+        // await _apiRepository.postRequest(url: Constants.api.logout, data: {});
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

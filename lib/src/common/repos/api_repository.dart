@@ -14,11 +14,12 @@ class ApiRepository {
   }
 
   void _initHeaders() {
-    final String? authToken = prefRepo.getPreference(
-      Constants.store.AUTH_TOKEN,
-    );
-    if (authToken != null) {
+    final String? authToken = prefRepo.getPreference(Constants.store.AUTH_TOKEN);
+    log.d("ApiRepository::_initHeaders::Token: $authToken");
+    if (authToken != null && authToken.isNotEmpty) {
       _dio.options.headers["Authorization"] = "Bearer $authToken";
+    } else {
+      _dio.options.headers.remove("Authorization");
     }
   }
 
@@ -51,9 +52,10 @@ class ApiRepository {
     required Map<String, dynamic> data,
   }) async {
     try {
+      _initHeaders(); // Ensure headers are fresh
       log.d("ApiRepository::postRequest::URL: $url, Data: $data");
+      print("🚀 ApiRepository: Token in Header = ${_dio.options.headers['Authorization']}");
 
-      // --- [MOCK LOGIC] ---
       if (Constants.app.USE_MOCK_API) {
         log.d(
           "ApiRepository::postRequest::MOCK MODE ENABLED. Simulating success.",
@@ -61,19 +63,14 @@ class ApiRepository {
         await Future.delayed(const Duration(milliseconds: 500));
         return <String, dynamic>{
           "success": true,
-          "message": "Mocked response",
+          "message": "Mock success",
           "data": <String, dynamic>{
-            "authToken": "fake_mock_token_12345",
+            "authToken": "fake_mock_token_${DateTime.now().millisecondsSinceEpoch}",
             "userId": "999",
             "name": "Mock Dealer",
             "mobile": "1234567890",
           },
         };
-      }
-
-      String? authToken = prefRepo.getPreference(Constants.store.AUTH_TOKEN);
-      if (authToken != null) {
-        _dio.options.headers['Authorization'] = 'Bearer $authToken';
       }
 
       final fullUrl = Constants.api.API_BASE_URL + url;
@@ -99,6 +96,7 @@ class ApiRepository {
 
   Future<dynamic> getRequest(String url) async {
     try {
+      _initHeaders(); // Ensure headers are fresh
       if (Constants.app.USE_MOCK_API) {
         log.d(
           "ApiRepository::getRequest::MOCK MODE ENABLED. Simulating success.",

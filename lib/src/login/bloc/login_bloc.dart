@@ -18,6 +18,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<RequestLoginOtp>(_onRequestOtp);
     on<SubmitLoginCredentials>(_onSubmitLogin);
     on<ResetLoginMessage>(_onReset);
+    on<SignOut>(_onSignOut);
   }
 
   final LoginRepository _repository;
@@ -111,5 +112,21 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   void _onReset(ResetLoginMessage event, Emitter<LoginState> emit) {
     emit(state.copyWith(message: () => ''));
+  }
+
+  Future<void> _onSignOut(SignOut event, Emitter<LoginState> emit) async {
+    _log.d('LoginBloc::_onSignOut::Logging out');
+    try {
+      await _repository.logout();
+      emit(LoginState.initial);
+    } catch (e) {
+      _log.e('LoginBloc::_onSignOut::Error: $e');
+      emit(
+        state.copyWith(
+          status: () => LoginStatus.failure,
+          message: () => e.toString(),
+        ),
+      );
+    }
   }
 }

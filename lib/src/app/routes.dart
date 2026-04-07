@@ -32,7 +32,7 @@ import 'package:go_router/go_router.dart';
 class Routes {
   static final GoRouter router = GoRouter(
     initialLocation: "/",
-
+    refreshListenable: getIt<PreferencesRepository>(),
     routes: [
       /// Splash
       GoRoute(
@@ -199,23 +199,32 @@ class Routes {
       final prefRepo = getIt<PreferencesRepository>();
       final dynamic token = prefRepo.getPreference(Constants.store.AUTH_TOKEN);
       final bool isLoggedIn = token != null && token.toString().isNotEmpty;
+      final String location = state.matchedLocation;
 
-      final bool isLoggingIn =
-          state.matchedLocation == '/login' ||
-          state.matchedLocation == '/' ||
-          state.matchedLocation == '/onboarding';
+      // Debugging
+      print("🚀 Router Check: Location=$location, isLoggedIn=$isLoggedIn");
+
+      final bool isAuthPath =
+          location == '/login' ||
+          location == '/' ||
+          location == '/onboarding' ||
+          location == '/otp';
 
       if (!isLoggedIn) {
-        // If not logged in and not on a login/splash page, go to login
-        return isLoggingIn ? null : '/login';
+        // If not logged in and not on a login/landing page, force redirect
+        if (!isAuthPath) {
+          print("🚫 Unauthorized access -> Redirection to /login");
+          return '/login';
+        }
+        return null;
       }
 
-      // If logged in and trying to visit login/splash, go to dashboard
-      if (isLoggingIn) {
+      // If logged in and on a login/landing page, go to dashboard
+      if (isAuthPath) {
+        print("✅ Already logged in -> Redirection to /dashboard");
         return '/dashboard';
       }
 
-      // No redirect needed
       return null;
     },
   );

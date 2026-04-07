@@ -9,6 +9,6 @@ Future<void> main() async {
 
   await AppTheme.init();
   await setupLocator();
-
+  
   runApp(const App());
 }

@@ -1,7 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class PreferencesRepository {
+class PreferencesRepository extends ChangeNotifier {
   final Logger log = Logger();
   final SharedPreferences _prefs;
 
@@ -20,6 +21,7 @@ class PreferencesRepository {
     } else if (value is List<String>) {
       await _prefs.setStringList(key, value);
     }
+    notifyListeners();
   }
 
   dynamic getPreference(String key) {
@@ -30,10 +32,12 @@ class PreferencesRepository {
   Future<void> removePreference(String key) async {
     log.d("PreferencesRepository::removePreference::$key");
     await _prefs.remove(key);
+    notifyListeners();
   }
 
   Future<void> clearPreferences() async {
     log.d("PreferencesRepository::clearPreferences");
     await _prefs.clear();
+    notifyListeners();
   }
 }
