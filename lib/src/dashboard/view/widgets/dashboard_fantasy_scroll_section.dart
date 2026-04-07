@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class DashboardFantasyScrollSection extends StatefulWidget {
   const DashboardFantasyScrollSection({super.key});
@@ -9,23 +11,33 @@ class DashboardFantasyScrollSection extends StatefulWidget {
 }
 
 class _DashboardFantasyScrollSectionState
-    extends State<DashboardFantasyScrollSection>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
+    extends State<DashboardFantasyScrollSection> {
+  final ScrollController _scrollController = ScrollController();
+  Timer? _timer;
+
+  bool isUserScrolling = false;
 
   @override
   void initState() {
     super.initState();
 
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 12),
-    )..repeat();
+    _timer = Timer.periodic(const Duration(milliseconds: 20), (_) {
+      if (!isUserScrolling && _scrollController.hasClients) {
+        double next = _scrollController.offset + 0.8;
+
+        if (next >= _scrollController.position.maxScrollExtent) {
+          _scrollController.jumpTo(0);
+        } else {
+          _scrollController.jumpTo(next);
+        }
+      }
+    });
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _timer?.cancel();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -95,10 +107,7 @@ class _DashboardFantasyScrollSectionState
         color: Colors.black,
       ),
       clipBehavior: Clip.antiAlias,
-      child: Image.asset(
-        image,
-        fit: BoxFit.cover,
-      ),
+      child: Image.asset(image, fit: BoxFit.cover),
     );
   }
 }
