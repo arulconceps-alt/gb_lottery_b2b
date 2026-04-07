@@ -1,5 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/add_customer/view/add_customer_page.dart';
 import 'package:gb_lottery_b2b/src/app/route_names.dart';
+import 'package:gb_lottery_b2b/src/common/constants/constansts.dart';
+import 'package:gb_lottery_b2b/src/common/repos/preferences_repository.dart';
+import 'package:gb_lottery_b2b/src/common/services/services_locator.dart';
 import 'package:gb_lottery_b2b/src/common/widgets/bottom_navigation_bar.dart';
 import 'package:gb_lottery_b2b/src/buy_ticket_screen/view/buy_ticket_screen.dart';
 import 'package:gb_lottery_b2b/src/common/widgets/splashscreen.dart';
@@ -9,7 +13,6 @@ import 'package:gb_lottery_b2b/src/dashboard/view/dashboard_page.dart';
 import 'package:gb_lottery_b2b/src/dashboard_chart_screen/view/dashboard_chart_screen.dart';
 import 'package:gb_lottery_b2b/src/leaderboard/view/leaderboard_page.dart';
 import 'package:gb_lottery_b2b/src/login/view/login_page.dart';
-import 'package:gb_lottery_b2b/src/login/view/login_screen.dart';
 import 'package:gb_lottery_b2b/src/notification_screen/view/notification_screen.dart';
 import 'package:gb_lottery_b2b/src/onboarding/view/onboarding.dart';
 import 'package:gb_lottery_b2b/src/otp/view/otp_page.dart';
@@ -24,7 +27,6 @@ import 'package:gb_lottery_b2b/src/results/view/resluts_page.dart';
 import 'package:gb_lottery_b2b/src/search_screen/view/search_screen.dart';
 import 'package:gb_lottery_b2b/src/settlement/view/settlement_page.dart';
 import 'package:gb_lottery_b2b/src/wallet_screen/view/wallet_screen.dart';
-
 import 'package:go_router/go_router.dart';
 
 class Routes {
@@ -40,7 +42,6 @@ class Routes {
       ),
 
       /// login
-      /// 
       GoRoute(
         name: RouteName.onboarding,
         path: "/onboarding",
@@ -51,7 +52,7 @@ class Routes {
         path: "/login",
         builder: (context, state) => const LoginPage(),
       ),
-       GoRoute(
+      GoRoute(
         name: RouteName.otp,
         path: "/otp",
         builder: (context, state) => const OtpPage(),
@@ -64,7 +65,6 @@ class Routes {
             child: child,
           );
         },
-
         routes: [
           /// dashboard
           GoRoute(
@@ -100,21 +100,20 @@ class Routes {
         path: "/addcustomer",
         builder: (context, state) => const AddCustomerPage(),
       ),
-       GoRoute(
+      GoRoute(
         name: RouteName.customerinformation,
         path: "/customerinformation",
         builder: (context, state) => const CustomerInformationPage(),
       ),
-    
       GoRoute(
         name: RouteName.buy_ticket,
         path: "/buy_ticket",
         builder: (context, state) => const BuyTicketsScreen(),
       ),
-      
+
       /// My Cart Screen
       GoRoute(
-        name: RouteName.myCart, 
+        name: RouteName.myCart,
         path: "/myCart",
         builder: (context, state) => const MycartScreen(),
       ),
@@ -141,7 +140,7 @@ class Routes {
       ),
 
       /// Purchase list
-        GoRoute(
+      GoRoute(
         name: RouteName.purchase_history_list,
         path: "/purchase_history_list",
         builder: (context, state) => const PurchaseHistoryList(),
@@ -169,14 +168,14 @@ class Routes {
       ),
 
       /// settlement
-       GoRoute(
+      GoRoute(
         name: RouteName.settlement,
         path: "/settlement",
         builder: (context, state) => const SettlementPage(),
       ),
 
       ///reslutinner
-       GoRoute(
+      GoRoute(
         name: RouteName.reslutinner,
         path: "/reslutinner",
         builder: (context, state) => const ResultInnerPage(),
@@ -188,6 +187,7 @@ class Routes {
         path: "/leaderboard",
         builder: (context, state) => const LeaderboardPage(),
       ),
+
       /// Dashboard Chart Design
       GoRoute(
         name: RouteName.dashboard_chart,
@@ -195,5 +195,28 @@ class Routes {
         builder: (context, state) => const DashboardChartScreen(),
       ),
     ],
+    redirect: (context, state) {
+      final prefRepo = getIt<PreferencesRepository>();
+      final dynamic token = prefRepo.getPreference(Constants.store.AUTH_TOKEN);
+      final bool isLoggedIn = token != null && token.toString().isNotEmpty;
+
+      final bool isLoggingIn =
+          state.matchedLocation == '/login' ||
+          state.matchedLocation == '/' ||
+          state.matchedLocation == '/onboarding';
+
+      if (!isLoggedIn) {
+        // If not logged in and not on a login/splash page, go to login
+        return isLoggingIn ? null : '/login';
+      }
+
+      // If logged in and trying to visit login/splash, go to dashboard
+      if (isLoggingIn) {
+        return '/dashboard';
+      }
+
+      // No redirect needed
+      return null;
+    },
   );
 }

@@ -38,12 +38,12 @@ class _DashboardFantasyScrollSectionState
     final itemWidth = s(140);
     final spacing = s(12);
 
-    final totalWidth = (itemWidth * 3) + (spacing * 2); // 3 items
+    final totalWidth = (itemWidth + spacing) * 3;
 
     return SizedBox(
       height: s(66),
       child: Padding(
-        padding: EdgeInsets.only(left: s(12)), // ✅ left space 12
+        padding: EdgeInsets.only(left: s(12)),
         child: ClipRect(
           child: AnimatedBuilder(
             animation: _controller,
@@ -52,9 +52,11 @@ class _DashboardFantasyScrollSectionState
 
               return Transform.translate(
                 offset: Offset(-offset, 0),
-                child: SizedBox(
-                  width: totalWidth * 2, // ✅ prevents Row overflow
+                child: OverflowBox(
+                  maxWidth: double.infinity,
+                  alignment: Alignment.centerLeft,
                   child: Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       _buildItems(itemWidth, spacing, s),
                       SizedBox(width: spacing),

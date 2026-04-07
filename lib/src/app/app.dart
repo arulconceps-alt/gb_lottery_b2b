@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/app/app_theme.dart';
 import 'package:gb_lottery_b2b/src/app/routes.dart';
-
 import 'package:responsive_framework/responsive_framework.dart';
 
 class App extends StatefulWidget {
