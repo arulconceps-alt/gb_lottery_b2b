@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
 import 'package:gb_lottery_b2b/src/common/widgets/app_bar_text_with_back.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomerEditScreen extends StatefulWidget {
@@ -210,17 +211,20 @@ void initState() {
     );
   }
   Widget _buildSubmitButton(double Function(double) s) {
-    return Container(
-      width: double.infinity,
-      height: s(54),
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(colors: [Color(0xFFDFC45C), Color(0xFFA89A5F)]),
-        borderRadius: BorderRadius.circular(s(8)),
-      ),
-      child: Text(
-        'Submit',
-        style: GoogleFonts.dmSans(color: Colors.white, fontSize: s(18), fontWeight: FontWeight.w600),
+    return GestureDetector(
+      onTap: () => context.go('/customer'),
+      child: Container(
+        width: double.infinity,
+        height: s(54),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(colors: [Color(0xFFDFC45C), Color(0xFFA89A5F)]),
+          borderRadius: BorderRadius.circular(s(8)),
+        ),
+        child: Text(
+          'Submit',
+          style: GoogleFonts.dmSans(color: Colors.white, fontSize: s(18), fontWeight: FontWeight.w600),
+        ),
       ),
     );
   }

@@ -41,7 +41,7 @@ class DashboardGameCard extends StatelessWidget {
                 height: s(50),
                 width: s(50),
                 decoration: BoxDecoration(
-                  shape: BoxShape.circle,
+                  borderRadius: BorderRadius.circular(8),
                   image: DecorationImage(
                     image: AssetImage(image),
                     fit: BoxFit.cover,

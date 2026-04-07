@@ -70,7 +70,7 @@ class _MycartScreenState extends State<MycartScreen> {
               SizedBox(height: s(10),),
               GestureDetector(
                 onTap: () {
-                  //context.push('/profile');
+                  context.go('/dashboard');
                 },
                 child: Container(
                   width: double.infinity,
