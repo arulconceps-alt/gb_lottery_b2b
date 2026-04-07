@@ -339,7 +339,6 @@ class MainNavigationScreen extends StatelessWidget {
       child: Scaffold(
         extendBody: true,
         body: child,
-
         bottomNavigationBar: _CustomBottomNav(
           selectedIndex: index,
           onTap: (i) => _onTap(context, i),
