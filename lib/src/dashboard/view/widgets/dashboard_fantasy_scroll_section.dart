@@ -1,6 +1,4 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class DashboardFantasyScrollSection extends StatefulWidget {
   const DashboardFantasyScrollSection({super.key});
@@ -11,33 +9,23 @@ class DashboardFantasyScrollSection extends StatefulWidget {
 }
 
 class _DashboardFantasyScrollSectionState
-    extends State<DashboardFantasyScrollSection> {
-  final ScrollController _scrollController = ScrollController();
-  Timer? _timer;
-
-  bool isUserScrolling = false;
+    extends State<DashboardFantasyScrollSection>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
 
-    _timer = Timer.periodic(const Duration(milliseconds: 20), (_) {
-      if (!isUserScrolling && _scrollController.hasClients) {
-        double next = _scrollController.offset + 0.8;
-
-        if (next >= _scrollController.position.maxScrollExtent) {
-          _scrollController.jumpTo(0);
-        } else {
-          _scrollController.jumpTo(next);
-        }
-      }
-    });
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 12),
+    )..repeat();
   }
 
   @override
   void dispose() {
-    _timer?.cancel();
-    _scrollController.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
@@ -85,7 +73,11 @@ class _DashboardFantasyScrollSectionState
   }
 
   // 🔹 ITEMS ROW
-  Widget _buildItems(double itemWidth, double spacing, double Function(double) s) {
+  Widget _buildItems(
+    double itemWidth,
+    double spacing,
+    double Function(double) s,
+  ) {
     return Row(
       children: [
         _card("assets/images/dashboard/icc.webp", itemWidth, s),
