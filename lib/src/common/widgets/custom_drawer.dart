@@ -40,7 +40,7 @@ class CustomDrawer extends StatelessWidget {
                         child: Center(
                           child: Text("B",
                           style: GoogleFonts.dmSans(
-                            fontSize: 28,
+                            fontSize: s(28),
                             color: ColorPalette.whitetext,
                             fontWeight: FontWeight.w400
                           ),),
@@ -127,25 +127,28 @@ class CustomDrawer extends StatelessWidget {
                       s,
                       onTap: () => context.push('/leaderboard'),
                     ),
-                    _menuItem(
-                      "assets/images/dashboard/support.webp",
-                      "Support Chat",
-                      s,
-                    ),
+                    // _menuItem(
+                    //   "assets/images/dashboard/support.webp",
+                    //   "Support Chat",
+                    //   s,
+                    // ),
                     _menuItem(
                       "assets/images/dashboard/terms_condition.webp",
                       "Terms & Conditions",
                       s,
+                      onTap: () => context.push('/terms'),
                     ),
                     _menuItem(
                       "assets/images/dashboard/privacy.webp",
                       "Privacy",
                       s,
+                      onTap: () => context.push('/privacy'),
                     ),
                     _menuItem(
                       "assets/images/dashboard/responsible.webp",
                       "Responsible Gaming",
                       s,
+                      onTap: () => context.push('/responsiblegaming'),
                     ),
       
                     Container(
@@ -158,6 +161,7 @@ class CustomDrawer extends StatelessWidget {
                       "assets/images/dashboard/profile_icon.webp",
                       "Relation manager",
                       s,
+                       onTap: () => context.push('/relationmanager'),
                     ),
                     Container(
                       height: s(48),
