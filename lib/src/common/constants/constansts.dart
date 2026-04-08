@@ -1,5 +1,6 @@
 import 'app_constants.dart';
 import 'api_constants.dart';
+import 'store_constants.dart';
 
 class Constants {
   // App-related constants
@@ -9,6 +10,5 @@ class Constants {
   static const api = ApiConstants();
 
   //Local Store constants
-
-  static const TEXTFIELD = "text";
+  static const store = StoreConstants();
 }

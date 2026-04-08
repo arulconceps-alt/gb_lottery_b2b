@@ -15,4 +15,7 @@ class AppConstants {
   final Map<String, String> APP_PERMISSIONS = const {'Camera': 'camera'};
 
   final List<String> MEMORY_CACHE_LIST = const ["userrole"];
+
+  // API Configuration
+  final bool USE_MOCK_API = true; // Toggle as needed
 }

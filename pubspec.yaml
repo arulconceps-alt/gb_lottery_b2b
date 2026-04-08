@@ -47,6 +47,9 @@ dependencies:
   shimmer: ^3.0.0
   google_fonts: ^8.0.2
   flutter_launcher_icons: ^0.14.4
+  syncfusion_flutter_charts: ^33.1.46
+  fl_chart: ^1.2.0
+  shared_preferences: ^2.5.2
 
 dev_dependencies:
   flutter_test:
@@ -71,9 +74,27 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+     - assets/images/buy_ticket/
+     - assets/images/splash/
+     - assets/images/onboarding/
+     - assets/images/icons/
+     - assets/images/myCart/
+     - assets/images/profile/
+     - assets/images/login/
+     - assets/images/otp/
+     - assets/images/dashboard/
+     - assets/images/customer_list/
+     - assets/images/add_customer/
+     - assets/images/purchase_history_list/
+     - assets/images/notification/
+     - assets/images/wallet/
+     - assets/images/settlement/
+     - assets/images/leaderboard/
+     - assets/theme/
+
+
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

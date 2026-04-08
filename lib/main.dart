@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/app/app.dart';
+import 'package:gb_lottery_b2b/src/app/app_theme.dart';
+
+import 'package:gb_lottery_b2b/src/common/services/services_locator.dart';
 
 Future<void> main() async {
-  runApp(App());
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await AppTheme.init();
+  await setupLocator();
+  
+  runApp(const App());
 }
