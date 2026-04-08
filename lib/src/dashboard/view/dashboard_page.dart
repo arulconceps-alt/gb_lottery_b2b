@@ -84,7 +84,7 @@ class _DashboardPageState extends State<DashboardPage> {
               child: Row(
                 children: [
                   HomeMenuSection(
-                    imagePath: "assets/images/dashboard/people.webp",
+                    imagePath: "assets/images/dashboard/people.png",
                     title: "Add Customer",
                     imageheight: 36,
                     imagewidth: 38,
@@ -95,7 +95,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   ),
                   SizedBox(width: s(14)),
                   HomeMenuSection(
-                    imagePath: "assets/images/dashboard/tickets.webp",
+                    imagePath: "assets/images/dashboard/tickets.png",
                     title: "Buy Tickets",
                     imageheight: 30,
                     imagewidth: 30,
@@ -106,7 +106,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   ),
                   SizedBox(width: s(14)),
                   HomeMenuSection(
-                    imagePath: "assets/images/dashboard/home_dashboard.webp",
+                    imagePath: "assets/images/dashboard/home_dashboard.png",
                     title: "Dashboard",
                     imageheight: 36,
                     imagewidth: 36,

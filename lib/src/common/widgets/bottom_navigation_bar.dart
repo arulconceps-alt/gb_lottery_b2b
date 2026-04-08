@@ -358,9 +358,9 @@ class _CustomBottomNav extends StatelessWidget {
 
   static const icons = [
     'assets/images/dashboard/home.png',
-    'assets/images/dashboard/customers.webp',
-    'assets/images/dashboard/results.webp',
-    'assets/images/dashboard/profile.webp',
+    'assets/images/dashboard/customers.png',
+    'assets/images/dashboard/results.png',
+    'assets/images/dashboard/profile.png',
   ];
 
   static const iconSizes = [

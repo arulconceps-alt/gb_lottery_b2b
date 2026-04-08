@@ -271,9 +271,7 @@ class _WalletScreenCardState extends State<WalletScreenCard> {
                   ],
                 ),
               ),
-
               SizedBox(width: s(10)),
-
               Expanded(
                 child: Text(
                   "I will send money within 2 days",

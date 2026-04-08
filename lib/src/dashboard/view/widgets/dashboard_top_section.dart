@@ -21,7 +21,7 @@ class DashboardTopSection extends StatelessWidget {
                 width: s(165),
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage("assets/images/dashboard/welcome.webp"),
+                    image: AssetImage("assets/images/dashboard/welcome.png"),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -34,7 +34,7 @@ class DashboardTopSection extends StatelessWidget {
                   width: s(120.5),
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage("assets/images/dashboard/one_wallet.webp"),
+                      image: AssetImage("assets/images/dashboard/one_wallet.png"),
                       fit: BoxFit.cover,
                     ),
                   ),
