@@ -88,7 +88,7 @@ class ProfileUserInfoCard extends StatelessWidget {
                   gradient: ColorPalette.buttonGradient,
                 ),
                 child: Image.asset(
-                  'assets/images/profile/edit.webp',
+                  'assets/images/profile/edit.png',
                   width: s(18),
                   height: s(18),
                 ),

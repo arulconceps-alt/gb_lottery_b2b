@@ -40,7 +40,7 @@ class NotificationCardItem extends StatelessWidget {
               ),
               child: Center(
                 child: Image.asset(
-                 "assets/images/notification/wallet_icon.webp",
+                 "assets/images/notification/wallet_icon.png",
                   height: s(24),
                   width: s(24),
                 ),

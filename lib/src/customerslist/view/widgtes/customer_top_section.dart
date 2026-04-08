@@ -67,7 +67,7 @@ class CustomerTopSection extends StatelessWidget {
                 child: Row(
                   children: [
                     Image.asset(
-                      "assets/images/customer_list/add.webp", 
+                      "assets/images/customer_list/add.png", 
                       height: s(20),
                       width: s(20),
                       fit: BoxFit.contain,

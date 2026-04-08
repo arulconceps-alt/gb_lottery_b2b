@@ -26,7 +26,7 @@ class ProfileMenuCard extends StatelessWidget {
             children: [
               _menuItem(
                 s,
-                iconPath: 'assets/images/profile/wallet.webp',
+                iconPath: 'assets/images/profile/wallet.png',
                 title: 'Wallet History',
                 onTap: () => context.push('/wallet_screen'),
               ),
@@ -34,7 +34,7 @@ class ProfileMenuCard extends StatelessWidget {
 
               _menuItem(
                 s,
-                iconPath: 'assets/images/profile/settlement.webp',
+                iconPath: 'assets/images/profile/settlement.png',
                 title: 'Settlement',
                 onTap: () => context.push('/settlement'),
               ),
@@ -42,21 +42,21 @@ class ProfileMenuCard extends StatelessWidget {
 
               _menuItem(
                 s,
-                iconPath: 'assets/images/profile/leardboard.webp',
+                iconPath: 'assets/images/profile/leardboard.png',
                 title: 'Leaderboard',
-                 onTap: () => context.push('/leaderboard'),
+                onTap: () => context.push('/leaderboard'),
               ),
               _divider(s),
               _menuItem(
                 s,
-                iconPath: 'assets/images/profile/purchase.webp',
+                iconPath: 'assets/images/profile/purchase.png',
                 title: 'Purchase History',
                 onTap: () => context.push('/purchase_history_list'),
               ),
               _divider(s),
               _menuItem(
                 s,
-                iconPath: 'assets/images/profile/cart.webp',
+                iconPath: 'assets/images/profile/cart.png',
                 title: 'Cart',
                 onTap: () => context.push('/myCart'),
               ),
@@ -65,7 +65,7 @@ class ProfileMenuCard extends StatelessWidget {
         ),
 
         SizedBox(height: s(26)),
-  
+
         Container(
           decoration: BoxDecoration(
             color: ColorPalette.backgroundDark,
@@ -75,36 +75,36 @@ class ProfileMenuCard extends StatelessWidget {
             children: [
               _menuItem(
                 s,
-                iconPath: 'assets/images/profile/notification.webp',
+                iconPath: 'assets/images/profile/notification.png',
                 title: 'Notification',
-                  onTap: () => context.push('/notification_screen'),
+                onTap: () => context.push('/notification_screen'),
               ),
               _divider(s),
 
               _menuItem(
                 s,
-                iconPath: 'assets/images/profile/language.webp',
+                iconPath: 'assets/images/profile/language.png',
                 title: 'Language',
               ),
               _divider(s),
 
               _menuItem(
                 s,
-                iconPath: 'assets/images/profile/terms.webp',
+                iconPath: 'assets/images/profile/terms.png',
                 title: 'Terms & Conditions',
               ),
               _divider(s),
 
               _menuItem(
                 s,
-                iconPath: 'assets/images/profile/privacy.webp',
+                iconPath: 'assets/images/profile/privacy.png',
                 title: 'Privacy Policy',
               ),
               _divider(s),
 
               _menuItem(
                 s,
-                iconPath: 'assets/images/profile/logout.webp',
+                iconPath: 'assets/images/profile/logout.png',
                 title: 'Logout',
                 onTap: () {
                   showLogoutBottomSheet(context);
@@ -146,7 +146,7 @@ class ProfileMenuCard extends StatelessWidget {
             ),
 
             Image.asset(
-              "assets/images/profile/right.webp",
+              "assets/images/profile/right.png",
               height: s(20),
               width: s(20),
               fit: BoxFit.contain,

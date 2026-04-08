@@ -162,7 +162,7 @@ class _SettlementMonthlyCardState extends State<SettlementMonthlyCard> {
                    color: ColorPalette.surface,
                   ),
                   child: Image.asset(
-                    "assets/images/settlement/calender.webp", 
+                    "assets/images/settlement/calender.png", 
                     height: s(18),
                     width: s(18),
                   ),

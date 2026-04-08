@@ -91,7 +91,7 @@ Widget build(BuildContext context) {
               shape: BoxShape.circle,
               color: ColorPalette.surface,
               image: const DecorationImage(
-                image: AssetImage("assets/images/leaderboard/avatar.webp"),
+                image: AssetImage("assets/images/leaderboard/avatar.png"),
                 fit: BoxFit.cover,
               ),
             ),
@@ -115,7 +115,7 @@ Widget build(BuildContext context) {
                 Row(
                   children: [
                     Image.asset(
-                      "assets/images/leaderboard/coin.webp",
+                      "assets/images/leaderboard/coin.png",
                       height: s(16),
                       width: s(16),
                       fit: BoxFit.contain,
@@ -140,7 +140,7 @@ Widget build(BuildContext context) {
             clipBehavior: Clip.none,
             children: [
               Image.asset(
-                'assets/images/leaderboard/price.webp',
+                'assets/images/leaderboard/price.png',
                 width: s(35),
                 height: s(24),
                 fit: BoxFit.contain,
