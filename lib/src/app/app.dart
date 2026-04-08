@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gb_lottery_b2b/src/app/app_theme.dart';
 import 'package:gb_lottery_b2b/src/app/routes.dart';
-
 import 'package:responsive_framework/responsive_framework.dart';
 
 class App extends StatefulWidget {
@@ -17,17 +17,17 @@ class _AppState extends State<App> {
       debugShowCheckedModeBanner: false,
 
       // FIX 1: Global background color
-      theme: ThemeData(scaffoldBackgroundColor: const Color(0xFF1C1B20)),
+      theme: AppTheme.theme,
 
-      routerConfig: Routes().router,
+      routerConfig: Routes.router,
 
       // FIX 2: Background inside ResponsiveFramework
       builder: (context, child) => Container(
-        color: const Color(0xFF1C1B20),
+        color: AppTheme.theme.scaffoldBackgroundColor,
         child: ResponsiveBreakpoints(
-          child: child!,
+          child: child ?? const SizedBox(),
           breakpoints: const [
-            Breakpoint(start: 375, end: 450, name: MOBILE),
+            Breakpoint(start: 0, end: 450, name: MOBILE),
             Breakpoint(start: 451, end: 800, name: TABLET),
             Breakpoint(start: 801, end: 1920, name: DESKTOP),
             Breakpoint(start: 1921, end: double.infinity, name: '4K'),

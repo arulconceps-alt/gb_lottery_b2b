@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gb_lottery_b2b/src/app/app_theme.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
+import 'package:gb_lottery_b2b/src/app/text_styles.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -17,6 +19,7 @@ class DashboardGameCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themedata = theme.context.of(context);
     final w = MediaQuery.of(context).size.width;
     final scale = w / 375;
     double s(double v) => v * scale;
@@ -26,7 +29,7 @@ class DashboardGameCard extends StatelessWidget {
       height: s(160),
       padding: EdgeInsets.all(s(10)),
       decoration: BoxDecoration(
-        color: const Color(0xFF2C2B33),
+        color: themedata.cardColor,
         borderRadius: BorderRadius.circular(s(8)),
       ),
       child: Column(
@@ -38,7 +41,7 @@ class DashboardGameCard extends StatelessWidget {
                 height: s(50),
                 width: s(50),
                 decoration: BoxDecoration(
-                  shape: BoxShape.circle,
+                  borderRadius: BorderRadius.circular(8),
                   image: DecorationImage(
                     image: AssetImage(image),
                     fit: BoxFit.cover,
@@ -52,29 +55,26 @@ class DashboardGameCard extends StatelessWidget {
                   children: [
                     Text(
                       title,
-                      style: GoogleFonts.dmSans(
+                      style: TextStyles.dmSans12SemiBold.copyWith(
                         fontSize: s(12),
-                        fontWeight: FontWeight.w600,
                         fontStyle: FontStyle.italic,
-                        color: ColorPalette.whitetext,
+                        color: themedata.textTheme.bodyLarge?.color,
                       ),
                     ),
                      SizedBox(height: s(1)),
                     Text(
                       "Win Price",
-                      style: GoogleFonts.dmSans(
+                      style: TextStyles.dmSans12.copyWith(
                         fontSize: s(12),
-                        fontWeight: FontWeight.w400,
-                        color: ColorPalette.darktext,
+                        color: themedata.textTheme.bodyMedium?.color,
                       ),
                     ),
                      SizedBox(height: s(1)),
                     Text(
                       prize,
-                      style: GoogleFonts.dmSans(
+                      style: TextStyles.dmSans12SemiBold.copyWith(
                         fontSize: s(12),
-                        fontWeight: FontWeight.w600,
-                        color: ColorPalette.whitetext,
+                        color: themedata.textTheme.bodyLarge?.color,
                       ),
                     ),
                   ],
@@ -86,39 +86,37 @@ class DashboardGameCard extends StatelessWidget {
           SizedBox(height: s(8)),
           Text(
             "Next draw starts in :",
-            style: GoogleFonts.dmSans(
+            style: TextStyles.dmSans10.copyWith(
               fontSize: s(10),
-              fontWeight: FontWeight.w400,
-              color: ColorPalette.darktext,
+              color: themedata.textTheme.bodyMedium?.color,
             ),
           ),
 
           SizedBox(height: s(4)),
           Row(
             children: [
-              _timeBox("01h", s),
+              _timeBox("01h", s, themedata),
+              SizedBox(width: s(3)),
+              Text(
+                ":",
+                style: TextStyles.dmSans12SemiBold.copyWith(
+                  fontSize: s(12),
+                  color: themedata.textTheme.bodyLarge?.color,
+                ),
+              ),
+              SizedBox(width: s(5)),
+              _timeBox("01m", s, themedata),
               SizedBox(width: s(3)),
               Text(
                 ":",
                 style: GoogleFonts.dmSans(
                   fontSize: s(12),
                   fontWeight: FontWeight.w600,
-                  color: ColorPalette.whitetext,
+                  color: themedata.textTheme.bodyLarge?.color,
                 ),
               ),
               SizedBox(width: s(5)),
-              _timeBox("01m", s),
-              SizedBox(width: s(3)),
-              Text(
-                ":",
-                style: GoogleFonts.dmSans(
-                  fontSize: s(12),
-                  fontWeight: FontWeight.w600,
-                  color: ColorPalette.whitetext,
-                ),
-              ),
-              SizedBox(width: s(5)),
-              _timeBox("30s", s),
+              _timeBox("30s", s, themedata),
             ],
           ),
 
@@ -131,15 +129,14 @@ class DashboardGameCard extends StatelessWidget {
               height: s(34),
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                color: ColorPalette.surface,
+                color: themedata.colorScheme.surface,
                 borderRadius: BorderRadius.circular(s(6)),
               ),
               child: Text(
                 "Play Now",
-                style: GoogleFonts.dmSans(
+                style: TextStyles.dmSans12SemiBold.copyWith(
                   fontSize: s(12),
-                  fontWeight: FontWeight.w600,
-                  color: ColorPalette.whitetext,
+                  color: themedata.textTheme.bodyLarge?.color,
                 ),
               ),
             ),
@@ -149,22 +146,21 @@ class DashboardGameCard extends StatelessWidget {
     );
   }
 
-  Widget _timeBox(String text, double Function(double) s) {
+  Widget _timeBox(String text, double Function(double) s, ThemeData themedata) {
     return Container(
       width: s(40),
       height: s(18),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: ColorPalette.surface,
+        color: themedata.colorScheme.surface,
         borderRadius: BorderRadius.circular(s(4)),
       ),
       child: Text(
         text,
-        style: GoogleFonts.dmSans(
+        style: TextStyles.dmSans10SemiBold.copyWith(
           fontSize: s(10),
           fontStyle: FontStyle.italic,
-          fontWeight: FontWeight.w600,
-          color: ColorPalette.whitetext,
+          color: themedata.textTheme.bodyLarge?.color,
         ),
       ),
     );

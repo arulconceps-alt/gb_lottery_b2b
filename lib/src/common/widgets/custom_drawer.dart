@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
+import 'package:gb_lottery_b2b/src/login/repo/login_repository.dart';
+import 'package:gb_lottery_b2b/src/login/repo/login_repository.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:gb_lottery_b2b/src/common/services/services_locator.dart';
+import 'package:gb_lottery_b2b/src/login/bloc/login_bloc.dart';
+import 'package:gb_lottery_b2b/src/common/services/services_locator.dart';
+import 'package:gb_lottery_b2b/src/login/bloc/login_bloc.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -33,17 +39,11 @@ class CustomDrawer extends StatelessWidget {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: ColorPalette.surface,
-                          // image: const DecorationImage(
-                          //   image: AssetImage(
-                          //     "assets/images/dashboard/user.webp",
-                          //   ),
-                          //   fit: BoxFit.cover,
-                          // ),
                         ),
                         child: Center(
                           child: Text("B",
                           style: GoogleFonts.dmSans(
-                            fontSize: 28,
+                            fontSize: s(28),
                             color: ColorPalette.whitetext,
                             fontWeight: FontWeight.w400
                           ),),
@@ -128,30 +128,32 @@ class CustomDrawer extends StatelessWidget {
                       "assets/images/dashboard/leadboard.webp",
                       "Leaderboard",
                       s,
-                        onTap: () => context.push('/leaderboard'),
+                      onTap: () => context.push('/leaderboard'),
                     ),
-                    _menuItem(
-                      "assets/images/dashboard/support.webp",
-                      "Support Chat",
-                      s,
-                    ),
+                    // _menuItem(
+                    //   "assets/images/dashboard/support.webp",
+                    //   "Support Chat",
+                    //   s,
+                    // ),
                     _menuItem(
                       "assets/images/dashboard/terms_condition.webp",
                       "Terms & Conditions",
                       s,
+                      onTap: () => context.push('/terms'),
                     ),
                     _menuItem(
                       "assets/images/dashboard/privacy.webp",
                       "Privacy",
                       s,
+                      onTap: () => context.push('/privacy'),
                     ),
                     _menuItem(
                       "assets/images/dashboard/responsible.webp",
                       "Responsible Gaming",
                       s,
+                      onTap: () => context.push('/responsiblegaming'),
                     ),
       
-                    //SizedBox(height: s(10)),
                     Container(
                       height: s(48),
                       alignment: Alignment.center,
@@ -162,6 +164,7 @@ class CustomDrawer extends StatelessWidget {
                       "assets/images/dashboard/profile_icon.webp",
                       "Relation manager",
                       s,
+                       onTap: () => context.push('/relationmanager'),
                     ),
                     Container(
                       height: s(48),
@@ -173,32 +176,16 @@ class CustomDrawer extends StatelessWidget {
                       "Logout",
                       s,
                       isLogout: true,
+                      onTap: () async {
+                        await getIt<LoginRepository>().logout();
+                        if (context.mounted) {
+                          context.go('/login');
+                        }
+                      },
                     ),
                   ],
                 ),
               ),
-              // Padding(
-              //   padding: EdgeInsets.all(s(16)),
-              //   child: Row(
-              //     children: [
-              //       Image.asset(
-              //         "assets/images/dashboard/logout.webp",
-              //         width: s(24),
-              //         height: s(24),
-              //         fit: BoxFit.contain,
-              //       ),
-              //       SizedBox(width: s(10)),
-              //       Text(
-              //         "Logout",
-              //         style: GoogleFonts.inter(
-              //           fontSize: s(14),
-              //           color: Colors.red,
-              //           fontWeight: FontWeight.w500,
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // ),
             ],
           ),
         ),

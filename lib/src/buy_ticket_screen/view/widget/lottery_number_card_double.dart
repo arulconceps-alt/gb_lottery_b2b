@@ -1,7 +1,6 @@
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:gb_lottery_b2b/src/app/color_palette.dart';
 
 class LotteryNumberCardDouble extends StatefulWidget {
   final double Function(double) s;
@@ -114,7 +113,8 @@ class _LotteryNumberCardDoubleState extends State<LotteryNumberCardDouble> {
         children: [
           GestureDetector(
             onTap: () => setState(() => quantities[index] = max(1, quantities[index] - 1)),
-            child: Text("-", style: GoogleFonts.dmSans(color: Colors.white,fontWeight: FontWeight.w400, fontSize: s(14))),
+            child: Text("-", style: GoogleFonts.dmSans(color: Colors.white,
+            fontWeight: FontWeight.w400, fontSize: s(22))),
           ),
           Text(
             "${quantities[index]}",
@@ -122,7 +122,8 @@ class _LotteryNumberCardDoubleState extends State<LotteryNumberCardDouble> {
           ),
           GestureDetector(
             onTap: () => setState(() => quantities[index]++),
-            child: Text("+", style: GoogleFonts.dmSans(color: Colors.white,fontWeight: FontWeight.w400, fontSize: s(14))),
+            child: Text("+", style: GoogleFonts.dmSans(color: Colors.white,
+            fontWeight: FontWeight.w400, fontSize: s(22))),
           ),
         ],
       ),
@@ -240,7 +241,7 @@ class _LotteryNumberCardDoubleState extends State<LotteryNumberCardDouble> {
       onTap: fillRandomDashes,
       child: Container(
         width: s(92),
-        height: s(32),
+        height: s(36),
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: const Color(0xFF313038),

@@ -27,9 +27,12 @@ class _AddCustomerFormSectionState extends State<AddCustomerFormSection> {
           physics: const NeverScrollableScrollPhysics(),
           itemCount: expandedList.length,
           itemBuilder: (context, index) {
-            return Column(children: [_buildForm(s, index), _addButton(s)]);
+            // REMOVED the Column with _addButton from here
+            return _buildForm(s, index);
           },
         ),
+        // Put it here so it only appears once at the bottom of the list
+        _addButton(s),
       ],
     );
   }
@@ -63,80 +66,100 @@ class _AddCustomerFormSectionState extends State<AddCustomerFormSection> {
   Widget _buildForm(double Function(double) s, int index) {
     bool isExpanded = expandedList[index];
 
-    return Container(
-      margin: EdgeInsets.only(bottom: s(16)),
-      decoration: BoxDecoration(
-        color: ColorPalette.backgroundDark,
-        borderRadius: BorderRadius.circular(s(8)),
-      ),
-      child: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.all(s(15)),
-            child: Column(
-              children: [
-                _field("Enter Name*", s),
-                SizedBox(height: s(11)),
-                _field("Enter Phone Number*", s),
-                SizedBox(height: s(11)),
-                _field("Enter Pincode*", s),
-
-                if (isExpanded) ...[
-                  SizedBox(height: s(11)),
-                  _field("Enter Email", s),
-                  SizedBox(height: s(11)),
-                  _field("Enter Address", s, maxLines: 3),
-                ],
-              ],
-            ),
+    return Stack(
+      clipBehavior: Clip.none, // Allows the icon to overlap the border
+      children: [
+        // 1. Your existing Container
+        Container(
+          margin: EdgeInsets.only(bottom: s(16)),
+          decoration: BoxDecoration(
+            color: ColorPalette.backgroundDark,
+            borderRadius: BorderRadius.circular(s(8)),
           ),
-
-          SizedBox(height: s(10)),
-
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                expandedList[index] = !expandedList[index];
-              });
-            },
-            child: Container(
-              height: s(40),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: const Color(0xFF313038),
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(s(8)),
-                  bottomRight: Radius.circular(s(8)),
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.all(s(15)),
+                child: Column(
+                  children: [
+                    _field("Enter Name*", s),
+                    SizedBox(height: s(11)),
+                    _field("Enter Phone Number*", s),
+                    SizedBox(height: s(11)),
+                    _field("Enter Pincode*", s),
+                    if (isExpanded) ...[
+                      SizedBox(height: s(11)),
+                      _field("Enter Email", s),
+                      SizedBox(height: s(11)),
+                      _field("Enter Address", s, maxLines: 3),
+                    ],
+                  ],
                 ),
               ),
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Text(
-                    "View More",
-                    style: GoogleFonts.dmSans(
-                      color: ColorPalette.primary,
-                      fontWeight: FontWeight.w600,
-                      fontSize: s(16),
+              SizedBox(height: s(10)),
+              GestureDetector(
+                onTap: () => setState(() => expandedList[index] = !expandedList[index]),
+                child: Container(
+                  height: s(40),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF313038),
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(s(8)),
+                      bottomRight: Radius.circular(s(8)),
                     ),
                   ),
-                  Positioned(
-                    right: s(10),
-                    child: Image.asset(
-                      "assets/images/add_customer/down_arrow.webp",
-                      height: s(16),
-                      width: s(16),
-                    )
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Text(
+                        isExpanded ? "View Less" : "View More",
+                        style: GoogleFonts.dmSans(
+                          color: ColorPalette.primary,
+                          fontWeight: FontWeight.w600,
+                          fontSize: s(16),
+                        ),
+                      ),
+                      Positioned(
+                        right: s(10),
+                        child: Image.asset(
+                          "assets/images/add_customer/down_arrow.webp",
+                          height: s(16),
+                          width: s(16),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        // 2. The Overlapping Cross Button (Hidden for index 0)
+        if (index != 0)
+          Positioned(
+            top: -s(6),  // Move slightly above the container
+            right: -s(0), // Move slightly outside to the right
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  expandedList.removeAt(index);
+                });
+              },
+              child: SizedBox(
+                width: 16,
+                height: 16,
+                child: Image.asset(
+                  "assets/images/add_customer/cross.webp",
+                  fit: BoxFit.contain,
+                ),
               ),
             ),
           ),
-        ],
-      ),
+      ],
     );
   }
-
   Widget _field(String hint, double Function(double) s, {int maxLines = 1}) {
     return Container(
       height: maxLines == 1 ? s(48) : s(87),

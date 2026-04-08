@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gb_lottery_b2b/src/app/app_theme.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
 import 'package:gb_lottery_b2b/src/buy_ticket_screen/view/widget/customer_dealer_section.dart';
 import 'package:gb_lottery_b2b/src/buy_ticket_screen/view/widget/customer_info_card.dart';
@@ -15,6 +16,7 @@ import 'package:gb_lottery_b2b/src/common/widgets/app_bar_text_with_back.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:gb_lottery_b2b/src/app/text_styles.dart';
 
 import 'model/customer_model.dart';
 
@@ -90,6 +92,7 @@ class _BuyTicketsScreenState extends State<BuyTicketsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themedata = theme.context.of(context);
     final w = MediaQuery.of(context).size.width;
     final scale = w / 375;
     double s(double v) => v * scale;
@@ -127,7 +130,7 @@ class _BuyTicketsScreenState extends State<BuyTicketsScreen> {
         },
       )
           : null,
-      backgroundColor: ColorPalette.background,
+      backgroundColor: themedata.scaffoldBackgroundColor,
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(left:s(16),top:s(30),right:s(16),),
@@ -172,12 +175,11 @@ class _BuyTicketsScreenState extends State<BuyTicketsScreen> {
                 height: s(20),   // ✅ correct height
                 child: Text(
                   "Select Lottery",
-                  style: GoogleFonts.dmSans(
-                    color: Colors.white,
+                  style: TextStyles.dmSans16SemiBold.copyWith(
+                    color: themedata.textTheme.bodyLarge?.color,
                     fontSize: s(16),
-                    fontWeight: FontWeight.w600,
                     fontStyle: FontStyle.italic,
-                    height: 20 / 16, // ✅ line height
+                    height: 20 / 16,
                   ),
                 ),
               ),
@@ -198,7 +200,7 @@ class _BuyTicketsScreenState extends State<BuyTicketsScreen> {
                 width: double.infinity,
                 height: s(135),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF24232A), // Matches your card color
+                  color: themedata.cardColor, // Matches your card color
                   borderRadius: BorderRadius.circular(s(8)),
                 ),
                 child: Image.asset(
@@ -212,12 +214,11 @@ class _BuyTicketsScreenState extends State<BuyTicketsScreen> {
                 height: s(22),   // ✅ correct height
                 child: Text(
                   "Select Time Slot",
-                  style: GoogleFonts.dmSans(
-                    color: Colors.white,
+                  style: TextStyles.dmSans16SemiBold.copyWith(
+                    color: themedata.textTheme.bodyLarge?.color,
                     fontSize: s(16),
-                    fontWeight: FontWeight.w600,
                     fontStyle: FontStyle.italic,
-                    height: 20 / 16, // ✅ line height
+                    height: 20 / 16,
                   ),
                 ),
               ),
@@ -293,9 +294,10 @@ class _BuyTicketsScreenState extends State<BuyTicketsScreen> {
       BuildContext context,
       double Function(double) s,
       ) {
+    final themedata = theme.context.of(context);
     showModalBottomSheet(
       context: context,
-      backgroundColor: const Color(0xFF24232A),
+      backgroundColor: themedata.cardColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(s(16)),
@@ -310,8 +312,8 @@ class _BuyTicketsScreenState extends State<BuyTicketsScreen> {
               return ListTile(
                 title: Text(
                   item,
-                  style: GoogleFonts.dmSans(
-                    color: Colors.white,
+                  style: TextStyles.dmSans14.copyWith(
+                    color: themedata.textTheme.bodyLarge?.color,
                     fontSize: s(14),
                   ),
                 ),

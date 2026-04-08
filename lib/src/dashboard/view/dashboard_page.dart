@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gb_lottery_b2b/src/app/color_palette.dart';
+import 'package:gb_lottery_b2b/src/app/app_theme.dart';
+import 'package:gb_lottery_b2b/src/app/text_styles.dart';
 import 'package:gb_lottery_b2b/src/common/widgets/common_app_bar.dart';
 import 'package:gb_lottery_b2b/src/common/widgets/custom_drawer.dart';
 import 'package:gb_lottery_b2b/src/dashboard/view/widgets/dashboard_carousal.dart';
@@ -10,7 +11,6 @@ import 'package:gb_lottery_b2b/src/dashboard/view/widgets/home_menu_section.dart
 import 'package:gb_lottery_b2b/src/dashboard/view/widgets/pure_lucky_section.dart';
 import 'package:gb_lottery_b2b/src/dashboard/view/widgets/whats_gb_box.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -23,11 +23,12 @@ class _DashboardPageState extends State<DashboardPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
+    final themedata = theme.context.of(context);
     final w = MediaQuery.of(context).size.width;
     final scale = w / 375;
     double s(double v) => v * scale;
     return Scaffold(
-      backgroundColor: const Color(0xFF1C1B20),
+      backgroundColor: themedata.scaffoldBackgroundColor,
       key: _scaffoldKey,
       drawer: const CustomDrawer(),
       appBar: CommonAppBar(
@@ -79,7 +80,7 @@ class _DashboardPageState extends State<DashboardPage> {
             // ),
             SizedBox(height: s(23)),
             Padding(
-               padding: EdgeInsets.symmetric(horizontal: s(16)),
+              padding: EdgeInsets.symmetric(horizontal: s(16)),
               child: Row(
                 children: [
                   HomeMenuSection(
@@ -100,7 +101,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     imagewidth: 30,
                     spaceheight: 9,
                     onTap: () {
-                        context.push('/buy_ticket');
+                      context.push('/buy_ticket');
                     },
                   ),
                   SizedBox(width: s(14)),
@@ -120,11 +121,11 @@ class _DashboardPageState extends State<DashboardPage> {
             SizedBox(height: s(30)),
             Text(
               "ABC Game",
-              style: GoogleFonts.dmSans(
+              style: TextStyles.dmSans16SemiBold.copyWith(
                 fontSize: s(16),
                 fontWeight: FontWeight.w600,
                 fontStyle: FontStyle.italic,
-                color: ColorPalette.primary,
+                color: themedata.colorScheme.primary,
               ),
             ),
             SizedBox(height: s(12)),
@@ -173,11 +174,11 @@ class _DashboardPageState extends State<DashboardPage> {
             SizedBox(height: s(33)),
             Text(
               "YZABC Game",
-              style: GoogleFonts.dmSans(
+              style: TextStyles.dmSans16SemiBold.copyWith(
                 fontSize: s(16),
                 fontWeight: FontWeight.w600,
                 fontStyle: FontStyle.italic,
-                color: ColorPalette.primary,
+                color: themedata.colorScheme.primary,
               ),
             ),
             SizedBox(height: s(12)),
@@ -189,6 +190,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 crossAxisCount: 2,
                 crossAxisSpacing: s(9),
                 mainAxisSpacing: s(10),
+                childAspectRatio: 1.0,
                 children: const [
                   DashboardGameCard(
                     image: "assets/images/dashboard/arunachal_lottry.webp",
@@ -226,11 +228,11 @@ class _DashboardPageState extends State<DashboardPage> {
             SizedBox(height: s(40)),
             Text(
               "What's in GB ",
-              style: GoogleFonts.dmSans(
+              style: TextStyles.dmSans16SemiBold.copyWith(
                 fontSize: s(16),
                 fontWeight: FontWeight.w600,
                 fontStyle: FontStyle.italic,
-                color: ColorPalette.primary,
+                color: themedata.colorScheme.primary,
               ),
             ),
             SizedBox(height: s(20)),
@@ -238,25 +240,25 @@ class _DashboardPageState extends State<DashboardPage> {
               padding: EdgeInsets.symmetric(horizontal: s(16)),
               child: const WhatsGbBox(),
             ),
-
+    
             SizedBox(height: s(31)),
             Text(
               "Fantasy Sports",
-              style: GoogleFonts.dmSans(
+              style: TextStyles.dmSans16SemiBold.copyWith(
                 fontSize: s(16),
                 fontWeight: FontWeight.w600,
                 fontStyle: FontStyle.italic,
-                color: ColorPalette.primary,
+                color: themedata.colorScheme.primary,
               ),
             ),
             SizedBox(height: s(1)),
             Text(
               "Build your team. Play smart. Win real rewards.",
-              style: GoogleFonts.dmSans(
+              style: TextStyles.dmSans12.copyWith(
                 fontSize: s(12),
                 fontWeight: FontWeight.w400,
                 fontStyle: FontStyle.italic,
-                color: ColorPalette.whitetext,
+                color: themedata.textTheme.bodyLarge?.color,
               ),
             ),
             SizedBox(height: s(27)),
@@ -267,25 +269,26 @@ class _DashboardPageState extends State<DashboardPage> {
             SizedBox(height: s(42)),
             Text(
               "Pure Luck - Instant results.",
-              style: GoogleFonts.dmSans(
+              style: TextStyles.dmSans16SemiBold.copyWith(
                 fontSize: s(16),
                 fontWeight: FontWeight.w600,
                 fontStyle: FontStyle.italic,
-                color: ColorPalette.primary,
+                color: themedata.colorScheme.primary,
               ),
             ),
             SizedBox(height: s(1)),
             Text(
               "No strategy. Just spin and see",
-              style: GoogleFonts.dmSans(
+              style: TextStyles.dmSans10.copyWith(
                 fontSize: s(10),
                 fontWeight: FontWeight.w400,
                 fontStyle: FontStyle.italic,
-                color: ColorPalette.whitetext,
+                color: themedata.textTheme.bodyLarge?.color,
               ),
             ),
             SizedBox(height: s(11)),
             DashboradPureluckySectionCard(),
+            SizedBox(height: s(30)),
           ],
         ),
       ),
