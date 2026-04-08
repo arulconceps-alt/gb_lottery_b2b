@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
 import 'package:gb_lottery_b2b/src/login/repo/login_repository.dart';
+import 'package:gb_lottery_b2b/src/login/repo/login_repository.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:gb_lottery_b2b/src/common/services/services_locator.dart';
+import 'package:gb_lottery_b2b/src/login/bloc/login_bloc.dart';
 import 'package:gb_lottery_b2b/src/common/services/services_locator.dart';
 import 'package:gb_lottery_b2b/src/login/bloc/login_bloc.dart';
 
@@ -126,6 +129,7 @@ class CustomDrawer extends StatelessWidget {
                       "Leaderboard",
                       s,
                       onTap: () => context.push('/leaderboard'),
+                      onTap: () => context.push('/leaderboard'),
                     ),
                     // _menuItem(
                     //   "assets/images/dashboard/support.webp",
@@ -173,6 +177,12 @@ class CustomDrawer extends StatelessWidget {
                       "Logout",
                       s,
                       isLogout: true,
+                      onTap: () async {
+                        await getIt<LoginRepository>().logout();
+                        if (context.mounted) {
+                          context.go('/login');
+                        }
+                      },
                       onTap: () async {
                         await getIt<LoginRepository>().logout();
                         if (context.mounted) {
