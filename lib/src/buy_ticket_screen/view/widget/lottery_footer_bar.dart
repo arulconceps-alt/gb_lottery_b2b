@@ -31,7 +31,7 @@ class LotteryFooterBar extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Row(
             children: [
-              // CLICKABLE AREA (Amount + Numbers)
+              
               GestureDetector(
                 onTap: onToggle,
                 behavior: HitTestBehavior.opaque,
