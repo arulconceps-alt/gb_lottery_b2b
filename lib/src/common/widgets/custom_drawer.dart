@@ -79,7 +79,7 @@ class CustomDrawer extends StatelessWidget {
                       GestureDetector(
                         onTap: () => Navigator.pop(context),
                         child: Image.asset(
-                          "assets/images/dashboard/cross.webp",
+                          "assets/images/drawer/cross.png",
                           width: s(16),
                           height: s(16),
                           fit: BoxFit.contain,
@@ -95,37 +95,37 @@ class CustomDrawer extends StatelessWidget {
                   padding: EdgeInsets.zero,
                   children: [
                     _menuItem(
-                      "assets/images/dashboard/profile_icon.webp",
+                      "assets/images/drawer/profile_icon.png",
                       "Profile",
                       s,
                       onTap: () => context.push('/profile'),
                     ),
                     _menuItem(
-                      "assets/images/dashboard/customer_icon.webp",
+                      "assets/images/drawer/customer_icon.png",
                       "Customers",
                       s,
                        onTap: () => context.push('/customer'),
                     ),
                     _menuItem(
-                      "assets/images/dashboard/purchase.webp",
+                      "assets/images/drawer/purchase.png",
                       "Purchase Ticket",
                       s,
                       onTap: () => context.push('/buy_ticket'),
                     ),
                     _menuItem(
-                      "assets/images/dashboard/wallet_icon.webp",
+                      "assets/images/drawer/wallet_icon.png",
                       "Wallet",
                       s,
                         onTap: () => context.push('/wallet_screen'),
                     ),
                     _menuItem(
-                      "assets/images/dashboard/settle_icon.webp",
+                      "assets/images/drawer/settle_icon.png",
                       "Settlement",
                       s,
                       onTap: () => context.push('/settlement'),
                     ),
                     _menuItem(
-                      "assets/images/dashboard/leadboard.webp",
+                      "assets/images/drawer/leadboard.png",
                       "Leaderboard",
                       s,
                       onTap: () => context.push('/leaderboard'),
@@ -136,19 +136,19 @@ class CustomDrawer extends StatelessWidget {
                     //   s,
                     // ),
                     _menuItem(
-                      "assets/images/dashboard/terms_condition.webp",
+                      "assets/images/drawer/terms_condition.png",
                       "Terms & Conditions",
                       s,
                       onTap: () => context.push('/terms'),
                     ),
                     _menuItem(
-                      "assets/images/dashboard/privacy.webp",
+                      "assets/images/drawer/privacy.png",
                       "Privacy",
                       s,
                       onTap: () => context.push('/privacy'),
                     ),
                     _menuItem(
-                      "assets/images/dashboard/responsible.webp",
+                      "assets/images/drawer/responsible.png",
                       "Responsible Gaming",
                       s,
                       onTap: () => context.push('/responsiblegaming'),
@@ -161,7 +161,7 @@ class CustomDrawer extends StatelessWidget {
                     ),
       
                     _menuItem(
-                      "assets/images/dashboard/profile_icon.webp",
+                      "assets/images/drawer/profile_icon.png",
                       "Relation manager",
                       s,
                        onTap: () => context.push('/relationmanager'),
@@ -172,7 +172,7 @@ class CustomDrawer extends StatelessWidget {
                       decoration: BoxDecoration(color: ColorPalette.background),
                     ),
                     _menuItem(
-                      "assets/images/dashboard/logout.webp",
+                      "assets/images/drawer/logout.png",
                       "Logout",
                       s,
                       isLogout: true,
@@ -219,7 +219,7 @@ class CustomDrawer extends StatelessWidget {
     trailing: isLogout
         ? null
         : Image.asset(
-            "assets/images/dashboard/right.webp",
+            "assets/images/drawer/right.png",
             width: s(20),
             height: s(20),
             fit: BoxFit.contain,

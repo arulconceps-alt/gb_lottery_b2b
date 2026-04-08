@@ -19,11 +19,8 @@ class AppBarWithBack extends StatelessWidget
       elevation: 0,
       leading: GestureDetector(
         onTap: onBackTap ?? () => context.pop(),
-        child: Image.asset(
-        "assets/images/dashboard/back.webp", 
-        height: s(24),
-        width: s(24),
-      ),
+      child: Icon(Icons.arrow_back_ios,
+      size: s(24),),
       ),
 
       centerTitle: true,
