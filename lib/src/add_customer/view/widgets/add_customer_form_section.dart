@@ -55,7 +55,7 @@ class _AddCustomerFormSectionState extends State<AddCustomerFormSection> {
           });
         },
         child: Image.asset(
-          "assets/images/add_customer/add.webp",
+          "assets/images/add_customer/add.png",
           height: s(50),
           width: s(50),
         ),
@@ -123,7 +123,7 @@ class _AddCustomerFormSectionState extends State<AddCustomerFormSection> {
                       Positioned(
                         right: s(10),
                         child: Image.asset(
-                          "assets/images/add_customer/down_arrow.webp",
+                          "assets/images/add_customer/down_arrow.png",
                           height: s(16),
                           width: s(16),
                         ),
@@ -147,12 +147,22 @@ class _AddCustomerFormSectionState extends State<AddCustomerFormSection> {
                   expandedList.removeAt(index);
                 });
               },
-              child: SizedBox(
-                width: 16,
-                height: 16,
-                child: Image.asset(
-                  "assets/images/add_customer/cross.webp",
-                  fit: BoxFit.contain,
+              child: Container(
+                width: s(20),
+                height: (20),
+                decoration: BoxDecoration(
+                   color: Color(0xFFD9D9D9),
+                  shape: BoxShape.circle
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Image.asset(
+                    "assets/images/add_customer/cross.png",
+                    width: s(11),
+                  height: (11),
+                  color: Colors.black,
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
             ),

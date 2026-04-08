@@ -66,7 +66,7 @@ class LotteryDropdownWidget extends StatelessWidget {
               ),
             ),
             Image.asset(
-              "assets/images/buy_ticket/ep_arrow-down-bold.webp",
+              "assets/images/buy_ticket/ep_arrow-down-bold.png",
               height: s(16),
               width: s(16),
             ),

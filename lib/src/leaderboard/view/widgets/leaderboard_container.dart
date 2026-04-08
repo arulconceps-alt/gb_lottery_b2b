@@ -145,7 +145,7 @@ class LeaderboardContainer extends StatelessWidget {
                     clipBehavior: Clip.none,
                     children: [
                       Image.asset(
-                        'assets/images/leaderboard/price.webp',
+                        'assets/images/leaderboard/price.png',
                         width: topImageWidth,
                         height: topImageHeight,
                         fit: BoxFit.contain,
@@ -184,7 +184,7 @@ class LeaderboardContainer extends StatelessWidget {
                 top: topImageHeight + gap,
                 bottom: s(-40),
                 child: Image.asset(
-                  'assets/images/leaderboard/men.webp',
+                  'assets/images/leaderboard/men.png',
                   width: bottomImageWidth,
                   height: bottomImageHeight,
                   fit: BoxFit.contain,
@@ -209,7 +209,7 @@ class LeaderboardContainer extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Image.asset(
-              'assets/images/leaderboard/coin.webp',
+              'assets/images/leaderboard/coin.png',
               width: s(16),
               height: s(16),
             ),

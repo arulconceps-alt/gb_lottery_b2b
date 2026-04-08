@@ -116,7 +116,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 child: Padding(
                   padding: EdgeInsets.all(s(4)),
                   child: Image.asset(
-                    "assets/images/profile/edit_icon.webp",
+                    "assets/images/profile/edit_icon.png",
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -201,7 +201,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               Padding(
                 padding: EdgeInsets.all(s(8)),
                 child: Image.asset(
-                  "assets/images/profile/copy_icon.webp",
+                  "assets/images/profile/copy.png",
                   width: s(20),
                   height: s(20),
                   color: Colors.white,

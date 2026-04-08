@@ -90,7 +90,7 @@ class MyNumberSummaryView extends StatelessWidget {
               width: 20,
               height: 20,
               child: Image.asset(
-                "assets/images/buy_ticket/delete_icon.webp",
+                "assets/images/buy_ticket/delete_icon.png",
                 fit: BoxFit.contain,
               ),
             ),

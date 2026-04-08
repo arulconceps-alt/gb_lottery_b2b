@@ -31,25 +31,25 @@ class _SettlementPageState extends State<SettlementPage> {
               SettlementTopSection(
                 items: [
                   {
-                    "icon": "assets/images/settlement/total_sales.webp",
+                    "icon": "assets/images/settlement/total_sales.png",
                     "text1": "Total Sales",
                     "text2": "₹2,45,000",
                     "text3": "This Month",
                   },
                   {
-                    "icon": "assets/images/settlement/settlement_earned.webp",
+                    "icon": "assets/images/settlement/settlement_earned.png",
                     "text1": "Commission Rate",
                     "text2": "15%",
                     "text3": "On all sales",
                   },
                   {
-                    "icon": "assets/images/settlement/commission_rate.webp",
+                    "icon": "assets/images/settlement/commission_rate.png",
                     "text1": "Settlement Earned",
                     "text2": "₹35,420",
                     "text3": "this month",
                   },
                   {
-                    "icon": "assets/images/settlement/bonus.webp",
+                    "icon": "assets/images/settlement/bonus.png",
                     "text1": "Bonus",
                     "text2": "2000",
                     "text3": "Performance bonus",
@@ -61,7 +61,7 @@ class _SettlementPageState extends State<SettlementPage> {
                 text1: "Total Earnings (This Month)",
                 text2: "₹37,420",
                 text3: "Settlement + Bonus",
-                imagePath: "assets/images/settlement/dollar.webp",
+                imagePath: "assets/images/settlement/dollar.png",
               ),
               SizedBox(height: s(16)),
               SettlementMonthlyCard(),

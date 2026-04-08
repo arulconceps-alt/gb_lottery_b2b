@@ -204,7 +204,7 @@ class _BuyTicketsScreenState extends State<BuyTicketsScreen> {
                   borderRadius: BorderRadius.circular(s(8)),
                 ),
                 child: Image.asset(
-                  "assets/images/buy_ticket/kerala_lottery.webp",
+                  "assets/images/buy_ticket/kerala_lottery.png",
                   fit: BoxFit.fill, // 🔥 FIX: Shows the entire image safely
                 ),
               ),

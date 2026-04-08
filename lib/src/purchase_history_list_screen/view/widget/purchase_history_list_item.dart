@@ -120,7 +120,7 @@ class PurchaseHistoryListItem extends StatelessWidget {
               height: s(20), // Figma Height: 20px
               alignment: Alignment.center, // Centers the 5.5px icon inside the 20px box
               child: Image.asset(
-                "assets/images/purchase_history_list/right_arrow_icon.webp",
+                "assets/images/purchase_history_list/right_arrow_icon.png",
                 width: s(20),  // Figma Width: 20px
                 height: s(20), // Figma Icon Height: 11.25px
                 color: Colors.white,

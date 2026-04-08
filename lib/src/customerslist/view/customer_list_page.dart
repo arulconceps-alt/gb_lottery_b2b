@@ -64,7 +64,7 @@ class _CustomerPageState extends State<CustomerPage> {
                 child: Row(
                   children: [
                     Image.asset(
-                      "assets/images/customer_list/search.webp",
+                      "assets/images/customer_list/search.png",
                       height: s(24),
                       width: s(24),
                       color: ColorPalette.darktext,
