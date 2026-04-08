@@ -37,7 +37,7 @@ class LotteryFooterBar extends StatelessWidget {
                 behavior: HitTestBehavior.opaque,
                 child: Row(
                   children: [
-                    Image.asset("assets/images/icons/leadingicon.webp"),
+                    Image.asset("assets/images/icons/leadingicon.png"),
                     const SizedBox(width: 16),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,

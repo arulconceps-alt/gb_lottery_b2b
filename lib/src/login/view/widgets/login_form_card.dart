@@ -105,7 +105,7 @@ class _LoginFormCardState extends State<LoginFormCard> {
                 SizedBox(height: s(12)),
 
                 _inputField(
-                  iconPath: "assets/images/login/fa_mobile.webp",
+                  iconPath: "assets/images/login/fa_mobile.png",
                   iconWidth: 18,
                   iconHeight: 18,
                   child: Row(
@@ -151,7 +151,7 @@ class _LoginFormCardState extends State<LoginFormCard> {
 
                 state.isOtpLogin
                     ? _inputField(
-                        iconPath: "assets/images/login/otp_icon.webp",
+                        iconPath: "assets/images/login/otp_icon.png",
                         iconWidth: 16,
                         iconHeight: 16,
                         child: Row(

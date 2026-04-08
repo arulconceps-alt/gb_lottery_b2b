@@ -101,14 +101,14 @@ class CartItemCard extends StatelessWidget {
             ),
             child: Row(
               children: [
-                _actionButton("assets/images/myCart/edit_icon.webp", "Edit"),
+                _actionButton("assets/images/myCart/edit_icon.png", "Edit"),
                 Container(
                   width: 1,
                   height: s(40),
                   color: Colors.white.withOpacity(0.1),
                 ),
                 _actionButton(
-                  "assets/images/myCart/delete_icon.webp",
+                  "assets/images/myCart/delete_icon.png",
                   "Remove",
                 ),
               ],
