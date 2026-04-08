@@ -129,7 +129,6 @@ class CustomDrawer extends StatelessWidget {
                       "Leaderboard",
                       s,
                       onTap: () => context.push('/leaderboard'),
-                      onTap: () => context.push('/leaderboard'),
                     ),
                     // _menuItem(
                     //   "assets/images/dashboard/support.webp",
@@ -177,12 +176,6 @@ class CustomDrawer extends StatelessWidget {
                       "Logout",
                       s,
                       isLogout: true,
-                      onTap: () async {
-                        await getIt<LoginRepository>().logout();
-                        if (context.mounted) {
-                          context.go('/login');
-                        }
-                      },
                       onTap: () async {
                         await getIt<LoginRepository>().logout();
                         if (context.mounted) {
