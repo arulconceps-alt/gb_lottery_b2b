@@ -5,49 +5,60 @@ import 'package:google_fonts/google_fonts.dart';
 class LeaderboardListSection extends StatelessWidget {
   const LeaderboardListSection({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    final w = MediaQuery.of(context).size.width;
-    final scale = w / 375;
-    double s(double v) => v * scale;
+ @override
+Widget build(BuildContext context) {
+  final w = MediaQuery.of(context).size.width;
+  final scale = w / 375;
+  double s(double v) => v * scale;
 
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: s(10)),
-      decoration: BoxDecoration(
-        color: ColorPalette.backgroundDark,
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(10),
-          topRight: Radius.circular(10),
-        ),
+  return Container(
+    padding: EdgeInsets.symmetric(vertical: s(10)),
+    decoration: BoxDecoration(
+      color: ColorPalette.backgroundDark,
+      borderRadius: const BorderRadius.only(
+        topLeft: Radius.circular(10),
+        topRight: Radius.circular(10),
       ),
-      child: Column(
-        children: [
-          profileItem(context, s, "Rahul", "1,05,001", "4"),
-          divider(s),
+    ),
 
-          profileItem(context, s, "Mani", "1,02,500", "5"),
-          divider(s),
+    // ✅ ONLY THIS SCROLLS
+    child: ListView(
+      children: [
+        profileItem(context, s, "Rahul", "1,05,001", "4"),
+        divider(s),
 
-          profileItem(context, s, "Sasi", "98,450", "6"),
-          divider(s),
+        profileItem(context, s, "Mani", "1,02,500", "5"),
+        divider(s),
 
-          profileItem(context, s, "Ram", "95,200", "7"),
-          divider(s),
+        profileItem(context, s, "Sasi", "98,450", "6"),
+        divider(s),
 
-          profileItem(context, s, "Kavi", "90,300", "8"),
-          divider(s),
+        profileItem(context, s, "Ram", "95,200", "7"),
+        divider(s),
 
-          profileItem(context, s, "Siva", "88,900", "9"),
-          divider(s),
+        profileItem(context, s, "Kavi", "90,300", "8"),
+        divider(s),
 
-          profileItem(context, s, "Baranee", "85,700", "10"),
-          divider(s),
+        profileItem(context, s, "Siva", "88,900", "9"),
+        divider(s),
 
-          profileItem(context, s, "Aravind", "82,400", "11"),
-        ],
-      ),
-    );
-  }
+        profileItem(context, s, "Baranee", "85,700", "10"),
+        divider(s),
+
+        profileItem(context, s, "Aravind", "82,400", "11"),
+        divider(s),
+
+        profileItem(context, s, "Siva", "88,900", "9"),
+        divider(s),
+
+        profileItem(context, s, "Baranee", "85,700", "10"),
+        divider(s),
+
+        profileItem(context, s, "Aravind", "82,400", "11"),
+      ],
+    ),
+  );
+}
 
   Widget divider(double Function(double) s) {
     return Padding(
@@ -64,14 +75,26 @@ class LeaderboardListSection extends StatelessWidget {
     String rank,
   ) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: s(14),),
+      padding: EdgeInsets.symmetric(horizontal: s(14)),
       child: Row(
         children: [
-          Image.asset(
-            "assets/images/leaderboard/avatar.webp",
+          // Image.asset(
+          //   "assets/images/leaderboard/avatar.webp",
+          //   height: s(35),
+          //   width: s(35),
+          //   fit: BoxFit.contain,
+          // ),m 
+          Container(
             height: s(35),
             width: s(35),
-            fit: BoxFit.contain,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: ColorPalette.surface,
+              image: const DecorationImage(
+                image: AssetImage("assets/images/leaderboard/avatar.webp"),
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
 
           SizedBox(width: s(10)),

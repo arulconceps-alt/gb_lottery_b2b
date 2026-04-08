@@ -81,7 +81,7 @@ class DashboardStatusCard extends StatelessWidget {
                 SizedBox(height: s(5)),
                 Text(
                   item['text3'] ?? '',
-                  style: GoogleFonts.inter(
+                  style: GoogleFonts.dmSans(
                     fontSize: s(14),
                     fontWeight: FontWeight.w400,
                     color: text3Colors[index],
@@ -97,7 +97,7 @@ class DashboardStatusCard extends StatelessWidget {
                     Expanded(
                       child: Text(
                         item['text2'] ?? '',
-                        style: GoogleFonts.inter(
+                        style: GoogleFonts.dmSans(
                           fontSize: s(14),
                           fontWeight: FontWeight.w400,
                           color: ColorPalette.darktext,

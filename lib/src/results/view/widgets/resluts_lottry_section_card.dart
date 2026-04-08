@@ -25,36 +25,42 @@ class LotterySectionCard extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  width: s(50), 
+                  width: s(50),
                   height: s(50),
                   decoration: const BoxDecoration(
                     color: Color(0xFF313038),
                     shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: AssetImage(
+                        "assets/images/dashboard/kerala_lottry.webp",
+                      ),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
-                SizedBox(width: s(12)), 
+                SizedBox(width: s(12)),
                 Text(
                   title,
                   style: GoogleFonts.dmSans(
                     color: ColorPalette.whitetext,
                     fontStyle: FontStyle.italic,
                     fontWeight: FontWeight.w600,
-                    fontSize: s(16), 
+                    fontSize: s(16),
                   ),
                 ),
               ],
             ),
             GestureDetector(
-             onTap: () => context.push('/reslutinner'),
+              onTap: () => context.push('/reslutinner'),
               child: Container(
-                    height: s(36),
+                height: s(36),
                 padding: EdgeInsets.symmetric(
                   horizontal: s(16),
                   vertical: s(9),
-                ), 
+                ),
                 decoration: BoxDecoration(
-                  color:  ColorPalette.backgroundDark,
-                  borderRadius: BorderRadius.circular(s(10)), 
+                  color: ColorPalette.backgroundDark,
+                  borderRadius: BorderRadius.circular(s(10)),
                 ),
                 child: Text(
                   "More",
@@ -62,8 +68,8 @@ class LotterySectionCard extends StatelessWidget {
                   softWrap: true,
                   style: GoogleFonts.dmSans(
                     color: ColorPalette.whitetext,
-                      fontWeight: FontWeight.w400,
-                      fontSize: s(14), 
+                    fontWeight: FontWeight.w400,
+                    fontSize: s(14),
                   ),
                 ),
               ),
@@ -71,7 +77,7 @@ class LotterySectionCard extends StatelessWidget {
           ],
         ),
 
-        SizedBox(height: s(14)), 
+        SizedBox(height: s(14)),
 
         /// Table
         const ReslutsLottryTable(),

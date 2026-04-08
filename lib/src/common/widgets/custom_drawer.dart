@@ -31,14 +31,23 @@ class CustomDrawer extends StatelessWidget {
                         height: s(48),
                         width: s(48),
                         decoration: BoxDecoration(
-                          //shape: BoxShape.circle,
-                          image: const DecorationImage(
-                            image: AssetImage(
-                              "assets/images/dashboard/user.webp",
-                            ),
-                            fit: BoxFit.cover,
-                          ),
+                          shape: BoxShape.circle,
+                          color: ColorPalette.surface,
+                          // image: const DecorationImage(
+                          //   image: AssetImage(
+                          //     "assets/images/dashboard/user.webp",
+                          //   ),
+                          //   fit: BoxFit.cover,
+                          // ),
                         ),
+                        child: Center(
+                          child: Text("B",
+                          style: GoogleFonts.dmSans(
+                            fontSize: 28,
+                            color: ColorPalette.whitetext,
+                            fontWeight: FontWeight.w400
+                          ),),
+                        )
                       ),
                       SizedBox(width: s(16)),
                       Expanded(
@@ -107,6 +116,7 @@ class CustomDrawer extends StatelessWidget {
                       "assets/images/dashboard/wallet_icon.webp",
                       "Wallet",
                       s,
+                        onTap: () => context.push('/wallet_screen'),
                     ),
                     _menuItem(
                       "assets/images/dashboard/settle_icon.webp",
@@ -118,6 +128,7 @@ class CustomDrawer extends StatelessWidget {
                       "assets/images/dashboard/leadboard.webp",
                       "Leaderboard",
                       s,
+                        onTap: () => context.push('/leaderboard'),
                     ),
                     _menuItem(
                       "assets/images/dashboard/support.webp",
@@ -212,7 +223,7 @@ class CustomDrawer extends StatelessWidget {
     ),
     title: Text(
       title,
-      style: GoogleFonts.inter(
+      style: GoogleFonts.dmSans(
         fontSize: s(14),
         color: isLogout ? Colors.red : ColorPalette.whitetext,
         fontWeight: FontWeight.w400,

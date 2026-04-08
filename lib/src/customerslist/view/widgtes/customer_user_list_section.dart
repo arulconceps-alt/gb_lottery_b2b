@@ -115,24 +115,26 @@ class _CustomerUserListSectionState
                                 borderRadius: BorderRadius.circular(s(12)),
                               ),
                               items: [
-                                PopupMenuItem(
+                               PopupMenuItem(
                                   value: "view",
                                   padding: EdgeInsets.zero,
-                                  child: SizedBox(
-                                    width: s(132),
+                                  child: Container(
                                     height: s(42),
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                        left: s(13),
-                                        top: s(8),
-                                        bottom: s(8),
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFF313038),
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(s(10)),
+                                        topRight: Radius.circular(s(10)),
                                       ),
-                                      child: Text(
-                                        "View",
-                                        style: GoogleFonts.dmSans(
-                                          color: ColorPalette.whitetext,
-                                          fontSize: s(14),
-                                        ),
+                                    ),
+                                    alignment: Alignment.centerLeft,
+                                    padding: EdgeInsets.only(left: s(13)),
+                                    child: Text(
+                                      "View",
+                                      style: GoogleFonts.dmSans(
+                                        color: ColorPalette.whitetext,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: s(14),
                                       ),
                                     ),
                                   ),
@@ -143,29 +145,35 @@ class _CustomerUserListSectionState
                                   padding: EdgeInsets.zero,
                                   height: s(1),
                                   child: Divider(
-                                    color: ColorPalette.darktext.withOpacity(0.5),
+                                    height: 1,
                                     thickness: 0.5,
+                                    color: ColorPalette.darktext.withOpacity(
+                                      0.5,
+                                    ),
                                   ),
                                 ),
 
                                 PopupMenuItem(
                                   value: "edit",
                                   padding: EdgeInsets.zero,
-                                  child: SizedBox(
+                                  child: Container(
                                     width: s(132),
                                     height: s(42),
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                        left: s(13),
-                                        top: s(8),
-                                        bottom: s(8),
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFF313038),
+                                      borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(s(10)),
+                                        bottomRight: Radius.circular(s(10)),
                                       ),
-                                      child: Text(
-                                        "Edit",
-                                        style: GoogleFonts.dmSans(
-                                          color: ColorPalette.whitetext,
-                                          fontSize: s(14),
-                                        ),
+                                    ),
+                                    alignment: Alignment.centerLeft,
+                                    padding: EdgeInsets.only(left: s(13)),
+                                    child: Text(
+                                      "Edit",
+                                      style: GoogleFonts.dmSans(
+                                        color: ColorPalette.whitetext,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: s(14),
                                       ),
                                     ),
                                   ),

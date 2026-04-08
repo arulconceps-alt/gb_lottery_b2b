@@ -22,10 +22,12 @@ class _SearchScreenState extends State<SearchScreen> {
 
     return Scaffold(
       backgroundColor: const Color(0xFF0F1116),
-      appBar: AppBarTextWithBack( title: "Search",),
+      appBar: AppBarTextWithBack(title: "Search"),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: s(16)), // Sets left & right to 16
+          padding: EdgeInsets.symmetric(
+            horizontal: s(16),
+          ), // Sets left & right to 16
           child: Column(
             children: [
               SizedBox(height: s(17)),

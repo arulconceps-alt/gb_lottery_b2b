@@ -8,8 +8,10 @@ import 'package:gb_lottery_b2b/src/customerslist/view/customer_list_page.dart';
 import 'package:gb_lottery_b2b/src/dashboard/view/dashboard_page.dart';
 import 'package:gb_lottery_b2b/src/dashboard_chart_screen/view/dashboard_chart_screen.dart';
 import 'package:gb_lottery_b2b/src/leaderboard/view/leaderboard_page.dart';
+import 'package:gb_lottery_b2b/src/login/view/login_page.dart';
 import 'package:gb_lottery_b2b/src/login/view/login_screen.dart';
 import 'package:gb_lottery_b2b/src/notification_screen/view/notification_screen.dart';
+import 'package:gb_lottery_b2b/src/onboarding/view/onboarding.dart';
 import 'package:gb_lottery_b2b/src/otp/view/otp_page.dart';
 import 'package:gb_lottery_b2b/src/profile/view/profile_page.dart';
 import 'package:gb_lottery_b2b/src/purchase_history_details/view/purchase_history_details.dart';
@@ -38,10 +40,16 @@ class Routes {
       ),
 
       /// login
+      /// 
+      GoRoute(
+        name: RouteName.onboarding,
+        path: "/onboarding",
+        builder: (context, state) => const OnboardingPage(),
+      ),
       GoRoute(
         name: RouteName.login,
         path: "/login",
-        builder: (context, state) => const LoginScreen(),
+        builder: (context, state) => const LoginPage(),
       ),
        GoRoute(
         name: RouteName.otp,

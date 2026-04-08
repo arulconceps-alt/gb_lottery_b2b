@@ -98,7 +98,7 @@ class _CustomerPageState extends State<CustomerPage> {
               SizedBox(height: s(12)),
               Text(
                 "Total Customer (25004)",
-                style: GoogleFonts.inter(
+                style: GoogleFonts.dmSans(
                   fontSize: s(16),
                   fontWeight: FontWeight.w400,
                   color: ColorPalette.darktext.withOpacity(0.60),

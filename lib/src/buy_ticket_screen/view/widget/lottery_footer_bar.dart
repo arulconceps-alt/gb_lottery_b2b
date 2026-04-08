@@ -90,11 +90,10 @@ class LotteryFooterBar extends StatelessWidget {
               ),
               const Spacer(),
 
-              // PAY NOW BUTTON WITH NAVIGATION
+              // Add To Cart Button
               GestureDetector(
                 onTap: () {
-                  // Add your navigation or cart logic here
-                  context.pushNamed("myCart");
+                  context.push('/myCart');
                 },
                 child: Container(
                   // 1. Fixed Figma Dimensions

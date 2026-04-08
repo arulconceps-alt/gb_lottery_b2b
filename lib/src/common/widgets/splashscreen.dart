@@ -17,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
       if (!mounted) return;
-      context.go('/login');
+      context.go('/onboarding');
     });
   }
 
@@ -30,19 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: ColorPalette.background,
       body: SafeArea(
         child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                "assets/images/login/gb_logo.webp",
-                width: s(72),
-                height: s(50),
-              ),
-              SizedBox(height: s(8)),
-              Image.asset(iconLogo, width: s(167), height: s(82)),
-            ],
-          ),
+          child: Image.asset(iconLogo, width: s(193), height: s(95)),
         ),
       ),
     );

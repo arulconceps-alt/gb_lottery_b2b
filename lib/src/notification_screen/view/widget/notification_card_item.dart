@@ -83,9 +83,9 @@ class NotificationCardItem extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 1,),
+                SizedBox(height: 5,),
                 Transform.translate(
-                  offset: Offset(0, -s(8)),
+                  offset: Offset(0, -s(6)),
                   child: SizedBox(
                     width: s(249),
                     child: Text(

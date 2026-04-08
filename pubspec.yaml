@@ -76,6 +76,7 @@ flutter:
   assets:
      - assets/images/buy_ticket/
      - assets/images/splash/
+     - assets/images/onboarding/
      - assets/images/icons/
      - assets/images/myCart/
      - assets/images/profile/

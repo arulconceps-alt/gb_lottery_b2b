@@ -62,7 +62,7 @@ class ProfileMenuCard extends StatelessWidget {
         ),
 
         SizedBox(height: s(26)),
-
+  
         Container(
           decoration: BoxDecoration(
             color: ColorPalette.backgroundDark,
@@ -74,6 +74,7 @@ class ProfileMenuCard extends StatelessWidget {
                 s,
                 iconPath: 'assets/images/profile/notification.webp',
                 title: 'Notification',
+                  onTap: () => context.push('/notification_screen'),
               ),
               _divider(s),
 

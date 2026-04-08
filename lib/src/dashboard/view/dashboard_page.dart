@@ -78,46 +78,49 @@ class _DashboardPageState extends State<DashboardPage> {
             //   subtitle: "Register new customer",
             // ),
             SizedBox(height: s(23)),
-            Row(
-              children: [
-                HomeMenuSection(
-                  imagePath: "assets/images/dashboard/people.webp",
-                  title: "Add Customer",
-                  imageheight: 36,
-                  imagewidth: 38,
-                  spaceheight: 3,
-                  onTap: () {
-                    context.push('/addcustomer');
-                  },
-                ),
-
-                HomeMenuSection(
-                  imagePath: "assets/images/dashboard/tickets.webp",
-                  title: "Buy Tickets",
-                  imageheight: 30,
-                  imagewidth: 30,
-                  spaceheight: 9,
-                  onTap: () {
-                      context.push('/buy_ticket');
-                  },
-                ),
-
-                HomeMenuSection(
-                  imagePath: "assets/images/dashboard/dashboard.webp",
-                  title: "Dashboard",
-                  imageheight: 36,
-                  imagewidth: 36,
-                  spaceheight: 3,
-                  onTap: () {
-                    context.push('/dashboard_chart');
-                  },
-                ),
-              ],
+            Padding(
+               padding: EdgeInsets.symmetric(horizontal: s(16)),
+              child: Row(
+                children: [
+                  HomeMenuSection(
+                    imagePath: "assets/images/dashboard/people.webp",
+                    title: "Add Customer",
+                    imageheight: 36,
+                    imagewidth: 38,
+                    spaceheight: 3,
+                    onTap: () {
+                      context.push('/addcustomer');
+                    },
+                  ),
+                  SizedBox(width: s(14)),
+                  HomeMenuSection(
+                    imagePath: "assets/images/dashboard/tickets.webp",
+                    title: "Buy Tickets",
+                    imageheight: 30,
+                    imagewidth: 30,
+                    spaceheight: 9,
+                    onTap: () {
+                        context.push('/buy_ticket');
+                    },
+                  ),
+                  SizedBox(width: s(14)),
+                  HomeMenuSection(
+                    imagePath: "assets/images/dashboard/dashboard.webp",
+                    title: "Dashboard",
+                    imageheight: 36,
+                    imagewidth: 36,
+                    spaceheight: 3,
+                    onTap: () {
+                      context.push('/dashboard_chart');
+                    },
+                  ),
+                ],
+              ),
             ),
             SizedBox(height: s(30)),
             Text(
               "ABC Game",
-              style: GoogleFonts.inter(
+              style: GoogleFonts.dmSans(
                 fontSize: s(16),
                 fontWeight: FontWeight.w600,
                 fontStyle: FontStyle.italic,
@@ -170,7 +173,7 @@ class _DashboardPageState extends State<DashboardPage> {
             SizedBox(height: s(33)),
             Text(
               "YZABC Game",
-              style: GoogleFonts.inter(
+              style: GoogleFonts.dmSans(
                 fontSize: s(16),
                 fontWeight: FontWeight.w600,
                 fontStyle: FontStyle.italic,
@@ -223,7 +226,7 @@ class _DashboardPageState extends State<DashboardPage> {
             SizedBox(height: s(40)),
             Text(
               "What's in GB ",
-              style: GoogleFonts.inter(
+              style: GoogleFonts.dmSans(
                 fontSize: s(16),
                 fontWeight: FontWeight.w600,
                 fontStyle: FontStyle.italic,
@@ -239,7 +242,7 @@ class _DashboardPageState extends State<DashboardPage> {
             SizedBox(height: s(31)),
             Text(
               "Fantasy Sports",
-              style: GoogleFonts.inter(
+              style: GoogleFonts.dmSans(
                 fontSize: s(16),
                 fontWeight: FontWeight.w600,
                 fontStyle: FontStyle.italic,
@@ -264,7 +267,7 @@ class _DashboardPageState extends State<DashboardPage> {
             SizedBox(height: s(42)),
             Text(
               "Pure Luck - Instant results.",
-              style: GoogleFonts.inter(
+              style: GoogleFonts.dmSans(
                 fontSize: s(16),
                 fontWeight: FontWeight.w600,
                 fontStyle: FontStyle.italic,

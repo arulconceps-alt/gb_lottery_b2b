@@ -43,7 +43,7 @@ class MainNavigationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final scale = screenWidth / 440;
+    final scale = screenWidth / 375;
 
     double s(double v) => v * scale;
 
@@ -144,7 +144,7 @@ class MainNavigationScreen extends StatelessWidget {
           body: child,
 
           bottomNavigationBar: Container(
-            height: s(98.63),
+           // height: s(49),
             decoration: BoxDecoration(
               color:  Color(0xFF1C1B20),
               boxShadow: [
@@ -233,10 +233,10 @@ class MainNavigationScreen extends StatelessWidget {
             width: s(30),
             height: s(30),
               color: selected
-              ? ColorPalette.primary  
-              : ColorPalette.darktext, 
+              ? ColorPalette.primary
+              : ColorPalette.darktext,
           ),
-          SizedBox(height: s(3)),
+          SizedBox(height: s(2)),
         ],
       ),
     );
