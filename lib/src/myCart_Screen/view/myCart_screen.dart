@@ -22,21 +22,19 @@ class _MycartScreenState extends State<MycartScreen> {
     return Scaffold(
       appBar: AppBarTextWithBack(title: "My Cart"),
       backgroundColor: const Color(0xFF0F1116),
-
+      extendBody: true,
       /// --- 1. ONLY PAY NOW BUTTON IS FIXED ---
       bottomNavigationBar: SafeArea(
         child: Container(
-          color: const Color(0xFF0F1116),
           padding: EdgeInsets.fromLTRB(
             s(16),
             s(10),
             s(16),
-            MediaQuery.of(context).padding.bottom + s(16),
+            s(16)
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-             
               Container(
                 width: double.infinity,
                  height: s(50),
@@ -156,7 +154,7 @@ class _MycartScreenState extends State<MycartScreen> {
             //   ),
             // ),
 
-            SizedBox(height: s(14)),
+            SizedBox(height: s(150)),
           ],
         ),
       ),

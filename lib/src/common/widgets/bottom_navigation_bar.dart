@@ -243,6 +243,7 @@
 //   }
 // }
 
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
@@ -337,7 +338,8 @@ class MainNavigationScreen extends StatelessWidget {
       },
 
       child: Scaffold(
-        extendBody: true,
+        //extendBody: true,
+        resizeToAvoidBottomInset: false,
         body: child,
         bottomNavigationBar: _CustomBottomNav(
           selectedIndex: index,
@@ -397,7 +399,7 @@ class _CustomBottomNav extends StatelessWidget {
                   index < 3 &&
                   selectedIndex != index &&
                   selectedIndex != (index + 1);
-
+      
               return Expanded(
                 child: GestureDetector(
                   onTap: () => onTap(index),
@@ -413,7 +415,7 @@ class _CustomBottomNav extends StatelessWidget {
                             color: Colors.white.withOpacity(0.2),
                           ),
                         ),
-
+      
                       isSelected
                           ? _selectedIcon(index)
                           : Image.asset(

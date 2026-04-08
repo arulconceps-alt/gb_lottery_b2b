@@ -11,7 +11,6 @@ import 'package:gb_lottery_b2b/src/dashboard/view/widgets/home_menu_section.dart
 import 'package:gb_lottery_b2b/src/dashboard/view/widgets/pure_lucky_section.dart';
 import 'package:gb_lottery_b2b/src/dashboard/view/widgets/whats_gb_box.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
@@ -191,6 +190,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 crossAxisCount: 2,
                 crossAxisSpacing: s(9),
                 mainAxisSpacing: s(10),
+                childAspectRatio: 1.0,
                 children: const [
                   DashboardGameCard(
                     image: "assets/images/dashboard/arunachal_lottry.webp",
@@ -240,7 +240,7 @@ class _DashboardPageState extends State<DashboardPage> {
               padding: EdgeInsets.symmetric(horizontal: s(16)),
               child: const WhatsGbBox(),
             ),
-
+    
             SizedBox(height: s(31)),
             Text(
               "Fantasy Sports",

@@ -11,9 +11,7 @@ class CartItemCard extends StatelessWidget {
     return Container(
       width: double.infinity,
       margin: EdgeInsets.only(top: s(16), bottom: s(8)),
-      decoration: BoxDecoration(
-        color: const Color(0xFF24232A),
-      ),
+      decoration: BoxDecoration(color: const Color(0xFF24232A)),
       child: Column(
         children: [
           Padding(
@@ -31,7 +29,8 @@ class CartItemCard extends StatelessWidget {
                     color: const Color(0xFFDFC45C),
                     image: const DecorationImage(
                       image: AssetImage("assets/images/myCart/list_image.webp"),
-                      fit: BoxFit.cover, // Ensures the image fills the 56x44 area without gaps
+                      fit: BoxFit
+                          .cover, // Ensures the image fills the 56x44 area without gaps
                     ),
                   ),
                 ),
@@ -55,25 +54,10 @@ class CartItemCard extends StatelessWidget {
                       _infoText("Phone number : ", "9874563215"),
                       _infoText("Customer Id  : ", "56526"),
                       _infoText("Pincode  : ", "642120"),
-                      SizedBox(height: s(12)),
-
-                      /// Numbers Row
-                      Wrap(
-                        spacing: s(8),
-                        runSpacing: s(8),
-                        children: [
-                          _numberBadge("A=1", "₹10.0", "x1"),
-                          _numberBadge("B=1", "₹10.0", "x1"),
-                          _numberBadge("C=1", "₹10.0", "x1"),
-                        ],
-                      ),
-                      SizedBox(height: s(12)),
-                      _infoText("Total Price : ", "₹30", isTotal: true),
                     ],
                   ),
                 ),
 
-                /// --- 3. Right Side Badges ---
                 Column(
                   children: [
                     _sideBadge("Digits", "1"),
@@ -84,29 +68,57 @@ class CartItemCard extends StatelessWidget {
               ],
             ),
           ),
-
-          /// --- 4. Bottom Action Bar ---
-          Container(
-            decoration: BoxDecoration(
-              border: Border(
-                top: BorderSide(color: Colors.white.withOpacity(0.1)),
-              ),
-            ),
-            child: Row(
-              children: [
-                _actionButton("assets/images/myCart/edit_icon.webp", "Edit"),
-                Container(
-                  width: 1,
-                  height: s(40),
-                  color: Colors.white.withOpacity(0.1),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    _numberBadge("A=1", "₹10.0", "x1"),
+                    SizedBox(width: s(8)),
+                    _numberBadge("B=1", "₹10.0", "x1"),
+                    SizedBox(width: s(8)),
+                    _numberBadge("C=1", "₹10.0", "x1"),
+                  ],
                 ),
-                _actionButton("assets/images/myCart/delete_icon.webp", "Remove"),
+              ),
+          
+              SizedBox(height: s(13)),
+          
+              /// Total Price
+              _infoText("Total Price : ", "₹30", isTotal: true),
+            ]
+          ),
+           SizedBox(height: s(24)),
+                /// --- 4. Bottom Action Bar ---
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border(
+                      top: BorderSide(color: Colors.white.withOpacity(0.1)),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      _actionButton(
+                        "assets/images/myCart/edit_icon.webp",
+                        "Edit",
+                      ),
+                      Container(
+                        width: 1,
+                        height: s(40),
+                        color: Colors.white.withOpacity(0.1),
+                      ),
+                      _actionButton(
+                        "assets/images/myCart/delete_icon.webp",
+                        "Remove",
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
-          ),
-        ],
-      ),
-    );
+          );
   }
 
   Widget _infoText(String label, String value, {bool isTotal = false}) {
@@ -147,14 +159,34 @@ class CartItemCard extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(label, style: GoogleFonts.dmSans(color: Colors.white, fontSize: s(10), fontWeight: FontWeight.w600)),
+          Text(
+            label,
+            style: GoogleFonts.dmSans(
+              color: Colors.white,
+              fontSize: s(10),
+              fontWeight: FontWeight.w600,
+            ),
+          ),
           SizedBox(width: s(4)),
-          Text(price, style: GoogleFonts.dmSans(color: Colors.white, fontSize: s(8))),
+          Text(
+            price,
+            style: GoogleFonts.dmSans(color: Colors.white, fontSize: s(8)),
+          ),
           SizedBox(width: s(4)),
           Container(
             padding: EdgeInsets.all(s(1)),
-            decoration: BoxDecoration(color: const Color(0xFFCDB75D), borderRadius: BorderRadius.circular(2)),
-            child: Text(qty, style: GoogleFonts.dmSans(color: Colors.black, fontSize: s(6), fontWeight: FontWeight.bold)),
+            decoration: BoxDecoration(
+              color: const Color(0xFFCDB75D),
+              borderRadius: BorderRadius.circular(2),
+            ),
+            child: Text(
+              qty,
+              style: GoogleFonts.dmSans(
+                color: Colors.black,
+                fontSize: s(6),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         ],
       ),
@@ -173,52 +205,52 @@ class CartItemCard extends StatelessWidget {
       ),
       child: isTime
           ? Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            label,
-            style: GoogleFonts.dmSans(
-              color: const Color(0xFF9F9F9F),
-              fontSize: s(8),
-              fontWeight: FontWeight.w400,
-              letterSpacing: -0.08,
-            ),
-          ),
-          Text(
-            value,
-            style: GoogleFonts.dmSans(
-              color: Colors.white,
-              fontSize: s(8),
-              fontWeight: FontWeight.w500,
-              letterSpacing: -0.08,
-            ),
-          ),
-        ],
-      )
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  label,
+                  style: GoogleFonts.dmSans(
+                    color: const Color(0xFF9F9F9F),
+                    fontSize: s(8),
+                    fontWeight: FontWeight.w400,
+                    letterSpacing: -0.08,
+                  ),
+                ),
+                Text(
+                  value,
+                  style: GoogleFonts.dmSans(
+                    color: Colors.white,
+                    fontSize: s(8),
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: -0.08,
+                  ),
+                ),
+              ],
+            )
           : Row(
-        // This ensures "Digits : 1" stays on one line
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            '$label : ',
-            style: GoogleFonts.dmSans(
-              color: const Color(0xFF9F9F9F),
-              fontSize: s(12),
-              fontWeight: FontWeight.w500,
-              letterSpacing: -0.12,
+              // This ensures "Digits : 1" stays on one line
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  '$label : ',
+                  style: GoogleFonts.dmSans(
+                    color: const Color(0xFF9F9F9F),
+                    fontSize: s(12),
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: -0.12,
+                  ),
+                ),
+                Text(
+                  value,
+                  style: GoogleFonts.dmSans(
+                    color: Colors.white,
+                    fontSize: s(12),
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: -0.12,
+                  ),
+                ),
+              ],
             ),
-          ),
-          Text(
-            value,
-            style: GoogleFonts.dmSans(
-              color: Colors.white,
-              fontSize: s(12),
-              fontWeight: FontWeight.w600,
-              letterSpacing: -0.12,
-            ),
-          ),
-        ],
-      ),
     );
   }
 
