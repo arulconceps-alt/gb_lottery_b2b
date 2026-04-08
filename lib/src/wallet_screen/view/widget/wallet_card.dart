@@ -2,9 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class WalletScreenCard extends StatelessWidget {
+class WalletScreenCard extends StatefulWidget {
   const WalletScreenCard({super.key});
 
+  @override
+  State<WalletScreenCard> createState() => _WalletScreenCardState();
+}
+
+class _WalletScreenCardState extends State<WalletScreenCard> {
+  bool isChecked = true;
+  final double totalMoney = 300000;
+  double ratio = 0.75;
   @override
   Widget build(BuildContext context) {
     final w = MediaQuery.of(context).size.width;
@@ -73,83 +81,136 @@ class WalletScreenCard extends StatelessWidget {
                     ],
                   ),
                 ),
+                SizedBox(height: s(9)),
+                LayoutBuilder(
+                  builder: (context, constraints) {
+                    double fullWidth = constraints.maxWidth;
+                    double cardWidth = s(104);
 
-                SizedBox(height: s(8)),
+                    double leftPosition = (fullWidth * ratio) - (cardWidth / 2);
+                    leftPosition = leftPosition.clamp(0.0, fullWidth - cardWidth);
 
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start, // Aligns text baseline with bottom of card
-                  children: [
-                    Expanded(
-                      child: Padding(
-                        padding: EdgeInsets.only(bottom: s(4)), // Subtle alignment adjustment
-                        child: Text(
-                          "Your Money is too Low",
-                          style: GoogleFonts.dmSans(
-                            color: Colors.white,
-                            fontSize: s(14),
-                            fontWeight: FontWeight.w400,
-                          ),
+                    double spentMoney = totalMoney * ratio;
+
+                    bool showLowText = ratio >= 0.60;
+
+                    List<Color> gradient;
+                    if (ratio <= 0.35) {
+                      gradient = [Colors.green, Colors.green.shade700];
+                    } else if (ratio <= 0.60) {
+                      gradient = [const Color(0xFFDFC45C), const Color(0xFFA89A5F)];
+                    } else if (ratio <= 0.85) {
+                      gradient = [Colors.red, Colors.red.shade700];
+                    } else {
+                      gradient = [Colors.grey, Colors.white54];
+                    }
+
+                    return GestureDetector(
+                      onHorizontalDragUpdate: (details) {
+                        setState(() {
+                          ratio += details.delta.dx / fullWidth;
+                          ratio = ratio.clamp(0.0, 1.0);
+                        });
+                      },
+                      child: SizedBox(
+                        height: s(70),
+                        child: Stack(
+                          clipBehavior: Clip.none,
+                          children: [
+                            if (showLowText)
+                              Positioned(
+                                left: 0,
+                                top: s(0),
+                                child: Text(
+                                  "Your Money is too Low",
+                                  style: GoogleFonts.dmSans(
+                                    color: Colors.white,
+                                    fontSize: s(14),
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+
+                            /// Moving card
+                            Positioned(
+                              left: leftPosition,
+                              top: s(0),
+                              child: Stack(
+                                clipBehavior: Clip.none,
+                                children: [
+                                  /// Half outside top dot
+                                  Positioned(
+                                    top: s(-4),
+                                    left: (cardWidth / 2) - s(4),
+                                    child: Container(
+                                      width: s(8),
+                                      height: s(8),
+                                      decoration: BoxDecoration(
+                                        color: gradient.first,
+                                        shape: BoxShape.circle,
+                                      ),
+                                    ),
+                                  ),
+
+                                  /// Moving money box
+                                  Container(
+                                    width: cardWidth,
+                                    height: s(44),
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                        begin: Alignment.centerRight,
+                                        end: Alignment.centerLeft,
+                                        colors: gradient,
+                                      ),
+                                      borderRadius: BorderRadius.circular(s(8)),
+                                    ),
+                                    child: Stack(
+                                      children: [
+                                        Positioned(
+                                          left: s(19),
+                                          top: s(5),
+                                          child: SizedBox(
+                                            width: s(67),
+                                            height: s(14),
+                                            child: Text(
+                                              "Spent Money",
+                                              style: GoogleFonts.dmSans(
+                                                color: Colors.white,
+                                                fontSize: s(10),
+                                                fontWeight: FontWeight.w600,
+                                                height: 1.2,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          left: s(15),
+                                          top: s(19),
+                                          child: SizedBox(
+                                            width: s(80),
+                                            height: s(20),
+                                            child: Text(
+                                              "₹${spentMoney.toStringAsFixed(0)}",
+                                              style: GoogleFonts.dmSans(
+                                                color: Colors.white,
+                                                fontSize: s(16),
+                                                fontWeight: FontWeight.w700,
+                                                height: 1.25,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ),
-                    Stack(
-                      clipBehavior: Clip.none, // Allows the red dot to show outside the box
-                      alignment: Alignment.topCenter,
-                      children: [
-                        Positioned(
-                          top: s(-4), // Exactly half of the height (8/2) peeks above the top border
-                          right: s(46), // Adjust this value to align perfectly with your progress bar
-                          child: Container(
-                            width: s(8),
-                            height: s(8),
-                            decoration: const BoxDecoration(
-                              color: Color(0xFFFF0000),
-                              shape: BoxShape.circle,
-                            ),
-                          ),
-                        ),
-                        /// THE GOLD BOX
-                        Container(
-                          width: s(104),
-                          height: s(44),
-                          decoration: BoxDecoration(
-                            gradient: const LinearGradient(
-                              begin: Alignment.centerRight,
-                              end: Alignment.centerLeft,
-                              colors: [Color(0xFFDFC45C), Color(0xFFA89A5F)],
-                            ),
-                            borderRadius: BorderRadius.circular(s(8)),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Spent Money",
-                                style: GoogleFonts.dmSans(
-                                  color: Colors.white,
-                                  fontSize: s(10),
-                                  fontWeight: FontWeight.w600,
-                                  height: 1.0,
-                                ),
-                              ),
-                              Text(
-                                "₹2,62,580",
-                                style: GoogleFonts.dmSans(
-                                  color: Colors.white,
-                                  fontSize: s(16),
-                                  fontWeight: FontWeight.w700,
-                                  height: 1.0,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-
-                        /// THE RED DOT (Half-in, half-out)
-
-                      ],
-                    ),
-                  ],
+                    );
+                  },
                 ),
               ],
             ),
@@ -159,38 +220,70 @@ class WalletScreenCard extends StatelessWidget {
         SizedBox(height: s(20)),
 
         /// CHECKBOX OUTSIDE CARD
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center, // Ensures vertical centering with text
-          children: [
-            Container(
-              width: s(18),
-              height: s(18),
-              // Figma shows a corner radius of 2px
-              decoration: BoxDecoration(
-                color: const Color(0xFFDFC45C),
-                borderRadius: BorderRadius.circular(s(2)),
-              ),
-              // Centering the asset directly inside the container
-              alignment: Alignment.center,
-              child: Image.asset(
-                "assets/images/wallet/check_tick.webp",
-                height: s(12),
-                width: s(12),
-                fit: BoxFit.contain,
-              ),
-            ),
-            SizedBox(width: s(10)), // 10px spacing as per your requirement
-            Expanded(
-              child: Text(
-                "I will send money within 2 days",
-                style: GoogleFonts.dmSans(
-                  color: Colors.white,
-                  fontSize: s(14),
-                  fontWeight: FontWeight.w400, // Matching typical Figma body weight
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              isChecked = !isChecked;
+            });
+          },
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: s(18),
+                height: s(18),
+                child: Stack(
+                  children: [
+                    /// checkbox bg
+                    Positioned(
+                      left: 0,
+                      top: 0,
+                      child: Container(
+                        width: s(18),
+                        height: s(18),
+                        decoration: ShapeDecoration(
+                          color: isChecked
+                              ? const Color(0xFFDFC45C)
+                              : Colors.transparent,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(s(2)),
+                            side: const BorderSide(
+                              color: Color(0xFFDFC45C),
+                              width: 1,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    /// tick icon exact Figma position
+                    if (isChecked)
+                      Positioned(
+                        left: s(3),
+                        top: s(3),
+                        child: Image.asset(
+                          "assets/images/wallet/check_tick.png",
+                          width: s(12),
+                          height: s(12),
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                  ],
                 ),
               ),
-            ),
-          ],
+              SizedBox(width: s(10)),
+              Expanded(
+                child: Text(
+                  "I will send money within 2 days",
+                  style: GoogleFonts.dmSans(
+                    color: Colors.white,
+                    fontSize: s(14),
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
 
         SizedBox(height: s(17)),
@@ -201,7 +294,7 @@ class WalletScreenCard extends StatelessWidget {
             Expanded(
               child: _button(
                 s,
-                text: "Money Request",
+                text: "Credit Request",
                 isGold: true,
                 onTap: (){},
               ),
