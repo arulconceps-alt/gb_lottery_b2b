@@ -34,6 +34,7 @@ import 'package:gb_lottery_b2b/src/results/view/resluts_page.dart';
 import 'package:gb_lottery_b2b/src/search_screen/view/search_screen.dart';
 import 'package:gb_lottery_b2b/src/settlement/view/settlement_page.dart';
 import 'package:gb_lottery_b2b/src/terms_codition/view/terms_condition_page.dart';
+import 'package:gb_lottery_b2b/src/transaction_screen/view/transaction_screen.dart';
 import 'package:gb_lottery_b2b/src/wallet_screen/view/wallet_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -221,6 +222,12 @@ class Routes {
         name: RouteName.terms,
         path: "/terms",
         builder: (context, state) => const TermsAndConditionsPage(),
+      ),
+      /// Transaction Screen
+      GoRoute(
+        name: RouteName.transaction,
+        path: "/transaction",
+        builder: (context, state) => const TransactionScreen(),
       ),
     ],
     redirect: (context, state) {

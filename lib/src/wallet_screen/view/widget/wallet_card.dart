@@ -262,7 +262,7 @@ class _WalletScreenCardState extends State<WalletScreenCard> {
                         left: s(3),
                         top: s(3),
                         child: Image.asset(
-                          "assets/images/wallet/check_tick.webp",
+                          "assets/images/wallet/check_tick.png",
                           width: s(12),
                           height: s(12),
                           fit: BoxFit.contain,

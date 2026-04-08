@@ -243,7 +243,6 @@
 //   }
 // }
 
-
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
@@ -365,7 +364,7 @@ class _CustomBottomNav extends StatelessWidget {
 
   static const iconSizes = [
     Size(24, 22), // home
-    Size(29, 22), // customers
+    Size(32, 32), // customers
     Size(18, 22), // results
     Size(23, 22), // profile
   ];
@@ -399,7 +398,7 @@ class _CustomBottomNav extends StatelessWidget {
                   index < 3 &&
                   selectedIndex != index &&
                   selectedIndex != (index + 1);
-      
+
               return Expanded(
                 child: GestureDetector(
                   onTap: () => onTap(index),
@@ -415,13 +414,13 @@ class _CustomBottomNav extends StatelessWidget {
                             color: Colors.white.withOpacity(0.2),
                           ),
                         ),
-      
+
                       isSelected
                           ? _selectedIcon(index)
                           : Image.asset(
                               icons[index],
-                              width: 26,
-                              height: 26,
+                              width: iconSizes[index].width,
+                              height: iconSizes[index].height,
                               color: const Color(0xFF6B6B6B),
                             ),
                     ],

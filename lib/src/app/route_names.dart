@@ -34,4 +34,5 @@ mixin RouteName {
   static const terms = "terms";
   static const responsiblegaming = "responsiblegaming";
   static const relationmanager = "relationmanager";
+  static const transaction = "transaction";
 }
