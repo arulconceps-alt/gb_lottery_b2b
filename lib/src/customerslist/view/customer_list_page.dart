@@ -108,6 +108,7 @@ class _CustomerPageState extends State<CustomerPage> {
               UserTypeSelector(),
               SizedBox(height: s(27)),
               CustomerUserListSection(),
+               SizedBox(height: s(100)),
             ],
           ),
         ),

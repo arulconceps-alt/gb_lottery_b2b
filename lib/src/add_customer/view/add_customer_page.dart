@@ -3,6 +3,7 @@ import 'package:gb_lottery_b2b/src/add_customer/view/widgets/add_customer_form_s
 import 'package:gb_lottery_b2b/src/add_customer/view/widgets/add_customer_radio_button.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
 import 'package:gb_lottery_b2b/src/common/widgets/app_bar_with_back.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddCustomerPage extends StatefulWidget {
@@ -65,20 +66,23 @@ class _AddCustomerPageState extends State<AddCustomerPage> {
     final scale = w / 375;
     double s(double v) => v * scale;
 
-    return Container(
-      width: double.infinity,
-      height: s(50),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(s(10)),
-        gradient: ColorPalette.buttonGradient,
-      ),
-      child: Center(
-        child: Text(
-          "Done",
-          style: GoogleFonts.dmSans(
-            fontSize: s(16),
-            fontWeight: FontWeight.w700,
-            color: ColorPalette.whitetext,
+    return GestureDetector(
+      onTap: () => context.go('/customer'),
+      child: Container(
+        width: double.infinity,
+        height: s(50),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(s(10)),
+          gradient: ColorPalette.buttonGradient,
+        ),
+        child: Center(
+          child: Text(
+            "Done",
+            style: GoogleFonts.dmSans(
+              fontSize: s(16),
+              fontWeight: FontWeight.w700,
+              color: ColorPalette.whitetext,
+            ),
           ),
         ),
       ),

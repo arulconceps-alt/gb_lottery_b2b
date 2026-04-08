@@ -30,5 +30,8 @@ mixin RouteName {
   static const walletLinkingProcessing = "walletLinkingProcessing";
   static const walletLinkingSuccess = "walletLinkingSuccess";
   static const walletLinkingPending = "walletLinkingPending";
-  static const kycFileUpdateSuccess = "kycFileUpdateSuccess";
+  static const privacy = "privacy";
+  static const terms = "terms";
+  static const responsiblegaming = "responsiblegaming";
+  static const relationmanager = "relationmanager";
 }

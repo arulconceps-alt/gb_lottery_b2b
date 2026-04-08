@@ -246,22 +246,25 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   Widget _buildSubmitButton(double Function(double) s) {
-    return Container(
-      width: double.infinity,
-      height: s(54),
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFFDFC45C), Color(0xFFA89A5F)],
+    return GestureDetector(
+      onTap: () => context.go('/profile'),
+      child: Container(
+        width: double.infinity,
+        height: s(54),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: [Color(0xFFDFC45C), Color(0xFFA89A5F)],
+          ),
+          borderRadius: BorderRadius.circular(s(8)),
         ),
-        borderRadius: BorderRadius.circular(s(8)),
-      ),
-      child: Text(
-        'Submit',
-        style: GoogleFonts.dmSans(
-          color: Colors.white,
-          fontSize: s(18),
-          fontWeight: FontWeight.w600,
+        child: Text(
+          'Submit',
+          style: GoogleFonts.dmSans(
+            color: Colors.white,
+            fontSize: s(18),
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
     );

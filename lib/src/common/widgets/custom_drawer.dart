@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
 import 'package:gb_lottery_b2b/src/login/repo/login_repository.dart';
+import 'package:gb_lottery_b2b/src/login/repo/login_repository.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:gb_lottery_b2b/src/common/services/services_locator.dart';
+import 'package:gb_lottery_b2b/src/login/bloc/login_bloc.dart';
 import 'package:gb_lottery_b2b/src/common/services/services_locator.dart';
 import 'package:gb_lottery_b2b/src/login/bloc/login_bloc.dart';
 
@@ -40,7 +43,7 @@ class CustomDrawer extends StatelessWidget {
                         child: Center(
                           child: Text("B",
                           style: GoogleFonts.dmSans(
-                            fontSize: 28,
+                            fontSize: s(28),
                             color: ColorPalette.whitetext,
                             fontWeight: FontWeight.w400
                           ),),
@@ -126,26 +129,30 @@ class CustomDrawer extends StatelessWidget {
                       "Leaderboard",
                       s,
                       onTap: () => context.push('/leaderboard'),
+                      onTap: () => context.push('/leaderboard'),
                     ),
-                    _menuItem(
-                      "assets/images/dashboard/support.webp",
-                      "Support Chat",
-                      s,
-                    ),
+                    // _menuItem(
+                    //   "assets/images/dashboard/support.webp",
+                    //   "Support Chat",
+                    //   s,
+                    // ),
                     _menuItem(
                       "assets/images/dashboard/terms_condition.webp",
                       "Terms & Conditions",
                       s,
+                      onTap: () => context.push('/terms'),
                     ),
                     _menuItem(
                       "assets/images/dashboard/privacy.webp",
                       "Privacy",
                       s,
+                      onTap: () => context.push('/privacy'),
                     ),
                     _menuItem(
                       "assets/images/dashboard/responsible.webp",
                       "Responsible Gaming",
                       s,
+                      onTap: () => context.push('/responsiblegaming'),
                     ),
       
                     Container(
@@ -158,6 +165,7 @@ class CustomDrawer extends StatelessWidget {
                       "assets/images/dashboard/profile_icon.webp",
                       "Relation manager",
                       s,
+                       onTap: () => context.push('/relationmanager'),
                     ),
                     Container(
                       height: s(48),
@@ -169,6 +177,12 @@ class CustomDrawer extends StatelessWidget {
                       "Logout",
                       s,
                       isLogout: true,
+                      onTap: () async {
+                        await getIt<LoginRepository>().logout();
+                        if (context.mounted) {
+                          context.go('/login');
+                        }
+                      },
                       onTap: () async {
                         await getIt<LoginRepository>().logout();
                         if (context.mounted) {
