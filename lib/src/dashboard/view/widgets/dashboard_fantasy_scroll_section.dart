@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class DashboardFantasyScrollSection extends StatefulWidget {
   const DashboardFantasyScrollSection({super.key});
@@ -9,23 +11,33 @@ class DashboardFantasyScrollSection extends StatefulWidget {
 }
 
 class _DashboardFantasyScrollSectionState
-    extends State<DashboardFantasyScrollSection>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
+    extends State<DashboardFantasyScrollSection> {
+  final ScrollController _scrollController = ScrollController();
+  Timer? _timer;
+
+  bool isUserScrolling = false;
 
   @override
   void initState() {
     super.initState();
 
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 12),
-    )..repeat();
+    _timer = Timer.periodic(const Duration(milliseconds: 20), (_) {
+      if (!isUserScrolling && _scrollController.hasClients) {
+        double next = _scrollController.offset + 0.8;
+
+        if (next >= _scrollController.position.maxScrollExtent) {
+          _scrollController.jumpTo(0);
+        } else {
+          _scrollController.jumpTo(next);
+        }
+      }
+    });
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _timer?.cancel();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -38,58 +50,54 @@ class _DashboardFantasyScrollSectionState
     final itemWidth = s(140);
     final spacing = s(12);
 
-    final totalWidth = (itemWidth + spacing) * 3;
+    final images = [
+      "assets/images/dashboard/icc.webp",
+      "assets/images/dashboard/ipl.webp",
+      "assets/images/dashboard/hocky.webp",
+    ];
+
+    final messages = ["hi", "hello", "like it"];
 
     return SizedBox(
       height: s(66),
-      child: Padding(
-        padding: EdgeInsets.only(left: s(12)),
-        child: ClipRect(
-          child: AnimatedBuilder(
-            animation: _controller,
-            builder: (context, child) {
-              final offset = _controller.value * totalWidth;
+      child: NotificationListener<UserScrollNotification>(
+        onNotification: (notification) {
+          if (notification.direction == ScrollDirection.idle) {
+            isUserScrolling = false;
+          } else {
+            isUserScrolling = true;
+          }
+          return true;
+        },
+        child: ListView.separated(
+          controller: _scrollController,
+          scrollDirection: Axis.horizontal,
+          itemCount: images.length * 20,
+          separatorBuilder: (_, __) => SizedBox(width: spacing),
+          itemBuilder: (context, index) {
+            final actualIndex = index % images.length;
+            final image = images[actualIndex];
 
-              return Transform.translate(
-                offset: Offset(-offset, 0),
-                child: OverflowBox(
-                  maxWidth: double.infinity,
-                  alignment: Alignment.centerLeft,
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      _buildItems(itemWidth, spacing, s),
-                      SizedBox(width: spacing),
-                      _buildItems(itemWidth, spacing, s),
-                    ],
-                  ),
-                ),
-              );
-            },
-          ),
+            return GestureDetector(
+              onTap: () {
+                final actualIndex = index % images.length;
+                final messages = ["hi", "hello", "like it"];
+
+                final messenger = ScaffoldMessenger.maybeOf(context);
+
+                messenger?.showSnackBar(
+                  SnackBar(content: Text(messages[actualIndex])),
+                );
+              },
+              child: _card(image, itemWidth, s),
+            );
+          },
         ),
       ),
     );
   }
 
-  // 🔹 ITEMS ROW
-  Widget _buildItems(
-    double itemWidth,
-    double spacing,
-    double Function(double) s,
-  ) {
-    return Row(
-      children: [
-        _card("assets/images/dashboard/icc.webp", itemWidth, s),
-        SizedBox(width: spacing),
-        _card("assets/images/dashboard/ipl.webp", itemWidth, s),
-        SizedBox(width: spacing),
-        _card("assets/images/dashboard/hocky.webp", itemWidth, s),
-      ],
-    );
-  }
-
-  // 🔹 CARD
+  // 🔹 CARD (unchanged UI)
   Widget _card(String image, double width, double Function(double) s) {
     return Container(
       width: width,
