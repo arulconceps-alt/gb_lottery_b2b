@@ -357,7 +357,7 @@ class _CustomBottomNav extends StatelessWidget {
   const _CustomBottomNav({required this.selectedIndex, required this.onTap});
 
   static const icons = [
-    'assets/images/dashboard/home.webp',
+    'assets/images/dashboard/home.png',
     'assets/images/dashboard/customers.webp',
     'assets/images/dashboard/results.webp',
     'assets/images/dashboard/profile.webp',

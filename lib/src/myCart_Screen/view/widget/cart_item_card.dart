@@ -83,42 +83,40 @@ class CartItemCard extends StatelessWidget {
                   ],
                 ),
               ),
-          
+
               SizedBox(height: s(13)),
-          
+
               /// Total Price
               _infoText("Total Price : ", "₹30", isTotal: true),
-            ]
+            ],
           ),
-           SizedBox(height: s(24)),
-                /// --- 4. Bottom Action Bar ---
+          SizedBox(height: s(24)),
+
+          /// --- 4. Bottom Action Bar ---
+          Container(
+            decoration: BoxDecoration(
+              border: Border(
+                top: BorderSide(color: Colors.white.withOpacity(0.1)),
+              ),
+            ),
+            child: Row(
+              children: [
+                _actionButton("assets/images/myCart/edit_icon.webp", "Edit"),
                 Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                      top: BorderSide(color: Colors.white.withOpacity(0.1)),
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      _actionButton(
-                        "assets/images/myCart/edit_icon.webp",
-                        "Edit",
-                      ),
-                      Container(
-                        width: 1,
-                        height: s(40),
-                        color: Colors.white.withOpacity(0.1),
-                      ),
-                      _actionButton(
-                        "assets/images/myCart/delete_icon.webp",
-                        "Remove",
-                      ),
-                    ],
-                  ),
+                  width: 1,
+                  height: s(40),
+                  color: Colors.white.withOpacity(0.1),
+                ),
+                _actionButton(
+                  "assets/images/myCart/delete_icon.webp",
+                  "Remove",
                 ),
               ],
             ),
-          );
+          ),
+        ],
+      ),
+    );
   }
 
   Widget _infoText(String label, String value, {bool isTotal = false}) {
@@ -131,7 +129,7 @@ class CartItemCard extends StatelessWidget {
               text: label,
               style: GoogleFonts.dmSans(
                 color: const Color(0xFF9F9F9F),
-                fontSize: s(isTotal ? 14 : 10),
+                fontSize: s(isTotal ? 14 : 11),
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -139,7 +137,7 @@ class CartItemCard extends StatelessWidget {
               text: value,
               style: GoogleFonts.dmSans(
                 color: Colors.white,
-                fontSize: s(isTotal ? 14 : 10),
+                fontSize: s(isTotal ? 14 : 11),
                 fontWeight: FontWeight.w400,
               ),
             ),

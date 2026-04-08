@@ -59,7 +59,7 @@ class _DashboardFantasyScrollSectionState
     final messages = ["hi", "hello", "like it"];
 
     return SizedBox(
-      height: s(66),
+      height: s(70),
       child: NotificationListener<UserScrollNotification>(
         onNotification: (notification) {
           if (notification.direction == ScrollDirection.idle) {
