@@ -17,7 +17,7 @@ class _PurchaseHistoryItemCardState
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.only(top: widget.s(16), bottom: widget.s(16)),
+      margin: EdgeInsets.only(top: widget.s(12), bottom: widget.s(12)),
        padding: EdgeInsets.all(widget.s(16)),
       decoration: const BoxDecoration(color: Color(0xFF24232A)),
       child: Column(
@@ -130,7 +130,7 @@ class _PurchaseHistoryItemCardState
               text: label,
               style: GoogleFonts.dmSans(
                 color: const Color(0xFF9F9F9F),
-                fontSize: widget.s(isTotal ? 14 : 10),
+                fontSize: widget.s(isTotal ? 14 : 11),
                 fontWeight: FontWeight.w400,
               ),
             ),
@@ -138,7 +138,7 @@ class _PurchaseHistoryItemCardState
               text: value,
               style: GoogleFonts.dmSans(
                 color: Colors.white,
-                fontSize: widget.s(isTotal ? 14 : 10),
+                fontSize: widget.s(isTotal ? 14 : 11),
                 fontWeight: FontWeight.w400,
               ),
             ),

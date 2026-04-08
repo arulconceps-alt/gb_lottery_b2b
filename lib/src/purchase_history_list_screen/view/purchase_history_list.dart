@@ -176,7 +176,7 @@ class _PurchaseHistoryListState extends State<PurchaseHistoryList> {
                             ),
                             child: Center(
                               child: Image.asset(
-                                "assets/images/purchase_history_list/filter_icon.webp",
+                                "assets/images/purchase_history_list/filter_icon.png",
                                 width: s(20),
                                 height: s(20),
                                 fit: BoxFit.contain,
