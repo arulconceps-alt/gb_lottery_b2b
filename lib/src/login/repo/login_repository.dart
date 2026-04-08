@@ -14,10 +14,11 @@ class LoginRepository {
       if (mobile.length != 10) {
         throw Exception('Please enter a valid 10-digit mobile number');
       }
-      
+
       await _apiRepository.postRequest(
         url: Constants.api.resendOtp,
-        data: {'mobile': mobile},
+        data: {'phone': mobile},
+        requestName: 'dealer_otp_send',
       );
     } catch (e) {
       rethrow;
@@ -35,23 +36,27 @@ class LoginRepository {
 
       final response = await _apiRepository.postRequest(
         url: Constants.api.verifyOtp,
-        data: {
-          'mobile': mobile,
-          'otp': otp,
-        },
+        data: {'phone': mobile, 'otp': otp},
+        requestName: 'verify_otp',
       );
 
       if (response['success'] == true) {
         final userData = response['data'] != null
             ? Map<String, dynamic>.from(response['data'])
             : <String, dynamic>{};
-        
+
         final user = LoginModel.fromJson(userData);
-        
+
         // Save to Preferences
-        await _preferencesRepository.setPreference(Constants.store.AUTH_TOKEN, user.authToken);
-        await _preferencesRepository.setPreference(Constants.store.USER_ID, user.userId);
-        
+        await _preferencesRepository.setPreference(
+          Constants.store.AUTH_TOKEN,
+          user.authToken,
+        );
+        await _preferencesRepository.setPreference(
+          Constants.store.USER_ID,
+          user.userId,
+        );
+
         return user;
       } else {
         throw Exception(response['message'] ?? 'Login failed');
@@ -72,22 +77,26 @@ class LoginRepository {
 
       final response = await _apiRepository.postRequest(
         url: Constants.api.login,
-        data: {
-          'mobile': mobile,
-          'password': password,
-        },
+        data: {'phone': mobile, 'password': password},
+        requestName: 'dealer_login',
       );
 
       if (response['success'] == true) {
         final userData = response['data'] != null
             ? Map<String, dynamic>.from(response['data'])
             : <String, dynamic>{};
-            
+
         final user = LoginModel.fromJson(userData);
 
         // Save to Preferences
-        await _preferencesRepository.setPreference(Constants.store.AUTH_TOKEN, user.authToken);
-        await _preferencesRepository.setPreference(Constants.store.USER_ID, user.userId);
+        await _preferencesRepository.setPreference(
+          Constants.store.AUTH_TOKEN,
+          user.authToken,
+        );
+        await _preferencesRepository.setPreference(
+          Constants.store.USER_ID,
+          user.userId,
+        );
 
         return user;
       } else {
@@ -103,7 +112,7 @@ class LoginRepository {
       // Clear Preferences
       await _preferencesRepository.removePreference(Constants.store.AUTH_TOKEN);
       await _preferencesRepository.removePreference(Constants.store.USER_ID);
-      
+
       // Optionally call a logout API if not in MOCK mode
       if (!Constants.app.USE_MOCK_API) {
         // await _apiRepository.postRequest(url: Constants.api.logout, data: {});

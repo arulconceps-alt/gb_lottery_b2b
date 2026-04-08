@@ -21,23 +21,25 @@ class ApiRepository {
     } else {
       _dio.options.headers.remove("Authorization");
     }
+    _dio.options.headers["Content-Type"] = "application/json";
+    _dio.options.headers["Accept"] = "*/*";
   }
 
-  String buildRequest({required Map<String, dynamic> data}) {
+  String buildRequest({
+    required Map<String, dynamic> data,
+    String? requestName,
+  }) {
     try {
       final Map<String, dynamic> requestJson = {
         "requester": {
           "name": Constants.app.APP_NAME,
           "version": "1.0",
           "timestamp": DateTime.now().toUtc().toIso8601String(),
-          "requestedby": prefRepo.getPreference(Constants.store.USER_ID),
+          "requestedby": prefRepo.getPreference(Constants.store.USER_ID) ?? "",
         },
+        Constants.api.REQUEST_NAME: requestName ?? "",
+        Constants.api.DATA: data,
       };
-
-      data.forEach((key, value) {
-        log.d("ApiRepository::buildRequest::$key - $value");
-        requestJson[key] = value;
-      });
 
       log.d("ApiRepository::buildRequest::Final JSON: $requestJson");
       return json.encode(requestJson);
@@ -50,10 +52,11 @@ class ApiRepository {
   Future<Map<String, dynamic>> postRequest({
     required String url,
     required Map<String, dynamic> data,
+    String? requestName,
   }) async {
     try {
       _initHeaders(); // Ensure headers are fresh
-      log.d("ApiRepository::postRequest::URL: $url, Data: $data");
+      log.d("ApiRepository::postRequest::URL: $url, Data: $data, RequestName: $requestName");
       print("🚀 ApiRepository: Token in Header = ${_dio.options.headers['Authorization']}");
 
       if (Constants.app.USE_MOCK_API) {
@@ -74,7 +77,7 @@ class ApiRepository {
       }
 
       final fullUrl = Constants.api.API_BASE_URL + url;
-      final requestBodyString = buildRequest(data: data);
+      final requestBodyString = buildRequest(data: data, requestName: requestName);
 
       log.d("ApiRepository::postRequest::Posting to $fullUrl");
 
@@ -90,6 +93,10 @@ class ApiRepository {
       return decoded as Map<String, dynamic>;
     } on DioException catch (dioError) {
       log.e("ApiRepository::postRequest::DioException: ${dioError.message}");
+      if (dioError.response != null) {
+        log.e("ApiRepository::postRequest::Response Code: ${dioError.response?.statusCode}");
+        log.e("ApiRepository::postRequest::Response Data: ${dioError.response?.data}");
+      }
       throw _handleError(dioError);
     }
   }

@@ -1,17 +1,17 @@
 class ApiConstants {
   const ApiConstants();
 
-  final String API_BASE_URL = "https://api.example.com";
+  final String API_BASE_URL = "http://187.127.131.80:4175/api";
 
   final String REQUEST_NAME = "requestname";
   final String DATA = "data";
 
   // --- Authentication ---
-  final String login = "/auth/login";
+  final String login = "/dealer/otp/send";
   final String register = "/auth/register";
   final String logout = "/auth/logout";
   final String verifyOtp = "/auth/verify-otp";
-  final String resendOtp = "/auth/resend-otp";
+  final String resendOtp = "/dealer/otp/send";
   final String refreshToken = "/auth/refresh-token";
   final String forgotPassword = "/auth/forgot-password";
 

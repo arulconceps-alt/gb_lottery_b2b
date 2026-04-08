@@ -30,7 +30,7 @@ class LoginModel extends Equatable {
   factory LoginModel.fromJson(Map<String, dynamic> json) {
     return LoginModel(
       userId: json['userId'] ?? '',
-      mobile: json['mobile'] ?? '',
+      mobile: json['mobile'] ?? json['phone'] ?? '',
       authToken: json['authToken'] ?? '',
       name: json['name'] ?? '',
     );
