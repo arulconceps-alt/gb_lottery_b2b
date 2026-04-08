@@ -155,7 +155,7 @@ class _LotteryNumberCardTripleState extends State<LotteryNumberCardTriple> {
     return GestureDetector(
       onTap: _fillRandom,
       child: Container(
-        width: s(92), height: s(32),
+        width: s(92), height: s(36),
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: const Color(0xFF313038),
@@ -181,14 +181,16 @@ class _LotteryNumberCardTripleState extends State<LotteryNumberCardTriple> {
           GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: () => setState(() => quantity = max(1, quantity - 1)),
-            child: Text("-", style: GoogleFonts.dmSans(color: Colors.white,fontWeight: FontWeight.w400, fontSize: s(14))),
+            child: Text("-", style: GoogleFonts.dmSans(color: Colors.white,
+            fontWeight: FontWeight.w400, fontSize: s(22))),
           ),
           Text("$quantity",
               style: GoogleFonts.dmSans(color: Colors.white, fontSize: s(14), fontWeight: FontWeight.w400)),
           GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: () => setState(() => quantity++),
-            child: Text("+", style: GoogleFonts.dmSans(color: Colors.white,fontWeight: FontWeight.w400, fontSize: s(14))),
+            child: Text("+", style: GoogleFonts.dmSans(color: Colors.white,
+            fontWeight: FontWeight.w400, fontSize: s(22))),
           ),
         ],
       ),

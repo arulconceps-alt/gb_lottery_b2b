@@ -280,4 +280,4 @@ class _BarGroupPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant _BarGroupPainter oldDelegate) => true;
-}
+}

@@ -167,7 +167,7 @@ class _LotteryNumberCardState extends State<LotteryNumberCard> {
       onTap: fillRandomDashes,
       child: Container(
         width: s(92),
-        height: s(32),
+        height: s(36),
         alignment: Alignment.center,
         decoration: BoxDecoration(
           color: const Color(0xFF313038),
@@ -204,12 +204,14 @@ class _LotteryNumberCardState extends State<LotteryNumberCard> {
         children: [
           GestureDetector(
             onTap: () => setState(() => quantities[index] = max(1, quantities[index] - 1)),
-            child: Text("-", style: GoogleFonts.dmSans(color: Colors.white,fontWeight: FontWeight.w400, fontSize: s(14))),
+            child: Text("-", style: GoogleFonts.dmSans(color: Colors.white,
+            fontWeight: FontWeight.w400, fontSize: s(22))),
           ),
           Text("${quantities[index]}", style: GoogleFonts.dmSans(color: Colors.white,fontWeight: FontWeight.w400, fontSize: s(14))),
           GestureDetector(
             onTap: () => setState(() => quantities[index]++),
-            child: Text("+", style: GoogleFonts.dmSans(color: Colors.white,fontWeight: FontWeight.w400, fontSize: s(14))),
+            child: Text("+", style: GoogleFonts.dmSans(color: Colors.white,
+            fontWeight: FontWeight.w400, fontSize: s(22))),
           ),
         ],
       ),
