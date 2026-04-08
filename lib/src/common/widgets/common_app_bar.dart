@@ -98,7 +98,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                     SizedBox(width: s(8)),
                     Image.asset(
-                      "assets/images/dashboard/wallet.webp",
+                      "assets/images/dashboard/wallet.png",
                       height: s(18),
                       width: s(18),
                     ),
@@ -116,7 +116,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
                       clipBehavior: Clip.none,
                       children: [
                         Image.asset(
-                          "assets/images/dashboard/bell.webp",
+                          "assets/images/dashboard/bell.png",
                           height: s(19.86),
                           width: s(19.86),
                         ),
@@ -147,7 +147,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
 
                   Image.asset(
-                    "assets/images/dashboard/bell_bottom.webp",
+                    "assets/images/dashboard/bell_bottom.png",
                     height: s(1.52),
                     width: s(3.5),
                   ),

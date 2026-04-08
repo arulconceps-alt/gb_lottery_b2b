@@ -84,6 +84,7 @@ flutter:
      - assets/images/login/
      - assets/images/otp/
      - assets/images/dashboard/
+     - assets/images/drawer/
      - assets/images/customer_list/
      - assets/images/add_customer/
      - assets/images/purchase_history_list/
