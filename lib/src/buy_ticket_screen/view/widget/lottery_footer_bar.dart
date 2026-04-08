@@ -31,13 +31,15 @@ class LotteryFooterBar extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Row(
             children: [
-              // CLICKABLE AREA (Amount + Numbers)
+              
               GestureDetector(
                 onTap: onToggle,
                 behavior: HitTestBehavior.opaque,
                 child: Row(
                   children: [
-                    Image.asset("assets/images/icons/leadingicon.png"),
+                    Image.asset("assets/images/icons/leadingicon.png",
+                    height: 46,
+                    width: 46,),
                     const SizedBox(width: 16),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
