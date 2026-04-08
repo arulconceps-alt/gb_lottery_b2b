@@ -106,7 +106,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   ),
                   SizedBox(width: s(14)),
                   HomeMenuSection(
-                    imagePath: "assets/images/dashboard/dashboard.webp",
+                    imagePath: "assets/images/dashboard/home_dashboard.webp",
                     title: "Dashboard",
                     imageheight: 36,
                     imagewidth: 36,
@@ -240,7 +240,7 @@ class _DashboardPageState extends State<DashboardPage> {
               padding: EdgeInsets.symmetric(horizontal: s(16)),
               child: const WhatsGbBox(),
             ),
-    
+
             SizedBox(height: s(31)),
             Text(
               "Fantasy Sports",
@@ -251,7 +251,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 color: themedata.colorScheme.primary,
               ),
             ),
-            SizedBox(height: s(1)),
+            SizedBox(height: s(6)),
             Text(
               "Build your team. Play smart. Win real rewards.",
               style: TextStyles.dmSans12.copyWith(
@@ -261,7 +261,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 color: themedata.textTheme.bodyLarge?.color,
               ),
             ),
-            SizedBox(height: s(27)),
+            SizedBox(height: s(20)),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: s(16)),
               child: DashboardFantasyScrollSection(),
@@ -276,7 +276,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 color: themedata.colorScheme.primary,
               ),
             ),
-            SizedBox(height: s(1)),
+            SizedBox(height: s(6)),
             Text(
               "No strategy. Just spin and see",
               style: TextStyles.dmSans10.copyWith(
@@ -286,7 +286,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 color: themedata.textTheme.bodyLarge?.color,
               ),
             ),
-            SizedBox(height: s(11)),
+            SizedBox(height: s(20)),
             DashboradPureluckySectionCard(),
             SizedBox(height: s(30)),
           ],

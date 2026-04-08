@@ -27,7 +27,9 @@ class _LoginFormCardState extends State<LoginFormCard> {
     super.initState();
     _mobileController = TextEditingController(text: LoginState.initial.mobile);
     _otpController = TextEditingController(text: LoginState.initial.otp);
-    _passwordController = TextEditingController(text: LoginState.initial.password);
+    _passwordController = TextEditingController(
+      text: LoginState.initial.password,
+    );
   }
 
   @override
@@ -46,10 +48,11 @@ class _LoginFormCardState extends State<LoginFormCard> {
       listener: (context, state) {
         if (state.status == LoginStatus.success) {
           context.pushReplacement('/dashboard');
-        } else if (state.status == LoginStatus.failure && state.message.isNotEmpty) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.message)),
-          );
+        } else if (state.status == LoginStatus.failure &&
+            state.message.isNotEmpty) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.message)));
           bloc.add(const ResetLoginMessage());
         } else if (state.status == LoginStatus.otpRequested) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -86,17 +89,17 @@ class _LoginFormCardState extends State<LoginFormCard> {
                         color: ColorPalette.whitetext,
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () => bloc.add(ToggleLoginMode(!state.isOtpLogin)),
-                      child: Text(
-                        state.isOtpLogin ? "Switch to Password" : "Switch to OTP",
-                        style: TextStyles.dmSans12.copyWith(
-                          fontSize: s(12),
-                          fontWeight: FontWeight.w400,
-                          color: ColorPalette.primary,
-                        ),
-                      ),
-                    ),
+                    // GestureDetector(
+                    //   onTap: () => bloc.add(ToggleLoginMode(!state.isOtpLogin)),
+                    //   child: Text(
+                    //     state.isOtpLogin ? "Switch to Password" : "Switch to OTP",
+                    //     style: TextStyles.dmSans12.copyWith(
+                    //       fontSize: s(12),
+                    //       fontWeight: FontWeight.w400,
+                    //       color: ColorPalette.primary,
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
                 SizedBox(height: s(12)),
@@ -180,7 +183,9 @@ class _LoginFormCardState extends State<LoginFormCard> {
                                   : () => bloc.add(const RequestLoginOtp()),
                               child: Container(
                                 height: s(36),
-                                padding: EdgeInsets.symmetric(horizontal: s(14)),
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: s(14),
+                                ),
                                 alignment: Alignment.center,
                                 decoration: BoxDecoration(
                                   color: ColorPalette.surface,
@@ -256,68 +261,69 @@ class _LoginFormCardState extends State<LoginFormCard> {
                   ),
                 ),
 
-          SizedBox(height: s(23)),
+                SizedBox(height: s(23)),
 
-          Text.rich(
-            TextSpan(
-              children: [
-                TextSpan(
-                  text:
-                      "By clicking this button you confirm that you have read and agree to\nthe",
-                  style: GoogleFonts.dmSans(
-                    color: ColorPalette.darktext,
-                    fontSize: s(10),
-                    height: 1.4,
-                    fontWeight: FontWeight.w400,
+                Text.rich(
+                  TextSpan(
+                    children: [
+                      TextSpan(
+                        text:
+                            "By clicking this button you confirm that you have read and agree to\nthe",
+                        style: GoogleFonts.dmSans(
+                          color: ColorPalette.darktext,
+                          fontSize: s(10),
+                          height: 1.4,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      TextSpan(
+                        text: "Terms and Conditions",
+                        style: GoogleFonts.dmSans(
+                          height: 1.4,
+                          color: ColorPalette.primary,
+                          fontSize: s(10),
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      TextSpan(
+                        text: " and ",
+                        style: GoogleFonts.dmSans(
+                          color: ColorPalette.darktext,
+                          fontWeight: FontWeight.w400,
+                          height: 1.4,
+                          fontSize: s(10),
+                        ),
+                      ),
+                      TextSpan(
+                        text: "privacy policy",
+                        style: GoogleFonts.dmSans(
+                          color: ColorPalette.primary,
+                          fontSize: s(10),
+                          height: 1.4,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      TextSpan(
+                        text:
+                            " of the company and\nconfirm that you are legal age.",
+                        style: GoogleFonts.dmSans(
+                          color: ColorPalette.darktext,
+                          fontWeight: FontWeight.w400,
+                          height: 1.4,
+                          fontSize: s(10),
+                        ),
+                      ),
+                    ],
                   ),
+                  textAlign: TextAlign.start,
                 ),
-                TextSpan(
-                  text: "Terms and Conditions",
-                  style:  GoogleFonts.dmSans(
-                    height: 1.4,
-                    color: ColorPalette.primary,
-                    fontSize: s(10),
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                TextSpan(
-                  text: " and ",
-                  style:  GoogleFonts.dmSans(
-                    color: ColorPalette.darktext,
-                    fontWeight: FontWeight.w400,
-                    height: 1.4,
-                    fontSize: s(10),
-                  ),
-                ),
-                TextSpan(
-                  text: "privacy policy",
-                  style:  GoogleFonts.dmSans(
-                    color: ColorPalette.primary,
-                    fontSize: s(10),
-                    height: 1.4,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                TextSpan(
-                  text: " of the company and\nconfirm that you are legal age.",
-                  style:  GoogleFonts.dmSans(
-                    color: ColorPalette.darktext,
-                    fontWeight: FontWeight.w400,
-                    height: 1.4,
-                    fontSize: s(10),
-                  ),
-                ),
+                SizedBox(height: s(20)),
               ],
             ),
-            textAlign: TextAlign.start,
-          ),
-          SizedBox(height: s(20)),
-        ],
+          );
+        },
       ),
     );
-  },
-),
-);
   }
 
   Widget _inputField({
@@ -332,10 +338,7 @@ class _LoginFormCardState extends State<LoginFormCard> {
       decoration: BoxDecoration(
         color: ColorPalette.backgroundDark,
         borderRadius: BorderRadius.circular(s(12)),
-        border: Border.all(
-          color: ColorPalette.surface,
-          width: 1
-        )
+        border: Border.all(color: ColorPalette.surface, width: 1),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,

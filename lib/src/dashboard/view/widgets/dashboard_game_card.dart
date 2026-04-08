@@ -57,11 +57,11 @@ class DashboardGameCard extends StatelessWidget {
                       title,
                       style: TextStyles.dmSans12SemiBold.copyWith(
                         fontSize: s(12),
-                        fontStyle: FontStyle.italic,
+
                         color: themedata.textTheme.bodyLarge?.color,
                       ),
                     ),
-                     SizedBox(height: s(1)),
+                    SizedBox(height: s(1)),
                     Text(
                       "Win Price",
                       style: TextStyles.dmSans12.copyWith(
@@ -69,7 +69,7 @@ class DashboardGameCard extends StatelessWidget {
                         color: themedata.textTheme.bodyMedium?.color,
                       ),
                     ),
-                     SizedBox(height: s(1)),
+                    SizedBox(height: s(1)),
                     Text(
                       prize,
                       style: TextStyles.dmSans12SemiBold.copyWith(
@@ -95,7 +95,7 @@ class DashboardGameCard extends StatelessWidget {
           SizedBox(height: s(4)),
           Row(
             children: [
-              _timeBox("01h", s, themedata),
+              _timeBox("01 h", s, themedata),
               SizedBox(width: s(3)),
               Text(
                 ":",
@@ -105,7 +105,7 @@ class DashboardGameCard extends StatelessWidget {
                 ),
               ),
               SizedBox(width: s(5)),
-              _timeBox("01m", s, themedata),
+              _timeBox("01 m", s, themedata),
               SizedBox(width: s(3)),
               Text(
                 ":",
@@ -116,11 +116,11 @@ class DashboardGameCard extends StatelessWidget {
                 ),
               ),
               SizedBox(width: s(5)),
-              _timeBox("30s", s, themedata),
+              _timeBox("30 s", s, themedata),
             ],
           ),
 
-           SizedBox(height: s(8)),
+          SizedBox(height: s(8)),
 
           GestureDetector(
             onTap: () => context.push('/buy_ticket'),
@@ -159,7 +159,7 @@ class DashboardGameCard extends StatelessWidget {
         text,
         style: TextStyles.dmSans10SemiBold.copyWith(
           fontSize: s(10),
-          fontStyle: FontStyle.italic,
+
           color: themedata.textTheme.bodyLarge?.color,
         ),
       ),
