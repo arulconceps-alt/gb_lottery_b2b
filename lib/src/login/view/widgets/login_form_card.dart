@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
 import 'package:gb_lottery_b2b/src/app/text_styles.dart';
+import 'package:gb_lottery_b2b/src/common/widgets/custom_success_snackbar.dart';
 import 'package:gb_lottery_b2b/src/login/bloc/login_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -50,14 +51,25 @@ class _LoginFormCardState extends State<LoginFormCard> {
           context.pushReplacement('/dashboard');
         } else if (state.status == LoginStatus.failure &&
             state.message.isNotEmpty) {
-          ScaffoldMessenger.of(
+          AppSnackBar.show(
             context,
-          ).showSnackBar(SnackBar(content: Text(state.message)));
+            message:state.message,
+            type: SnackBarType.error,
+          );
+          /*ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.message)));*/
           bloc.add(const ResetLoginMessage());
         } else if (state.status == LoginStatus.otpRequested) {
-          ScaffoldMessenger.of(context).showSnackBar(
+         /* ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(content: Text('OTP sent successfully')),
+          );*/
+          AppSnackBar.show(
+            context,
+            message: 'OTP sent successfully',
+            type: SnackBarType.success,
           );
+
           bloc.add(const ResetLoginMessage());
         }
       },
