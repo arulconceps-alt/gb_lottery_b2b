@@ -29,7 +29,7 @@ import 'package:gb_lottery_b2b/src/responsible/view/responsible_gaming_page.dart
 import 'package:gb_lottery_b2b/src/resultinner/view/result_inner_page.dart';
 import 'package:gb_lottery_b2b/src/customer_edit/view/customer_edit_screen.dart';
 import 'package:gb_lottery_b2b/src/myCart_Screen/view/myCart_screen.dart';
-import 'package:gb_lottery_b2b/src/edit_profile_screen/view/edit_profile_screen.dart';
+import 'package:gb_lottery_b2b/src/profile/view/edit_profile_page.dart';
 import 'package:gb_lottery_b2b/src/results/view/resluts_page.dart';
 import 'package:gb_lottery_b2b/src/search_screen/view/search_screen.dart';
 import 'package:gb_lottery_b2b/src/settlement/view/settlement_page.dart';
@@ -102,6 +102,11 @@ class Routes {
             path: "/profile",
             builder: (context, state) => const ProfilePage(),
           ),
+          GoRoute(
+            name: RouteName.editprofile,
+            path: "/editprofile",
+            builder: (context, state) => const EditProfilePage(),
+          ),
         ],
       ),
       GoRoute(
@@ -125,13 +130,6 @@ class Routes {
         name: RouteName.myCart,
         path: "/myCart",
         builder: (context, state) => const MycartScreen(),
-      ),
-
-      /// Profile Screen
-      GoRoute(
-        name: RouteName.editprofile,
-        path: "/editprofile",
-        builder: (context, state) => const EditProfileScreen(),
       ),
 
       /// customer_info Screen

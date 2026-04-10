@@ -10,13 +10,13 @@ class ApiConstants {
   final String login = "/dealer/otp/send";
   final String register = "/auth/register";
   final String logout = "/auth/logout";
-  final String verifyOtp = "/auth/verify-otp";
+  final String verifyOtp = "/dealer/otp/verify";
   final String resendOtp = "/dealer/otp/send";
   final String refreshToken = "/auth/refresh-token";
   final String forgotPassword = "/auth/forgot-password";
 
   // --- User Profile ---
-  final String getAccountDetails = "/account/details";
+  final String getAccountDetails = "/dealer/agents";
   final String updateProfile = "/account/update";
   final String changePassword = "/account/change-password";
   final String getKycStatus = "/kyc/status";

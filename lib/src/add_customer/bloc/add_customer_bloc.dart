@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gb_lottery_b2b/src/add_customer/repo/add_customer_repo.dart';
+import 'package:gb_lottery_b2b/src/add_customer/repo/add_customer_repository.dart';
 import 'package:gb_lottery_b2b/src/common/models/customer_model.dart';
 import 'package:logger/logger.dart';
 

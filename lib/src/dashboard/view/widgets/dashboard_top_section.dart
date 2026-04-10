@@ -42,7 +42,7 @@ class DashboardTopSection extends StatelessWidget {
                ),
             ],
           ),
-           SizedBox(width: s(40)),
+          const Spacer(),
           Column(
             children:  [
              Container(

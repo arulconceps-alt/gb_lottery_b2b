@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
 import 'package:gb_lottery_b2b/src/login/repo/login_repository.dart';
-import 'package:gb_lottery_b2b/src/login/repo/login_repository.dart';
+import 'package:gb_lottery_b2b/src/profile/bloc/profile_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gb_lottery_b2b/src/common/services/services_locator.dart';
-import 'package:gb_lottery_b2b/src/login/bloc/login_bloc.dart';
-import 'package:gb_lottery_b2b/src/common/services/services_locator.dart';
-import 'package:gb_lottery_b2b/src/login/bloc/login_bloc.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -21,7 +19,7 @@ class CustomDrawer extends StatelessWidget {
     return SafeArea(
       child: Drawer(
         width: s(300),
-        backgroundColor:  ColorPalette.backgroundDark,
+        backgroundColor: ColorPalette.backgroundDark,
         child: SafeArea(
           child: Column(
             children: [
@@ -30,52 +28,74 @@ class CustomDrawer extends StatelessWidget {
                 height: s(80),
                 color: ColorPalette.background,
                 child: Padding(
-                  padding:  EdgeInsets.all(s(16)),
+                  padding: EdgeInsets.all(s(16)),
                   child: Row(
                     children: [
-                      Container(
-                        height: s(48),
-                        width: s(48),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: ColorPalette.surface,
-                        ),
-                        child: Center(
-                          child: Text("B",
-                          style: GoogleFonts.dmSans(
-                            fontSize: s(28),
-                            color: ColorPalette.whitetext,
-                            fontWeight: FontWeight.w400
-                          ),),
-                        )
+                      BlocBuilder<ProfileBloc, ProfileState>(
+                        builder: (context, state) {
+                          final user = state.user;
+                          final initial = user.name.isNotEmpty
+                              ? user.name[0].toUpperCase()
+                              : "?";
+
+                          return Container(
+                            height: s(48),
+                            width: s(48),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: ColorPalette.surface,
+                            ),
+                            child: Center(
+                              child: Text(
+                                initial,
+                                style: GoogleFonts.dmSans(
+                                  fontSize: s(28),
+                                  color: ColorPalette.whitetext,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
                       ),
                       SizedBox(width: s(16)),
                       Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Username",
-                              style: GoogleFonts.archivo(
-                                fontSize: s(14),
-                                fontWeight: FontWeight.w400,
-                                color: ColorPalette.whitetext,
-                              ),
-                            ),
-                            SizedBox(height: s(2)),
-                            Text(
-                              "+91- 99988776655",
-                              style: GoogleFonts.archivo(
-                                fontSize: s(12),
-                                fontWeight: FontWeight.w400,
-                                color: ColorPalette.whitetext,
-                              ),
-                            ),
-                          ],
+                        child: BlocBuilder<ProfileBloc, ProfileState>(
+                          builder: (context, state) {
+                            final user = state.user;
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  user.name.isEmpty ? "Username" : user.name,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: GoogleFonts.archivo(
+                                    fontSize: s(14),
+                                    fontWeight: FontWeight.w400,
+                                    color: ColorPalette.whitetext,
+                                  ),
+                                ),
+                                SizedBox(height: s(2)),
+                                Text(
+                                  user.phone.isEmpty
+                                      ? "+91- 99988776655"
+                                      : "+91- ${user.phone}",
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: GoogleFonts.archivo(
+                                    fontSize: s(12),
+                                    fontWeight: FontWeight.w400,
+                                    color: ColorPalette.whitetext,
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
                         ),
                       ),
-                      SizedBox(width: s(54)),
+                      const Spacer(),
                       GestureDetector(
                         onTap: () => Navigator.pop(context),
                         child: Image.asset(

@@ -10,12 +10,13 @@ class AppConstants {
   final String CONFIG_HOME_PAGE = "home_page";
   final String FONT_POPPINS = "Poppins";
 
+  /// Toggle this to false when the real-time API is ready.
+  // final bool USE_MOCK_API = true; // Managed via App Flavors
+  bool get USE_MOCK_API => const bool.fromEnvironment('USE_MOCK_API', defaultValue: false);
+
   final Map<String, String> LANGUAGES = const {'English': 'en', 'Tamil': 'ta'};
 
   final Map<String, String> APP_PERMISSIONS = const {'Camera': 'camera'};
 
   final List<String> MEMORY_CACHE_LIST = const ["userrole"];
-
-  // API Configuration
-  final bool USE_MOCK_API = true; // Toggle as needed
 }

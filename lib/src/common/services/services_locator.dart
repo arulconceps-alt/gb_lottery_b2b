@@ -6,8 +6,10 @@ import 'package:gb_lottery_b2b/src/common/repos/api_repository.dart';
 import 'package:gb_lottery_b2b/src/common/repos/preferences_repository.dart';
 import 'package:gb_lottery_b2b/src/login/repo/login_repository.dart';
 import 'package:gb_lottery_b2b/src/login/bloc/login_bloc.dart';
-import 'package:gb_lottery_b2b/src/add_customer/repo/add_customer_repo.dart';
+import 'package:gb_lottery_b2b/src/add_customer/repo/add_customer_repository.dart';
 import 'package:gb_lottery_b2b/src/add_customer/bloc/add_customer_bloc.dart';
+import 'package:gb_lottery_b2b/src/profile/repo/profile_repository.dart';
+import 'package:gb_lottery_b2b/src/profile/bloc/profile_bloc.dart';
 
 final GetIt getIt = GetIt.instance;
 
@@ -31,6 +33,9 @@ Future<void> setupLocator() async {
   getIt.registerLazySingleton<AddCustomerRepository>(
     () => AddCustomerRepository(getIt<ApiRepository>()),
   );
+  getIt.registerLazySingleton<ProfileRepository>(
+    () => ProfileRepository(getIt<ApiRepository>(), getIt<PreferencesRepository>()),
+  );
 
   // Blocs
   getIt.registerFactory<LoginBloc>(
@@ -38,5 +43,8 @@ Future<void> setupLocator() async {
   );
   getIt.registerFactory<AddCustomerBloc>(
     () => AddCustomerBloc(repository: getIt<AddCustomerRepository>()),
+  );
+  getIt.registerFactory<ProfileBloc>(
+    () => ProfileBloc(repository: getIt<ProfileRepository>()),
   );
 }
