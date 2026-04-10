@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:gb_lottery_b2b/src/lottery/repo/lottery_repository.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -10,6 +11,9 @@ import 'package:gb_lottery_b2b/src/add_customer/repo/add_customer_repository.dar
 import 'package:gb_lottery_b2b/src/add_customer/bloc/add_customer_bloc.dart';
 import 'package:gb_lottery_b2b/src/profile/repo/profile_repository.dart';
 import 'package:gb_lottery_b2b/src/profile/bloc/profile_bloc.dart';
+import 'package:gb_lottery_b2b/src/lottery/bloc/lottery_bloc.dart';
+import 'package:gb_lottery_b2b/src/customerslist/repo/customer_list_repository.dart';
+import 'package:gb_lottery_b2b/src/customerslist/bloc/customer_list_bloc.dart';
 
 final GetIt getIt = GetIt.instance;
 
@@ -28,13 +32,23 @@ Future<void> setupLocator() async {
 
   // Repositories
   getIt.registerLazySingleton<LoginRepository>(
-    () => LoginRepository(getIt<ApiRepository>(), getIt<PreferencesRepository>()),
+    () =>
+        LoginRepository(getIt<ApiRepository>(), getIt<PreferencesRepository>()),
   );
   getIt.registerLazySingleton<AddCustomerRepository>(
     () => AddCustomerRepository(getIt<ApiRepository>()),
   );
   getIt.registerLazySingleton<ProfileRepository>(
-    () => ProfileRepository(getIt<ApiRepository>(), getIt<PreferencesRepository>()),
+    () => ProfileRepository(
+      getIt<ApiRepository>(),
+      getIt<PreferencesRepository>(),
+    ),
+  );
+  getIt.registerLazySingleton<LotteryRepository>(
+    () => LotteryRepository(getIt<ApiRepository>()),
+  );
+  getIt.registerLazySingleton<CustomerListRepository>(
+    () => CustomerListRepository(getIt<ApiRepository>()),
   );
 
   // Blocs
@@ -46,5 +60,11 @@ Future<void> setupLocator() async {
   );
   getIt.registerFactory<ProfileBloc>(
     () => ProfileBloc(repository: getIt<ProfileRepository>()),
+  );
+  getIt.registerFactory<LotteryBloc>(
+    () => LotteryBloc(getIt<LotteryRepository>()),
+  );
+  getIt.registerFactory<CustomerListBloc>(
+    () => CustomerListBloc(repository: getIt<CustomerListRepository>()),
   );
 }

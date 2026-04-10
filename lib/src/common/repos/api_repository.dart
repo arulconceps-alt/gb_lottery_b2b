@@ -56,6 +56,7 @@ class ApiRepository {
     required Map<String, dynamic> data,
     String? requestName,
     bool isRaw = false,
+    String? baseUrl,
   }) async {
     try {
       _initHeaders(); // Ensure headers are fresh
@@ -64,7 +65,7 @@ class ApiRepository {
         return _simulateMockResponse("postRequest", url);
       }
 
-      final fullUrl = Constants.api.API_BASE_URL + url;
+      final fullUrl = (baseUrl ?? Constants.api.API_BASE_URL) + url;
       final requestBody = isRaw ? data : buildWrappedRequest(data: data, requestName: requestName);
 
       _log.d("ApiRepository::postRequest::Posting to $fullUrl with body: $requestBody");
@@ -83,16 +84,25 @@ class ApiRepository {
   }
 
   /// Generic GET request method.
-  Future<dynamic> getRequest(String url) async {
+  Future<dynamic> getRequest(
+    String url, {
+    Map<String, dynamic>? queryParameters,
+    String? baseUrl,
+  }) async {
     try {
       _initHeaders();
-      
+
       if (Constants.app.USE_MOCK_API) {
         return _simulateMockResponse("getRequest", url);
       }
 
-      final fullUrl = Constants.api.API_BASE_URL + url;
-      final response = await _dio.get(fullUrl);
+      final String fullUrl = (baseUrl ?? Constants.api.API_BASE_URL) + url;
+
+      final response = await _dio.get(
+        fullUrl,
+        queryParameters: queryParameters,
+      );
+      
       return _handleResponse(response);
     } on DioException catch (dioError) {
       _log.e("ApiRepository::getRequest::DioException: ${dioError.message}");
@@ -106,10 +116,11 @@ class ApiRepository {
     required Map<String, dynamic> data,
     String? requestName,
     bool isRaw = true, // Default to true for updates as they are often raw
+    String? baseUrl,
   }) async {
     try {
       _initHeaders();
-      final fullUrl = Constants.api.API_BASE_URL + url;
+      final fullUrl = (baseUrl ?? Constants.api.API_BASE_URL) + url;
       final requestBody = isRaw ? data : buildWrappedRequest(data: data, requestName: requestName);
       
       _log.d("ApiRepository::putRequest::Putting to $fullUrl");
@@ -133,10 +144,11 @@ class ApiRepository {
     required Map<String, dynamic> data,
     String? requestName,
     bool isRaw = true,
+    String? baseUrl,
   }) async {
     try {
       _initHeaders();
-      final fullUrl = Constants.api.API_BASE_URL + url;
+      final fullUrl = (baseUrl ?? Constants.api.API_BASE_URL) + url;
       final requestBody = isRaw ? data : buildWrappedRequest(data: data, requestName: requestName);
       
       _log.d("ApiRepository::patchRequest::Patching to $fullUrl");
@@ -158,10 +170,11 @@ class ApiRepository {
   Future<Map<String, dynamic>> deleteRequest({
     required String url,
     Map<String, dynamic>? data,
+    String? baseUrl,
   }) async {
     try {
       _initHeaders();
-      final fullUrl = Constants.api.API_BASE_URL + url;
+      final fullUrl = (baseUrl ?? Constants.api.API_BASE_URL) + url;
       _log.d("ApiRepository::deleteRequest::Deleting at $fullUrl");
 
       final response = await _dio.delete(

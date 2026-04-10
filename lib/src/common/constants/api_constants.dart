@@ -2,6 +2,9 @@ class ApiConstants {
   const ApiConstants();
 
   final String API_BASE_URL = "http://187.127.131.80:4175/api";
+  final String LOTTERY_BASE_URL = "http://187.127.131.80:3000/api";
+
+  final String lotteries = "/lotteries";
 
   final String REQUEST_NAME = "requestname";
   final String DATA = "data";

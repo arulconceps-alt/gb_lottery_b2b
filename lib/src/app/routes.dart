@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/add_customer/view/add_customer_page.dart';
+import 'package:gb_lottery_b2b/src/common/models/customer_model.dart';
 import 'package:gb_lottery_b2b/src/app/route_names.dart';
 import 'package:gb_lottery_b2b/src/common/constants/constansts.dart';
 import 'package:gb_lottery_b2b/src/common/repos/preferences_repository.dart';
@@ -117,7 +118,10 @@ class Routes {
       GoRoute(
         name: RouteName.customerinformation,
         path: "/customerinformation",
-        builder: (context, state) => const CustomerInformationPage(),
+        builder: (context, state) {
+          final customer = state.extra as CustomerModel;
+          return CustomerInformationPage(customer: customer);
+        },
       ),
       GoRoute(
         name: RouteName.buy_ticket,
@@ -136,7 +140,10 @@ class Routes {
       GoRoute(
         name: RouteName.customer_edit,
         path: "/customer_edit",
-        builder: (context, state) => const CustomerEditScreen(),
+        builder: (context, state) {
+          final customer = state.extra as CustomerModel;
+          return CustomerEditScreen(customer: customer);
+        },
       ),
 
       /// Search Screen

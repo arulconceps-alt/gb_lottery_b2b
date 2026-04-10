@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class DashboradPureluckySectionCard extends StatelessWidget {
-  const DashboradPureluckySectionCard({super.key});
+class DashboardPureLuckySection extends StatelessWidget {
+  const DashboardPureLuckySection({super.key});
 
   @override
   Widget build(BuildContext context) {
