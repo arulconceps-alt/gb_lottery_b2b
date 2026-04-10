@@ -6,6 +6,7 @@ import 'package:gb_lottery_b2b/src/add_customer/view/widgets/add_customer_type_s
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
 import 'package:gb_lottery_b2b/src/common/services/services_locator.dart';
 import 'package:gb_lottery_b2b/src/common/widgets/app_bar_with_back.dart';
+import 'package:gb_lottery_b2b/src/common/widgets/custom_success_snackbar.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -40,16 +41,17 @@ class _AddCustomerPageContentState extends State<_AddCustomerPageContent> {
     return BlocListener<AddCustomerBloc, AddCustomerState>(
       listener: (context, state) {
         if (state.status == AddCustomerStatus.success) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.message)),
+          AppSnackBar.show(
+            context,
+            message: state.message,
+            type: SnackBarType.success,
           );
           context.pop(); // Go back to customer list
         } else if (state.status == AddCustomerStatus.failure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(state.message),
-              backgroundColor: Colors.red,
-            ),
+          AppSnackBar.show(
+            context,
+            message: state.message,
+            type: SnackBarType.error,
           );
           context.read<AddCustomerBloc>().add(const ResetStatus());
         }
