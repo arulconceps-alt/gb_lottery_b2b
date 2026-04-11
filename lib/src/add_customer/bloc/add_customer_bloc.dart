@@ -88,18 +88,26 @@ class AddCustomerBloc extends Bloc<AddCustomerEvent, AddCustomerState> {
     try {
       emit(state.copyWith(status: () => AddCustomerStatus.loading));
       
-      // Basic validation
+      // Basic validation: Only Name and Phone are mandatory now
       for (var customer in state.customers) {
-        if (customer.name.isEmpty || customer.phone.isEmpty || customer.pincode.isEmpty) {
-          throw Exception('Please fill all required fields (*) for all entries');
+        final name = customer.name.trim();
+        final phone = customer.phone.trim();
+        
+        if (name.isEmpty || phone.isEmpty) {
+          throw Exception('Please fill Name and Phone for all entries');
+        }
+        
+        // 10-digit phone validation
+        if (phone.length != 10 || !RegExp(r'^[0-9]+$').hasMatch(phone)) {
+          throw Exception('Phone number must be exactly 10 digits for: $name');
         }
       }
 
-      await _repository.addMultipleCustomers(state.customers);
+      await _repository.addCustomers(state.customers);
       
       emit(state.copyWith(
         status: () => AddCustomerStatus.success,
-        message: () => 'Customers added successfully',
+        message: () => 'Agents added successfully',
       ));
     } catch (e) {
       _log.e('AddCustomerBloc::_onSubmit::Error: $e');

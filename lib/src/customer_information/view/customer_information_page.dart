@@ -51,7 +51,7 @@ class _CustomerInformationPageState extends State<CustomerInformationPage> {
                   "Phone": customer.phone,
                   "Customer ID": customer.id,
                   "Email": customer.email ?? "N/A",
-                  "Pincode": customer.pincode,
+                  "Pincode": customer.pincode ?? '',
                   "Address": customer.address ?? "N/A",
                   "Join Date": "15/01/2026", // Mock or from extra fields if needed
                   "Ticket Purchase": "150",   // Mock

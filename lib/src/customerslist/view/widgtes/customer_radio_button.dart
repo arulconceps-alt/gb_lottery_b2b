@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
+import 'package:gb_lottery_b2b/src/customerslist/bloc/customer_list_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomRadioItem extends StatelessWidget {
@@ -57,7 +59,6 @@ class CustomRadioItem extends StatelessWidget {
 
           SizedBox(width: s(10)),
 
-          /// 🔹 TEXT
           Text(
             text,
             style: GoogleFonts.dmSans(
@@ -72,15 +73,8 @@ class CustomRadioItem extends StatelessWidget {
   }
 }
 
-class UserTypeSelector extends StatefulWidget {
+class UserTypeSelector extends StatelessWidget {
   const UserTypeSelector({super.key});
-
-  @override
-  State<UserTypeSelector> createState() => _UserTypeSelectorState();
-}
-
-class _UserTypeSelectorState extends State<UserTypeSelector> {
-  String selectedValue = "all";
 
   @override
   Widget build(BuildContext context) {
@@ -88,39 +82,51 @@ class _UserTypeSelectorState extends State<UserTypeSelector> {
     final scale = w / 375;
     double s(double v) => v * scale;
 
-    return Row(
-      children: [
-        CustomRadioItem(
-          text: "All",
-          value: "all",
-          groupValue: selectedValue,
-          onChanged: (val) {
-            setState(() => selectedValue = val);
-          },
-        ),
+    return BlocBuilder<CustomerListBloc, CustomerListState>(
+      buildWhen: (previous, current) => previous.selectedRole != current.selectedRole,
+      builder: (context, state) {
+        // UI uses internal 'all', 'customer', 'moderator' values
+        // We map these to the State's 'All', 'User', 'Moderator'
+        String currentUIValue = "all";
+        if (state.selectedRole == "User") currentUIValue = "customer";
+        else if (state.selectedRole == "Moderator") currentUIValue = "moderator";
+        else currentUIValue = "all";
 
-        SizedBox(width: s(20)),
+        return Row(
+          children: [
+            CustomRadioItem(
+              text: "All",
+              value: "all",
+              groupValue: currentUIValue,
+              onChanged: (val) {
+                context.read<CustomerListBloc>().add(const FetchCustomers(roleName: "All"));
+              },
+            ),
 
-        CustomRadioItem(
-          text: "Customer",
-          value: "customer",
-          groupValue: selectedValue,
-          onChanged: (val) {
-            setState(() => selectedValue = val);
-          },
-        ),
+            SizedBox(width: s(20)),
 
-        SizedBox(width: s(20)),
+            CustomRadioItem(
+              text: "Customer",
+              value: "customer",
+              groupValue: currentUIValue,
+              onChanged: (val) {
+                context.read<CustomerListBloc>().add(const FetchCustomers(roleName: "User"));
+              },
+            ),
 
-        CustomRadioItem(
-          text: "Moderator",
-          value: "moderator",
-          groupValue: selectedValue,
-          onChanged: (val) {
-            setState(() => selectedValue = val);
-          },
-        ),
-      ],
+            SizedBox(width: s(20)),
+
+            CustomRadioItem(
+              text: "Moderator",
+              value: "moderator",
+              groupValue: currentUIValue,
+              onChanged: (val) {
+                context.read<CustomerListBloc>().add(const FetchCustomers(roleName: "Moderator"));
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

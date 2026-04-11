@@ -38,6 +38,8 @@ import 'package:gb_lottery_b2b/src/terms_codition/view/terms_condition_page.dart
 import 'package:gb_lottery_b2b/src/transaction_screen/view/transaction_screen.dart';
 import 'package:gb_lottery_b2b/src/wallet_screen/view/wallet_screen.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gb_lottery_b2b/src/customerslist/bloc/customer_list_bloc.dart';
 
 class Routes {
   static final GoRouter router = GoRouter(
@@ -87,7 +89,10 @@ class Routes {
           GoRoute(
             name: RouteName.customer,
             path: "/customer",
-            builder: (context, state) => const CustomerPage(),
+            builder: (context, state) => BlocProvider(
+              create: (context) => getIt<CustomerListBloc>()..add(const FetchCustomers(roleName: "All")),
+              child: const CustomerPage(),
+            ),
           ),
 
           /// results

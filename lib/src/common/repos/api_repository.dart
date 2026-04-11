@@ -78,7 +78,7 @@ class ApiRepository {
       final decoded = _handleResponse(response);
       return Map<String, dynamic>.from(decoded);
     } on DioException catch (dioError) {
-      _log.e("ApiRepository::postRequest::DioException: ${dioError.message}");
+      _log.e("ApiRepository::postRequest::DioException: ${dioError.message ?? dioError.toString()}");
       throw _handleError(dioError);
     }
   }
@@ -105,7 +105,11 @@ class ApiRepository {
       
       return _handleResponse(response);
     } on DioException catch (dioError) {
-      _log.e("ApiRepository::getRequest::DioException: ${dioError.message}");
+      if (dioError.response?.statusCode == 401) {
+        _log.w("ApiRepository::getRequest::Unauthorized access blocked");
+      } else {
+        _log.e("ApiRepository::getRequest::DioException: ${dioError.message ?? dioError.toString()}");
+      }
       throw _handleError(dioError);
     }
   }
@@ -133,7 +137,7 @@ class ApiRepository {
       final decoded = _handleResponse(response);
       return Map<String, dynamic>.from(decoded);
     } on DioException catch (dioError) {
-      _log.e("ApiRepository::putRequest::DioException: ${dioError.message}");
+      _log.e("ApiRepository::putRequest::DioException: ${dioError.message ?? dioError.toString()}");
       throw _handleError(dioError);
     }
   }
@@ -216,6 +220,8 @@ class ApiRepository {
 
   /// Handles the transformation of [Response] into usable data.
   dynamic _handleResponse(Response response) {
+    _log.d("ApiRepository::_handleResponse::Status: ${response.statusCode}, Data: ${response.data}");
+    
     if (response.statusCode != null &&
         response.statusCode! >= 200 &&
         response.statusCode! < 300) {
@@ -233,7 +239,11 @@ class ApiRepository {
       }
       return data;
     } else {
-      // TODO: Logic to handle 401 Unauthorized (Token Expiry) and trigger logout/refresh
+      if (response.statusCode == 401) {
+        _log.w("ApiRepository::_handleResponse::Unauthorized (401). Clearing token on next frame.");
+        Future.microtask(() => _prefRepo.removePreference(Constants.store.AUTH_TOKEN));
+        throw Exception("Session expired. Please log in again.");
+      }
       throw Exception("HTTP error: ${response.statusCode}");
     }
   }
@@ -254,7 +264,20 @@ class ApiRepository {
         break;
       case DioExceptionType.badResponse:
         final code = error.response?.statusCode;
-        message = message.contains("Network error") ? "Server error ($code)." : message;
+        if (code == 401) {
+          // Only force a global logout if the primary authentication API rejects the token
+          final uri = error.requestOptions.uri.toString();
+          if (uri.startsWith(Constants.api.API_BASE_URL)) {
+             _log.w("ApiRepository::_handleError::Unauthorized (401) on Main API. Clearing token.");
+             Future.microtask(() => _prefRepo.removePreference(Constants.store.AUTH_TOKEN));
+             message = "Session expired. Please log in again.";
+          } else {
+             _log.w("ApiRepository::_handleError::Unauthorized (401) on Secondary API ($uri). Skipping global logout.");
+             message = "Unauthorized (Secondary Service)";
+          }
+        } else {
+          message = message.contains("Network error") ? "Server error ($code)." : message;
+        }
         break;
       default:
         break;

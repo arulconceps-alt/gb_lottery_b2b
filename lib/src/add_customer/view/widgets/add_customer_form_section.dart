@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gb_lottery_b2b/src/add_customer/bloc/add_customer_bloc.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
@@ -100,15 +101,19 @@ class AddCustomerFormSection extends StatelessWidget {
                               s: s,
                               initialValue: customer.phone,
                               keyboardType: TextInputType.phone,
+                              maxLength: 10,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
                               onChanged: (v) => context
                                   .read<AddCustomerBloc>()
                                   .add(UpdateFormEntry(index: index, phone: v)),
                             ),
                             SizedBox(height: s(11)),
                             _field(
-                              hint: "Enter Pincode*",
+                              hint: "Enter Pincode",
                               s: s,
-                              initialValue: customer.pincode,
+                              initialValue: customer.pincode ?? '',
                               keyboardType: TextInputType.number,
                               onChanged: (v) => context
                                   .read<AddCustomerBloc>()
@@ -222,6 +227,8 @@ class AddCustomerFormSection extends StatelessWidget {
     required ValueChanged<String> onChanged,
     int maxLines = 1,
     TextInputType? keyboardType,
+    int? maxLength,
+    List<TextInputFormatter>? inputFormatters,
   }) {
     return Container(
       height: maxLines == 1 ? s(48) : s(87),
@@ -238,6 +245,8 @@ class AddCustomerFormSection extends StatelessWidget {
           onChanged: onChanged,
           maxLines: maxLines,
           keyboardType: keyboardType,
+          maxLength: maxLength,
+          inputFormatters: inputFormatters,
           style: GoogleFonts.dmSans(
             color: ColorPalette.whitetext,
             fontWeight: FontWeight.w400,
@@ -245,6 +254,7 @@ class AddCustomerFormSection extends StatelessWidget {
           ),
           decoration: InputDecoration(
             hintText: hint,
+            counterText: "", // Hide counter
             hintStyle: GoogleFonts.dmSans(
               color: ColorPalette.darktext,
               fontWeight: FontWeight.w400,

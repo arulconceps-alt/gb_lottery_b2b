@@ -28,8 +28,10 @@ class ApiConstants {
   // --- Customers (B2B Management) ---
   final String getCustomersList = "/customers/list";
   final String getCustomerDetails = "/customers/details";
-  final String addCustomer = "/customers/add";
-  final String updateCustomer = "/customers/update";
+  final String addCustomer = "/dealer/agents/bulk";
+  final String addAgentBulk = "/dealer/agents/bulk";
+  final String getRoles = "/dealer/roles";
+  final String updateCustomer = "/dealer/agents";
   final String deleteCustomer = "/customers/delete";
 
   // --- Lottery & Games ---

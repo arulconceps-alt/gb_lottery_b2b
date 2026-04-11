@@ -53,7 +53,7 @@ class ColorPalette {
         height: size,
         decoration: BoxDecoration(
           gradient: RadialGradient(
-            colors: [color, color.withValues(alpha: 0)],
+            colors: [color, color.withOpacity(0)],
             stops: const [0.0, 1.0],
           ),
         ),
@@ -61,6 +61,6 @@ class ColorPalette {
     );
   }
 
-  static Color white(double alpha) => Colors.white.withValues(alpha: alpha);
-  static Color black(double alpha) => Colors.black.withValues(alpha: alpha);
+  static Color white(double alpha) => Colors.white.withOpacity(alpha);
+  static Color black(double alpha) => Colors.black.withOpacity(alpha);
 }
