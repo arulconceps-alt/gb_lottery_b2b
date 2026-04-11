@@ -3,27 +3,34 @@ import 'package:gb_lottery_b2b/src/common/models/login_model.dart';
 import 'package:gb_lottery_b2b/src/common/repos/api_repository.dart';
 import 'package:gb_lottery_b2b/src/common/repos/preferences_repository.dart';
 
+/// [LoginRepository] manages authentication-related operations.
+/// It interacts with [ApiRepository] for network calls and [PreferencesRepository] for session storage.
 class LoginRepository {
   final ApiRepository _apiRepository;
   final PreferencesRepository _preferencesRepository;
 
   LoginRepository(this._apiRepository, this._preferencesRepository);
 
+  /// Requests an OTP for a given mobile number.
+  /// Throws [Exception] if mobile number is invalid or request fails.
   Future<void> requestOtp({required String mobile}) async {
     try {
-      if (mobile.length != 10) {
+      if (!_isValidMobile(mobile)) {
         throw Exception('Please enter a valid 10-digit mobile number');
       }
-      
-      await _apiRepository.postRequest(
-        url: Constants.api.resendOtp,
-        data: {'mobile': mobile},
+
+      await _apiRepository.postRawRequest(
+        url: Constants.api.login,
+        data: {"phone": mobile},
       );
     } catch (e) {
+      // TODO: Log error to a monitoring service like Sentry
       rethrow;
     }
   }
 
+  /// Verifies OTP and performs login.
+  /// Saves [authToken] and [userId] to local storage upon successful verification.
   Future<LoginModel> loginWithOtp({
     required String mobile,
     required String otp,
@@ -33,34 +40,18 @@ class LoginRepository {
         throw Exception('Mobile and OTP are required');
       }
 
-      final response = await _apiRepository.postRequest(
+      final responseData = await _apiRepository.postRawRequest(
         url: Constants.api.verifyOtp,
-        data: {
-          'mobile': mobile,
-          'otp': otp,
-        },
+        data: {"phone": mobile, "otp": otp},
       );
 
-      if (response['success'] == true) {
-        final userData = response['data'] != null
-            ? Map<String, dynamic>.from(response['data'])
-            : <String, dynamic>{};
-        
-        final user = LoginModel.fromJson(userData);
-        
-        // Save to Preferences
-        await _preferencesRepository.setPreference(Constants.store.AUTH_TOKEN, user.authToken);
-        await _preferencesRepository.setPreference(Constants.store.USER_ID, user.userId);
-        
-        return user;
-      } else {
-        throw Exception(response['message'] ?? 'Login failed');
-      }
+      return _processLoginResponse(responseData);
     } catch (e) {
       rethrow;
     }
   }
 
+  /// Performs login using mobile and password.
   Future<LoginModel> loginWithPassword({
     required String mobile,
     required String password,
@@ -70,46 +61,65 @@ class LoginRepository {
         throw Exception('Mobile and password are required');
       }
 
-      final response = await _apiRepository.postRequest(
+      final responseData = await _apiRepository.postRawRequest(
         url: Constants.api.login,
-        data: {
-          'mobile': mobile,
-          'password': password,
-        },
+        data: {'phone': mobile, 'password': password},
       );
 
-      if (response['success'] == true) {
-        final userData = response['data'] != null
-            ? Map<String, dynamic>.from(response['data'])
-            : <String, dynamic>{};
-            
-        final user = LoginModel.fromJson(userData);
+      return _processLoginResponse(responseData);
+    } catch (e) {
+      rethrow;
+    }
+  }
 
-        // Save to Preferences
-        await _preferencesRepository.setPreference(Constants.store.AUTH_TOKEN, user.authToken);
-        await _preferencesRepository.setPreference(Constants.store.USER_ID, user.userId);
+  /// Clears local session data and optionally notifies the backend.
+  Future<void> logout() async {
+    try {
+      // TODO: If using FCM, unregister the device token before clearing preferences
+      
+      await _preferencesRepository.removePreference(Constants.store.AUTH_TOKEN);
+      await _preferencesRepository.removePreference(Constants.store.USER_ID);
 
-        return user;
-      } else {
-        throw Exception(response['message'] ?? 'Login failed');
+      if (!Constants.app.USE_MOCK_API) {
+        // TODO: Implement server-side logout to invalidate the token
+        // await _apiRepository.postRequest(url: Constants.api.logout, data: {});
       }
     } catch (e) {
       rethrow;
     }
   }
 
-  Future<void> logout() async {
-    try {
-      // Clear Preferences
-      await _preferencesRepository.removePreference(Constants.store.AUTH_TOKEN);
-      await _preferencesRepository.removePreference(Constants.store.USER_ID);
-      
-      // Optionally call a logout API if not in MOCK mode
-      if (!Constants.app.USE_MOCK_API) {
-        // await _apiRepository.postRequest(url: Constants.api.logout, data: {});
+  /// Internal helper to process successful login responses and persist session data.
+  Future<LoginModel> _processLoginResponse(Map<String, dynamic> responseData) async {
+    if (responseData['success'] == true) {
+      final userData = responseData['data'] != null
+          ? Map<String, dynamic>.from(responseData['data'])
+          : <String, dynamic>{};
+
+      final user = LoginModel.fromJson(userData);
+
+      if (user.authToken.isNotEmpty) {
+        await _preferencesRepository.setPreference(
+          Constants.store.AUTH_TOKEN,
+          user.authToken,
+        );
       }
-    } catch (e) {
-      rethrow;
+      if (user.userId.isNotEmpty) {
+        await _preferencesRepository.setPreference(
+          Constants.store.USER_ID,
+          user.userId,
+        );
+      }
+
+      return user;
+    } else {
+      throw Exception(responseData['message'] ?? 'Authentication failed');
     }
+  }
+
+  /// Validates if the string is a standard 10-digit mobile number.
+  bool _isValidMobile(String mobile) {
+    // Simple 10-digit validation
+    return mobile.length == 10 && RegExp(r'^[0-9]+$').hasMatch(mobile);
   }
 }

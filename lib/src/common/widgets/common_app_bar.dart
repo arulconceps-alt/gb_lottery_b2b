@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gb_lottery_b2b/src/profile/bloc/profile_bloc.dart';
 
 class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String amount;
@@ -16,60 +18,50 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     double s(double v) => v * scale;
 
     return AppBar(
-      backgroundColor:  ColorPalette.backgroundDark,
+      backgroundColor: ColorPalette.backgroundDark,
       elevation: 0,
-
       leading: GestureDetector(
         onTap: onLeadingTap,
         child: Icon(Icons.menu, color: ColorPalette.whitetext, size: s(24)),
       ),
       titleSpacing: 0,
-      title: Row(
-        children: [
-          // Container(
-          //   height: s(32),
-          //   width: s(32),
-          //   decoration: BoxDecoration(
-          //     borderRadius: BorderRadius.circular(s(6)),
-          //   ),
-          //   child: ClipRRect(
-          //     borderRadius: BorderRadius.circular(s(6)),
-          //     child: Image.asset(
-          //       "assets/images/dashboard/a1.webp",
-          //       fit: BoxFit.cover,
-          //     ),
-          //   ),
-          // ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
+      title: BlocBuilder<ProfileBloc, ProfileState>(
+        builder: (context, state) {
+          final user = state.user;
+          return Row(
             children: [
-              Text(
-                "Welcome",
-                style: GoogleFonts.dmSans(
-                  color: ColorPalette.whitetext,
-                  fontSize: s(9),
-                  fontStyle: FontStyle.italic,
-                  fontWeight: FontWeight.w300,
-                ),
-              ),
-              Text(
-                "Userid-Name",
-                style: GoogleFonts.dmSans(
-                  color: ColorPalette.whitetext,
-                  fontSize: s(11),
-                  fontWeight: FontWeight.w400,
-                ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Welcome",
+                    style: GoogleFonts.dmSans(
+                      color: ColorPalette.whitetext,
+                      fontSize: s(9),
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                  Text(
+                    user.name.isEmpty ? "Dealer" : user.name,
+                    style: GoogleFonts.dmSans(
+                      color: ColorPalette.whitetext,
+                      fontSize: s(11),
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
               ),
             ],
-          ),
-        ],
+          );
+        },
       ),
-
       actions: [
         Padding(
           padding: EdgeInsets.only(right: s(12)),
           child: Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Container(
                 padding: EdgeInsets.symmetric(
@@ -82,12 +74,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 child: Row(
                   children: [
-                    // Image.asset(
-                    //   "assets/images/dashboard/wallet_icon.webp",
-                    //   height: s(20),
-                    //   width: s(20),
-                    // ),
-                     SizedBox(width: s(15)),
+                    SizedBox(width: s(15)),
                     Text(
                       amount,
                       style: GoogleFonts.dmSans(
@@ -108,10 +95,9 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
               SizedBox(width: s(18.3)),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   GestureDetector(
-                    onTap: ()=> context.push('/notification_screen'),
+                    onTap: () => context.push('/notification_screen'),
                     child: Stack(
                       clipBehavior: Clip.none,
                       children: [
@@ -120,7 +106,6 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
                           height: s(19.86),
                           width: s(19.86),
                         ),
-                    
                         Positioned(
                           right: -4,
                           top: -4,
@@ -145,7 +130,6 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
                       ],
                     ),
                   ),
-
                   Image.asset(
                     "assets/images/dashboard/bell_bottom.png",
                     height: s(1.52),

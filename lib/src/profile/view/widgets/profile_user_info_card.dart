@@ -53,30 +53,36 @@ class ProfileUserInfoCard extends StatelessWidget {
             ),
         
             SizedBox(width: s(13)),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  name,
-                  style: GoogleFonts.dmSans(
-                    color: ColorPalette.whitetext,
-                    fontWeight: FontWeight.w600,
-                    fontSize: s(16),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    name,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.dmSans(
+                      color: ColorPalette.whitetext,
+                      fontWeight: FontWeight.w600,
+                      fontSize: s(16),
+                    ),
                   ),
-                ),
-                SizedBox(height: s(1)),
-                Text(
-                  id,
-                  style: GoogleFonts.dmSans(
-                    color: ColorPalette.darktext,
-                    fontWeight: FontWeight.w400,
-                    fontSize: s(14),
+                  SizedBox(height: s(1)),
+                  Text(
+                    id,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.dmSans(
+                      color: ColorPalette.darktext,
+                      fontWeight: FontWeight.w400,
+                      fontSize: s(14),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-            SizedBox(width: s(132)),
+            const Spacer(),
             GestureDetector(
               onTap: () => context.push('/editprofile'),
               child: Container(

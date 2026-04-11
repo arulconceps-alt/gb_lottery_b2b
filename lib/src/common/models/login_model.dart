@@ -28,11 +28,14 @@ class LoginModel extends Equatable {
   }
 
   factory LoginModel.fromJson(Map<String, dynamic> json) {
+    // Handle the nested agent structure
+    final agent = json['agent'] as Map<String, dynamic>?;
+    
     return LoginModel(
-      userId: json['userId'] ?? '',
-      mobile: json['mobile'] ?? '',
-      authToken: json['authToken'] ?? '',
-      name: json['name'] ?? '',
+      userId: agent?['id']?.toString() ?? json['userId']?.toString() ?? '',
+      mobile: agent?['phone']?.toString() ?? json['phone']?.toString() ?? json['mobile']?.toString() ?? '',
+      authToken: json['accessToken'] ?? json['authToken'] ?? '',
+      name: agent?['name'] ?? json['name'] ?? '',
     );
   }
 

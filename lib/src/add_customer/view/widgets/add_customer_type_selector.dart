@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gb_lottery_b2b/src/add_customer/bloc/add_customer_bloc.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -72,15 +74,8 @@ class AddCustomerRadioButton extends StatelessWidget {
   }
 }
 
-class AddCustomerTypeSelector extends StatefulWidget {
+class AddCustomerTypeSelector extends StatelessWidget {
   const AddCustomerTypeSelector({super.key});
-
-  @override
-  State<AddCustomerTypeSelector> createState() => _AddCustomerTypeSelectorState();
-}
-
-class _AddCustomerTypeSelectorState extends State<AddCustomerTypeSelector> {
-  String selectedValue = "customer";
 
   @override
   Widget build(BuildContext context) {
@@ -88,28 +83,31 @@ class _AddCustomerTypeSelectorState extends State<AddCustomerTypeSelector> {
     final scale = w / 375;
     double s(double v) => v * scale;
 
-    return Row(
-      children: [
-        AddCustomerRadioButton(
-          text: "Customer",
-          value: "customer",
-          groupValue: selectedValue,
-          onChanged: (val) {
-            setState(() => selectedValue = val);
-          },
-        ),
-
-        SizedBox(width: s(20)),
-
-        AddCustomerRadioButton(
-          text: "Moderator",
-          value: "moderator",
-          groupValue: selectedValue,
-          onChanged: (val) {
-            setState(() => selectedValue = val);
-          },
-        ),
-      ],
+    return BlocSelector<AddCustomerBloc, AddCustomerState, String>(
+      selector: (state) => state.selectedType,
+      builder: (context, selectedType) {
+        return Row(
+          children: [
+            AddCustomerRadioButton(
+              text: "Customer",
+              value: "customer",
+              groupValue: selectedType,
+              onChanged: (val) {
+                context.read<AddCustomerBloc>().add(UpdateCustomerType(val));
+              },
+            ),
+            SizedBox(width: s(20)),
+            AddCustomerRadioButton(
+              text: "Moderator",
+              value: "moderator",
+              groupValue: selectedType,
+              onChanged: (val) {
+                context.read<AddCustomerBloc>().add(UpdateCustomerType(val));
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

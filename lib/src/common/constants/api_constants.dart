@@ -1,22 +1,25 @@
 class ApiConstants {
   const ApiConstants();
 
-  final String API_BASE_URL = "https://api.example.com";
+  final String API_BASE_URL = "http://187.127.131.80:4175/api";
+  final String LOTTERY_BASE_URL = "http://187.127.131.80:3000/api";
+
+  final String lotteries = "/lotteries";
 
   final String REQUEST_NAME = "requestname";
   final String DATA = "data";
 
   // --- Authentication ---
-  final String login = "/auth/login";
+  final String login = "/dealer/otp/send";
   final String register = "/auth/register";
   final String logout = "/auth/logout";
-  final String verifyOtp = "/auth/verify-otp";
-  final String resendOtp = "/auth/resend-otp";
+  final String verifyOtp = "/dealer/otp/verify";
+  final String resendOtp = "/dealer/otp/send";
   final String refreshToken = "/auth/refresh-token";
   final String forgotPassword = "/auth/forgot-password";
 
   // --- User Profile ---
-  final String getAccountDetails = "/account/details";
+  final String getAccountDetails = "/dealer/agents";
   final String updateProfile = "/account/update";
   final String changePassword = "/account/change-password";
   final String getKycStatus = "/kyc/status";
@@ -25,8 +28,10 @@ class ApiConstants {
   // --- Customers (B2B Management) ---
   final String getCustomersList = "/customers/list";
   final String getCustomerDetails = "/customers/details";
-  final String addCustomer = "/customers/add";
-  final String updateCustomer = "/customers/update";
+  final String addCustomer = "/dealer/agents/bulk";
+  final String addAgentBulk = "/dealer/agents/bulk";
+  final String getRoles = "/dealer/roles";
+  final String updateCustomer = "/dealer/agents";
   final String deleteCustomer = "/customers/delete";
 
   // --- Lottery & Games ---

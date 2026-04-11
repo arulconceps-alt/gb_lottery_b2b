@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
+import 'package:gb_lottery_b2b/src/common/models/customer_model.dart';
 import 'package:gb_lottery_b2b/src/common/widgets/app_bar_text_with_back.dart';
 import 'package:gb_lottery_b2b/src/customer_information/view/widgets/customer_info_card.dart';
 import 'package:gb_lottery_b2b/src/customer_information/view/widgets/customer_top_card.dart';
 
 class CustomerInformationPage extends StatefulWidget {
-  const CustomerInformationPage({super.key});
+  final CustomerModel customer;
+
+  const CustomerInformationPage({super.key, required this.customer});
 
   @override
   State<CustomerInformationPage> createState() =>
@@ -18,12 +21,14 @@ class _CustomerInformationPageState extends State<CustomerInformationPage> {
     final w = MediaQuery.of(context).size.width;
     final scale = w / 375;
     double s(double v) => v * scale;
+    final customer = widget.customer;
+
     return Scaffold(
-        backgroundColor: const Color(0xFF1C1B20),
-      appBar: AppBarTextWithBack(title: "Customer Info"),
+      backgroundColor: const Color(0xFF1C1B20),
+      appBar: const AppBarTextWithBack(title: "Customer Info"),
       body: SingleChildScrollView(
         child: Padding(
-          padding:  EdgeInsets.symmetric(horizontal: s(16)),
+          padding: EdgeInsets.symmetric(horizontal: s(16)),
           child: Column(
             children: [
               SizedBox(height: s(23)),
@@ -35,7 +40,6 @@ class _CustomerInformationPageState extends State<CustomerInformationPage> {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
-          
                 bottomTitle: "Total Spent",
                 bottomValue: "₹21,420",
                 bottomGradient: ColorPalette.buttonGradient,
@@ -43,19 +47,19 @@ class _CustomerInformationPageState extends State<CustomerInformationPage> {
               SizedBox(height: s(12)),
               CustomerInfoCard(
                 data: {
-                  "Name": "Bala S",
-                  "Phone": "98745 63215",
-                  "Customer ID": "GB-C001",
-                  "Email": "bala@gmail.com",
-                  "Pincode": "642108",
-                  "Address": "40 Ganapathy, Coimbatore",
-                  "Join Date": "15/01/2026",
-                  "Ticket Purchase": "150",
-                  "Total Spent Money": "₹37,420",
-                  "Total Winning Money": "₹1,37,420",
+                  "Name": customer.name,
+                  "Phone": customer.phone,
+                  "Customer ID": customer.id,
+                  "Email": customer.email ?? "N/A",
+                  "Pincode": customer.pincode ?? '',
+                  "Address": customer.address ?? "N/A",
+                  "Join Date": "15/01/2026", // Mock or from extra fields if needed
+                  "Ticket Purchase": "150",   // Mock
+                  "Total Spent Money": "₹37,420", // Mock
+                  "Total Winning Money": "₹1,37,420", // Mock
                 },
               ),
-               SizedBox(height: s(46)),
+              SizedBox(height: s(46)),
             ],
           ),
         ),

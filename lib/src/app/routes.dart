@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/add_customer/view/add_customer_page.dart';
+import 'package:gb_lottery_b2b/src/common/models/customer_model.dart';
 import 'package:gb_lottery_b2b/src/app/route_names.dart';
 import 'package:gb_lottery_b2b/src/common/constants/constansts.dart';
 import 'package:gb_lottery_b2b/src/common/repos/preferences_repository.dart';
@@ -29,7 +30,7 @@ import 'package:gb_lottery_b2b/src/responsible/view/responsible_gaming_page.dart
 import 'package:gb_lottery_b2b/src/resultinner/view/result_inner_page.dart';
 import 'package:gb_lottery_b2b/src/customer_edit/view/customer_edit_screen.dart';
 import 'package:gb_lottery_b2b/src/myCart_Screen/view/myCart_screen.dart';
-import 'package:gb_lottery_b2b/src/edit_profile_screen/view/edit_profile_screen.dart';
+import 'package:gb_lottery_b2b/src/profile/view/edit_profile_page.dart';
 import 'package:gb_lottery_b2b/src/results/view/resluts_page.dart';
 import 'package:gb_lottery_b2b/src/search_screen/view/search_screen.dart';
 import 'package:gb_lottery_b2b/src/settlement/view/settlement_page.dart';
@@ -37,6 +38,8 @@ import 'package:gb_lottery_b2b/src/terms_codition/view/terms_condition_page.dart
 import 'package:gb_lottery_b2b/src/transaction_screen/view/transaction_screen.dart';
 import 'package:gb_lottery_b2b/src/wallet_screen/view/wallet_screen.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gb_lottery_b2b/src/customerslist/bloc/customer_list_bloc.dart';
 
 class Routes {
   static final GoRouter router = GoRouter(
@@ -86,7 +89,10 @@ class Routes {
           GoRoute(
             name: RouteName.customer,
             path: "/customer",
-            builder: (context, state) => const CustomerPage(),
+            builder: (context, state) => BlocProvider(
+              create: (context) => getIt<CustomerListBloc>()..add(const FetchCustomers(roleName: "All")),
+              child: const CustomerPage(),
+            ),
           ),
 
           /// results
@@ -102,6 +108,11 @@ class Routes {
             path: "/profile",
             builder: (context, state) => const ProfilePage(),
           ),
+          GoRoute(
+            name: RouteName.editprofile,
+            path: "/editprofile",
+            builder: (context, state) => const EditProfilePage(),
+          ),
         ],
       ),
       GoRoute(
@@ -112,7 +123,10 @@ class Routes {
       GoRoute(
         name: RouteName.customerinformation,
         path: "/customerinformation",
-        builder: (context, state) => const CustomerInformationPage(),
+        builder: (context, state) {
+          final customer = state.extra as CustomerModel;
+          return CustomerInformationPage(customer: customer);
+        },
       ),
       GoRoute(
         name: RouteName.buy_ticket,
@@ -127,18 +141,14 @@ class Routes {
         builder: (context, state) => const MycartScreen(),
       ),
 
-      /// Profile Screen
-      GoRoute(
-        name: RouteName.editprofile,
-        path: "/editprofile",
-        builder: (context, state) => const EditProfileScreen(),
-      ),
-
       /// customer_info Screen
       GoRoute(
         name: RouteName.customer_edit,
         path: "/customer_edit",
-        builder: (context, state) => const CustomerEditScreen(),
+        builder: (context, state) {
+          final customer = state.extra as CustomerModel;
+          return CustomerEditScreen(customer: customer);
+        },
       ),
 
       /// Search Screen

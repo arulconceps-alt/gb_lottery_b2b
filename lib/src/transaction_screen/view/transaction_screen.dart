@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gb_lottery_b2b/src/common/widgets/app_bar_text_with_back.dart';
+import 'package:gb_lottery_b2b/src/transaction_screen/view/widget/date_filter_bottom_sheet.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TransactionScreen extends StatefulWidget {
@@ -26,6 +27,15 @@ class _TransactionScreenState extends State<TransactionScreen> {
     {'date': 'March 28, 02:00pm'},
   ];
 
+  void _showDateBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      builder: (_) => const DateFilterBottomSheet(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final w = MediaQuery.of(context).size.width;
@@ -44,33 +54,36 @@ class _TransactionScreenState extends State<TransactionScreen> {
                 padding: EdgeInsets.all(s(16)),
                 child: Align(
                   alignment: Alignment.centerRight,
-                  child: Container(
-                    height: s(38), // ✅ exact Figma height
-                    padding: EdgeInsets.symmetric(horizontal: s(14)),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF24232A),
-                      borderRadius: BorderRadius.circular(s(8)),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Date",
-                          style: GoogleFonts.dmSans(
-                            color: Colors.white,
-                            fontSize: s(14),
-                            fontWeight: FontWeight.w400,
-                            height: 1.3,
+                  child: GestureDetector(
+                    onTap: () => _showDateBottomSheet(context),
+                    child: Container(
+                      height: s(38), // ✅ exact Figma height
+                      padding: EdgeInsets.symmetric(horizontal: s(14)),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF24232A),
+                        borderRadius: BorderRadius.circular(s(8)),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Date",
+                            style: GoogleFonts.dmSans(
+                              color: Colors.white,
+                              fontSize: s(14),
+                              fontWeight: FontWeight.w400,
+                              height: 1.3,
+                            ),
                           ),
-                        ),
-                        SizedBox(width: s(4)),
-                        Icon(
-                          Icons.keyboard_arrow_down_rounded,
-                          color: Colors.white,
-                          size: s(18),
-                        ),
-                      ],
+                          SizedBox(width: s(4)),
+                          Icon(
+                            Icons.keyboard_arrow_down_rounded,
+                            color: Colors.white,
+                            size: s(18),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

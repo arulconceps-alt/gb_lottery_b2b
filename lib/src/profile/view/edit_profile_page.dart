@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
 import 'package:gb_lottery_b2b/src/common/widgets/app_bar_text_with_back.dart';
+import 'package:gb_lottery_b2b/src/profile/bloc/profile_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class EditProfileScreen extends StatefulWidget {
-  const EditProfileScreen({super.key});
+class EditProfilePage extends StatefulWidget {
+  const EditProfilePage({super.key});
 
   @override
-  State<EditProfileScreen> createState() => _EditProfileScreenState();
+  State<EditProfilePage> createState() => _EditProfilePageState();
 }
 
-class _EditProfileScreenState extends State<EditProfileScreen> {
-  late List<TextEditingController> controllers;
+class _EditProfilePageState extends State<EditProfilePage> {
+  late Map<String, TextEditingController> controllerMap;
 
   final List<String> labels = [
     'Name',
@@ -26,13 +28,24 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   void initState() {
     super.initState();
+    final user = context.read<ProfileBloc>().state.user;
 
-    final initialValues = ['Baranee', '', '', '', '', ''];
+    controllerMap = {
+      'Name': TextEditingController(text: user.name),
+      'User ID': TextEditingController(text: user.id),
+      'Phone': TextEditingController(text: user.phone),
+      'Pincode': TextEditingController(text: ""),
+      'Address': TextEditingController(text: ""),
+      'Email': TextEditingController(text: user.email),
+    };
+  }
 
-    controllers = List.generate(
-      labels.length,
-      (index) => TextEditingController(text: initialValues[index]),
-    );
+  @override
+  void dispose() {
+    for (var controller in controllerMap.values) {
+      controller.dispose();
+    }
+    super.dispose();
   }
 
   @override
@@ -41,60 +54,82 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     final scale = w / 375;
     double s(double v) => v * scale;
 
-    return Scaffold(
-      backgroundColor: const Color(0xFF1C1B20),
-      appBar: AppBarTextWithBack(title: "Profile"),
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                //physics: const BouncingScrollPhysics(),
-                padding: EdgeInsets.symmetric(horizontal: s(16)),
-                child: Column(
-                  children: [
-                    SizedBox(height: s(50)),
-                    _buildProfileImage(s),
+    return BlocListener<ProfileBloc, ProfileState>(
+      listener: (context, state) {
+        if (state.status == ProfileStatus.updateSuccess) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Profile updated successfully!')),
+          );
+          context.pop();
+        } else if (state.status == ProfileStatus.failure) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.message)));
+        }
+      },
+      child: Scaffold(
+        backgroundColor: const Color(0xFF1C1B20),
+        appBar: const AppBarTextWithBack(title: "Profile"),
+        body: SafeArea(
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.symmetric(horizontal: s(16)),
+                  child: BlocBuilder<ProfileBloc, ProfileState>(
+                    builder: (context, state) {
+                      final user = state.user;
+                      final initial = user.name.isNotEmpty
+                          ? user.name[0].toUpperCase()
+                          : "?";
 
-                    SizedBox(height: s(12)),
-
-                    Text(
-                      'Baranee',
-                      style: GoogleFonts.dmSans(
-                        color: Colors.white,
-                        fontSize: s(20),
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-
-                    SizedBox(height: s(40)),
-                    _buildDetailsCard(s),
-                    SizedBox(height: s(107)),
-                    _buildSubmitButton(s),
-                  ],
+                      return Column(
+                        children: [
+                          SizedBox(height: s(50)),
+                          _buildProfileImage(s, initial),
+                          SizedBox(height: s(12)),
+                          Text(
+                            user.name.isEmpty ? "Dealer" : user.name,
+                            style: GoogleFonts.dmSans(
+                              color: Colors.white,
+                              fontSize: s(20),
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(height: s(40)),
+                          _buildDetailsCard(s),
+                          SizedBox(height: s(107)),
+                          _buildSubmitButton(
+                            s,
+                            state.status == ProfileStatus.updating,
+                          ),
+                        ],
+                      );
+                    },
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildProfileImage(double Function(double) s) {
+  Widget _buildProfileImage(double Function(double) s, String initial) {
     return Center(
       child: Container(
         width: s(80),
         height: s(80),
-        decoration: ShapeDecoration(
-          shape: const OvalBorder(),
+        decoration: const ShapeDecoration(
+          shape: OvalBorder(),
           color: ColorPalette.backgroundDark,
         ),
         child: Stack(
           children: [
             Center(
               child: Text(
-                "B",
+                initial,
                 style: GoogleFonts.dmSans(
                   fontSize: 28,
                   color: ColorPalette.whitetext,
@@ -102,7 +137,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 ),
               ),
             ),
-
             Positioned(
               bottom: 0,
               right: 0,
@@ -139,7 +173,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ...List.generate(labels.length, (index) {
+          ...labels.map((label) {
+            final isEditable = label != 'User ID';
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -149,7 +184,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        "${labels[index]} : ",
+                        "$label : ",
                         style: GoogleFonts.dmSans(
                           color: Colors.white,
                           fontSize: s(16),
@@ -157,17 +192,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           letterSpacing: 0.16,
                         ),
                       ),
-
                       Expanded(
                         child: TextField(
-                          controller: controllers[index],
-                          maxLines: labels[index] == "Address" ? 1 : 1,
+                          controller: controllerMap[label],
+                          enabled: isEditable,
                           style: GoogleFonts.dmSans(
-                            color: Colors.white,
+                            color: isEditable ? Colors.white : Colors.grey,
                             fontSize: s(16),
                             fontWeight: FontWeight.w400,
                           ),
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: InputBorder.none,
                             isDense: true,
                             contentPadding: EdgeInsets.zero,
@@ -177,7 +211,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ],
                   ),
                 ),
-
                 Divider(
                   color: Colors.white.withOpacity(0.10),
                   thickness: 1,
@@ -186,7 +219,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ],
             );
           }),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -215,39 +247,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
-  Widget _buildName(double Function(double) s) {
-    return Center(
-      child: Container(
-        width: s(80),
-        height: s(80),
-        alignment: Alignment.center,
-        decoration: const ShapeDecoration(
-          color: ColorPalette.backgroundDark,
-          shape: OvalBorder(),
-        ),
-        child: SizedBox(
-          width: s(25),
-          height: s(46),
-          child: Center(
-            child: Text(
-              'B',
-              style: GoogleFonts.lato(
-                color: Colors.white,
-                fontSize: s(38.4),
-                fontWeight: FontWeight.w500,
-                height: 1.0,
-                letterSpacing: 0,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSubmitButton(double Function(double) s) {
+  Widget _buildSubmitButton(double Function(double) s, bool isUpdating) {
     return GestureDetector(
-      onTap: () => context.go('/profile'),
+      onTap: isUpdating
+          ? null
+          : () {
+              context.read<ProfileBloc>().add(
+                UpdateProfile(
+                  name: controllerMap['Name']!.text,
+                  email: controllerMap['Email']!.text,
+                  phone: controllerMap['Phone']!.text,
+                ),
+              );
+            },
       child: Container(
         width: double.infinity,
         height: s(54),
@@ -258,14 +270,16 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           ),
           borderRadius: BorderRadius.circular(s(8)),
         ),
-        child: Text(
-          'Submit',
-          style: GoogleFonts.dmSans(
-            color: Colors.white,
-            fontSize: s(18),
-            fontWeight: FontWeight.w600,
-          ),
-        ),
+        child: isUpdating
+            ? const CircularProgressIndicator(color: Colors.white)
+            : Text(
+                'Submit',
+                style: GoogleFonts.dmSans(
+                  color: Colors.white,
+                  fontSize: s(18),
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
       ),
     );
   }

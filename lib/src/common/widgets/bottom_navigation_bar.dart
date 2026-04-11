@@ -245,7 +245,10 @@
 
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gb_lottery_b2b/src/app/color_palette.dart';
+import 'package:gb_lottery_b2b/src/common/services/services_locator.dart';
+import 'package:gb_lottery_b2b/src/profile/bloc/profile_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -288,15 +291,17 @@ class MainNavigationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final index = _getIndex(location);
 
-    return PopScope(
-      canPop: false,
-      onPopInvokedWithResult: (didPop, result) async {
-        final currentIndex = _getIndex(location);
+    return BlocProvider(
+      create: (context) => getIt<ProfileBloc>()..add(FetchProfile()),
+      child: PopScope(
+        canPop: false,
+        onPopInvokedWithResult: (didPop, result) async {
+          final currentIndex = _getIndex(location);
 
-        if (currentIndex != 0) {
-          context.go("/dashboard");
-          return;
-        }
+          if (currentIndex != 0) {
+            context.go("/dashboard");
+            return;
+          }
 
         final shouldExit = await showDialog<bool>(
           context: context,
@@ -337,13 +342,15 @@ class MainNavigationScreen extends StatelessWidget {
       },
 
       child: Scaffold(
-        //extendBody: true,
         resizeToAvoidBottomInset: false,
         body: child,
-        bottomNavigationBar: _CustomBottomNav(
-          selectedIndex: index,
-          onTap: (i) => _onTap(context, i),
-        ),
+        bottomNavigationBar: location == "/editprofile"
+            ? null
+            : _CustomBottomNav(
+                selectedIndex: index,
+                onTap: (i) => _onTap(context, i),
+              ),
+      ),
       ),
     );
   }
